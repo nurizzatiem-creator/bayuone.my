@@ -1,314 +1,521 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ms">
 <head>
-<script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260907-05-0068bad","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script><script src="/_sdk/9e99ecf74af2a081.telemetry_sdk.js" integrity="sha512-tZ7fmfTx2KpCLjXQnEuL9azQ4A5+7+xumsx6r/WYVD0zCP/8LP8hDeCypMQesmP+WyAew4g7l5Ah23Bjd6yoVg=="></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BayuOne | Connect · Create · Grow</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/fbe2ebfd64647c54.data_sdk.js" integrity="sha512-vkTX6CfvpHc3WbjK+tFJCaDuw4ERA4aEV/e5/7+MMJPMTF4RJYCI6CAwJBT/gtDW+dba4uLSsPUgDjVDHWtgUQ=="></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap" rel="stylesheet">
-  <style>
-    :root{--ink:#083c33;--green:#0b604c;--lime:#8dae55;--mist:#eff5ee;--line:#d8e4dc}
-    *{box-sizing:border-box} body{margin:0;font-family:"DM Sans",sans-serif;color:var(--ink);background:#f8faf8}
-    .display{font-family:"Fraunces",serif}.shell{width:100%;max-width:1240px;margin:auto;padding:0 24px}
-    .glass{background:rgba(255,255,255,.9);backdrop-filter:blur(12px)} .card{border:1px solid var(--line);box-shadow:0 12px 28px rgba(8,60,51,.08);transition:.25s ease}
-    .card:hover{transform:translateY(-5px);box-shadow:0 20px 36px rgba(8,60,51,.14)}
-    .tab.active{background:var(--green);color:white}.hidden-view{display:none!important}
-    .pill{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:.32rem .62rem}
-    .modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(3,29,24,.72)}
-    .modal-panel{width:min(960px,100%);max-height:92%;overflow:auto;background:#fff;border-radius:24px}
-    .field{width:100%;border:1px solid #cbd9d0;border-radius:10px;padding:.72rem .8rem;outline:none}.field:focus{border-color:var(--green);box-shadow:0 0 0 3px #0b604c18}
-    .check{accent-color:var(--green);width:17px;height:17px}.admin-row:hover{background:#f1f7f2}
-    .toast{position:fixed;right:20px;bottom:20px;z-index:70;max-width:360px;background:#083c33;color:#fff;padding:14px 18px;border-radius:12px;box-shadow:0 12px 30px #0004}
-    @media(max-width:700px){.shell{padding:0 16px}.nav-word{display:none}.card-grid{grid-template-columns:1fr!important}.filter-grid{grid-template-columns:1fr!important}}
-  </style>
-  <script src="/_sdk/fcb6dc01f91829ac.resizing_sdk.js" type="text/javascript" integrity="sha512-YK8JfnN705qaEaVhiL7pcVB2Rs/BbdX5yxV55Az8zT/1JanyEWTw9HqCF915m9iV1YEaoil8qsjJz03l1Kb0Ug=="></script>
- </head>
- <body data-template-id="__page-root" class="w-full" style="background: rgb(248, 250, 248);">
-  <header data-template-id="main-header" class="canva-header sticky top-0 z-30 glass border-b border-[#d8e4dc]" style="background: rgb(255, 255, 255);">
-   <div class="shell flex items-center justify-between gap-4 py-3">
-    <img data-template-id="main-logo" class="canva-image h-11 w-auto object-contain" loading="lazy" src="canva://MAHUgP4Hl7k/1" alt="Logo rasmi BayuOne Connect Create Grow">
-    <nav aria-label="Navigasi utama" class="flex items-center gap-2">
-     <button type="button" class="tab active rounded-full px-4 py-2 text-sm font-semibold" data-tab="agenda"><span class="nav-word">Agenda</span><i data-lucide="calendar-days" class="inline sm:hidden w-4"></i></button> <button type="button" class="tab rounded-full px-4 py-2 text-sm font-semibold" data-tab="trainer"><span class="nav-word">Trainer</span><i data-lucide="graduation-cap" class="inline sm:hidden w-4"></i></button> <button type="button" class="tab rounded-full px-4 py-2 text-sm font-semibold" data-tab="talent"><span class="nav-word">Talent</span><i data-lucide="sparkles" class="inline sm:hidden w-4"></i></button>
-    </nav><button data-template-id="join-button" type="button" id="openJoin" class="canva-button rounded-full px-4 py-2 text-sm font-bold shadow-sm" style="background: rgb(141, 174, 85); color: rgb(8, 60, 51); font-weight: 700;"><span data-template-id="join-button-label" class="canva-text hidden sm:inline" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 16px;">Sertai BayuOne</span><i data-lucide="plus" class="inline sm:hidden w-4"></i></button>
-   </div>
-  </header>
-  <main>
-   <section class="w-full bg-[#083c33] text-white overflow-hidden">
-    <div class="shell py-12 md:py-16 grid md:grid-cols-[1.25fr_.75fr] gap-8 items-center">
-     <div>
-      <p data-template-id="hero-kicker" class="canva-text text-[#b8d680] font-bold tracking-[.18em] text-xs uppercase mb-4" style="color: rgb(184, 214, 128); font-weight: 700; font-style: normal; font-size: 16px;">Powered by NMZ Kreatif</p>
-      <h1 data-template-id="hero-title" class="canva-text display font-semibold leading-tight mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 32px;">Ruang untuk manusia yang mahu bergerak bersama.</h1>
-      <p data-template-id="hero-copy" class="canva-text text-white/80 max-w-2xl leading-relaxed" style="color: rgb(220, 233, 223); font-weight: 400; font-style: normal; font-size: 16px;">BayuOne menghubungkan bakat, kepakaran dan peluang untuk mencipta jaringan yang lebih bermakna di Sabah dan seluruh Malaysia.</p>
-     </div>
-     <div class="rounded-[28px] border border-white/15 bg-white/10 p-7">
-      <p data-template-id="hero-stat-1" class="canva-text text-4xl font-bold" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">3</p>
-      <p data-template-id="hero-stat-1-label" class="canva-text text-white/70 mb-5" style="color: rgb(220, 233, 223); font-weight: 400; font-style: normal; font-size: 16px;">Ruang komuniti dalam satu platform</p>
-      <div class="h-px bg-white/20 mb-5"></div>
-      <p data-template-id="hero-stat-2" class="canva-text text-4xl font-bold text-[#b8d680]" style="color: rgb(184, 214, 128); font-weight: 700; font-style: normal; font-size: 16px;">∞</p>
-      <p data-template-id="hero-stat-2-label" class="canva-text text-white/70" style="color: rgb(220, 233, 223); font-weight: 400; font-style: normal; font-size: 16px;">Potensi kolaborasi yang boleh diteroka</p>
-     </div>
-    </div>
-   </section>
-   <section class="shell py-8">
-    <div class="filter-grid grid md:grid-cols-[2fr_1fr_1fr_1fr] gap-3 rounded-2xl bg-white p-4 card">
-     <label class="relative"><span class="sr-only">Carian</span><i data-lucide="search" class="absolute left-3 top-3 text-[#0b604c] w-5"></i><input id="searchInput" class="field pl-10" data-template-id="search-input" type="search" placeholder="Cari acara, trainer atau talent..." style="font-weight: 400; font-style: normal; font-size: 16px;"></label> <label><span class="sr-only">Lokasi</span><select id="locationFilter" class="field"><option value="">Semua Lokasi</option><option>Kota Kinabalu</option><option>Sandakan</option><option>Tawau</option><option>Online</option></select></label> <label><span class="sr-only">Mod</span><select id="modeFilter" class="field"><option value="">Semua Mod</option><option>Fizikal</option><option>Online</option><option>Hybrid</option></select></label> <label><span class="sr-only">Kategori</span><select id="categoryFilter" class="field"><option value="">Semua Kategori</option></select></label>
-    </div>
-   </section>
-   <section id="agendaView" class="shell pb-14">
-    <div class="flex flex-wrap items-end justify-between gap-4 mb-7">
-     <div>
-      <div class="flex items-center gap-3 mb-3"><img data-template-id="agenda-logo" class="canva-image h-8 w-auto object-contain" loading="lazy" src="canva://MAHUgP4Hl7k/1" alt="Logo rasmi BayuOne"><span class="text-xs font-bold tracking-widest text-[#6f9155]">AGENDA</span>
-      </div>
-      <h2 data-template-id="agenda-title" class="canva-text display font-semibold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 24px;">Program &amp; Aktiviti Terkini</h2>
-      <p data-template-id="agenda-subtitle" class="canva-text mt-2 text-[#4d665d]" style="color: rgb(77, 102, 93); font-weight: 400; font-style: normal; font-size: 16px;">Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.</p>
-     </div>
-    </div>
-    <div id="agendaGrid" class="card-grid grid md:grid-cols-3 gap-6">
-     <article class="public-card card rounded-2xl overflow-hidden bg-white" data-type="Agenda" data-location="Kota Kinabalu" data-mode="Fizikal" data-category="Kursus, Seminar, Bengkel &amp; Latihan" data-title="Kelas Pemerkasaan Digital Sabah">
-      <img data-template-id="agenda-photo-1" class="canva-image w-full h-48 object-cover" loading="lazy" src="https://images.pexels.com/photos/12753250/pexels-photo-12753250.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Bangunan moden dengan bendera Malaysia di Kota Kinabalu, Sabah">
-      <div class="p-5">
-       <div class="flex justify-between gap-2 mb-3"><span class="pill bg-[#e8f2da] text-[#45662e]">Featured</span><span class="pill bg-[#eaf5f0] text-[#0b604c]">Akan Datang</span>
-       </div>
-       <h3 data-template-id="agenda-card-title-1" class="canva-text font-bold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 19px;">Kelas Pemerkasaan Digital Sabah</h3>
-       <p data-template-id="agenda-card-meta-1" class="canva-text text-sm text-[#587168] mt-2" style="color: rgb(88, 113, 104); font-weight: 400; font-style: normal; font-size: 16px;">18 September 2026 · Kota Kinabalu · Fizikal</p>
-       <p data-template-id="agenda-card-pic-1" class="canva-text text-sm mt-3" style="color: rgb(8, 60, 51); font-weight: 400; font-style: normal; font-size: 16px;">PIC: Nurul Afiqah · 012-880 4721</p><button type="button" class="open-tiktok mt-4 w-full rounded-xl bg-[#083c33] text-white py-2.5 font-bold text-sm">Lihat Program</button>
-      </div>
-     </article>
-     <article class="public-card card rounded-2xl overflow-hidden bg-white" data-type="Agenda" data-location="Kota Kinabalu" data-mode="Hybrid" data-category="Persidangan / Run" data-title="Sabah SME Growth Forum">
-      <img data-template-id="agenda-photo-2" class="canva-image w-full h-48 object-cover" loading="lazy" src="https://images.pexels.com/photos/8761328/pexels-photo-8761328.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Profesional menghadiri pembentangan perniagaan dalam bilik persidangan">
-      <div class="p-5">
-       <div class="flex justify-between gap-2 mb-3"><span class="pill bg-[#fff3cf] text-[#8a6510]">Promoted</span><span class="pill bg-[#eaf5f0] text-[#0b604c]">Akan Datang</span>
-       </div>
-       <h3 data-template-id="agenda-card-title-2" class="canva-text font-bold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 19px;">Sabah SME Growth Forum</h3>
-       <p data-template-id="agenda-card-meta-2" class="canva-text text-sm text-[#587168] mt-2" style="color: rgb(88, 113, 104); font-weight: 400; font-style: normal; font-size: 16px;">3 Oktober 2026 · Kota Kinabalu · Hybrid</p>
-       <p data-template-id="agenda-card-pic-2" class="canva-text text-sm mt-3" style="color: rgb(8, 60, 51); font-weight: 400; font-style: normal; font-size: 16px;">PIC: Farid Zaman · 013-665 1832</p><button type="button" class="open-tiktok mt-4 w-full rounded-xl bg-[#083c33] text-white py-2.5 font-bold text-sm">Lihat Program</button>
-      </div>
-     </article>
-     <article class="public-card card rounded-2xl overflow-hidden bg-white" data-type="Agenda" data-location="Sandakan" data-mode="Fizikal" data-category="Festival / Event (Lain-Lain)" data-title="Borneo Creative Community Festival">
-      <img data-template-id="agenda-photo-3" class="canva-image w-full h-48 object-cover" loading="lazy" src="https://images.pexels.com/photos/30887767/pexels-photo-30887767.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Pengunjung menyertai aktiviti di gerai festival budaya">
-      <div class="p-5">
-       <div class="flex justify-between gap-2 mb-3"><span class="pill bg-[#e8f2da] text-[#45662e]">Top</span><span class="pill bg-[#eaf5f0] text-[#0b604c]">Sedang Berlangsung</span>
-       </div>
-       <h3 data-template-id="agenda-card-title-3" class="canva-text font-bold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 19px;">Borneo Creative Community Festival</h3>
-       <p data-template-id="agenda-card-meta-3" class="canva-text text-sm text-[#587168] mt-2" style="color: rgb(88, 113, 104); font-weight: 400; font-style: normal; font-size: 16px;">7–9 September 2026 · Sandakan · Fizikal</p>
-       <p data-template-id="agenda-card-pic-3" class="canva-text text-sm mt-3" style="color: rgb(8, 60, 51); font-weight: 400; font-style: normal; font-size: 16px;">PIC: Junaidi Lim · 016-833 9090</p><button type="button" class="open-tiktok mt-4 w-full rounded-xl bg-[#083c33] text-white py-2.5 font-bold text-sm">Lihat Program</button>
-      </div>
-     </article>
-    </div>
-   </section>
-   <section id="trainerView" class="shell pb-14 hidden-view">
-    <div class="mb-7">
-     <div class="flex items-center gap-3 mb-3"><img data-template-id="trainer-logo" class="canva-image h-8 w-auto object-contain" loading="lazy" src="canva://MAHUgP4Hl7k/1" alt="Logo rasmi BayuOne"><span class="text-xs font-bold tracking-widest text-[#6f9155]">TRAINER</span>
-     </div>
-     <h2 data-template-id="directory-title" class="canva-text display font-semibold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 24px;">Menghubungkan Bakat, Kepakaran &amp; Peluang</h2>
-     <p data-template-id="directory-subtitle" class="canva-text mt-2 text-[#4d665d]" style="color: rgb(77, 102, 93); font-weight: 400; font-style: normal; font-size: 16px;">Temui jurulatih profesional dan pencipta kandungan terkemuka untuk agensi kerajaan, korporat, universiti dan jenama.</p>
-    </div>
-    <div class="card-grid grid md:grid-cols-3 gap-6">
-     <article class="public-card card rounded-2xl overflow-hidden bg-white" data-type="Trainer" data-location="Kota Kinabalu" data-title="Nadia Rahman" data-category="Leadership"><img data-template-id="trainer-photo-1" class="canva-image w-full aspect-square object-cover" loading="lazy" src="https://images.pexels.com/photos/6922159/pexels-photo-6922159.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Trainer wanita memberi panduan kepada peserta">
-      <div class="p-5">
-       <h3 data-template-id="trainer-name-1" class="canva-text font-bold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 19px;">Nadia Rahman</h3>
-       <p data-template-id="trainer-info-1" class="canva-text text-sm text-[#567066] mt-2" style="color: rgb(86, 112, 102); font-weight: 400; font-style: normal; font-size: 16px;">Leadership &amp; People Development · Kota Kinabalu</p>
-       <p data-template-id="trainer-summary-1" class="canva-text text-sm mt-3" style="color: rgb(8, 60, 51); font-weight: 400; font-style: normal; font-size: 16px;">Membina pasukan yang jelas arah, berani berkomunikasi dan bersedia memimpin.</p><button class="open-tiktok mt-4 w-full rounded-xl border border-[#0b604c] text-[#0b604c] py-2 font-bold text-sm">Kenali Trainer</button>
-      </div>
-     </article>
-     <article class="public-card card rounded-2xl overflow-hidden bg-white" data-type="Trainer" data-location="Sandakan" data-title="Azlan Mahmud" data-category="Business"><img data-template-id="trainer-photo-2" class="canva-image w-full aspect-square object-cover" loading="lazy" src="https://images.pexels.com/photos/6326406/pexels-photo-6326406.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Penceramah profesional membentangkan idea pada papan putih">
-      <div class="p-5">
-       <h3 data-template-id="trainer-name-2" class="canva-text font-bold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 19px;">Azlan Mahmud</h3>
-       <p data-template-id="trainer-info-2" class="canva-text text-sm text-[#567066] mt-2" style="color: rgb(86, 112, 102); font-weight: 400; font-style: normal; font-size: 16px;">Strategi Perniagaan &amp; SME · Sandakan</p>
-       <p data-template-id="trainer-summary-2" class="canva-text text-sm mt-3" style="color: rgb(8, 60, 51); font-weight: 400; font-style: normal; font-size: 16px;">Jurulatih untuk pemilik bisnes yang mahu menyusun strategi pertumbuhan yang praktikal.</p><button class="open-tiktok mt-4 w-full rounded-xl border border-[#0b604c] text-[#0b604c] py-2 font-bold text-sm">Kenali Trainer</button>
-      </div>
-     </article>
-     <article class="public-card card rounded-2xl overflow-hidden bg-white" data-type="Trainer" data-location="Online" data-title="Daniel Lim" data-category="Digital"><img data-template-id="trainer-photo-3" class="canva-image w-full aspect-square object-cover" loading="lazy" src="https://images.pexels.com/photos/10816007/pexels-photo-10816007.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Lelaki profesional berkaca mata memakai sut kelabu">
-      <div class="p-5">
-       <h3 data-template-id="trainer-name-3" class="canva-text font-bold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 19px;">Daniel Lim</h3>
-       <p data-template-id="trainer-info-3" class="canva-text text-sm text-[#567066] mt-2" style="color: rgb(86, 112, 102); font-weight: 400; font-style: normal; font-size: 16px;">Digital Marketing &amp; AI · Online</p>
-       <p data-template-id="trainer-summary-3" class="canva-text text-sm mt-3" style="color: rgb(8, 60, 51); font-weight: 400; font-style: normal; font-size: 16px;">Membantu organisasi menerjemah teknologi digital kepada hasil kerja yang nyata.</p><button class="open-tiktok mt-4 w-full rounded-xl border border-[#0b604c] text-[#0b604c] py-2 font-bold text-sm">Kenali Trainer</button>
-      </div>
-     </article>
-    </div>
-   </section>
-   <section id="talentView" class="shell pb-14 hidden-view">
-    <div class="mb-7">
-     <div class="flex items-center gap-3 mb-3"><img data-template-id="talent-logo" class="canva-image h-8 w-auto object-contain" loading="lazy" src="canva://MAHUgP4Hl7k/1" alt="Logo rasmi BayuOne"><span class="text-xs font-bold tracking-widest text-[#6f9155]">TALENT</span>
-     </div>
-     <h2 data-template-id="talent-title" class="canva-text display font-semibold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 24px;">Menghubungkan Bakat, Kepakaran &amp; Peluang</h2>
-     <p data-template-id="talent-subtitle" class="canva-text mt-2 text-[#4d665d]" style="color: rgb(77, 102, 93); font-weight: 400; font-style: normal; font-size: 16px;">Temui jurulatih profesional dan pencipta kandungan terkemuka untuk agensi kerajaan, korporat, universiti dan jenama.</p>
-    </div>
-    <div class="card-grid grid md:grid-cols-3 gap-6">
-     <article class="public-card card rounded-2xl overflow-hidden bg-white" data-type="Talent" data-location="Kota Kinabalu" data-title="Aina Eats Sabah" data-category="F&amp;B"><img data-template-id="talent-photo-1" class="canva-image w-full aspect-square object-cover" loading="lazy" src="https://images.pexels.com/photos/35459250/pexels-photo-35459250.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Peniaga makanan jalanan memanggang makanan pada waktu malam di Malaysia">
-      <div class="p-5">
-       <h3 data-template-id="talent-name-1" class="canva-text font-bold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 19px;">Aina Eats Sabah</h3>
-       <p data-template-id="talent-info-1" class="canva-text text-sm text-[#567066] mt-2" style="color: rgb(86, 112, 102); font-weight: 400; font-style: normal; font-size: 16px;">F&amp;B · Kota Kinabalu · @ainaeatssabah</p>
-       <p data-template-id="talent-summary-1" class="canva-text text-sm mt-3" style="color: rgb(8, 60, 51); font-weight: 400; font-style: normal; font-size: 16px;">Pencipta kandungan makanan tempatan yang meraikan rasa dan cerita Sabah.</p><button class="open-tiktok mt-4 w-full rounded-xl border border-[#0b604c] text-[#0b604c] py-2 font-bold text-sm">Kenali Talent</button>
-      </div>
-     </article>
-     <article class="public-card card rounded-2xl overflow-hidden bg-white" data-type="Talent" data-location="Sandakan" data-title="Borneo Lens" data-category="Tourism &amp; Hospitality"><img data-template-id="talent-photo-2" class="canva-image w-full aspect-square object-cover" loading="lazy" src="https://images.pexels.com/photos/15069595/pexels-photo-15069595.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Pencipta kandungan dengan kamera melihat pemandangan dari tingkap">
-      <div class="p-5">
-       <h3 data-template-id="talent-name-2" class="canva-text font-bold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 19px;">Borneo Lens</h3>
-       <p data-template-id="talent-info-2" class="canva-text text-sm text-[#567066] mt-2" style="color: rgb(86, 112, 102); font-weight: 400; font-style: normal; font-size: 16px;">Tourism &amp; Hospitality · Sandakan · @borneolens</p>
-       <p data-template-id="talent-summary-2" class="canva-text text-sm mt-3" style="color: rgb(8, 60, 51); font-weight: 400; font-style: normal; font-size: 16px;">Visual storyteller untuk destinasi, pengalaman komuniti dan pelancongan Borneo.</p><button class="open-tiktok mt-4 w-full rounded-xl border border-[#0b604c] text-[#0b604c] py-2 font-bold text-sm">Kenali Talent</button>
-      </div>
-     </article>
-     <article class="public-card card rounded-2xl overflow-hidden bg-white" data-type="Talent" data-location="Tawau" data-title="Sihat Bersama Nura" data-category="Health &amp; Wellness"><img data-template-id="talent-photo-3" class="canva-image w-full aspect-square object-cover" loading="lazy" src="https://images.pexels.com/photos/6920059/pexels-photo-6920059.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Wanita mencipta kandungan ASMR dengan mikrofon di dalam ruang">
-      <div class="p-5">
-       <h3 data-template-id="talent-name-3" class="canva-text font-bold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 19px;">Sihat Bersama Nura</h3>
-       <p data-template-id="talent-info-3" class="canva-text text-sm text-[#567066] mt-2" style="color: rgb(86, 112, 102); font-weight: 400; font-style: normal; font-size: 16px;">Health &amp; Wellness · Tawau · @sihatbersamanura</p>
-       <p data-template-id="talent-summary-3" class="canva-text text-sm mt-3" style="color: rgb(8, 60, 51); font-weight: 400; font-style: normal; font-size: 16px;">Kandungan kesejahteraan yang lembut, mudah diikuti dan dekat dengan komuniti.</p><button class="open-tiktok mt-4 w-full rounded-xl border border-[#0b604c] text-[#0b604c] py-2 font-bold text-sm">Kenali Talent</button>
-      </div>
-     </article>
-    </div>
-   </section>
-   <section data-template-id="subscribe-section" class="canva-section bg-[#e8f1e8]" style="background: rgb(232, 241, 232);">
-    <div class="shell py-14 grid md:grid-cols-[.8fr_1.2fr] gap-10">
-     <div>
-      <p data-template-id="subscribe-eyebrow" class="canva-text text-xs font-bold text-[#638347] tracking-widest uppercase" style="color: rgb(99, 131, 71); font-weight: 700; font-style: normal; font-size: 16px;">Jangan terlepas peluang</p>
-      <h2 data-template-id="subscribe-title" class="canva-text display font-semibold mt-3" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 24px;">Dapatkan Update Program &amp; Acara Terkini</h2>
-      <p data-template-id="subscribe-copy" class="canva-text mt-3 text-[#496358]" style="color: rgb(73, 99, 88); font-weight: 400; font-style: normal; font-size: 16px;">Percuma. Masukkan emel anda untuk menerima hebahan program dan acara yang menarik.</p>
-     </div>
-     <form id="subscribeForm" class="bg-white rounded-2xl p-6 card">
-      <div class="grid sm:grid-cols-2 gap-3"><label><span class="text-sm font-semibold">Nama</span><input class="field mt-1" name="name" required=""></label><label><span class="text-sm font-semibold">Emel</span><input class="field mt-1" name="email" type="email" required=""></label>
-      </div>
-      <fieldset class="mt-5"><legend class="font-bold">Minat anda <span class="text-red-600">*</span></legend>
-       <div id="interestChecks" class="grid sm:grid-cols-2 gap-2 mt-3 text-sm"></div>
-      </fieldset>
-      <p id="subscribeMessage" class="text-sm font-semibold mt-4" aria-live="polite"></p><button data-template-id="subscribe-button" class="canva-button mt-3 rounded-xl px-5 py-3 font-bold" type="submit" style="background: rgb(11, 96, 76); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Langgan Hebahan</button>
-     </form>
-    </div>
-   </section>
-  </main>
-  <footer data-template-id="footer-section" class="canva-footer bg-[#083c33] text-white" tabindex="0" style="background: rgb(8, 60, 51);">
-   <div class="shell py-10 grid md:grid-cols-2 gap-8">
-    <div><img data-template-id="footer-logo" class="canva-image h-11 w-auto object-contain brightness-0 invert" loading="lazy" src="canva://MAHUgP4Hl7k/1" alt="Logo rasmi BayuOne">
-     <h2 data-template-id="footer-heading" class="canva-text font-bold mt-5" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Tentang BayuOne</h2>
-     <p data-template-id="footer-copy" class="canva-text text-white/70 text-sm leading-relaxed mt-2 max-w-xl" style="color: rgb(207, 224, 212); font-weight: 400; font-style: normal; font-size: 16px;">BayuOne ialah platform yang menghubungkan individu, profesional dan organisasi untuk berkongsi ilmu, membina jaringan serta membuka peluang kolaborasi dan perkembangan bakat.</p>
-    </div>
-    <div class="md:text-right">
-     <p data-template-id="footer-disclaimer" class="canva-text text-white/65 text-sm leading-relaxed" style="color: rgb(207, 224, 212); font-weight: 400; font-style: normal; font-size: 16px;">Kandungan, profil, program dan tawaran yang dipaparkan mungkin disediakan oleh pihak ketiga. Pengguna bertanggungjawab membuat semakan dan pengesahan sendiri sebelum membuat sebarang keputusan, bayaran atau kerjasama</p><button id="footerSecret" type="button" data-template-id="footer-powered" class="canva-text text-[#b8d680] text-sm font-semibold mt-5" style="color: rgb(184, 214, 128); font-weight: 600;"><span data-template-id="footer-powered-label" class="canva-text" style="color: rgb(184, 214, 128); font-weight: 600; font-style: normal; font-size: 16px;">Powered By © 2026 NMZ Kreatif — Nurturing Minds Zone (199736-T)</span></button>
-    </div>
-   </div>
-  </footer>
-  <div id="joinModal" class="modal hidden-view" role="dialog" aria-modal="true" aria-labelledby="joinHeading">
-   <div class="modal-panel p-6 md:p-8">
-    <div class="flex justify-between items-start">
-     <div><img data-template-id="modal-logo" class="canva-image h-12 w-auto object-contain" loading="lazy" src="canva://MAHUgP4Hl7k/1" alt="Logo rasmi BayuOne">
-      <h2 id="joinHeading" data-template-id="join-title" class="canva-text display font-semibold mt-4" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 24px;">Sertai komuniti BayuOne</h2>
-     </div><button class="close-modal p-2" aria-label="Tutup"><i data-lucide="x"></i></button>
-    </div>
-    <div class="flex flex-wrap gap-2 mt-5" id="joinTypes"><button class="tab active rounded-full px-4 py-2 text-sm" data-form="Agenda">Penganjur</button><button class="tab rounded-full px-4 py-2 text-sm" data-form="Trainer">Trainer</button><button class="tab rounded-full px-4 py-2 text-sm" data-form="Talent">Talent</button>
-    </div>
-    <form id="applicationForm" class="mt-6 grid sm:grid-cols-2 gap-4">
-     <input type="hidden" name="application_type" value="Agenda"> <label class="agenda-only"><span class="text-sm font-semibold">Tajuk program</span><input name="title" class="field mt-1" required=""></label> <label class="agenda-only"><span class="text-sm font-semibold">Tarikh</span><input name="event_date" type="date" class="field mt-1" required=""></label> <label class="trainer-talent"><span class="text-sm font-semibold">Nama</span><input name="applicant_name" class="field mt-1"></label> <label class="agenda-only"><span class="text-sm font-semibold">Kategori</span><select name="category" class="field mt-1"><option>Kursus &amp; Latihan</option><option>Seminar &amp; Forum</option><option>Bengkel</option><option>Persidangan &amp; Konvensyen</option><option>Networking &amp; Professional</option><option>Komuniti &amp; Sosial</option><option>Sukan &amp; Rekreasi</option><option>Festival &amp; Hiburan</option><option>Keusahawanan &amp; Perniagaan</option><option>Pendidikan</option><option>Agama &amp; Kerohanian</option><option>Lain-lain</option></select></label> <label class="trainer-only"><span class="text-sm font-semibold">Bidang Kepakaran</span><input name="expertise" class="field mt-1"></label> <label class="all"><span class="text-sm font-semibold">Lokasi</span><input name="location" class="field mt-1" required=""></label> <label class="agenda-only"><span class="text-sm font-semibold">Nama PIC <em>(optional)</em></span><input name="organisation" class="field mt-1"></label> <label class="agenda-only"><span class="text-sm font-semibold">No. Tel PIC <em>(optional)</em></span><input name="phone" class="field mt-1"></label> <label class="agenda-only"><span class="text-sm font-semibold">Mod <em>(optional)</em></span><select name="mode" class="field mt-1"><option value="">Pilih mod</option><option>Online</option><option>Fizikal</option><option>Hybrid</option></select></label> <label class="agenda-only"><span class="text-sm font-semibold">URL Hebahan</span><input name="promotion_url" type="url" class="field mt-1" required=""></label> <label class="trainer-only sm:col-span-2"><span class="text-sm font-semibold">Pentauliahan</span>
-      <div id="certChecks" class="grid sm:grid-cols-3 gap-2 mt-2 text-sm"></div><input name="cert_other" class="field mt-2" placeholder="Lain-Lain"></label> <label class="talent-only sm:col-span-2"><span class="text-sm font-semibold">Niche Talent</span>
-      <div id="nicheChecks" class="grid sm:grid-cols-2 gap-2 mt-2 text-sm"></div></label> <label class="trainer-talent sm:col-span-2"><span class="text-sm font-semibold">Ringkasan profil</span><textarea name="profile_summary" class="field mt-1" rows="3"></textarea></label> <label class="trainer-talent sm:col-span-2"><span class="text-sm font-semibold">URL social media/website</span><input name="social_url" type="url" class="field mt-1"></label>
-     <div class="sm:col-span-2">
-      <p id="applicationMessage" class="text-sm font-semibold" aria-live="polite"></p><button data-template-id="application-submit" class="canva-button mt-2 rounded-xl px-5 py-3 font-bold" type="submit" style="background: rgb(11, 96, 76); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Hantar Permohonan</button>
-     </div>
-    </form>
-   </div>
-  </div>
-  <div id="adminAccess" class="modal hidden-view" role="dialog" aria-modal="true">
-   <div class="modal-panel max-w-md p-7 text-center"><img data-template-id="admin-logo" class="canva-image h-14 w-auto object-contain mx-auto" loading="lazy" src="canva://MAHUgP4Hl7k/1" alt="Logo rasmi BayuOne">
-    <h2 data-template-id="admin-access-title" class="canva-text display font-semibold mt-4" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 24px;">Admin Access</h2>
-    <p data-template-id="admin-access-copy" class="canva-text text-[#587168] mt-2" style="color: rgb(88, 113, 104); font-weight: 400; font-style: normal; font-size: 16px;">Akses demo untuk pengurusan kelulusan, status dan permohonan BayuOne.</p>
-    <form id="adminLoginForm" class="mt-5 text-left">
-     <label for="adminDemoInput" class="text-sm font-semibold">Akses demo</label><input id="adminDemoInput" class="field mt-1" type="text" autocomplete="off" placeholder="Masukkan BAYUONE" required="">
-     <p id="adminLoginMessage" class="text-sm font-semibold mt-2" aria-live="polite"></p><button id="enterAdmin" data-template-id="admin-enter-button" class="canva-button mt-4 rounded-xl px-6 py-3 font-bold" type="submit" style="background: rgb(11, 96, 76); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Buka Dashboard Demo</button>
-    </form><button type="button" class="close-admin-modal mt-3 rounded-xl px-5 py-2 font-semibold" aria-label="Tutup Admin Access">Tutup</button>
-   </div>
-  </div>
-  <div id="adminDashboard" class="modal hidden-view" role="dialog" aria-modal="true">
-   <div class="modal-panel p-5 md:p-8">
-    <div class="flex justify-between gap-4">
-     <div>
-      <h2 data-template-id="admin-dashboard-title" class="canva-text display font-semibold" style="color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 24px;">Admin Dashboard</h2>
-      <p class="text-sm text-[#587168]">Pengurusan kelulusan BayuOne</p>
-     </div><button id="logoutAdmin" data-template-id="logout-button" class="canva-button h-fit rounded-xl px-4 py-2 font-bold" style="background: rgb(232, 241, 232); color: rgb(8, 60, 51); font-weight: 700; font-style: normal; font-size: 16px;">Logout</button>
-    </div>
-    <div id="summaryCards" class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 mt-6"></div>
-    <div class="grid md:grid-cols-3 gap-3 mt-6"><input id="adminSearch" class="field" placeholder="Cari applicant / organisasi"><select id="adminType" class="field"><option value="">Semua aplikasi</option><option>Agenda</option><option>Trainer</option><option>Talent</option></select><select id="adminApproval" class="field"><option value="">Semua kelulusan</option><option>Pending</option><option>Approved</option></select>
-    </div>
-    <div class="overflow-x-auto mt-5 border border-[#d8e4dc] rounded-xl">
-     <table class="w-full text-sm text-left">
-      <thead class="bg-[#eef5ef]">
-       <tr>
-        <th class="p-3">APPLICATION</th>
-        <th class="p-3">APPROVAL</th>
-        <th class="p-3">VALIDITY</th>
-        <th class="p-3">TARIKH</th>
-        <th class="p-3">LABEL</th>
-        <th class="p-3">REMARK</th>
-        <th class="p-3"></th>
-       </tr>
-      </thead>
-      <tbody id="adminRows"></tbody>
-     </table>
-    </div>
-    <section id="detailPanel" class="hidden-view mt-6 rounded-2xl bg-[#f1f6f2] p-5">
-     <div class="flex justify-between">
-      <h3 class="font-bold text-lg">Detail Permohonan</h3><button id="closeDetail" class="p-1" aria-label="Tutup detail"><i data-lucide="x"></i></button>
-     </div>
-     <form id="adminForm" class="grid md:grid-cols-3 gap-3 mt-4"><input type="hidden" name="backend_id"><label>Applicant Name<input class="field mt-1" name="applicant_name"></label><label>Organisation<input class="field mt-1" name="organisation"></label><label>Position<input class="field mt-1" name="position"></label><label>Email<input class="field mt-1" name="email"></label><label>Phone<input class="field mt-1" name="phone"></label><label>Application Type<input class="field mt-1" name="application_type" readonly=""></label><label>Approval<select class="field mt-1" name="approval"><option value="Pending">Pending</option><option value="Approved">Approved</option></select></label><label>Validity<select class="field mt-1" name="validity"><option value="">Tiada</option><option>1 Bulan</option><option>6 Bulan</option><option>1 Tahun</option></select></label><label>Tarikh Dari<input class="field mt-1" type="date" name="start_date"></label><label>Tarikh Sehingga<input class="field mt-1" type="date" name="end_date"></label><label>Label<select class="field mt-1" name="labels"><option value="">Tiada</option><option>Featured</option><option>Promoted</option><option>Top</option></select></label><label>Remark<select class="field mt-1" name="remark"><option value="">Tiada</option><option>Expired</option><option>Cancelled</option><option>Delete</option></select></label><label>Photo<input class="field mt-1" type="file" id="photoUpload" accept="image/*"><span class="text-xs text-[#587168]">Upload / Replace foto landscape</span></label>
-      <div class="md:col-span-3 flex flex-wrap gap-2"><button data-template-id="admin-save-button" class="canva-button rounded-xl px-4 py-2 font-bold" type="submit" style="background: rgb(8, 60, 51); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Simpan Perubahan</button><button id="approveButton" type="button" class="rounded-xl bg-[#0b604c] text-white px-4 py-2 font-bold">Luluskan</button><button id="cancelButton" type="button" class="rounded-xl bg-[#f3ba58] px-4 py-2 font-bold">Batal</button><button id="deleteButton" type="button" class="rounded-xl bg-[#b94242] text-white px-4 py-2 font-bold">Padam</button>
-      </div>
-     </form>
-    </section>
-   </div>
-   <template id="summaryTemplate">
-    <div class="rounded-xl bg-white border border-[#d8e4dc] p-3">
-     <p class="text-[10px] font-bold tracking-wide text-[#587168]"></p><strong class="text-2xl text-[#083c33]"></strong>
-    </div>
-   </template>
-   <script src="/_sdk/92570d8e491862b9.editing_sdk.js" integrity="sha512-FgTgBgZOGUl1XBrojWdmYvV2Ka+jYLWeeIrMhp1Q1xMV3FJfF+VJFjO6hw+EDGnXYa+zMZXNIP5UYLxGsdfP6g=="></script>
-   <script>
-    const tiktokUrl='https://www.tiktok.com/@bayuone';
-    const interests=['Peningkatan Kemahiran & Kerjaya','Perniagaan & Keusahawanan','Kewangan & Pelaburan','Kesihatan & Kesejahteraan','Teknologi & Digital','Pendidikan & Pembelajaran','Kreativiti & Media','Komuniti & Networking','Gaya Hidup & Minat','Agama & Kerohanian'];
-    const niches=['F&B','Tourism & Hospitality','Local Product & SME','Beauty & Lifestyle','Health & Wellness','Education & Professional','Automotive','Real Estate','Agriculture & Agrofood','Events & Wedding'];
-    const certs=['HRD Corp TTT','HRD Corp Accredited Trainer','Sijil NCS-TTT','SKM3','DKM','DLKM'];
-    let records=[], selected=null, footerClicks=0;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BayuOne — Menghubungkan Komuniti, Bakat & Peluang</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    function checks(items,id,name){document.getElementById(id).innerHTML=items.map((x,i)=>`<label class="flex gap-2 items-center"><input class="check" type="checkbox" name="${name}" value="${x}">${x}</label>`).join('')}
-    checks(interests,'interestChecks','interest');checks(niches,'nicheChecks','niche');checks(certs,'certChecks','cert');
-    function toast(msg, bad=false){const x=document.createElement('div');x.className='toast';x.style.background=bad?'#9f3030':'#083c33';x.textContent=msg;document.body.appendChild(x);setTimeout(()=>x.remove(),3500)}
-    function setTab(tab){document.querySelectorAll('.tab[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));['agenda','trainer','talent'].forEach(x=>document.getElementById(x+'View').classList.toggle('hidden-view',x!==tab)); const opts=tab==='agenda'?['Kursus, Seminar, Bengkel & Latihan','Persidangan / Run','Festival / Event (Lain-Lain)']:tab==='talent'?niches:['Leadership','Business','Digital'];categoryFilter.innerHTML='<option value="">Semua Kategori</option>'+opts.map(x=>`<option>${x}</option>`).join('');filterCards()}
-    document.querySelectorAll('.tab[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
-    document.querySelectorAll('.open-tiktok').forEach(b=>b.onclick=()=>window.open(tiktokUrl,'_blank','noopener'));
-    function filterCards(){let q=searchInput.value.toLowerCase(),loc=locationFilter.value,mode=modeFilter.value,cat=categoryFilter.value;document.querySelectorAll('.public-card').forEach(c=>{let ok=(!q||c.dataset.title.toLowerCase().includes(q))&&(!loc||c.dataset.location===loc)&&(!mode||c.dataset.mode===mode)&&(!cat||c.dataset.category===cat);c.classList.toggle('hidden-view',!ok)})}
-    [searchInput,locationFilter,modeFilter,categoryFilter].forEach(x=>x.addEventListener('input',filterCards));
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            dark: '#0b2916'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .hidden-section { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-    openJoin.onclick=()=>joinModal.classList.remove('hidden-view');document.querySelectorAll('.close-modal').forEach(b=>b.onclick=()=>joinModal.classList.add('hidden-view'));
-    function switchForm(type){document.querySelectorAll('#joinTypes .tab').forEach(x=>x.classList.toggle('active',x.dataset.form===type));applicationForm.application_type.value=type;document.querySelectorAll('.agenda-only').forEach(x=>x.classList.toggle('hidden-view',type!=='Agenda'));document.querySelectorAll('.trainer-only').forEach(x=>x.classList.toggle('hidden-view',type!=='Trainer'));document.querySelectorAll('.talent-only').forEach(x=>x.classList.toggle('hidden-view',type!=='Talent'));document.querySelectorAll('.trainer-talent').forEach(x=>x.classList.toggle('hidden-view',type==='Agenda'));applicationForm.querySelectorAll('[required]').forEach(x=>x.required=false);if(type==='Agenda'){applicationForm.title.required=true;applicationForm.event_date.required=true}else applicationForm.applicant_name.required=true}
-    document.querySelectorAll('#joinTypes .tab').forEach(b=>b.onclick=()=>switchForm(b.dataset.form));switchForm('Agenda');
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" onclick="showSection('home')" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-brand-700 rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-md shadow-brand-700/20">
+                    B1
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-xl tracking-tight text-slate-900 leading-none">BAYUONE</span>
+                    <span class="text-[10px] text-slate-500 font-medium tracking-wide">Powered by NMZ Kreatif</span>
+                </div>
+            </a>
 
-    async function create(record,button){button.disabled=true;button.classList.add('opacity-60');const res=await window.dataSdk.create(record);button.disabled=false;button.classList.remove('opacity-60');if(!res.isOk)toast('Tidak dapat menyimpan rekod. Sila cuba lagi.',true);return res.isOk}
-    subscribeForm.addEventListener('submit',async e=>{e.preventDefault();let chosen=[...subscribeForm.querySelectorAll('input[name=interest]:checked')].map(x=>x.value);if(!chosen.length){subscribeMessage.textContent='Sila pilih sekurang-kurangnya satu minat.';subscribeMessage.className='text-sm font-semibold mt-4 text-red-700';return}let ok=await create({application_type:'Subscription',applicant_name:e.target.name.value,organisation:'',position:'',email:e.target.email.value,phone:'',title:'Langganan BayuOne',expertise:'',niche:chosen.join(', '),location:'',profile_summary:'',category:'',event_date:'',mode:'',promotion_url:'',social_url:'',certifications:'',approval:'Approved',validity:'',start_date:'',end_date:'',remark:'',labels:'',photo_url:'',submitted_at:new Date().toISOString()},e.submitter);if(ok){subscribeMessage.textContent='Terima kasih! Anda kini dalam senarai hebahan BayuOne.';subscribeMessage.className='text-sm font-semibold mt-4 text-[#0b604c]';e.target.reset()}});
-    applicationForm.addEventListener('submit',async e=>{e.preventDefault();let f=new FormData(e.target), type=f.get('application_type'), name=type==='Agenda'?f.get('title'):f.get('applicant_name');if(type==='Talent'&&![...e.target.querySelectorAll('[name=niche]:checked')].length){applicationMessage.textContent='Sila pilih sekurang-kurangnya satu niche talent.';return}let ok=await create({application_type:type,applicant_name:name,organisation:f.get('organisation')||'',position:'',email:'',phone:f.get('phone')||'',title:f.get('title')||name,expertise:f.get('expertise')||'',niche:[...e.target.querySelectorAll('[name=niche]:checked')].map(x=>x.value).join(', '),location:f.get('location')||'',profile_summary:f.get('profile_summary')||'',category:f.get('category')||'',event_date:f.get('event_date')||'',mode:f.get('mode')||'',promotion_url:f.get('promotion_url')||'',social_url:f.get('social_url')||'',certifications:[...e.target.querySelectorAll('[name=cert]:checked')].map(x=>x.value).concat(f.get('cert_other')||'').filter(Boolean).join(', '),approval:'Pending',validity:'',start_date:'',end_date:'',remark:'',labels:'',photo_url:'',submitted_at:new Date().toISOString()},e.submitter);if(ok){applicationMessage.textContent='Permohonan berjaya dihantar dan sedang menunggu semakan.';e.target.reset();switchForm(type)}});
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-sm text-slate-600">
+                <button onclick="showSection('home')" class="hover:text-brand-700 transition">HOME</button>
+                <button onclick="showSection('agenda')" class="hover:text-brand-700 transition">AGENDA</button>
+                <button onclick="showSection('trainer')" class="hover:text-brand-700 transition">TRAINER</button>
+                <button onclick="showSection('talent')" class="hover:text-brand-700 transition">TALENT</button>
+                <button onclick="showSection('join')" class="hover:text-brand-700 transition">SERTAI BAYUONE</button>
+                <button onclick="showSection('about')" class="hover:text-brand-700 transition">TENTANG BAYUONE</button>
+            </nav>
 
-    let footerTimer;
-    function resetFooterClicks(){footerClicks=0;clearTimeout(footerTimer)}
-    function openAdminAccess(){resetFooterClicks();adminAccess.classList.remove('hidden-view');adminDemoInput.value='';adminLoginMessage.textContent='';setTimeout(()=>adminDemoInput.focus(),0)}
-    footerSection.addEventListener('click',e=>{if(!footerSection.contains(e.target))return;footerClicks++;clearTimeout(footerTimer);if(footerClicks===3){openAdminAccess()}else footerTimer=setTimeout(resetFooterClicks,1200)});
-    document.addEventListener('click',e=>{if(!footerSection.contains(e.target))resetFooterClicks()});
-    adminLoginForm.addEventListener('submit',e=>{e.preventDefault();if(adminDemoInput.value.trim().toUpperCase()!=='BAYUONE'){adminLoginMessage.textContent='Akses demo tidak sah.';adminLoginMessage.className='text-sm font-semibold mt-2 text-red-700';adminDemoInput.focus();return}adminAccess.classList.add('hidden-view');adminDashboard.classList.remove('hidden-view');renderAdmin()});
-    document.querySelectorAll('.close-admin-modal').forEach(b=>b.onclick=()=>adminAccess.classList.add('hidden-view'));
-    logoutAdmin.onclick=()=>adminDashboard.classList.add('hidden-view');
-    function status(r){if(r.remark==='Cancelled')return'Dibatalkan';if(r.remark==='Delete')return'Dipadam';if(r.approval!=='Approved')return'Menunggu Semakan';if(!r.end_date)return'Aktif';let d=new Date(r.end_date),now=new Date(),soon=new Date();soon.setDate(now.getDate()+14);return d<now?'Luput':d<=soon?'Akan Tamat':'Aktif'}
-    function renderAdmin(){let rows=records.filter(r=>r.application_type!=='Subscription'), q=adminSearch.value.toLowerCase(),tp=adminType.value,ap=adminApproval.value;rows=rows.filter(r=>(!q||`${r.applicant_name} ${r.organisation}`.toLowerCase().includes(q))&&(!tp||r.application_type===tp)&&(!ap||r.approval===ap)).sort((a,b)=>b.submitted_at.localeCompare(a.submitted_at));let groups=[['Jumlah Permohonan',records.filter(r=>r.application_type!=='Subscription').length],['Menunggu Semakan',rows.filter(r=>r.approval==='Pending').length],['Diluluskan',rows.filter(r=>r.approval==='Approved').length],['Aktif',rows.filter(r=>status(r)==='Aktif').length],['Akan Tamat',rows.filter(r=>status(r)==='Akan Tamat').length],['Luput',rows.filter(r=>status(r)==='Luput').length],['Dibatalkan',rows.filter(r=>status(r)==='Dibatalkan').length]];summaryCards.innerHTML='';groups.forEach(g=>{let n=summaryTemplate.content.cloneNode(true);n.querySelector('p').textContent=g[0];n.querySelector('strong').textContent=g[1];summaryCards.appendChild(n)});adminRows.innerHTML=rows.map(r=>`<tr class="admin-row border-t border-[#d8e4dc]"><td class="p-3 font-semibold">${r.application_type}<br><span class="font-normal text-[#587168]">${r.applicant_name}</span></td><td class="p-3">${status(r)}</td><td class="p-3">${r.validity||'—'}</td><td class="p-3">${r.start_date||'—'}<br>${r.end_date||''}</td><td class="p-3">${r.labels||'—'}</td><td class="p-3">${r.remark||'—'}</td><td class="p-3"><button class="view-record text-[#0b604c] font-bold" data-id="${r.__backendId}">View</button></td></tr>`).join('');document.querySelectorAll('.view-record').forEach(b=>b.onclick=()=>openDetail(records.find(r=>r.__backendId===b.dataset.id)))}
-    [adminSearch,adminType,adminApproval].forEach(x=>x.oninput=renderAdmin);
-    function openDetail(r){selected=r;detailPanel.classList.remove('hidden-view');let f=adminForm;Object.keys(r).forEach(k=>{if(f.elements[k])f.elements[k].value=r[k]||''});f.backend_id.value=r.__backendId}
-    closeDetail.onclick=()=>detailPanel.classList.add('hidden-view');
-    adminForm.validity.onchange=()=>{let s=adminForm.start_date.value;if(!s)return;let d=new Date(s),v=adminForm.validity.value;if(v==='1 Bulan')d.setMonth(d.getMonth()+1);if(v==='6 Bulan')d.setMonth(d.getMonth()+6);if(v==='1 Tahun')d.setFullYear(d.getFullYear()+1);adminForm.end_date.value=d.toISOString().slice(0,10)}
-    photoUpload.onchange=e=>{if(e.target.files[0])toast('Foto dipilih untuk semakan sesi ini. Gantikan foto sebelum menyimpan.')}
-    adminForm.onsubmit=async e=>{e.preventDefault();if(!selected)return;let f=new FormData(e.target), upd={...selected};['applicant_name','organisation','position','email','phone','application_type','approval','validity','start_date','end_date','labels','remark'].forEach(k=>upd[k]=f.get(k)||'');let result=await window.dataSdk.update(upd);if(result.isOk){toast('Perubahan disimpan.');detailPanel.classList.add('hidden-view')}else toast('Gagal menyimpan perubahan.',true)}
-    approveButton.onclick=()=>{adminForm.approval.value='Approved';if(!adminForm.start_date.value)adminForm.start_date.value=new Date().toISOString().slice(0,10);if(!adminForm.validity.value)adminForm.validity.value='1 Bulan';adminForm.validity.dispatchEvent(new Event('change'));adminForm.requestSubmit()}
-    cancelButton.onclick=()=>{adminForm.remark.value='Cancelled';adminForm.requestSubmit()}
-    deleteButton.onclick=()=>{adminForm.remark.value='Delete';adminForm.requestSubmit()}
-    const handler={onDataChanged(data){records=data;renderAdmin();}};
-    (async()=>{let result=await window.dataSdk.init(handler);if(!result.isOk)toast('Sambungan data tidak tersedia.',true)})();
-    lucide.createIcons();
-  </script>
-  </div>
- 
-</body></html>
+            <div class="hidden md:flex items-center gap-3">
+                <button onclick="showSection('join')" class="bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm px-5 py-2.5 rounded-lg shadow-sm transition">
+                    Sertai Sekarang
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-3 font-medium text-slate-700">
+            <button onclick="showSection('home'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">HOME</button>
+            <button onclick="showSection('agenda'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">AGENDA</button>
+            <button onclick="showSection('trainer'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">TRAINER</button>
+            <button onclick="showSection('talent'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">TALENT</button>
+            <button onclick="showSection('join'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">SERTAI BAYUONE</button>
+            <button onclick="showSection('about'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">TENTANG BAYUONE</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINERS -->
+    <main class="flex-grow">
+
+        <!-- 1. HOME SECTION -->
+        <section id="sec-home" class="space-y-16 pb-16">
+            <!-- Hero -->
+            <div class="bg-gradient-to-b from-brand-50 to-slate-50 border-b border-slate-200/60 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto text-center space-y-6">
+                    <span class="inline-block bg-brand-100 text-brand-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Komuniti Peluang & Kemahiran
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight">
+                        BAYUONE
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
+                        Temui program, trainer dan bakat profesional dalam satu komuniti.
+                    </p>
+
+                    <!-- Search Bar -->
+                    <div class="max-w-2xl mx-auto pt-4">
+                        <div class="flex items-center bg-white rounded-2xl shadow-lg border border-slate-200 p-2">
+                            <i data-lucide="search" class="w-6 h-6 text-slate-400 ml-3"></i>
+                            <input type="text" id="global-search" placeholder="Cari program, trainer atau talent..." class="w-full px-4 py-3 focus:outline-none text-slate-700 placeholder-slate-400">
+                            <button onclick="handleGlobalSearch()" class="bg-brand-700 hover:bg-brand-800 text-white font-bold px-6 py-3 rounded-xl transition flex-shrink-0">
+                                Jelajah
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 pt-2">
+                        <button onclick="showSection('agenda')" class="bg-brand-700 hover:bg-brand-800 text-white font-bold px-6 py-3 rounded-xl transition shadow-md">
+                            Jelajah BayuOne
+                        </button>
+                        <button onclick="showSection('join')" class="bg-white border border-slate-300 hover:border-slate-400 text-slate-700 font-bold px-6 py-3 rounded-xl transition">
+                            Sertai BayuOne
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Agenda -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">Agenda Pilihan</h2>
+                        <p class="text-slate-500 text-sm">Program & acara terkini khas untuk anda</p>
+                    </div>
+                    <button onclick="showSection('agenda')" class="text-brand-700 font-bold text-sm hover:underline flex items-center gap-1">
+                        Lihat Semua <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div id="home-featured-agenda" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Dynamic rendering -->
+                </div>
+            </div>
+
+            <!-- Why BayuOne -->
+            <div class="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto space-y-12">
+                    <div class="text-center max-w-2xl mx-auto">
+                        <h2 class="text-3xl font-extrabold">Kenapa Pilih BayuOne?</h2>
+                        <p class="text-slate-400 mt-2">Platform sehenti untuk pembangunan kerjaya, kepakaran dan jaringan profesional.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700 space-y-3">
+                            <div class="w-12 h-12 bg-brand-500/10 text-brand-500 rounded-xl flex items-center justify-center">
+                                <i data-lucide="compass" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-bold text-lg">Terokai Peluang</h3>
+                            <p class="text-slate-400 text-sm">Cari seminar, kursus latihan dan program networking terkini yang bersesuaian dengan matlamat anda.</p>
+                        </div>
+                        <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700 space-y-3">
+                            <div class="w-12 h-12 bg-brand-500/10 text-brand-500 rounded-xl flex items-center justify-center">
+                                <i data-lucide="users" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-bold text-lg">Jaringan Trainer Bertauliah</h3>
+                            <p class="text-slate-400 text-sm">Hubungi penceramah dan jurulatih berpengalaman untuk keperluan latihan industri dan korporat.</p>
+                        </div>
+                        <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700 space-y-3">
+                            <div class="w-12 h-12 bg-brand-500/10 text-brand-500 rounded-xl flex items-center justify-center">
+                                <i data-lucide="star" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-bold text-lg">Ketengahkan Bakat Tempatan</h3>
+                            <p class="text-slate-400 text-sm">Platform untuk bakat, pereka kreatif, dan pencipta kandungan menyerlahkan profil mereka.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subscriber Section -->
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-brand-50 border border-brand-100 p-8 rounded-3xl space-y-6">
+                    <div class="text-center space-y-2">
+                        <h2 class="text-2xl font-extrabold text-slate-900">Dapatkan Update Program & Acara Terkini</h2>
+                        <p class="text-slate-600 text-sm">Percuma. Masukkan emel anda untuk menerima hebahan program dan acara yang menarik.</p>
+                    </div>
+                    <form id="subscriber-form" onsubmit="handleSubscribe(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" id="sub-name" placeholder="Nama Anda" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <input type="email" id="sub-email" placeholder="Emel Anda" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Pilih Minat (Pilih sekurang-kurangnya satu):</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm">
+                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Peningkatan Kemahiran & Kerjaya" class="accent-brand-600"> Peningkatan Kemahiran</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Perniagaan & Keusahawanan" class="accent-brand-600"> Keusahawanan</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Kewangan & Pelaburan" class="accent-brand-600"> Kewangan</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Kesihatan & Kesejahteraan" class="accent-brand-600"> Kesihatan</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Teknologi & Digital" class="accent-brand-600"> Teknologi & AI</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Komuniti & Networking" class="accent-brand-600"> Networking</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-3 rounded-xl transition shadow-sm">
+                            Langgan Sekarang
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. AGENDA SECTION -->
+        <section id="sec-agenda" class="hidden-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div>
+                <h1 class="text-3xl font-extrabold text-slate-900">Agenda & Program</h1>
+                <p class="text-slate-500">Jelajah senarai program, seminar, dan kursus latihan aktif.</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <input type="text" id="filter-agenda-search" placeholder="Cari tajuk..." class="px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <select id="filter-agenda-category" class="px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <option value="">Semua Kategori</option>
+                        <option>Kursus & Latihan</option>
+                        <option>Seminar & Forum</option>
+                        <option>Bengkel</option>
+                        <option>Persidangan & Konvensyen</option>
+                        <option>Networking & Professional</option>
+                        <option>Keusahawanan & Perniagaan</option>
+                    </select>
+                    <select id="filter-agenda-mode" class="px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <option value="">Semua Mod</option>
+                        <option>Fizikal</option>
+                        <option>Online</option>
+                        <option>Hybrid</option>
+                    </select>
+                    <button onclick="renderAgenda()" class="bg-brand-700 hover:bg-brand-800 text-white font-bold py-2.5 rounded-xl transition text-sm">Tapis</button>
+                </div>
+            </div>
+
+            <!-- Agenda Grid -->
+            <div id="agenda-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Dynamic cards -->
+            </div>
+        </section>
+
+        <!-- 3. TRAINER SECTION -->
+        <section id="sec-trainer" class="hidden-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div>
+                <h1 class="text-3xl font-extrabold text-slate-900">Direktori Trainer</h1>
+                <p class="text-slate-500">Cari penceramah, jurulatih dan pakar industri bertauliah.</p>
+            </div>
+
+            <!-- Trainer Grid -->
+            <div id="trainer-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Dynamic cards -->
+            </div>
+        </section>
+
+        <!-- 4. TALENT SECTION -->
+        <section id="sec-talent" class="hidden-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div>
+                <h1 class="text-3xl font-extrabold text-slate-900">Direktori Talent</h1>
+                <p class="text-slate-500">Temui pencipta kandungan, pereka kreatif, dan bakat tempatan.</p>
+            </div>
+
+            <!-- Talent Grid -->
+            <div id="talent-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Dynamic cards -->
+            </div>
+        </section>
+
+        <!-- 5. JOIN SECTION -->
+        <section id="sec-join" class="hidden-section max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div class="text-center space-y-2">
+                <h1 class="text-3xl font-extrabold text-slate-900">Sertai BayuOne</h1>
+                <p class="text-slate-500">Pilih peranan anda dan hantar permohonan untuk menyertai rangkaian komuniti kami.</p>
+            </div>
+
+            <!-- Application Type Selector -->
+            <div class="grid grid-cols-3 gap-3 bg-slate-200/60 p-1.5 rounded-2xl text-center font-bold text-sm">
+                <button onclick="switchJoinTab('organiser')" id="tab-btn-organiser" class="py-3 rounded-xl bg-white text-brand-800 shadow-sm">PENGANJUR</button>
+                <button onclick="switchJoinTab('trainer')" id="tab-btn-trainer" class="py-3 rounded-xl text-slate-600">TRAINER</button>
+                <button onclick="switchJoinTab('talent')" id="tab-btn-talent" class="py-3 rounded-xl text-slate-600">TALENT</button>
+            </div>
+
+            <!-- Dynamic Form -->
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                <form id="join-form" onsubmit="handleApplicationSubmit(event)" class="space-y-6">
+                    <div id="form-fields" class="space-y-4">
+                        <!-- Rendered dynamically -->
+                    </div>
+
+                    <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-3.5 rounded-xl transition shadow-md">
+                        Hantar Permohonan
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 6. ABOUT SECTION -->
+        <section id="sec-about" class="hidden-section max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+            <div class="text-center space-y-4">
+                <h1 class="text-4xl font-extrabold text-slate-900">Tentang BayuOne</h1>
+                <p class="text-slate-600 text-lg">Platform Pemerkasaan Komuniti, Peluang & Bakat Profesional</p>
+            </div>
+
+            <div class="prose prose-slate max-w-none bg-white p-8 rounded-3xl border border-slate-200 space-y-6">
+                <p>
+                    <strong>BayuOne</strong> merupakan sebuah inisiatif platform komuniti profesional yang dibangunkan oleh <strong>NMZ Kreatif</strong>. Ia direka khas untuk merapatkan jurang antara penganjur acara, jurulatih bertauliah (trainers), bakat tempatan (talents), serta ahli komuniti.
+                </p>
+                <h3 class="text-xl font-bold text-slate-900">Misi Kami</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>Memudahkan pencarian program pemerkasaan kemahiran dan keusahawanan.</li>
+                    <li>Menyediakan ruang promosi bagi jurulatih dan pencipta kandungan tempatan.</li>
+                    <li>Membina komuniti profesional yang saling menyokong di seluruh negara.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 7. ADMIN LOGIN SECTION -->
+        <section id="sec-admin-login" class="hidden-section max-w-md mx-auto px-4 py-16">
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-12 h-12 bg-brand-700 rounded-xl flex items-center justify-center text-white font-extrabold text-2xl mx-auto">B1</div>
+                    <h1 class="text-2xl font-bold text-slate-900">Admin Access</h1>
+                    <p class="text-sm text-slate-500">Log masuk untuk menguruskan maklumat BayuOne</p>
+                </div>
+
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Emel</label>
+                        <input type="email" id="admin-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Kata Laluan</label>
+                        <input type="password" id="admin-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                    <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition">
+                        Log Masuk
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white font-extrabold text-xl">
+                        B1
+                    </div>
+                    <div>
+                        <span class="font-bold text-white text-lg">BayuOne</span>
+                        <p class="text-xs text-slate-500">Powered by NMZ Kreatif</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-6 text-sm font-medium text-slate-300">
+                    <a href="#" onclick="showSection('home')" class="hover:text-white">Home</a>
+                    <a href="#" onclick="showSection('agenda')" class="hover:text-white">Agenda</a>
+                    <a href="#" onclick="showSection('trainer')" class="hover:text-white">Trainer</a>
+                    <a href="#" onclick="showSection('talent')" class="hover:text-white">Talent</a>
+                    <button onclick="openFeedbackModal()" class="hover:text-white">Maklum Balas</button>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-6 flex flex-col md:flex-row justify-between items-center text-xs gap-4">
+                <p>&copy; 2026 BayuOne & NMZ Kreatif. Hak Cipta Terelihara.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    <a href="#" class="hover:underline">Terms of Service</a>
+                    <button onclick="showSection('admin-login')" class="text-slate-600 hover:text-slate-400 transition">Admin Access</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FEEDBACK MODAL -->
+    <div id="modal-feedback" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-xl font-bold text-slate-900">Hantar Maklum Balas</h3>
+                <button onclick="closeFeedbackModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <form onsubmit="handleFeedbackSubmit(event)" class="space-y-4">
+                <input type="text" id="fb-name" placeholder="Nama" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                <input type="email" id="fb-email" placeholder="Emel" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                <textarea id="fb-message" placeholder="Mesej / Maklum Balas Anda..." rows="4" required class="w-full px-4 py-3 border rounded-xl text-sm"></textarea>
+                <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-3 rounded-xl">Hantar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- APPLICATION SCRIPTS -->
+    <script>
+        // Lucide icons initialization
+        lucide.createIcons();
+
+        // Navigation state handler
+        function showSection(secId) {
+            const sections = ['home', 'agenda', 'trainer', 'talent', 'join', 'about', 'admin-login'];
+            sections.forEach(id => {
+                const el = document.getElementById(`sec-${id}`);
+                if (el) el.classList.add('hidden-section');
+            });
+
+            const target = document.getElementById(`sec-${secId}`);
+            if (target) target.classList.remove('hidden-section');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Feedback Modal Controls
+        function openFeedbackModal() {
+            document.getElementById('modal-feedback').classList.remove('hidden');
+        }
+        function closeFeedbackModal() {
+            document.getElementById('modal-feedback').classList.add('hidden');
+        }
+
+        // Join Application Tab Handler
+        let currentJoinTab = 'organiser';
+        function switchJoinTab(type) {
+            currentJoinTab = type;
+            ['organiser', 'trainer', 'talent'].forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (t === type) {
+                    btn.className = 'py-3 rounded-xl bg-white text-brand-800 shadow-sm';
+                } else {
+                    btn.className = 'py-3 rounded-xl text-slate-600';
+                }
+            });
+            renderJoinFormFields();
+        }
+
+        function renderJoinFormFields() {
+            const container = document.getElementById('form-fields');
+            if (currentJoinTab === 'organiser') {
+                container.innerHTML = `
+                    <input type="text" placeholder="Nama Organisasi / Syarikat" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <input type="text" placeholder="Tajuk Program" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-xs font-bold text-slate-500">Tarikh Mula</label>
+                            <input type="date" required class="w-full px-4 py-2.5 border rounded-xl text-sm">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-500">Tarikh Tamat</label>
+                            <input type="date" required class="w-full px-4 py-2.5 border rounded-xl text-sm">
+                        </div>
+                    </div>
+                    <input type="text" placeholder="Lokasi Program" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <textarea placeholder="Penerangan Ringkas Program" rows="3" required class="w-full px-4 py-3 border rounded-xl text-sm"></textarea>
+                `;
+            } else if (currentJoinTab === 'trainer') {
+                container.innerHTML = `
+                    <input type="text" placeholder="Nama Penuh" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <input type="email" placeholder="Emel Kontak" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <input type="text" placeholder="Bidang Kepakaran (cth: Kepimpinan, Digital Marketing)" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <textarea placeholder="Biodata & Ringkasan Pengalaman" rows="3" required class="w-full px-4 py-3 border rounded-xl text-sm"></textarea>
+                `;
+            } else {
+                container.innerHTML = `
+                    <input type="text" placeholder="Nama / Nama Pentas" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <input type="email" placeholder="Emel Kontak" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <input type="text" placeholder="Niche (cth: Content Creator, Fotografi, Muzik)" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <textarea placeholder="Ringkasan Profil & Portfolio" rows="3" required class="w-full px-4 py-3 border rounded-xl text-sm"></textarea>
+                `;
+            }
+        }
+
+        // Submissions handlers
+        function handleSubscribe(e) {
+            e.preventDefault();
+            alert('Terima kasih! Anda kini dalam senarai hebahan BayuOne.');
+            e.target.reset();
+        }
+
+        function handleApplicationSubmit(e) {
+            e.preventDefault();
+            alert('Terima Kasih! Permohonan anda telah diterima dan sedang dalam semakan admin.');
+            e.target.reset();
+        }
+
+        function handleFeedbackSubmit(e) {
+            e.preventDefault();
+            alert('Terima Kasih Atas Maklum Balas Anda! Maklum balas anda telah diterima.');
+            closeFeedbackModal();
+            e.target.reset();
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            alert('Sistem pengesahan sedang berhubung dengan Supabase. Sila pastikan environment variables telah dikonfigurasi.');
+        }
+
+        // Global search mockup handler
+        function handleGlobalSearch() {
+            const query = document.getElementById('global-search').value;
+            if (query.trim()) {
+                showSection('agenda');
+            }
+        }
+
+        // Initial setup
+        renderJoinFormFields();
+    </script>
+</body>
+</html>
