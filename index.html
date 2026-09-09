@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BayuOne — Menghubungkan Komuniti, Bakat & Peluang</title>
+    <title>BayuOne — Komuniti Peluang & Kemahiran</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
+    <!-- Google Fonts: DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Supabase JS Client -->
@@ -21,73 +21,85 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#14532d',
-                            dark: '#0b2916'
-                        }
+                            50: '#F4F8F5',   /* Pale green section background */
+                            100: '#E2ECE6',
+                            500: '#126B4C',  /* Primary Botanical Green */
+                            600: '#105F43',
+                            700: '#0B5139',  /* Dark Green for strong sections */
+                            800: '#09422F',
+                            dark: '#17231E'  /* Dark Charcoal-Green for headings */
+                        },
+                        muted: '#637069'    /* Muted grey-green secondary text */
                     },
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                        sans: ['DM Sans', 'sans-serif']
+                    },
+                    maxWidth: {
+                        'site': '1200px'
                     }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { 
+            font-family: 'DM Sans', sans-serif; 
+            color: #17231E; 
+            background-color: #FAFCFB;
+        }
         .hidden-section { display: none; }
+        .soft-border { border: 1px solid #E5EAE7; }
+        .soft-shadow { box-shadow: 0 4px 20px -2px rgba(23, 35, 30, 0.04); }
+        .soft-shadow-lg { box-shadow: 0 12px 32px -4px rgba(23, 35, 30, 0.06); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+<body class="bg-[#FAFCFB] text-[#17231E] antialiased min-h-screen flex flex-col justify-between">
 
     <!-- HEADER / NAVIGATION -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header class="bg-white border-b border-[#E5EAE7] sticky top-0 z-40">
+        <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#" onclick="showSection('home')" class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-brand-700 rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-md shadow-brand-700/20">
+                <div class="w-10 h-10 bg-[#126B4C] rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-sm">
                     B1
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-extrabold text-xl tracking-tight text-slate-900 leading-none">BAYUONE</span>
-                    <span class="text-[10px] text-slate-500 font-medium tracking-wide">Powered by NMZ Kreatif</span>
+                    <span class="text-xl tracking-tight leading-none text-[#17231E]">
+                        <span class="font-bold">Bayu</span><span class="font-normal">One</span>
+                    </span>
+                    <span class="text-[11px] text-[#637069] font-medium tracking-wide mt-0.5">Powered by NMZ Kreatif</span>
                 </div>
             </a>
 
             <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center gap-8 font-semibold text-sm text-slate-600">
-                <button onclick="showSection('home')" class="hover:text-brand-700 transition">HOME</button>
-                <button onclick="showSection('agenda')" class="hover:text-brand-700 transition">AGENDA</button>
-                <button onclick="showSection('trainer')" class="hover:text-brand-700 transition">TRAINER</button>
-                <button onclick="showSection('talent')" class="hover:text-brand-700 transition">TALENT</button>
-                <button onclick="showSection('join')" class="hover:text-brand-700 transition">SERTAI BAYUONE</button>
-                <button onclick="showSection('about')" class="hover:text-brand-700 transition">TENTANG BAYUONE</button>
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-[#637069]">
+                <button onclick="showSection('home')" class="hover:text-[#126B4C] transition">HOME</button>
+                <button onclick="showSection('agenda')" class="hover:text-[#126B4C] transition">AGENDA</button>
+                <button onclick="showSection('trainer')" class="hover:text-[#126B4C] transition">TRAINER</button>
+                <button onclick="showSection('talent')" class="hover:text-[#126B4C] transition">TALENT</button>
+                <button onclick="showSection('join')" class="hover:text-[#126B4C] transition">SERTAI <span class="font-bold">Bayu</span><span class="font-normal">One</span></button>
+                <button onclick="showSection('about')" class="hover:text-[#126B4C] transition">TENTANG <span class="font-bold">Bayu</span><span class="font-normal">One</span></button>
             </nav>
 
             <div class="hidden md:flex items-center gap-3">
-                <button onclick="showSection('join')" class="bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm px-5 py-2.5 rounded-lg shadow-sm transition">
+                <button onclick="showSection('join')" class="bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium text-sm px-5 py-2.5 rounded-xl shadow-sm transition">
                     Sertai Sekarang
                 </button>
             </div>
 
             <!-- Mobile Menu Toggle -->
-            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 focus:outline-none">
+            <button onclick="toggleMobileMenu()" class="md:hidden text-[#17231E] focus:outline-none">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-3 font-medium text-slate-700">
-            <button onclick="showSection('home'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">HOME</button>
-            <button onclick="showSection('agenda'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">AGENDA</button>
-            <button onclick="showSection('trainer'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">TRAINER</button>
-            <button onclick="showSection('talent'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">TALENT</button>
-            <button onclick="showSection('join'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">SERTAI BAYUONE</button>
-            <button onclick="showSection('about'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-brand-700">TENTANG BAYUONE</button>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-[#E5EAE7] bg-white px-4 pt-2 pb-6 space-y-3 font-medium text-[#17231E]">
+            <button onclick="showSection('home'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">HOME</button>
+            <button onclick="showSection('agenda'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">AGENDA</button>
+            <button onclick="showSection('trainer'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">TRAINER</button>
+            <button onclick="showSection('talent'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">TALENT</button>
+            <button onclick="showSection('join'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">SERTAI <span class="font-bold">Bayu</span><span class="font-normal">One</span></button>
+            <button onclick="showSection('about'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">TENTANG <span class="font-bold">Bayu</span><span class="font-normal">One</span></button>
         </div>
     </header>
 
@@ -95,50 +107,50 @@
     <main class="flex-grow">
 
         <!-- 1. HOME SECTION -->
-        <section id="sec-home" class="space-y-16 pb-16">
+        <section id="sec-home" class="space-y-16 pb-20">
             <!-- Hero -->
-            <div class="bg-gradient-to-b from-brand-50 to-slate-50 border-b border-slate-200/60 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+            <div class="bg-[#F4F8F5] border-b border-[#E5EAE7] py-20 md:py-28 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-4xl mx-auto text-center space-y-6">
-                    <span class="inline-block bg-brand-100 text-brand-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    <span class="inline-block bg-[#E2ECE6] text-[#0B5139] text-xs font-semibold px-3.5 py-1.5 rounded-full uppercase tracking-wider">
                         Komuniti Peluang & Kemahiran
                     </span>
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight">
-                        BAYUONE
+                    <h1 class="text-4xl md:text-6xl font-bold text-[#17231E] tracking-tight">
+                        <span class="font-bold">Bayu</span><span class="font-normal">One</span>
                     </h1>
-                    <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
+                    <p class="text-lg md:text-xl text-[#637069] max-w-2xl mx-auto font-normal">
                         Temui program, trainer dan bakat profesional dalam satu komuniti.
                     </p>
 
-                    <!-- Search Bar -->
+                    <!-- Clean Search Bar -->
                     <div class="max-w-2xl mx-auto pt-4">
-                        <div class="flex items-center bg-white rounded-2xl shadow-lg border border-slate-200 p-2">
-                            <i data-lucide="search" class="w-6 h-6 text-slate-400 ml-3"></i>
-                            <input type="text" id="global-search" placeholder="Cari program, trainer atau talent..." class="w-full px-4 py-3 focus:outline-none text-slate-700 placeholder-slate-400">
-                            <button onclick="handleGlobalSearch()" class="bg-brand-700 hover:bg-brand-800 text-white font-bold px-6 py-3 rounded-xl transition flex-shrink-0">
+                        <div class="flex items-center bg-white rounded-2xl soft-shadow-lg soft-border p-2">
+                            <i data-lucide="search" class="w-5 h-5 text-[#637069] ml-3"></i>
+                            <input type="text" id="global-search" placeholder="Cari program, trainer atau talent..." class="w-full px-4 py-3 focus:outline-none text-[#17231E] placeholder-[#637069] text-sm">
+                            <button onclick="handleGlobalSearch()" class="bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium text-sm px-6 py-3 rounded-xl transition flex-shrink-0">
                                 Jelajah
                             </button>
                         </div>
                     </div>
 
                     <div class="flex items-center justify-center gap-4 pt-2">
-                        <button onclick="showSection('agenda')" class="bg-brand-700 hover:bg-brand-800 text-white font-bold px-6 py-3 rounded-xl transition shadow-md">
-                            Jelajah BayuOne
+                        <button onclick="showSection('agenda')" class="bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium px-6 py-3 rounded-xl transition text-sm shadow-sm">
+                            Jelajah <span class="font-bold">Bayu</span><span class="font-normal">One</span>
                         </button>
-                        <button onclick="showSection('join')" class="bg-white border border-slate-300 hover:border-slate-400 text-slate-700 font-bold px-6 py-3 rounded-xl transition">
-                            Sertai BayuOne
+                        <button onclick="showSection('join')" class="bg-white soft-border hover:bg-slate-50 text-[#17231E] font-medium px-6 py-3 rounded-xl transition text-sm">
+                            Sertai <span class="font-bold">Bayu</span><span class="font-normal">One</span>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Featured Agenda -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-end mb-8">
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900">Agenda Pilihan</h2>
-                        <p class="text-slate-500 text-sm">Program & acara terkini khas untuk anda</p>
+                        <h2 class="text-2xl font-bold text-[#17231E]">Agenda Pilihan</h2>
+                        <p class="text-[#637069] text-sm mt-1">Program & acara terkini khas untuk anda</p>
                     </div>
-                    <button onclick="showSection('agenda')" class="text-brand-700 font-bold text-sm hover:underline flex items-center gap-1">
+                    <button onclick="showSection('agenda')" class="text-[#126B4C] font-semibold text-sm hover:underline flex items-center gap-1">
                         Lihat Semua <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
                 </div>
@@ -148,62 +160,62 @@
             </div>
 
             <!-- Why BayuOne -->
-            <div class="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8">
-                <div class="max-w-7xl mx-auto space-y-12">
+            <div class="bg-[#0B5139] text-white py-20 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-site mx-auto space-y-12">
                     <div class="text-center max-w-2xl mx-auto">
-                        <h2 class="text-3xl font-extrabold">Kenapa Pilih BayuOne?</h2>
-                        <p class="text-slate-400 mt-2">Platform sehenti untuk pembangunan kerjaya, kepakaran dan jaringan profesional.</p>
+                        <h2 class="text-3xl font-bold">Kenapa Pilih <span class="font-bold">Bayu</span><span class="font-normal">One</span>?</h2>
+                        <p class="text-[#E2ECE6] mt-3 font-normal">Platform sehenti untuk pembangunan kerjaya, kepakaran dan jaringan profesional.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700 space-y-3">
-                            <div class="w-12 h-12 bg-brand-500/10 text-brand-500 rounded-xl flex items-center justify-center">
+                        <div class="bg-[#126B4C]/40 p-8 rounded-2xl border border-white/10 space-y-3">
+                            <div class="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center">
                                 <i data-lucide="compass" class="w-6 h-6"></i>
                             </div>
                             <h3 class="font-bold text-lg">Terokai Peluang</h3>
-                            <p class="text-slate-400 text-sm">Cari seminar, kursus latihan dan program networking terkini yang bersesuaian dengan matlamat anda.</p>
+                            <p class="text-[#E2ECE6] text-sm font-normal leading-relaxed">Cari seminar, kursus latihan dan program networking terkini yang bersesuaian dengan matlamat anda.</p>
                         </div>
-                        <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700 space-y-3">
-                            <div class="w-12 h-12 bg-brand-500/10 text-brand-500 rounded-xl flex items-center justify-center">
+                        <div class="bg-[#126B4C]/40 p-8 rounded-2xl border border-white/10 space-y-3">
+                            <div class="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center">
                                 <i data-lucide="users" class="w-6 h-6"></i>
                             </div>
                             <h3 class="font-bold text-lg">Jaringan Trainer Bertauliah</h3>
-                            <p class="text-slate-400 text-sm">Hubungi penceramah dan jurulatih berpengalaman untuk keperluan latihan industri dan korporat.</p>
+                            <p class="text-[#E2ECE6] text-sm font-normal leading-relaxed">Hubungi penceramah dan jurulatih berpengalaman untuk keperluan latihan industri dan korporat.</p>
                         </div>
-                        <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700 space-y-3">
-                            <div class="w-12 h-12 bg-brand-500/10 text-brand-500 rounded-xl flex items-center justify-center">
+                        <div class="bg-[#126B4C]/40 p-8 rounded-2xl border border-white/10 space-y-3">
+                            <div class="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center">
                                 <i data-lucide="star" class="w-6 h-6"></i>
                             </div>
                             <h3 class="font-bold text-lg">Ketengahkan Bakat Tempatan</h3>
-                            <p class="text-slate-400 text-sm">Platform untuk bakat, pereka kreatif, dan pencipta kandungan menyerlahkan profil mereka.</p>
+                            <p class="text-[#E2ECE6] text-sm font-normal leading-relaxed">Platform untuk bakat, pereka kreatif, dan pencipta kandungan menyerlahkan profil mereka.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Subscriber Section -->
+            <!-- Premium Dark-Green Subscriber CTA Section -->
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-brand-50 border border-brand-100 p-8 rounded-3xl space-y-6">
+                <div class="bg-[#0B5139] text-white p-10 rounded-3xl soft-shadow-lg space-y-8">
                     <div class="text-center space-y-2">
-                        <h2 class="text-2xl font-extrabold text-slate-900">Dapatkan Update Program & Acara Terkini</h2>
-                        <p class="text-slate-600 text-sm">Percuma. Masukkan emel anda untuk menerima hebahan program dan acara yang menarik.</p>
+                        <h2 class="text-2xl font-bold">Dapatkan Update Program & Acara Terkini</h2>
+                        <p class="text-[#E2ECE6] text-sm font-normal max-w-xl mx-auto">Percuma. Masukkan emel anda untuk menerima hebahan program dan acara yang menarik.</p>
                     </div>
-                    <form id="subscriber-form" onsubmit="handleSubscribe(event)" class="space-y-4">
+                    <form id="subscriber-form" onsubmit="handleSubscribe(event)" class="space-y-5 max-w-2xl mx-auto">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="text" id="sub-name" placeholder="Nama Anda" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
-                            <input type="email" id="sub-email" placeholder="Emel Anda" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <input type="text" id="sub-name" placeholder="Nama Anda" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:bg-white/20 text-sm">
+                            <input type="email" id="sub-email" placeholder="Emel Anda" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:bg-white/20 text-sm">
                         </div>
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Pilih Minat (Pilih sekurang-kurangnya satu):</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm">
-                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Peningkatan Kemahiran & Kerjaya" class="accent-brand-600"> Peningkatan Kemahiran</label>
-                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Perniagaan & Keusahawanan" class="accent-brand-600"> Keusahawanan</label>
-                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Kewangan & Pelaburan" class="accent-brand-600"> Kewangan</label>
-                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Kesihatan & Kesejahteraan" class="accent-brand-600"> Kesihatan</label>
-                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Teknologi & Digital" class="accent-brand-600"> Teknologi & AI</label>
-                                <label class="flex items-center gap-2"><input type="checkbox" name="interest" value="Komuniti & Networking" class="accent-brand-600"> Networking</label>
+                        <div class="space-y-3">
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-[#E2ECE6]">Pilih Minat (Pilih sekurang-kurangnya satu):</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
+                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Peningkatan Kemahiran & Kerjaya" class="accent-[#126B4C]"> Peningkatan Kemahiran</label>
+                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Perniagaan & Keusahawanan" class="accent-[#126B4C]"> Keusahawanan</label>
+                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Kewangan & Pelaburan" class="accent-[#126B4C]"> Kewangan</label>
+                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Kesihatan & Kesejahteraan" class="accent-[#126B4C]"> Kesihatan</label>
+                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Teknologi & Digital" class="accent-[#126B4C]"> Teknologi & AI</label>
+                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Komuniti & Networking" class="accent-[#126B4C]"> Networking</label>
                             </div>
                         </div>
-                        <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-3 rounded-xl transition shadow-sm">
+                        <button type="submit" class="w-full bg-[#126B4C] hover:bg-[#09422F] text-white font-medium py-3.5 rounded-xl transition shadow-sm text-sm">
                             Langgan Sekarang
                         </button>
                     </form>
@@ -212,17 +224,17 @@
         </section>
 
         <!-- 2. AGENDA SECTION -->
-        <section id="sec-agenda" class="hidden-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+        <section id="sec-agenda" class="hidden-section max-w-site mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             <div>
-                <h1 class="text-3xl font-extrabold text-slate-900">Agenda & Program</h1>
-                <p class="text-slate-500">Jelajah senarai program, seminar, dan kursus latihan aktif.</p>
+                <h1 class="text-3xl font-bold text-[#17231E]">Agenda & Program</h1>
+                <p class="text-[#637069] text-sm mt-1">Jelajah senarai program, seminar, dan kursus latihan aktif.</p>
             </div>
 
-            <!-- Filters -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4 shadow-sm">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <input type="text" id="filter-agenda-search" placeholder="Cari tajuk..." class="px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                    <select id="filter-agenda-category" class="px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+            <!-- Clean Filter Panel -->
+            <div class="bg-white p-5 rounded-2xl soft-border soft-shadow space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                    <input type="text" id="filter-agenda-search" placeholder="Cari tajuk..." class="px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                    <select id="filter-agenda-category" class="px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C] text-[#637069]">
                         <option value="">Semua Kategori</option>
                         <option>Kursus & Latihan</option>
                         <option>Seminar & Forum</option>
@@ -231,27 +243,27 @@
                         <option>Networking & Professional</option>
                         <option>Keusahawanan & Perniagaan</option>
                     </select>
-                    <select id="filter-agenda-mode" class="px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <select id="filter-agenda-mode" class="px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C] text-[#637069]">
                         <option value="">Semua Mod</option>
                         <option>Fizikal</option>
                         <option>Online</option>
                         <option>Hybrid</option>
                     </select>
-                    <button onclick="renderAgenda()" class="bg-brand-700 hover:bg-brand-800 text-white font-bold py-2.5 rounded-xl transition text-sm">Tapis</button>
+                    <button onclick="renderAgenda()" class="bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium py-2.5 rounded-xl transition text-sm">Tapis</button>
                 </div>
             </div>
 
-            <!-- Agenda Grid -->
+            <!-- Agenda Grid (Modern 3-Column) -->
             <div id="agenda-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Dynamic cards -->
             </div>
         </section>
 
         <!-- 3. TRAINER SECTION -->
-        <section id="sec-trainer" class="hidden-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+        <section id="sec-trainer" class="hidden-section max-w-site mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             <div>
-                <h1 class="text-3xl font-extrabold text-slate-900">Direktori Trainer</h1>
-                <p class="text-slate-500">Cari penceramah, jurulatih dan pakar industri bertauliah.</p>
+                <h1 class="text-3xl font-bold text-[#17231E]">Direktori Trainer</h1>
+                <p class="text-[#637069] text-sm mt-1">Cari penceramah, jurulatih dan pakar industri bertauliah.</p>
             </div>
 
             <!-- Trainer Grid -->
@@ -261,10 +273,10 @@
         </section>
 
         <!-- 4. TALENT SECTION -->
-        <section id="sec-talent" class="hidden-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+        <section id="sec-talent" class="hidden-section max-w-site mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             <div>
-                <h1 class="text-3xl font-extrabold text-slate-900">Direktori Talent</h1>
-                <p class="text-slate-500">Temui pencipta kandungan, pereka kreatif, dan bakat tempatan.</p>
+                <h1 class="text-3xl font-bold text-[#17231E]">Direktori Talent</h1>
+                <p class="text-[#637069] text-sm mt-1">Temui pencipta kandungan, pereka kreatif, dan bakat tempatan.</p>
             </div>
 
             <!-- Talent Grid -->
@@ -276,25 +288,25 @@
         <!-- 5. JOIN SECTION -->
         <section id="sec-join" class="hidden-section max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             <div class="text-center space-y-2">
-                <h1 class="text-3xl font-extrabold text-slate-900">Sertai BayuOne</h1>
-                <p class="text-slate-500">Pilih peranan anda dan hantar permohonan untuk menyertai rangkaian komuniti kami.</p>
+                <h1 class="text-3xl font-bold text-[#17231E]">Sertai <span class="font-bold">Bayu</span><span class="font-normal">One</span></h1>
+                <p class="text-[#637069] text-sm">Pilih peranan anda dan hantar permohonan untuk menyertai rangkaian komuniti kami.</p>
             </div>
 
             <!-- Application Type Selector -->
-            <div class="grid grid-cols-3 gap-3 bg-slate-200/60 p-1.5 rounded-2xl text-center font-bold text-sm">
-                <button onclick="switchJoinTab('organiser')" id="tab-btn-organiser" class="py-3 rounded-xl bg-white text-brand-800 shadow-sm">PENGANJUR</button>
-                <button onclick="switchJoinTab('trainer')" id="tab-btn-trainer" class="py-3 rounded-xl text-slate-600">TRAINER</button>
-                <button onclick="switchJoinTab('talent')" id="tab-btn-talent" class="py-3 rounded-xl text-slate-600">TALENT</button>
+            <div class="grid grid-cols-3 gap-2 bg-[#F4F8F5] p-1.5 rounded-2xl border border-[#E5EAE7] text-center font-medium text-xs">
+                <button onclick="switchJoinTab('organiser')" id="tab-btn-organiser" class="py-3 rounded-xl bg-white text-[#126B4C] soft-shadow font-semibold">PENGANJUR</button>
+                <button onclick="switchJoinTab('trainer')" id="tab-btn-trainer" class="py-3 rounded-xl text-[#637069]">TRAINER</button>
+                <button onclick="switchJoinTab('talent')" id="tab-btn-talent" class="py-3 rounded-xl text-[#637069]">TALENT</button>
             </div>
 
             <!-- Dynamic Form -->
-            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+            <div class="bg-white p-8 rounded-3xl soft-border soft-shadow">
                 <form id="join-form" onsubmit="handleApplicationSubmit(event)" class="space-y-6">
                     <div id="form-fields" class="space-y-4">
                         <!-- Rendered dynamically -->
                     </div>
 
-                    <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-3.5 rounded-xl transition shadow-md">
+                    <button type="submit" class="w-full bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium py-3.5 rounded-xl transition shadow-sm text-sm">
                         Hantar Permohonan
                     </button>
                 </form>
@@ -303,17 +315,17 @@
 
         <!-- 6. ABOUT SECTION -->
         <section id="sec-about" class="hidden-section max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <div class="text-center space-y-4">
-                <h1 class="text-4xl font-extrabold text-slate-900">Tentang BayuOne</h1>
-                <p class="text-slate-600 text-lg">Platform Pemerkasaan Komuniti, Peluang & Bakat Profesional</p>
+            <div class="text-center space-y-3">
+                <h1 class="text-4xl font-bold text-[#17231E]">Tentang <span class="font-bold">Bayu</span><span class="font-normal">One</span></h1>
+                <p class="text-[#637069] text-base">Platform Pemerkasaan Komuniti, Peluang & Bakat Profesional</p>
             </div>
 
-            <div class="prose prose-slate max-w-none bg-white p-8 rounded-3xl border border-slate-200 space-y-6">
-                <p>
-                    <strong>BayuOne</strong> merupakan sebuah inisiatif platform komuniti profesional yang dibangunkan oleh <strong>NMZ Kreatif</strong>. Ia direka khas untuk merapatkan jurang antara penganjur acara, jurulatih bertauliah (trainers), bakat tempatan (talents), serta ahli komuniti.
+            <div class="prose prose-slate max-w-none bg-white p-8 md:p-10 rounded-3xl soft-border soft-shadow space-y-6">
+                <p class="text-[#17231E] leading-relaxed">
+                    <strong class="text-[#17231E]"><span class="font-bold">Bayu</span><span class="font-normal">One</span></strong> merupakan sebuah inisiatif platform komuniti profesional yang dibangunkan oleh <strong>NMZ Kreatif</strong>. Ia direka khas untuk merapatkan jurang antara penganjur acara, jurulatih bertauliah (trainers), bakat tempatan (talents), serta ahli komuniti.
                 </p>
-                <h3 class="text-xl font-bold text-slate-900">Misi Kami</h3>
-                <ul class="list-disc pl-5 space-y-2">
+                <h3 class="text-xl font-bold text-[#17231E]">Misi Kami</h3>
+                <ul class="list-disc pl-5 space-y-2 text-[#637069] text-sm">
                     <li>Memudahkan pencarian program pemerkasaan kemahiran dan keusahawanan.</li>
                     <li>Menyediakan ruang promosi bagi jurulatih dan pencipta kandungan tempatan.</li>
                     <li>Membina komuniti profesional yang saling menyokong di seluruh negara.</li>
@@ -323,23 +335,23 @@
 
         <!-- 7. ADMIN LOGIN SECTION -->
         <section id="sec-admin-login" class="hidden-section max-w-md mx-auto px-4 py-16">
-            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+            <div class="bg-white p-8 rounded-3xl soft-border soft-shadow-lg space-y-6">
                 <div class="text-center space-y-2">
-                    <div class="w-12 h-12 bg-brand-700 rounded-xl flex items-center justify-center text-white font-extrabold text-2xl mx-auto">B1</div>
-                    <h1 class="text-2xl font-bold text-slate-900">Admin Access</h1>
-                    <p class="text-sm text-slate-500">Log masuk untuk menguruskan maklumat BayuOne</p>
+                    <div class="w-12 h-12 bg-[#126B4C] rounded-xl flex items-center justify-center text-white font-bold text-xl mx-auto shadow-sm">B1</div>
+                    <h1 class="text-2xl font-bold text-[#17231E]">Admin Access</h1>
+                    <p class="text-xs text-[#637069]">Log masuk untuk menguruskan maklumat <span class="font-bold">Bayu</span><span class="font-normal">One</span></p>
                 </div>
 
                 <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-1">Emel</label>
-                        <input type="email" id="admin-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <label class="block text-xs font-semibold text-[#17231E] uppercase tracking-wider mb-1">Emel</label>
+                        <input type="email" id="admin-email" required class="w-full px-4 py-3 rounded-xl soft-border focus:outline-none focus:ring-1 focus:ring-[#126B4C] text-sm">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-1">Kata Laluan</label>
-                        <input type="password" id="admin-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <label class="block text-xs font-semibold text-[#17231E] uppercase tracking-wider mb-1">Kata Laluan</label>
+                        <input type="password" id="admin-password" required class="w-full px-4 py-3 rounded-xl soft-border focus:outline-none focus:ring-1 focus:ring-[#126B4C] text-sm">
                     </div>
-                    <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition">
+                    <button type="submit" class="w-full bg-[#17231E] hover:bg-black text-white font-medium py-3 rounded-xl transition text-sm">
                         Log Masuk
                     </button>
                 </form>
@@ -348,52 +360,54 @@
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <!-- DARK GREEN FOOTER -->
+    <footer class="bg-[#0B5139] text-[#E2ECE6] py-14 border-t border-[#09422F]">
+        <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white font-extrabold text-xl">
+                    <div class="w-10 h-10 bg-[#126B4C] rounded-xl flex items-center justify-center text-white font-bold text-lg border border-white/10">
                         B1
                     </div>
                     <div>
-                        <span class="font-bold text-white text-lg">BayuOne</span>
-                        <p class="text-xs text-slate-500">Powered by NMZ Kreatif</p>
+                        <span class="text-lg text-white">
+                            <span class="font-bold">Bayu</span><span class="font-normal">One</span>
+                        </span>
+                        <p class="text-xs text-[#E2ECE6]/70">Powered by NMZ Kreatif</p>
                     </div>
                 </div>
 
-                <div class="flex flex-wrap gap-6 text-sm font-medium text-slate-300">
-                    <a href="#" onclick="showSection('home')" class="hover:text-white">Home</a>
-                    <a href="#" onclick="showSection('agenda')" class="hover:text-white">Agenda</a>
-                    <a href="#" onclick="showSection('trainer')" class="hover:text-white">Trainer</a>
-                    <a href="#" onclick="showSection('talent')" class="hover:text-white">Talent</a>
-                    <button onclick="openFeedbackModal()" class="hover:text-white">Maklum Balas</button>
+                <div class="flex flex-wrap gap-6 text-sm font-medium text-[#E2ECE6]">
+                    <a href="#" onclick="showSection('home')" class="hover:text-white transition">Home</a>
+                    <a href="#" onclick="showSection('agenda')" class="hover:text-white transition">Agenda</a>
+                    <a href="#" onclick="showSection('trainer')" class="hover:text-white transition">Trainer</a>
+                    <a href="#" onclick="showSection('talent')" class="hover:text-white transition">Talent</a>
+                    <button onclick="openFeedbackModal()" class="hover:text-white transition">Maklum Balas</button>
                 </div>
             </div>
 
-            <div class="border-t border-slate-800 pt-6 flex flex-col md:flex-row justify-between items-center text-xs gap-4">
-                <p>&copy; 2026 BayuOne & NMZ Kreatif. Hak Cipta Terelihara.</p>
+            <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs gap-4 text-[#E2ECE6]/70">
+                <p>&copy; 2026 <span class="font-bold">Bayu</span><span class="font-normal">One</span> & NMZ Kreatif. Hak Cipta Terelihara.</p>
                 <div class="flex gap-4">
                     <a href="#" class="hover:underline">Privacy Policy</a>
                     <a href="#" class="hover:underline">Terms of Service</a>
-                    <button onclick="showSection('admin-login')" class="text-slate-600 hover:text-slate-400 transition">Admin Access</button>
+                    <button onclick="showSection('admin-login')" class="text-[#E2ECE6]/50 hover:text-white transition">Admin Access</button>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- FEEDBACK MODAL -->
-    <div id="modal-feedback" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4">
+    <div id="modal-feedback" class="fixed inset-0 bg-[#17231E]/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 soft-shadow-lg">
             <div class="flex justify-between items-center">
-                <h3 class="text-xl font-bold text-slate-900">Hantar Maklum Balas</h3>
-                <button onclick="closeFeedbackModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <h3 class="text-lg font-bold text-[#17231E]">Hantar Maklum Balas</h3>
+                <button onclick="closeFeedbackModal()" class="text-[#637069] hover:text-[#17231E]"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
             <form onsubmit="handleFeedbackSubmit(event)" class="space-y-4">
-                <input type="text" id="fb-name" placeholder="Nama" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                <input type="email" id="fb-email" placeholder="Emel" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                <textarea id="fb-message" placeholder="Mesej / Maklum Balas Anda..." rows="4" required class="w-full px-4 py-3 border rounded-xl text-sm"></textarea>
-                <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-3 rounded-xl">Hantar</button>
+                <input type="text" id="fb-name" placeholder="Nama" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                <input type="email" id="fb-email" placeholder="Emel" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                <textarea id="fb-message" placeholder="Mesej / Maklum Balas Anda..." rows="4" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]"></textarea>
+                <button type="submit" class="w-full bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium py-3 rounded-xl text-sm transition">Hantar</button>
             </form>
         </div>
     </div>
@@ -402,6 +416,89 @@
     <script>
         // Lucide icons initialization
         lucide.createIcons();
+
+        // Sample Data for Directory Cards
+        const sampleAgenda = [
+            { title: "Bengkel AI & Digital Marketing 2026", category: "Bengkel", mode: "Fizikal", date: "15 Okt 2026", loc: "Kota Kinabalu" },
+            { title: "Forum Keusahawanan & Kewangan Persendirian", category: "Seminar & Forum", mode: "Online", date: "22 Okt 2026", loc: "Webinar Zoom" },
+            { title: "Kursus Latihan Kepimpinan Eksekutif", category: "Kursus & Latihan", mode: "Hybrid", date: "05 Nov 2026", loc: "Kuala Lumpur" }
+        ];
+
+        const sampleTrainers = [
+            { name: "Dr. Ahmad Farhan", exp: "AI & Digital Strategy", loc: "Kuala Lumpur" },
+            { name: "Siti Nurhaliza Kassim", exp: "Pengurusan & Kepimpinan", loc: "Kota Kinabalu" },
+            { name: "Marcus Lee", exp: "Kewangan & Pelaburan", loc: "Penang" }
+        ];
+
+        const sampleTalents = [
+            { name: "Aina Ridzuan", niche: "Content Creator & Design", loc: "Selangor" },
+            { name: "Borneo Creative Studio", niche: "Videografi & Fotografi", loc: "Sabah" },
+            { name: "Khairul Amri", niche: "Digital Marketing & Branding", loc: "Johor" }
+        ];
+
+        function renderSampleData() {
+            // Home Agenda
+            const homeAgenda = document.getElementById('home-featured-agenda');
+            if (homeAgenda) {
+                homeAgenda.innerHTML = sampleAgenda.map(item => `
+                    <div class="bg-white rounded-2xl p-6 soft-border soft-shadow space-y-4 hover:border-[#126B4C]/40 transition">
+                        <div class="flex justify-between items-start">
+                            <span class="bg-[#F4F8F5] text-[#126B4C] border border-[#E2ECE6] text-[11px] font-semibold px-2.5 py-1 rounded-full">${item.category}</span>
+                            <span class="text-xs text-[#637069]">${item.mode}</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-[#17231E] leading-snug">${item.title}</h3>
+                        <div class="text-xs text-[#637069] space-y-1 pt-2 border-t border-[#E5EAE7]">
+                            <p class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3.5 h-3.5 text-[#126B4C]"></i> ${item.date}</p>
+                            <p class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#126B4C]"></i> ${item.loc}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Agenda Page
+            const agendaList = document.getElementById('agenda-list');
+            if (agendaList) {
+                agendaList.innerHTML = sampleAgenda.map(item => `
+                    <div class="bg-white rounded-2xl p-6 soft-border soft-shadow space-y-4">
+                        <span class="bg-[#F4F8F5] text-[#126B4C] text-[11px] font-semibold px-2.5 py-1 rounded-full">${item.category}</span>
+                        <h3 class="font-bold text-lg text-[#17231E]">${item.title}</h3>
+                        <p class="text-xs text-[#637069]">${item.loc} • ${item.date}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Trainer Page
+            const trainerList = document.getElementById('trainer-list');
+            if (trainerList) {
+                trainerList.innerHTML = sampleTrainers.map(item => `
+                    <div class="bg-white rounded-2xl p-6 soft-border soft-shadow text-center space-y-3">
+                        <div class="w-16 h-16 bg-[#F4F8F5] text-[#126B4C] rounded-full flex items-center justify-center font-bold text-xl mx-auto border border-[#E2ECE6]">
+                            ${item.name.charAt(0)}
+                        </div>
+                        <h3 class="font-bold text-base text-[#17231E]">${item.name}</h3>
+                        <span class="inline-block bg-[#F4F8F5] text-[#126B4C] text-xs font-medium px-3 py-1 rounded-full">${item.exp}</span>
+                        <p class="text-xs text-[#637069]">${item.loc}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Talent Page
+            const talentList = document.getElementById('talent-list');
+            if (talentList) {
+                talentList.innerHTML = sampleTalents.map(item => `
+                    <div class="bg-white rounded-2xl p-6 soft-border soft-shadow text-center space-y-3">
+                        <div class="w-16 h-16 bg-[#F4F8F5] text-[#126B4C] rounded-full flex items-center justify-center font-bold text-xl mx-auto border border-[#E2ECE6]">
+                            ${item.name.charAt(0)}
+                        </div>
+                        <h3 class="font-bold text-base text-[#17231E]">${item.name}</h3>
+                        <span class="inline-block bg-[#F4F8F5] text-[#126B4C] text-xs font-medium px-3 py-1 rounded-full">${item.niche}</span>
+                        <p class="text-xs text-[#637069]">${item.loc}</p>
+                    </div>
+                `).join('');
+            }
+
+            lucide.createIcons();
+        }
 
         // Navigation state handler
         function showSection(secId) {
@@ -437,9 +534,9 @@
             ['organiser', 'trainer', 'talent'].forEach(t => {
                 const btn = document.getElementById(`tab-btn-${t}`);
                 if (t === type) {
-                    btn.className = 'py-3 rounded-xl bg-white text-brand-800 shadow-sm';
+                    btn.className = 'py-3 rounded-xl bg-white text-[#126B4C] soft-shadow font-semibold';
                 } else {
-                    btn.className = 'py-3 rounded-xl text-slate-600';
+                    btn.className = 'py-3 rounded-xl text-[#637069]';
                 }
             });
             renderJoinFormFields();
@@ -449,34 +546,34 @@
             const container = document.getElementById('form-fields');
             if (currentJoinTab === 'organiser') {
                 container.innerHTML = `
-                    <input type="text" placeholder="Nama Organisasi / Syarikat" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                    <input type="text" placeholder="Tajuk Program" required class="w-full px-4 py-3 border rounded-xl text-sm">
+                    <input type="text" placeholder="Nama Organisasi / Syarikat" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                    <input type="text" placeholder="Tajuk Program" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="text-xs font-bold text-slate-500">Tarikh Mula</label>
-                            <input type="date" required class="w-full px-4 py-2.5 border rounded-xl text-sm">
+                            <label class="text-xs font-semibold text-[#17231E]">Tarikh Mula</label>
+                            <input type="date" required class="w-full px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
                         </div>
                         <div>
-                            <label class="text-xs font-bold text-slate-500">Tarikh Tamat</label>
-                            <input type="date" required class="w-full px-4 py-2.5 border rounded-xl text-sm">
+                            <label class="text-xs font-semibold text-[#17231E]">Tarikh Tamat</label>
+                            <input type="date" required class="w-full px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
                         </div>
                     </div>
-                    <input type="text" placeholder="Lokasi Program" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                    <textarea placeholder="Penerangan Ringkas Program" rows="3" required class="w-full px-4 py-3 border rounded-xl text-sm"></textarea>
+                    <input type="text" placeholder="Lokasi Program" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                    <textarea placeholder="Penerangan Ringkas Program" rows="3" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]"></textarea>
                 `;
             } else if (currentJoinTab === 'trainer') {
                 container.innerHTML = `
-                    <input type="text" placeholder="Nama Penuh" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                    <input type="email" placeholder="Emel Kontak" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                    <input type="text" placeholder="Bidang Kepakaran (cth: Kepimpinan, Digital Marketing)" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                    <textarea placeholder="Biodata & Ringkasan Pengalaman" rows="3" required class="w-full px-4 py-3 border rounded-xl text-sm"></textarea>
+                    <input type="text" placeholder="Nama Penuh" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                    <input type="email" placeholder="Emel Kontak" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                    <input type="text" placeholder="Bidang Kepakaran (cth: Kepimpinan, Digital Marketing)" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                    <textarea placeholder="Biodata & Ringkasan Pengalaman" rows="3" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]"></textarea>
                 `;
             } else {
                 container.innerHTML = `
-                    <input type="text" placeholder="Nama / Nama Pentas" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                    <input type="email" placeholder="Emel Kontak" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                    <input type="text" placeholder="Niche (cth: Content Creator, Fotografi, Muzik)" required class="w-full px-4 py-3 border rounded-xl text-sm">
-                    <textarea placeholder="Ringkasan Profil & Portfolio" rows="3" required class="w-full px-4 py-3 border rounded-xl text-sm"></textarea>
+                    <input type="text" placeholder="Nama / Nama Pentas" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                    <input type="email" placeholder="Emel Kontak" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                    <input type="text" placeholder="Niche (cth: Content Creator, Fotografi, Muzik)" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
+                    <textarea placeholder="Ringkasan Profil & Portfolio" rows="3" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]"></textarea>
                 `;
             }
         }
@@ -506,7 +603,6 @@
             alert('Sistem pengesahan sedang berhubung dengan Supabase. Sila pastikan environment variables telah dikonfigurasi.');
         }
 
-        // Global search mockup handler
         function handleGlobalSearch() {
             const query = document.getElementById('global-search').value;
             if (query.trim()) {
@@ -514,8 +610,13 @@
             }
         }
 
+        function renderAgenda() {
+            renderSampleData();
+        }
+
         // Initial setup
         renderJoinFormFields();
+        renderSampleData();
     </script>
 </body>
 </html>
