@@ -3,513 +3,1306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BayuOne — Komuniti Peluang & Kemahiran</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>BayuOne — Powered by NMZ Kreatif</title>
+    
     <!-- Google Fonts: DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Supabase JS Client -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            50: '#F4F8F5',   /* Pale green section background */
-                            100: '#E2ECE6',
-                            500: '#126B4C',  /* Primary Botanical Green */
-                            600: '#105F43',
-                            700: '#0B5139',  /* Dark Green for strong sections */
-                            800: '#09422F',
-                            dark: '#17231E'  /* Dark Charcoal-Green for headings */
-                        },
-                        muted: '#637069'    /* Muted grey-green secondary text */
+                            DEFAULT: '#126B4C',
+                            dark: '#0B5139',
+                            text: '#17231E',
+                            muted: '#637069',
+                            border: '#DCE6DF',
+                            bg: '#F4F8F5',
+                            accent: '#1CB07E'
+                        }
                     },
                     fontFamily: {
-                        sans: ['DM Sans', 'sans-serif']
-                    },
-                    maxWidth: {
-                        'site': '1200px'
+                        sans: ['DM Sans', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+    
     <style>
-        body { 
-            font-family: 'DM Sans', sans-serif; 
-            color: #17231E; 
-            background-color: #FAFCFB;
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #FFFFFF;
+            color: #17231E;
+            overflow-x: hidden;
         }
-        .hidden-section { display: none; }
-        .soft-border { border: 1px solid #E5EAE7; }
-        .soft-shadow { box-shadow: 0 4px 20px -2px rgba(23, 35, 30, 0.04); }
-        .soft-shadow-lg { box-shadow: 0 12px 32px -4px rgba(23, 35, 30, 0.06); }
+        
+        .sticky-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.92);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4F8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C2D4C9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #126B4C;
+        }
+        
+        .tab-btn.active {
+            color: #126B4C;
+            border-bottom: 2px solid #126B4C;
+            font-weight: 700;
+        }
+        
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-featured { background-color: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+        .badge-promoted { background-color: #E0E7FF; color: #3730A3; border: 1px solid #C7D2FE; }
+        .badge-top { background-color: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
+        
+        /* Modal Animation */
+        .modal-backdrop {
+            background-color: rgba(11, 25, 19, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Brand Typography Helper */
+        .brand-text-b { font-weight: 700; }
+        .brand-text-o { font-weight: 400; }
     </style>
 </head>
-<body class="bg-[#FAFCFB] text-[#17231E] antialiased min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between bg-white text-brand-text">
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="bg-white border-b border-[#E5EAE7] sticky top-0 z-40">
-        <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" onclick="showSection('home')" class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-[#126B4C] rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-sm">
-                    B1
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 border-b border-brand-border sticky-nav transition-all duration-200">
+        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo (AMENDMENT 1 & 2) -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('agenda')">
+                <div class="w-11 h-11 bg-white border border-brand-border rounded-xl shadow-sm flex items-center justify-center overflow-hidden p-1">
+                    <!-- Official Provided BayuOne Logo Asset -->
+                    <img src="https://lh3.googleusercontent.com/d/1gXBWckPatTAQwgfXpmLn5gu3DY7YkWQO" onerror="this.src='https://drive.google.com/thumbnail?id=1gXBWckPatTAQwgfXpmLn5gu3DY7YkWQO&sz=w1000'" alt="BayuOne Logo" class="w-full h-full object-contain">
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-xl tracking-tight leading-none text-[#17231E]">
-                        <span class="font-bold">Bayu</span><span class="font-normal">One</span>
+                    <span class="text-xl tracking-tight text-brand-dark flex items-center gap-1.5">
+                        <span><span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></span>
+                        <span class="text-[10px] bg-brand-bg text-brand border border-brand-border px-1.5 py-0.5 rounded font-semibold uppercase tracking-wider">Sabah</span>
                     </span>
-                    <span class="text-[11px] text-[#637069] font-medium tracking-wide mt-0.5">Powered by NMZ Kreatif</span>
+                    <span class="text-[11px] font-medium text-brand-muted leading-none">Powered by NMZ Kreatif</span>
                 </div>
-            </a>
+            </div>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-[#637069]">
-                <button onclick="showSection('home')" class="hover:text-[#126B4C] transition">HOME</button>
-                <button onclick="showSection('agenda')" class="hover:text-[#126B4C] transition">AGENDA</button>
-                <button onclick="showSection('trainer')" class="hover:text-[#126B4C] transition">TRAINER</button>
-                <button onclick="showSection('talent')" class="hover:text-[#126B4C] transition">TALENT</button>
-                <button onclick="showSection('join')" class="hover:text-[#126B4C] transition">SERTAI <span class="font-bold">Bayu</span><span class="font-normal">One</span></button>
-                <button onclick="showSection('about')" class="hover:text-[#126B4C] transition">TENTANG <span class="font-bold">Bayu</span><span class="font-normal">One</span></button>
+            <!-- Desktop Navigation Tabs -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <button onclick="switchTab('agenda')" id="nav-agenda" class="tab-btn py-7 transition-colors">
+                    <i class="fa-regular fa-calendar-check mr-2"></i>Agenda
+                </button>
+                <button onclick="switchTab('trainer')" id="nav-trainer" class="tab-btn py-7 transition-colors">
+                    <i class="fa-solid fa-chalkboard-user mr-2"></i>Trainer
+                </button>
+                <button onclick="switchTab('talent')" id="nav-talent" class="tab-btn py-7 transition-colors">
+                    <i class="fa-solid fa-star mr-2"></i>Talent
+                </button>
             </nav>
 
-            <div class="hidden md:flex items-center gap-3">
-                <button onclick="showSection('join')" class="bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium text-sm px-5 py-2.5 rounded-xl shadow-sm transition">
-                    Sertai Sekarang
+            <!-- CTA Actions (AMENDMENT 2) -->
+            <div class="hidden md:flex items-center space-x-3">
+                <button onclick="openRegisterModal()" class="bg-brand hover:bg-brand-dark text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow-sm hover:shadow transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-plus text-xs"></i>
+                    <span>Sertai <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></span>
                 </button>
             </div>
 
-            <!-- Mobile Menu Toggle -->
-            <button onclick="toggleMobileMenu()" class="md:hidden text-[#17231E] focus:outline-none">
-                <i data-lucide="menu" class="w-6 h-6"></i>
+            <!-- Mobile Hamburger Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-brand-dark text-xl p-2 rounded-lg hover:bg-brand-bg focus:outline-none">
+                <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
             </button>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-[#E5EAE7] bg-white px-4 pt-2 pb-6 space-y-3 font-medium text-[#17231E]">
-            <button onclick="showSection('home'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">HOME</button>
-            <button onclick="showSection('agenda'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">AGENDA</button>
-            <button onclick="showSection('trainer'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">TRAINER</button>
-            <button onclick="showSection('talent'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">TALENT</button>
-            <button onclick="showSection('join'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">SERTAI <span class="font-bold">Bayu</span><span class="font-normal">One</span></button>
-            <button onclick="showSection('about'); toggleMobileMenu()" class="block w-full text-left py-2 hover:text-[#126B4C]">TENTANG <span class="font-bold">Bayu</span><span class="font-normal">One</span></button>
+        <!-- Mobile Menu Drawer (AMENDMENT 2) -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-brand-border bg-white px-4 pt-3 pb-5 space-y-3">
+            <button onclick="switchTab('agenda'); toggleMobileMenu()" class="w-full text-left py-2.5 px-3 rounded-lg text-sm font-semibold text-brand-text hover:bg-brand-bg flex items-center gap-3">
+                <i class="fa-regular fa-calendar-check text-brand"></i> Agenda Program
+            </button>
+            <button onclick="switchTab('trainer'); toggleMobileMenu()" class="w-full text-left py-2.5 px-3 rounded-lg text-sm font-semibold text-brand-text hover:bg-brand-bg flex items-center gap-3">
+                <i class="fa-solid fa-chalkboard-user text-brand"></i> Trainer Profesional
+            </button>
+            <button onclick="switchTab('talent'); toggleMobileMenu()" class="w-full text-left py-2.5 px-3 rounded-lg text-sm font-semibold text-brand-text hover:bg-brand-bg flex items-center gap-3">
+                <i class="fa-solid fa-star text-brand"></i> Bakat Tempatan
+            </button>
+            <div class="pt-2">
+                <button onclick="openRegisterModal(); toggleMobileMenu()" class="w-full bg-brand text-white font-bold text-center py-3 rounded-xl shadow">
+                    + Sertai <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- MAIN CONTENT CONTAINERS -->
-    <main class="flex-grow">
-
-        <!-- 1. HOME SECTION -->
-        <section id="sec-home" class="space-y-16 pb-20">
-            <!-- Hero -->
-            <div class="bg-[#F4F8F5] border-b border-[#E5EAE7] py-20 md:py-28 px-4 sm:px-6 lg:px-8">
-                <div class="max-w-4xl mx-auto text-center space-y-6">
-                    <span class="inline-block bg-[#E2ECE6] text-[#0B5139] text-xs font-semibold px-3.5 py-1.5 rounded-full uppercase tracking-wider">
-                        Komuniti Peluang & Kemahiran
-                    </span>
-                    <h1 class="text-4xl md:text-6xl font-bold text-[#17231E] tracking-tight">
-                        <span class="font-bold">Bayu</span><span class="font-normal">One</span>
-                    </h1>
-                    <p class="text-lg md:text-xl text-[#637069] max-w-2xl mx-auto font-normal">
-                        Temui program, trainer dan bakat profesional dalam satu komuniti.
-                    </p>
-
-                    <!-- Clean Search Bar -->
-                    <div class="max-w-2xl mx-auto pt-4">
-                        <div class="flex items-center bg-white rounded-2xl soft-shadow-lg soft-border p-2">
-                            <i data-lucide="search" class="w-5 h-5 text-[#637069] ml-3"></i>
-                            <input type="text" id="global-search" placeholder="Cari program, trainer atau talent..." class="w-full px-4 py-3 focus:outline-none text-[#17231E] placeholder-[#637069] text-sm">
-                            <button onclick="handleGlobalSearch()" class="bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium text-sm px-6 py-3 rounded-xl transition flex-shrink-0">
-                                Jelajah
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-center gap-4 pt-2">
-                        <button onclick="showSection('agenda')" class="bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium px-6 py-3 rounded-xl transition text-sm shadow-sm">
-                            Jelajah <span class="font-bold">Bayu</span><span class="font-normal">One</span>
-                        </button>
-                        <button onclick="showSection('join')" class="bg-white soft-border hover:bg-slate-50 text-[#17231E] font-medium px-6 py-3 rounded-xl transition text-sm">
-                            Sertai <span class="font-bold">Bayu</span><span class="font-normal">One</span>
-                        </button>
-                    </div>
-                </div>
+    <!-- HERO SECTION -->
+    <section class="bg-brand-bg border-b border-brand-border py-12 md:py-16">
+        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
+            <!-- Eyebrow Tag -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-brand-border text-brand-dark text-xs font-bold uppercase tracking-widest shadow-2xs mb-4">
+                <span class="w-2 h-2 rounded-full bg-brand"></span>
+                <span>CONNECT · CREATE · GROW</span>
             </div>
 
-            <!-- Featured Agenda -->
-            <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-end mb-8">
+            <!-- Dynamic Hero Headline & Subtitle -->
+            <h1 id="hero-title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tight max-w-3xl mx-auto leading-tight">
+                Program & Aktiviti Terkini
+            </h1>
+            <p id="hero-subtitle" class="mt-4 text-base sm:text-lg text-brand-muted max-w-2xl mx-auto font-normal">
+                Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.
+            </p>
+
+            <!-- Global Search Bar -->
+            <div class="mt-8 max-w-2xl mx-auto">
+                <div class="relative flex items-center bg-white rounded-2xl border border-brand-border shadow-sm p-1.5 focus-within:ring-2 focus-within:ring-brand focus-within:border-transparent transition-all">
+                    <i class="fa-solid fa-magnifying-glass text-brand-muted ml-4 text-lg"></i>
+                    <input type="text" id="global-search" onkeyup="handleGlobalSearch()" placeholder="Cari acara, trainer atau talent..." class="w-full px-3 py-3 text-sm text-brand-text placeholder-brand-muted bg-transparent focus:outline-none">
+                    <button onclick="triggerSearch()" class="bg-brand hover:bg-brand-dark text-white text-sm font-bold px-6 py-3 rounded-xl transition-colors shrink-0">
+                        Cari
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-[1200px] mx-auto px-4 sm:px-6 py-10 flex-grow w-full">
+        
+        <!-- ================= TAB 1: AGENDA VIEW ================= -->
+        <div id="view-agenda" class="tab-content">
+            <!-- Agenda Filter Panel -->
+            <div class="bg-brand-bg border border-brand-border rounded-2xl p-5 mb-8 shadow-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                        <h2 class="text-2xl font-bold text-[#17231E]">Agenda Pilihan</h2>
-                        <p class="text-[#637069] text-sm mt-1">Program & acara terkini khas untuk anda</p>
+                        <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Lokasi</label>
+                        <select id="filter-agenda-location" onchange="filterAgenda()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                            <option value="">Semua Lokasi</option>
+                            <option value="Kota Kinabalu">Kota Kinabalu</option>
+                            <option value="Penampang">Penampang</option>
+                            <option value="Sandakan">Sandakan</option>
+                            <option value="Tawau">Tawau</option>
+                            <option value="Tuaran">Tuaran</option>
+                            <option value="Keningau">Keningau</option>
+                            <option value="Online">Online / Webinar</option>
+                        </select>
                     </div>
-                    <button onclick="showSection('agenda')" class="text-[#126B4C] font-semibold text-sm hover:underline flex items-center gap-1">
-                        Lihat Semua <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </button>
-                </div>
-                <div id="home-featured-agenda" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Dynamic rendering -->
-                </div>
-            </div>
 
-            <!-- Why BayuOne -->
-            <div class="bg-[#0B5139] text-white py-20 px-4 sm:px-6 lg:px-8">
-                <div class="max-w-site mx-auto space-y-12">
-                    <div class="text-center max-w-2xl mx-auto">
-                        <h2 class="text-3xl font-bold">Kenapa Pilih <span class="font-bold">Bayu</span><span class="font-normal">One</span>?</h2>
-                        <p class="text-[#E2ECE6] mt-3 font-normal">Platform sehenti untuk pembangunan kerjaya, kepakaran dan jaringan profesional.</p>
+                    <div>
+                        <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Mod</label>
+                        <select id="filter-agenda-mode" onchange="filterAgenda()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                            <option value="">Semua Mod</option>
+                            <option value="Fizikal">Fizikal</option>
+                            <option value="Online">Online</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="bg-[#126B4C]/40 p-8 rounded-2xl border border-white/10 space-y-3">
-                            <div class="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center">
-                                <i data-lucide="compass" class="w-6 h-6"></i>
-                            </div>
-                            <h3 class="font-bold text-lg">Terokai Peluang</h3>
-                            <p class="text-[#E2ECE6] text-sm font-normal leading-relaxed">Cari seminar, kursus latihan dan program networking terkini yang bersesuaian dengan matlamat anda.</p>
-                        </div>
-                        <div class="bg-[#126B4C]/40 p-8 rounded-2xl border border-white/10 space-y-3">
-                            <div class="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center">
-                                <i data-lucide="users" class="w-6 h-6"></i>
-                            </div>
-                            <h3 class="font-bold text-lg">Jaringan Trainer Bertauliah</h3>
-                            <p class="text-[#E2ECE6] text-sm font-normal leading-relaxed">Hubungi penceramah dan jurulatih berpengalaman untuk keperluan latihan industri dan korporat.</p>
-                        </div>
-                        <div class="bg-[#126B4C]/40 p-8 rounded-2xl border border-white/10 space-y-3">
-                            <div class="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center">
-                                <i data-lucide="star" class="w-6 h-6"></i>
-                            </div>
-                            <h3 class="font-bold text-lg">Ketengahkan Bakat Tempatan</h3>
-                            <p class="text-[#E2ECE6] text-sm font-normal leading-relaxed">Platform untuk bakat, pereka kreatif, dan pencipta kandungan menyerlahkan profil mereka.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Premium Dark-Green Subscriber CTA Section -->
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-[#0B5139] text-white p-10 rounded-3xl soft-shadow-lg space-y-8">
-                    <div class="text-center space-y-2">
-                        <h2 class="text-2xl font-bold">Dapatkan Update Program & Acara Terkini</h2>
-                        <p class="text-[#E2ECE6] text-sm font-normal max-w-xl mx-auto">Percuma. Masukkan emel anda untuk menerima hebahan program dan acara yang menarik.</p>
+                    <div>
+                        <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Kategori</label>
+                        <select id="filter-agenda-category" onchange="filterAgenda()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                            <option value="">Semua Kategori</option>
+                            <option value="Kursus & Latihan">Kursus & Latihan</option>
+                            <option value="Seminar & Forum">Seminar & Forum</option>
+                            <option value="Bengkel">Bengkel</option>
+                            <option value="Persidangan & Konvensyen">Persidangan & Konvensyen</option>
+                            <option value="Networking & Professional">Networking & Professional</option>
+                            <option value="Komuniti & Sosial">Komuniti & Sosial</option>
+                            <option value="Sukan & Rekreasi">Sukan & Rekreasi</option>
+                            <option value="Festival & Hiburan">Festival & Hiburan</option>
+                            <option value="Keusahawanan & Perniagaan">Keusahawanan & Perniagaan</option>
+                            <option value="Pendidikan">Pendidikan</option>
+                            <option value="Agama & Kerohanian">Agama & Kerohanian</option>
+                            <option value="Lain-lain">Lain-lain</option>
+                        </select>
                     </div>
-                    <form id="subscriber-form" onsubmit="handleSubscribe(event)" class="space-y-5 max-w-2xl mx-auto">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="text" id="sub-name" placeholder="Nama Anda" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:bg-white/20 text-sm">
-                            <input type="email" id="sub-email" placeholder="Emel Anda" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:bg-white/20 text-sm">
+
+                    <div class="flex items-end gap-2">
+                        <div class="w-full">
+                            <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Tarikh</label>
+                            <input type="date" id="filter-agenda-date" onchange="filterAgenda()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-brand">
                         </div>
-                        <div class="space-y-3">
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-[#E2ECE6]">Pilih Minat (Pilih sekurang-kurangnya satu):</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
-                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Peningkatan Kemahiran & Kerjaya" class="accent-[#126B4C]"> Peningkatan Kemahiran</label>
-                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Perniagaan & Keusahawanan" class="accent-[#126B4C]"> Keusahawanan</label>
-                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Kewangan & Pelaburan" class="accent-[#126B4C]"> Kewangan</label>
-                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Kesihatan & Kesejahteraan" class="accent-[#126B4C]"> Kesihatan</label>
-                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Teknologi & Digital" class="accent-[#126B4C]"> Teknologi & AI</label>
-                                <label class="flex items-center gap-2 bg-white/5 p-2.5 rounded-lg border border-white/10 cursor-pointer"><input type="checkbox" name="interest" value="Komuniti & Networking" class="accent-[#126B4C]"> Networking</label>
-                            </div>
-                        </div>
-                        <button type="submit" class="w-full bg-[#126B4C] hover:bg-[#09422F] text-white font-medium py-3.5 rounded-xl transition shadow-sm text-sm">
-                            Langgan Sekarang
+                        <button onclick="resetAgendaFilters()" class="bg-white border border-brand-border text-brand-muted hover:text-brand-dark hover:border-brand px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors shrink-0">
+                            Reset
                         </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. AGENDA SECTION -->
-        <section id="sec-agenda" class="hidden-section max-w-site mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-            <div>
-                <h1 class="text-3xl font-bold text-[#17231E]">Agenda & Program</h1>
-                <p class="text-[#637069] text-sm mt-1">Jelajah senarai program, seminar, dan kursus latihan aktif.</p>
-            </div>
-
-            <!-- Clean Filter Panel -->
-            <div class="bg-white p-5 rounded-2xl soft-border soft-shadow space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-                    <input type="text" id="filter-agenda-search" placeholder="Cari tajuk..." class="px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <select id="filter-agenda-category" class="px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C] text-[#637069]">
-                        <option value="">Semua Kategori</option>
-                        <option>Kursus & Latihan</option>
-                        <option>Seminar & Forum</option>
-                        <option>Bengkel</option>
-                        <option>Persidangan & Konvensyen</option>
-                        <option>Networking & Professional</option>
-                        <option>Keusahawanan & Perniagaan</option>
-                    </select>
-                    <select id="filter-agenda-mode" class="px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C] text-[#637069]">
-                        <option value="">Semua Mod</option>
-                        <option>Fizikal</option>
-                        <option>Online</option>
-                        <option>Hybrid</option>
-                    </select>
-                    <button onclick="renderAgenda()" class="bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium py-2.5 rounded-xl transition text-sm">Tapis</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Agenda Grid (Modern 3-Column) -->
-            <div id="agenda-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Dynamic cards -->
-            </div>
-        </section>
-
-        <!-- 3. TRAINER SECTION -->
-        <section id="sec-trainer" class="hidden-section max-w-site mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-            <div>
-                <h1 class="text-3xl font-bold text-[#17231E]">Direktori Trainer</h1>
-                <p class="text-[#637069] text-sm mt-1">Cari penceramah, jurulatih dan pakar industri bertauliah.</p>
-            </div>
-
-            <!-- Trainer Grid -->
-            <div id="trainer-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Dynamic cards -->
-            </div>
-        </section>
-
-        <!-- 4. TALENT SECTION -->
-        <section id="sec-talent" class="hidden-section max-w-site mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-            <div>
-                <h1 class="text-3xl font-bold text-[#17231E]">Direktori Talent</h1>
-                <p class="text-[#637069] text-sm mt-1">Temui pencipta kandungan, pereka kreatif, dan bakat tempatan.</p>
-            </div>
-
-            <!-- Talent Grid -->
-            <div id="talent-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Dynamic cards -->
-            </div>
-        </section>
-
-        <!-- 5. JOIN SECTION -->
-        <section id="sec-join" class="hidden-section max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-            <div class="text-center space-y-2">
-                <h1 class="text-3xl font-bold text-[#17231E]">Sertai <span class="font-bold">Bayu</span><span class="font-normal">One</span></h1>
-                <p class="text-[#637069] text-sm">Pilih peranan anda dan hantar permohonan untuk menyertai rangkaian komuniti kami.</p>
-            </div>
-
-            <!-- Application Type Selector -->
-            <div class="grid grid-cols-3 gap-2 bg-[#F4F8F5] p-1.5 rounded-2xl border border-[#E5EAE7] text-center font-medium text-xs">
-                <button onclick="switchJoinTab('organiser')" id="tab-btn-organiser" class="py-3 rounded-xl bg-white text-[#126B4C] soft-shadow font-semibold">PENGANJUR</button>
-                <button onclick="switchJoinTab('trainer')" id="tab-btn-trainer" class="py-3 rounded-xl text-[#637069]">TRAINER</button>
-                <button onclick="switchJoinTab('talent')" id="tab-btn-talent" class="py-3 rounded-xl text-[#637069]">TALENT</button>
-            </div>
-
-            <!-- Dynamic Form -->
-            <div class="bg-white p-8 rounded-3xl soft-border soft-shadow">
-                <form id="join-form" onsubmit="handleApplicationSubmit(event)" class="space-y-6">
-                    <div id="form-fields" class="space-y-4">
-                        <!-- Rendered dynamically -->
+            <!-- Agenda Sub-Sections: Akan Datang & Sedang Berlangsung VS Telah Tamat -->
+            <div class="space-y-12">
+                <!-- Active / Upcoming Section -->
+                <div>
+                    <div class="flex items-center justify-between mb-6 pb-2 border-b border-brand-border">
+                        <div>
+                            <h2 class="text-2xl font-bold text-brand-dark flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                                Akan Datang & Sedang Berlangsung
+                            </h2>
+                            <p class="text-sm text-brand-muted">Program terkini yang terbuka untuk penyertaan anda.</p>
+                        </div>
+                        <span id="count-upcoming" class="text-xs font-bold bg-brand-bg text-brand px-3 py-1 rounded-full border border-brand-border">0 Program</span>
                     </div>
 
-                    <button type="submit" class="w-full bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium py-3.5 rounded-xl transition shadow-sm text-sm">
-                        Hantar Permohonan
+                    <div id="grid-agenda-upcoming" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Dynamic Cards Inserted via JS -->
+                    </div>
+                </div>
+
+                <!-- Ended Section -->
+                <div>
+                    <div class="flex items-center justify-between mb-6 pb-2 border-b border-brand-border">
+                        <div>
+                            <h2 class="text-xl font-bold text-brand-muted flex items-center gap-2">
+                                <i class="fa-regular fa-clock"></i>
+                                Telah Tamat
+                            </h2>
+                            <p class="text-sm text-brand-muted">Rekod program dan acara yang telah berlalu.</p>
+                        </div>
+                        <span id="count-ended" class="text-xs font-bold bg-gray-100 text-gray-500 px-3 py-1 rounded-full">0 Program</span>
+                    </div>
+
+                    <div id="grid-agenda-ended" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-75">
+                        <!-- Dynamic Ended Cards -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 2: TRAINER VIEW ================= -->
+        <div id="view-trainer" class="tab-content hidden">
+            <!-- Trainer Filter Panel -->
+            <div class="bg-brand-bg border border-brand-border rounded-2xl p-5 mb-8 shadow-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Cari Nama Trainer</label>
+                        <input type="text" id="filter-trainer-name" onkeyup="filterTrainer()" placeholder="Masukkan nama..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Bidang Kepakaran</label>
+                        <select id="filter-trainer-expertise" onchange="filterTrainer()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                            <option value="">Semua Kepakaran</option>
+                            <option value="Pengurusan & Kepimpinan">Pengurusan & Kepimpinan</option>
+                            <option value="Sumber Manusia & Organisasi">Sumber Manusia & Organisasi</option>
+                            <option value="Pentadbiran & Profesional">Pentadbiran & Profesional</option>
+                            <option value="Perniagaan & Keusahawanan">Perniagaan & Keusahawanan</option>
+                            <option value="Pemasaran & Jualan">Pemasaran & Jualan</option>
+                            <option value="Teknologi, AI & Digital">Teknologi, AI & Digital</option>
+                            <option value="Kreatif, Media & Komunikasi">Kreatif, Media & Komunikasi</option>
+                            <option value="Kewangan, Akaun & Percukaian">Kewangan, Akaun & Percukaian</option>
+                            <option value="Pendidikan & Akademik">Pendidikan & Akademik</option>
+                            <option value="Kesihatan, Keselamatan & Kesejahteraan">Kesihatan, Keselamatan & Kesejahteraan</option>
+                            <option value="Industri & Teknikal">Industri & Teknikal</option>
+                            <option value="Kerajaan & Perkhidmatan Awam">Kerajaan & Perkhidmatan Awam</option>
+                            <option value="Bahasa & Kemahiran Komunikasi">Bahasa & Kemahiran Komunikasi</option>
+                            <option value="Pelancongan, Hospitaliti & F&B">Pelancongan, Hospitaliti & F&B</option>
+                            <option value="Kualiti, Risiko & Pematuhan">Kualiti, Risiko & Pematuhan</option>
+                            <option value="Kemahiran Insaniah & Pembangunan Diri">Kemahiran Insaniah & Pembangunan Diri</option>
+                            <option value="Alam Sekitar & Kelestarian">Alam Sekitar & Kelestarian</option>
+                            <option value="Kemahiran Khusus / Lain-lain">Kemahiran Khusus / Lain-lain</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Lokasi</label>
+                        <select id="filter-trainer-location" onchange="filterTrainer()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                            <option value="">Semua Lokasi</option>
+                            <option value="Kota Kinabalu">Kota Kinabalu</option>
+                            <option value="Sandakan">Sandakan</option>
+                            <option value="Tawau">Tawau</option>
+                            <option value="Penampang">Penampang</option>
+                            <option value="Kuala Lumpur">Kuala Lumpur / Selangor</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-end gap-2">
+                        <div class="w-full">
+                            <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Pentauliahan / Sijil</label>
+                            <select id="filter-trainer-cert" onchange="filterTrainer()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                                <option value="">Semua Sijil</option>
+                                <option value="HRD Corp TTT">HRD Corp TTT</option>
+                                <option value="HRD Corp Accredited Trainer">HRD Corp Accredited Trainer</option>
+                                <option value="Sijil NCS-TTT">Sijil NCS-TTT</option>
+                                <option value="SKM3, DKM, atau DLKM">SKM3, DKM, atau DLKM</option>
+                                <option value="Lain-Lain">Lain-Lain</option>
+                            </select>
+                        </div>
+                        <button onclick="resetTrainerFilters()" class="bg-white border border-brand-border text-brand-muted hover:text-brand-dark hover:border-brand px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors shrink-0">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trainer Cards Grid -->
+            <div id="grid-trainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamic Trainer Cards -->
+            </div>
+        </div>
+
+        <!-- ================= TAB 3: TALENT VIEW ================= -->
+        <div id="view-talent" class="tab-content hidden">
+            <!-- Talent Filter Panel -->
+            <div class="bg-brand-bg border border-brand-border rounded-2xl p-5 mb-8 shadow-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Cari Nama Talent</label>
+                        <input type="text" id="filter-talent-name" onkeyup="filterTalent()" placeholder="Masukkan nama..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Bidang / Niche</label>
+                        <select id="filter-talent-niche" onchange="filterTalent()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                            <option value="">Semua Niche</option>
+                            <option value="Makanan, Minuman & Gaya Hidup">Makanan, Minuman & Gaya Hidup</option>
+                            <option value="Pelancongan, Percutian & Hospitaliti">Pelancongan, Percutian & Hospitaliti</option>
+                            <option value="Kecantikan, Fesyen & Penjagaan Diri Kesihatan">Kecantikan, Fesyen & Penjagaan Diri</option>
+                            <option value="Kecergasan & Kesejahteraan">Kecergasan & Kesejahteraan</option>
+                            <option value="Perniagaan, Kewangan & Keusahawanan">Perniagaan, Kewangan & Keusahawanan</option>
+                            <option value="Pendidikan, Kerjaya & Pembangunan Diri">Pendidikan, Kerjaya & Pembangunan Diri</option>
+                            <option value="Teknologi, Digital & Media Sosial">Teknologi, Digital & Media Sosial</option>
+                            <option value="Automotif, Hartanah & Pelaburan">Automotif, Hartanah & Pelaburan</option>
+                            <option value="Keluarga, Komuniti, Budaya & Gaya Hidup">Keluarga, Komuniti, Budaya & Gaya Hidup</option>
+                            <option value="Pengacaraan & Emcee">Pengacaraan & Emcee</option>
+                            <option value="Hiburan & Seni">Hiburan & Seni</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-end gap-2">
+                        <div class="w-full">
+                            <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Lokasi</label>
+                            <select id="filter-talent-location" onchange="filterTalent()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand">
+                                <option value="">Semua Lokasi</option>
+                                <option value="Kota Kinabalu">Kota Kinabalu</option>
+                                <option value="Sandakan">Sandakan</option>
+                                <option value="Tawau">Tawau</option>
+                                <option value="Keningau">Keningau</option>
+                                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                            </select>
+                        </div>
+                        <button onclick="resetTalentFilters()" class="bg-white border border-brand-border text-brand-muted hover:text-brand-dark hover:border-brand px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors shrink-0">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Talent Cards Grid -->
+            <div id="grid-talent" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamic Talent Cards -->
+            </div>
+        </div>
+
+        <!-- ================= ADMIN DASHBOARD VIEW ================= -->
+        <div id="view-admin" class="tab-content hidden space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-brand-bg p-6 rounded-2xl border border-brand-border">
+                <div>
+                    <span class="text-xs font-bold text-brand uppercase tracking-wider">PANEL PENGURUSAN <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></span>
+                    <h2 class="text-2xl font-extrabold text-brand-dark">Admin Dashboard & Kelulusan Permohonan</h2>
+                    <p class="text-xs text-brand-muted mt-1">Semak, luluskan, muat naik gambar dan urus tempoh sah penganjur, trainer & talent.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="switchTab('agenda')" class="bg-white border border-brand-border text-brand-dark hover:bg-gray-50 px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Ke Laman Awam
                     </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- 6. ABOUT SECTION -->
-        <section id="sec-about" class="hidden-section max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <div class="text-center space-y-3">
-                <h1 class="text-4xl font-bold text-[#17231E]">Tentang <span class="font-bold">Bayu</span><span class="font-normal">One</span></h1>
-                <p class="text-[#637069] text-base">Platform Pemerkasaan Komuniti, Peluang & Bakat Profesional</p>
+                    <button onclick="logoutAdmin()" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        Log Keluar
+                    </button>
+                </div>
             </div>
 
-            <div class="prose prose-slate max-w-none bg-white p-8 md:p-10 rounded-3xl soft-border soft-shadow space-y-6">
-                <p class="text-[#17231E] leading-relaxed">
-                    <strong class="text-[#17231E]"><span class="font-bold">Bayu</span><span class="font-normal">One</span></strong> merupakan sebuah inisiatif platform komuniti profesional yang dibangunkan oleh <strong>NMZ Kreatif</strong>. Ia direka khas untuk merapatkan jurang antara penganjur acara, jurulatih bertauliah (trainers), bakat tempatan (talents), serta ahli komuniti.
+            <!-- AMENDMENT 3 — SUBSCRIBER DASHBOARD (DIRECTLY BELOW "PANEL PENGURUSAN BAYUONE") -->
+            <div class="bg-white rounded-2xl border border-brand-border shadow-xs p-6 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-4">
+                    <div>
+                        <h3 class="text-xl font-extrabold text-brand-dark uppercase tracking-wide flex items-center gap-2">
+                            <i class="fa-solid fa-users text-brand"></i>
+                            SUBSCRIBER DASHBOARD
+                        </h3>
+                        <p class="text-xs text-brand-muted">Pantau dan urus maklumat serta status pelanggan laman web <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>.</p>
+                    </div>
+                </div>
+
+                <!-- Subscriber Dashboard Summary Info -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-brand-bg p-4 rounded-xl border border-brand-border shadow-2xs">
+                        <span class="text-[11px] font-bold text-brand-muted uppercase tracking-wider">Total Subscribers</span>
+                        <div id="stat-sub-total" class="text-2xl font-extrabold text-brand-dark mt-1">0</div>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 shadow-2xs">
+                        <span class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">New Subscribers</span>
+                        <div id="stat-sub-new" class="text-2xl font-extrabold text-emerald-800 mt-1">0</div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 shadow-2xs">
+                        <span class="text-[11px] font-bold text-blue-700 uppercase tracking-wider">Existing Subscribers</span>
+                        <div id="stat-sub-existing" class="text-2xl font-extrabold text-blue-800 mt-1">0</div>
+                    </div>
+                </div>
+
+                <!-- Subscriber Management Table -->
+                <div class="overflow-x-auto border border-brand-border rounded-xl">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-brand-border text-brand-muted uppercase font-bold tracking-wider">
+                                <th class="p-3.5">Name</th>
+                                <th class="p-3.5">Email</th>
+                                <th class="p-3.5">Minat</th>
+                                <th class="p-3.5 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subscriber-table-body" class="divide-y divide-brand-border">
+                            <!-- Dynamic Subscriber Rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Summary Statistic Cards for Applications -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+                <div class="bg-white p-4 rounded-xl border border-brand-border shadow-2xs">
+                    <span class="text-[11px] font-bold text-brand-muted uppercase">Jumlah</span>
+                    <div id="stat-total" class="text-2xl font-extrabold text-brand-dark mt-1">0</div>
+                </div>
+                <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 shadow-2xs">
+                    <span class="text-[11px] font-bold text-amber-700 uppercase">Menunggu</span>
+                    <div id="stat-pending" class="text-2xl font-extrabold text-amber-800 mt-1">0</div>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 shadow-2xs">
+                    <span class="text-[11px] font-bold text-blue-700 uppercase">Diluluskan</span>
+                    <div id="stat-approved" class="text-2xl font-extrabold text-blue-800 mt-1">0</div>
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 shadow-2xs">
+                    <span class="text-[11px] font-bold text-emerald-700 uppercase">Aktif</span>
+                    <div id="stat-active" class="text-2xl font-extrabold text-emerald-800 mt-1">0</div>
+                </div>
+                <div class="bg-orange-50 p-4 rounded-xl border border-orange-200 shadow-2xs">
+                    <span class="text-[11px] font-bold text-orange-700 uppercase">Akan Tamat</span>
+                    <div id="stat-expiring" class="text-2xl font-extrabold text-orange-800 mt-1">0</div>
+                </div>
+                <div class="bg-red-50 p-4 rounded-xl border border-red-200 shadow-2xs">
+                    <span class="text-[11px] font-bold text-red-700 uppercase">Luput</span>
+                    <div id="stat-expired" class="text-2xl font-extrabold text-red-800 mt-1">0</div>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 shadow-2xs">
+                    <span class="text-[11px] font-bold text-gray-600 uppercase">Batal/Padam</span>
+                    <div id="stat-cancelled" class="text-2xl font-extrabold text-gray-700 mt-1">0</div>
+                </div>
+            </div>
+
+            <!-- Admin Filters & Table Area -->
+            <div class="bg-white rounded-2xl border border-brand-border shadow-xs overflow-hidden">
+                <!-- Table Controls -->
+                <div class="p-4 bg-brand-bg border-b border-brand-border flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-2 flex-grow max-w-md">
+                        <i class="fa-solid fa-search text-brand-muted ml-2"></i>
+                        <input type="text" id="admin-search" onkeyup="renderAdminTable()" placeholder="Cari pemohon / organisasi..." class="w-full bg-white border border-brand-border rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-brand">
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2">
+                        <select id="admin-filter-type" onchange="renderAdminTable()" class="bg-white border border-brand-border rounded-xl px-2.5 py-1.5 text-xs font-medium">
+                            <option value="">Semua Jenis</option>
+                            <option value="Agenda">Agenda</option>
+                            <option value="Trainer">Trainer</option>
+                            <option value="Talent">Talent</option>
+                        </select>
+                        <select id="admin-filter-approval" onchange="renderAdminTable()" class="bg-white border border-brand-border rounded-xl px-2.5 py-1.5 text-xs font-medium">
+                            <option value="">Semua Kelulusan</option>
+                            <option value="Pending">Menunggu Semakan</option>
+                            <option value="Approved">Diluluskan</option>
+                        </select>
+                        <select id="admin-filter-status" onchange="renderAdminTable()" class="bg-white border border-brand-border rounded-xl px-2.5 py-1.5 text-xs font-medium">
+                            <option value="">Semua Status Sah</option>
+                            <option value="ACTIVE">Aktif</option>
+                            <option value="EXPIRING">Akan Tamat</option>
+                            <option value="EXPIRED">Luput</option>
+                            <option value="CANCELLED">Dibatalkan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Admin Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-brand-border text-brand-muted uppercase font-bold tracking-wider">
+                                <th class="p-3.5">Gambar</th>
+                                <th class="p-3.5">Permohonan</th>
+                                <th class="p-3.5">Pemohon / Organisasi</th>
+                                <th class="p-3.5">Kelulusan</th>
+                                <th class="p-3.5">Tempoh Sah</th>
+                                <th class="p-3.5">Tarikh Dari - Hingga</th>
+                                <th class="p-3.5">Label</th>
+                                <th class="p-3.5 text-right">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body" class="divide-y divide-brand-border">
+                            <!-- Dynamic rows via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBSCRIBE / NEWSLETTER SECTION (AMENDMENT 2) -->
+        <section id="subscription-section" class="mt-16 bg-brand-dark rounded-2xl p-8 sm:p-12 text-white relative overflow-hidden shadow-lg">
+            <div class="max-w-3xl mx-auto text-center space-y-4">
+                <span class="inline-block px-3 py-1 bg-brand rounded-full text-xs font-bold uppercase tracking-widest text-emerald-200">Hebahan Percuma</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Dapatkan Update Program & Acara Terkini</h2>
+                <p class="text-brand-bg text-sm sm:text-base font-normal max-w-xl mx-auto">
+                    Percuma. Masukkan emel anda untuk menerima hebahan program dan acara yang menarik.
                 </p>
-                <h3 class="text-xl font-bold text-[#17231E]">Misi Kami</h3>
-                <ul class="list-disc pl-5 space-y-2 text-[#637069] text-sm">
-                    <li>Memudahkan pencarian program pemerkasaan kemahiran dan keusahawanan.</li>
-                    <li>Menyediakan ruang promosi bagi jurulatih dan pencipta kandungan tempatan.</li>
-                    <li>Membina komuniti profesional yang saling menyokong di seluruh negara.</li>
-                </ul>
-            </div>
-        </section>
 
-        <!-- 7. ADMIN LOGIN SECTION -->
-        <section id="sec-admin-login" class="hidden-section max-w-md mx-auto px-4 py-16">
-            <div class="bg-white p-8 rounded-3xl soft-border soft-shadow-lg space-y-6">
-                <div class="text-center space-y-2">
-                    <div class="w-12 h-12 bg-[#126B4C] rounded-xl flex items-center justify-center text-white font-bold text-xl mx-auto shadow-sm">B1</div>
-                    <h1 class="text-2xl font-bold text-[#17231E]">Admin Access</h1>
-                    <p class="text-xs text-[#637069]">Log masuk untuk menguruskan maklumat <span class="font-bold">Bayu</span><span class="font-normal">One</span></p>
-                </div>
+                <!-- Subscription Form -->
+                <form id="subscribe-form" onsubmit="handleSubscribeSubmit(event)" class="mt-8 text-left bg-white/5 border border-white/10 p-6 sm:p-8 rounded-2xl backdrop-blur-sm space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-emerald-200 mb-1">Nama <span class="text-red-400">*</span></label>
+                            <input type="text" id="sub-name" required placeholder="Nama penuh anda" class="w-full bg-white text-brand-text rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-emerald-200 mb-1">Emel <span class="text-red-400">*</span></label>
+                            <input type="email" id="sub-email" required placeholder="alamat@emel.com" class="w-full bg-white text-brand-text rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                        </div>
+                    </div>
 
-                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <!-- Minat Checkbox Field -->
                     <div>
-                        <label class="block text-xs font-semibold text-[#17231E] uppercase tracking-wider mb-1">Emel</label>
-                        <input type="email" id="admin-email" required class="w-full px-4 py-3 rounded-xl soft-border focus:outline-none focus:ring-1 focus:ring-[#126B4C] text-sm">
+                        <label class="block text-xs font-bold uppercase text-emerald-200 mb-2">
+                            Pilih Minat Anda (Boleh pilih lebih dari 1) <span class="text-red-400">*</span>
+                        </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-white">
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Peningkatan Kemahiran & Kerjaya" class="accent-brand rounded">
+                                <span>Peningkatan Kemahiran & Kerjaya</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Perniagaan & Keusahawanan" class="accent-brand rounded">
+                                <span>Perniagaan & Keusahawanan</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Kewangan & Pelaburan" class="accent-brand rounded">
+                                <span>Kewangan & Pelaburan</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Kesihatan & Kesejahteraan" class="accent-brand rounded">
+                                <span>Kesihatan & Kesejahteraan</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Teknologi & Digital" class="accent-brand rounded">
+                                <span>Teknologi & Digital</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Pendidikan & Pembelajaran" class="accent-brand rounded">
+                                <span>Pendidikan & Pembelajaran</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Kreativiti & Media" class="accent-brand rounded">
+                                <span>Kreativiti & Media</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Komuniti & Networking" class="accent-brand rounded">
+                                <span>Komuniti & Networking</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Gaya Hidup & Minat" class="accent-brand rounded">
+                                <span>Gaya Hidup & Minat</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
+                                <input type="checkbox" name="sub_interest" value="Agama & Kerohanian" class="accent-brand rounded">
+                                <span>Agama & Kerohanian</span>
+                            </label>
+                        </div>
+                        <!-- Validation Error Message Display -->
+                        <div id="sub-error" class="hidden mt-2 p-2 bg-red-500/20 border border-red-400 text-red-200 text-xs rounded-lg font-medium">
+                            Sila pilih sekurang-kurangnya satu minat.
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-[#17231E] uppercase tracking-wider mb-1">Kata Laluan</label>
-                        <input type="password" id="admin-password" required class="w-full px-4 py-3 rounded-xl soft-border focus:outline-none focus:ring-1 focus:ring-[#126B4C] text-sm">
+
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-white hover:bg-brand-bg text-brand-dark text-sm font-extrabold py-3.5 rounded-xl shadow transition-colors">
+                            Saya Nak Dapatkan Update Program & Acara Terkini
+                        </button>
                     </div>
-                    <button type="submit" class="w-full bg-[#17231E] hover:bg-black text-white font-medium py-3 rounded-xl transition text-sm">
-                        Log Masuk
-                    </button>
                 </form>
+
+                <!-- Subscription Success Display (AMENDMENT 2) -->
+                <div id="sub-success-message" class="hidden p-6 bg-emerald-900/80 border border-emerald-500/30 rounded-2xl text-emerald-100 font-semibold text-center animate-fade-in">
+                    <i class="fa-solid fa-circle-check text-3xl text-emerald-400 mb-2 block"></i>
+                    Terima kasih! Anda kini dalam senarai hebahan <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>.
+                </div>
             </div>
         </section>
-
     </main>
 
-    <!-- DARK GREEN FOOTER -->
-    <footer class="bg-[#0B5139] text-[#E2ECE6] py-14 border-t border-[#09422F]">
-        <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-[#126B4C] rounded-xl flex items-center justify-center text-white font-bold text-lg border border-white/10">
-                        B1
+    <!-- FOOTER (AMENDMENT 1, 2, 4) -->
+    <footer class="bg-brand-dark text-white border-t border-brand-dark py-12">
+        <div class="max-w-[1200px] mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-emerald-900/60">
+                <!-- Column 1: About BayuOne (AMENDMENT 1 & 2) -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-white rounded-lg p-1 flex items-center justify-center overflow-hidden">
+                            <!-- Official Provided BayuOne Logo Asset -->
+                            <img src="https://lh3.googleusercontent.com/d/1gXBWckPatTAQwgfXpmLn5gu3DY7YkWQO" onerror="this.src='https://drive.google.com/thumbnail?id=1gXBWckPatTAQwgfXpmLn5gu3DY7YkWQO&sz=w1000'" alt="BayuOne Logo" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xl tracking-tight text-white"><span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></span>
                     </div>
-                    <div>
-                        <span class="text-lg text-white">
-                            <span class="font-bold">Bayu</span><span class="font-normal">One</span>
-                        </span>
-                        <p class="text-xs text-[#E2ECE6]/70">Powered by NMZ Kreatif</p>
-                    </div>
+                    <h3 class="text-xs uppercase font-bold text-emerald-400 tracking-wider">Tentang <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></h3>
+                    <p class="text-xs sm:text-sm text-emerald-100/80 leading-relaxed max-w-lg">
+                        <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> ialah platform yang menghubungkan individu, profesional dan organisasi untuk berkongsi ilmu, membina jaringan serta membuka peluang kolaborasi dan perkembangan bakat.
+                    </p>
                 </div>
 
-                <div class="flex flex-wrap gap-6 text-sm font-medium text-[#E2ECE6]">
-                    <a href="#" onclick="showSection('home')" class="hover:text-white transition">Home</a>
-                    <a href="#" onclick="showSection('agenda')" class="hover:text-white transition">Agenda</a>
-                    <a href="#" onclick="showSection('trainer')" class="hover:text-white transition">Trainer</a>
-                    <a href="#" onclick="showSection('talent')" class="hover:text-white transition">Talent</a>
-                    <button onclick="openFeedbackModal()" class="hover:text-white transition">Maklum Balas</button>
+                <!-- Column 2: Disclaimer & Admin Link (AMENDMENT 4: "Admin Login" changed to "Login") -->
+                <div class="space-y-3">
+                    <h3 class="text-xs uppercase font-bold text-emerald-400 tracking-wider">PENAFIAN</h3>
+                    <p class="text-xs sm:text-sm text-emerald-100/80 leading-relaxed">
+                        Kandungan, profil, program dan tawaran yang dipaparkan mungkin disediakan oleh pihak ketiga. Pengguna bertanggungjawab membuat semakan dan pengesahan sendiri sebelum membuat sebarang keputusan, bayaran atau kerjasama.
+                    </p>
+                    <div class="pt-2 flex items-center gap-4 text-xs font-semibold">
+                        <button onclick="openFeedbackModal()" class="text-emerald-300 hover:text-white underline underline-offset-4 transition-colors">
+                            Maklum Balas
+                        </button>
+                        <span class="text-emerald-800">•</span>
+                        <!-- AMENDMENT 4: Footer link text changed from "Admin Login" to "Login" -->
+                        <button onclick="openAdminLoginModal()" class="text-emerald-400/60 hover:text-emerald-300 transition-colors">
+                            Login
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs gap-4 text-[#E2ECE6]/70">
-                <p>&copy; 2026 <span class="font-bold">Bayu</span><span class="font-normal">One</span> & NMZ Kreatif. Hak Cipta Terelihara.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="hover:underline">Privacy Policy</a>
-                    <a href="#" class="hover:underline">Terms of Service</a>
-                    <button onclick="showSection('admin-login')" class="text-[#E2ECE6]/50 hover:text-white transition">Admin Access</button>
-                </div>
+            <!-- Copyright -->
+            <div class="pt-6 text-center text-xs text-emerald-200/60">
+                Powered By © 2026 NMZ Kreatif — Nurturing Minds Zone (199736-T)
             </div>
         </div>
     </footer>
 
-    <!-- FEEDBACK MODAL -->
-    <div id="modal-feedback" class="fixed inset-0 bg-[#17231E]/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 soft-shadow-lg">
-            <div class="flex justify-between items-center">
-                <h3 class="text-lg font-bold text-[#17231E]">Hantar Maklum Balas</h3>
-                <button onclick="closeFeedbackModal()" class="text-[#637069] hover:text-[#17231E]"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <!-- REGISTRATION MODAL ("Sertai BayuOne") (AMENDMENT 2) -->
+    <div id="modal-register" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-brand-border">
+            <button onclick="closeRegisterModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Header -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-brand-bg border border-brand-border flex items-center justify-center text-brand font-bold text-lg">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-brand-dark">Sertai <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></h3>
+                    <p class="text-xs text-brand-muted">Hantar permohonan penganjuran program, trainer atau talent anda.</p>
+                </div>
             </div>
-            <form onsubmit="handleFeedbackSubmit(event)" class="space-y-4">
-                <input type="text" id="fb-name" placeholder="Nama" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                <input type="email" id="fb-email" placeholder="Emel" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                <textarea id="fb-message" placeholder="Mesej / Maklum Balas Anda..." rows="4" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]"></textarea>
-                <button type="submit" class="w-full bg-[#126B4C] hover:bg-[#0B5139] text-white font-medium py-3 rounded-xl text-sm transition">Hantar</button>
+
+            <!-- Role Selector -->
+            <div class="grid grid-cols-3 gap-2 bg-brand-bg p-1.5 rounded-xl border border-brand-border mb-6">
+                <button type="button" onclick="setRegisterType('penganjur')" id="btn-reg-penganjur" class="py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs">
+                    1. Penganjur
+                </button>
+                <button type="button" onclick="setRegisterType('trainer')" id="btn-reg-trainer" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">
+                    2. Trainer
+                </button>
+                <button type="button" onclick="setRegisterType('talent')" id="btn-reg-talent" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">
+                    3. Talent
+                </button>
+            </div>
+
+            <!-- Dynamic Form Body -->
+            <form id="form-register" onsubmit="handleRegisterSubmit(event)">
+                <input type="hidden" id="reg-type" value="penganjur">
+
+                <!-- 1. PENGANJUR FIELDS -->
+                <div id="fields-penganjur" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tajuk Program <span class="text-red-500">*</span></label>
+                        <input type="text" id="reg-penganjur-title" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Program <span class="text-red-500">*</span></label>
+                            <input type="date" id="reg-penganjur-date" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi <span class="text-red-500">*</span></label>
+                            <input type="text" id="reg-penganjur-location" placeholder="cth: Kota Kinabalu" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Kategori <span class="text-red-500">*</span></label>
+                        <select id="reg-penganjur-category" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <option value="Kursus & Latihan">Kursus & Latihan</option>
+                            <option value="Seminar & Forum">Seminar & Forum</option>
+                            <option value="Bengkel">Bengkel</option>
+                            <option value="Persidangan & Konvensyen">Persidangan & Konvensyen</option>
+                            <option value="Networking & Professional">Networking & Professional</option>
+                            <option value="Komuniti & Sosial">Komuniti & Sosial</option>
+                            <option value="Sukan & Rekreasi">Sukan & Rekreasi</option>
+                            <option value="Festival & Hiburan">Festival & Hiburan</option>
+                            <option value="Keusahawanan & Perniagaan">Keusahawanan & Perniagaan</option>
+                            <option value="Pendidikan">Pendidikan</option>
+                            <option value="Agama & Kerohanian">Agama & Kerohanian</option>
+                            <option value="Lain-lain">Lain-lain</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama PIC (Optional)</label>
+                            <input type="text" id="reg-penganjur-pic-name" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Tel PIC (Optional)</label>
+                            <input type="tel" id="reg-penganjur-pic-tel" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Mod (Optional)</label>
+                            <select id="reg-penganjur-mode" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                <option value="Fizikal">Fizikal</option>
+                                <option value="Online">Online</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Hebahan / Pendaftaran</label>
+                        <input type="url" id="reg-penganjur-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- 2. TRAINER FIELDS -->
+                <div id="fields-trainer" class="space-y-4 hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Trainer <span class="text-red-500">*</span></label>
+                            <input type="text" id="reg-trainer-name" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi <span class="text-red-500">*</span></label>
+                            <input type="text" id="reg-trainer-location" placeholder="cth: Kota Kinabalu" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Bidang Kepakaran (Boleh pilih lebih satu)</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto p-2 border border-brand-border rounded-xl text-xs bg-gray-50">
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pengurusan & Kepimpinan"> Pengurusan & Kepimpinan</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Sumber Manusia & Organisasi"> Sumber Manusia & Organisasi</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pentadbiran & Profesional"> Pentadbiran & Profesional</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Perniagaan & Keusahawanan"> Perniagaan & Keusahawanan</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pemasaran & Jualan"> Pemasaran & Jualan</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Teknologi, AI & Digital"> Teknologi, AI & Digital</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kreatif, Media & Komunikasi"> Kreatif, Media & Komunikasi</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kewangan, Akaun & Percukaian"> Kewangan, Akaun & Percukaian</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pendidikan & Akademik"> Pendidikan & Akademik</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kesihatan, Keselamatan & Kesejahteraan"> Kesihatan & Keselamatan</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil <span class="text-red-500">*</span></label>
+                        <textarea id="reg-trainer-summary" rows="3" placeholder="Penerangan ringkas pengalaman & kepakaran anda..." class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Pentauliahan / Sijil</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="HRD Corp TTT"> HRD Corp TTT</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="HRD Corp Accredited Trainer"> HRD Corp Accredited Trainer</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="Sijil NCS-TTT"> Sijil NCS-TTT</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="SKM3, DKM, atau DLKM"> SKM3, DKM, atau DLKM</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
+                        <input type="url" id="reg-trainer-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- 3. TALENT FIELDS -->
+                <div id="fields-talent" class="space-y-4 hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Talent <span class="text-red-500">*</span></label>
+                            <input type="text" id="reg-talent-name" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi <span class="text-red-500">*</span></label>
+                            <input type="text" id="reg-talent-location" placeholder="cth: Kota Kinabalu" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Bidang / Niche <span class="text-red-500">*</span></label>
+                        <select id="reg-talent-niche" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <option value="Makanan, Minuman & Gaya Hidup">Makanan, Minuman & Gaya Hidup</option>
+                            <option value="Pelancongan, Percutian & Hospitaliti">Pelancongan, Percutian & Hospitaliti</option>
+                            <option value="Kecantikan, Fesyen & Penjagaan Diri Kesihatan">Kecantikan, Fesyen & Penjagaan Diri</option>
+                            <option value="Kecergasan & Kesejahteraan">Kecergasan & Kesejahteraan</option>
+                            <option value="Perniagaan, Kewangan & Keusahawanan">Perniagaan, Kewangan & Keusahawanan</option>
+                            <option value="Pendidikan, Kerjaya & Pembangunan Diri">Pendidikan, Kerjaya & Pembangunan Diri</option>
+                            <option value="Teknologi, Digital & Media Sosial">Teknologi, Digital & Media Sosial</option>
+                            <option value="Automotif, Hartanah & Pelaburan">Automotif, Hartanah & Pelaburan</option>
+                            <option value="Keluarga, Komuniti, Budaya & Gaya Hidup">Keluarga, Komuniti, Budaya & Gaya Hidup</option>
+                            <option value="Pengacaraan & Emcee">Pengacaraan & Emcee</option>
+                            <option value="Hiburan & Seni">Hiburan & Seni</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil <span class="text-red-500">*</span></label>
+                        <textarea id="reg-talent-summary" rows="3" placeholder="Penerangan pencapaian & aktiviti anda..." class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
+                        <input type="url" id="reg-talent-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl shadow transition-colors text-sm">
+                        Hantar Permohonan
+                    </button>
+                    <p class="text-[11px] text-brand-muted text-center mt-2">Permohonan akan disemak oleh pasukan Admin sebelum diterbitkan secara awam.</p>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- APPLICATION SCRIPTS -->
+    <!-- FEEDBACK MODAL (AMENDMENT 2) -->
+    <div id="modal-feedback" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-brand-border">
+            <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-lg font-bold text-brand-dark mb-1">Maklum Balas</h3>
+            <p class="text-xs text-brand-muted mb-4">Kongsi maklum balas atau cadangan penambahbaikan anda bersama pasukan <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>.</p>
+            
+            <form id="form-feedback" onsubmit="handleFeedbackSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama <span class="text-red-500">*</span></label>
+                    <input type="text" id="fb-name" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel <span class="text-red-500">*</span></label>
+                    <input type="email" id="fb-email" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Maklum Balas <span class="text-red-500">*</span></label>
+                    <textarea id="fb-message" rows="4" required class="w-full bg-white border border-brand-border rounded-xl p-3 text-sm focus:border-brand focus:outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-sm transition-colors">
+                    Hantar Maklum Balas
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FEEDBACK SUCCESS POPUP (AMENDMENT 2) -->
+    <div id="modal-feedback-success" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center border border-brand-border space-y-4">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="text-lg font-bold text-brand-dark">Terima Kasih Atas Maklum Balas Anda</h3>
+            <p class="text-xs text-brand-muted leading-relaxed">
+                Maklum balas anda telah diterima dan akan disemak oleh pasukan <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>.
+            </p>
+            <button onclick="closeFeedbackSuccessModal()" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-sm transition-colors">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL (AMENDMENT 2) -->
+    <div id="modal-admin-login" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative border border-brand-border">
+            <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 bg-brand-bg rounded-xl mx-auto flex items-center justify-center text-brand text-xl font-bold mb-2">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="text-lg font-bold text-brand-dark"><span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> Admin Access</h3>
+                <p class="text-xs text-brand-muted">Log masuk panel kawalan <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-brand-dark mb-1">Emel Admin</label>
+                    <input type="email" id="admin-login-email" value="admin@bayuone.my" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-brand-dark mb-1">Katalaluan</label>
+                    <input type="password" id="admin-login-pass" value="admin123" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                </div>
+                <button type="submit" class="w-full bg-brand text-white font-bold py-2.5 rounded-xl text-xs hover:bg-brand-dark transition-colors">
+                    Log Masuk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN EDIT / REVIEW MODAL -->
+    <div id="modal-admin-review" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative my-8 border border-brand-border">
+            <button onclick="closeAdminReviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <h3 class="text-lg font-bold text-brand-dark mb-1">Semakan & Edit Permohonan</h3>
+            <p class="text-xs text-brand-muted mb-4">Kemaskini kelulusan, tarikh sah, muat naik gambar dan label.</p>
+
+            <div id="admin-review-body" class="space-y-4">
+                <!-- Dynamic form injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT SUBSCRIBER MODAL (AMENDMENT 3) -->
+    <div id="modal-edit-subscriber" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-brand-border">
+            <button onclick="closeEditSubscriberModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-lg font-bold text-brand-dark mb-1">Edit Subscriber</h3>
+            <p class="text-xs text-brand-muted mb-4">Kemaskini maklumat pelanggan hebahan.</p>
+            
+            <form id="form-edit-subscriber" onsubmit="handleSaveSubscriber(event)" class="space-y-4">
+                <input type="hidden" id="edit-sub-id">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="edit-sub-name" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Email <span class="text-red-500">*</span></label>
+                    <input type="email" id="edit-sub-email" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Minat <span class="text-red-500">*</span></label>
+                    <textarea id="edit-sub-minat" rows="3" required class="w-full bg-white border border-brand-border rounded-xl p-3 text-sm focus:border-brand focus:outline-none"></textarea>
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeEditSubscriberModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs transition-colors">
+                        Batal
+                    </button>
+                    <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- APPLICATION JAVASCRIPT LOGIC -->
     <script>
-        // Lucide icons initialization
-        lucide.createIcons();
+        // Official TikTok BayuOne URL Reference
+        const TIKTOK_BAYUONE_URL = "https://www.tiktok.com/@bayuone.my";
 
-        // Sample Data for Directory Cards
-        const sampleAgenda = [
-            { title: "Bengkel AI & Digital Marketing 2026", category: "Bengkel", mode: "Fizikal", date: "15 Okt 2026", loc: "Kota Kinabalu" },
-            { title: "Forum Keusahawanan & Kewangan Persendirian", category: "Seminar & Forum", mode: "Online", date: "22 Okt 2026", loc: "Webinar Zoom" },
-            { title: "Kursus Latihan Kepimpinan Eksekutif", category: "Kursus & Latihan", mode: "Hybrid", date: "05 Nov 2026", loc: "Kuala Lumpur" }
-        ];
+        // Current Reference Date: September 9, 2026
+        const TODAY = new Date("2026-09-09");
 
-        const sampleTrainers = [
-            { name: "Dr. Ahmad Farhan", exp: "AI & Digital Strategy", loc: "Kuala Lumpur" },
-            { name: "Siti Nurhaliza Kassim", exp: "Pengurusan & Kepimpinan", loc: "Kota Kinabalu" },
-            { name: "Marcus Lee", exp: "Kewangan & Pelaburan", loc: "Penang" }
-        ];
+        // Mock Initial Data Store (including Subscribers for AMENDMENT 3)
+        let bayuData = {
+            applications: [
+                {
+                    id: "APP-1001",
+                    type: "Agenda",
+                    title: "Bengkel Pemasaran Digital & AI Sabah 2026",
+                    name: "Azman Kassim",
+                    org: "NMZ Kreatif",
+                    email: "azman@nmzkreatif.my",
+                    phone: "019-8812345",
+                    location: "Kota Kinabalu",
+                    mode: "Fizikal",
+                    category: "Bengkel",
+                    date: "2026-09-25",
+                    url: TIKTOK_BAYUONE_URL,
+                    approval: "Approved",
+                    validity: "1 Bulan",
+                    tarikhDari: "2026-09-01",
+                    tarikhSehingga: "2026-10-01",
+                    label: "Featured",
+                    remark: "",
+                    photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80"
+                },
+                {
+                    id: "APP-1002",
+                    type: "Agenda",
+                    title: "Persidangan Pembangunan Bakat Tempatan",
+                    name: "Dr. Dayang Suhana",
+                    org: "Institut Kepimpinan Sabah",
+                    email: "suhana@iks.sabah.gov.my",
+                    phone: "088-234567",
+                    location: "Kota Kinabalu",
+                    mode: "Hybrid",
+                    category: "Persidangan & Konvensyen",
+                    date: "2026-10-12",
+                    url: TIKTOK_BAYUONE_URL,
+                    approval: "Approved",
+                    validity: "6 Bulan",
+                    tarikhDari: "2026-09-01",
+                    tarikhSehingga: "2027-03-01",
+                    label: "Top",
+                    remark: "",
+                    photo: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80"
+                },
+                {
+                    id: "APP-1003",
+                    type: "Agenda",
+                    title: "Forum Keusahawanan Belia Tawau",
+                    name: "Roslan Jumaat",
+                    org: "Kelab Belia Tawau",
+                    email: "roslan@tawaubelia.org",
+                    phone: "013-8119988",
+                    location: "Tawau",
+                    mode: "Fizikal",
+                    category: "Seminar & Forum",
+                    date: "2026-08-15",
+                    url: TIKTOK_BAYUONE_URL,
+                    approval: "Approved",
+                    validity: "1 Bulan",
+                    tarikhDari: "2026-08-01",
+                    tarikhSehingga: "2026-09-01",
+                    label: "",
+                    remark: "",
+                    photo: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80"
+                },
+                {
+                    id: "APP-2001",
+                    type: "Trainer",
+                    title: "Trainer Profesional",
+                    name: "Ir. Ts. Hj. Aliman Basri",
+                    location: "Kota Kinabalu",
+                    expertise: ["Pengurusan & Kepimpinan", "Teknologi, AI & Digital"],
+                    certs: ["HRD Corp Accredited Trainer", "Sijil NCS-TTT"],
+                    summary: "Pakar runding pengurusan industri dengan 15 tahun pengalaman bertauliah dalam pelaksanaan sistem digital & keselamatan borneo.",
+                    url: TIKTOK_BAYUONE_URL,
+                    approval: "Approved",
+                    validity: "1 Tahun",
+                    tarikhDari: "2026-01-01",
+                    tarikhSehingga: "2027-01-01",
+                    label: "Top",
+                    remark: "",
+                    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80"
+                },
+                {
+                    id: "APP-2002",
+                    type: "Trainer",
+                    title: "Trainer Keusahawanan",
+                    name: "Pn. Noraini Mansor",
+                    location: "Penampang",
+                    expertise: ["Perniagaan & Keusahawanan", "Kewangan, Akaun & Percukaian"],
+                    certs: ["HRD Corp TTT"],
+                    summary: "Jurulatih keusahawanan PKS Sabah dengan fokus strategik pengurusan aliran tunai dan pemasaran mikro.",
+                    url: TIKTOK_BAYUONE_URL,
+                    approval: "Approved",
+                    validity: "6 Bulan",
+                    tarikhDari: "2026-06-01",
+                    tarikhSehingga: "2026-12-01",
+                    label: "Promoted",
+                    remark: "",
+                    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80"
+                },
+                {
+                    id: "APP-3001",
+                    type: "Talent",
+                    title: "Content Creator & Emcee",
+                    name: "Felixia Wong (Sabah Content Creator)",
+                    location: "Kota Kinabalu",
+                    niche: "Pelancongan, Percutian & Hospitaliti",
+                    summary: "Pencipta kandungan pelancongan Sabah & pengacara majlis korporat berdwibahasa berpengalaman.",
+                    url: TIKTOK_BAYUONE_URL,
+                    approval: "Approved",
+                    validity: "1 Tahun",
+                    tarikhDari: "2026-03-01",
+                    tarikhSehingga: "2027-03-01",
+                    label: "Featured",
+                    remark: "",
+                    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+                },
+                {
+                    id: "APP-3002",
+                    type: "Talent",
+                    title: "Emcee & Media Personality",
+                    name: "Mohd Rizwan",
+                    location: "Sandakan",
+                    niche: "Pengacaraan & Emcee",
+                    summary: "Pengacara majlis rasmi kerajaan dan pelancaran jenama tempatan dengan gaya mesra dan bertenaga.",
+                    url: TIKTOK_BAYUONE_URL,
+                    approval: "Approved",
+                    validity: "6 Bulan",
+                    tarikhDari: "2026-07-01",
+                    tarikhSehingga: "2027-01-01",
+                    label: "",
+                    remark: "",
+                    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+                },
+                {
+                    id: "APP-1004",
+                    type: "Agenda",
+                    title: "Bengkel Seni & Komuniti Kundasang",
+                    name: "Siti Rahmah",
+                    org: "Persatuan Seniman Kundasang",
+                    email: "rahmah@kundasang.org",
+                    phone: "016-8001122",
+                    location: "Tuaran",
+                    mode: "Fizikal",
+                    category: "Komuniti & Sosial",
+                    date: "2026-11-05",
+                    url: TIKTOK_BAYUONE_URL,
+                    approval: "Pending",
+                    validity: "1 Bulan",
+                    tarikhDari: "2026-09-09",
+                    tarikhSehingga: "2026-10-09",
+                    label: "",
+                    remark: "",
+                    photo: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80"
+                }
+            ],
+            // AMENDMENT 3 — EXISTING SUBSCRIBER DATA ARCHITECTURE
+            subscribers: [
+                {
+                    id: "SUB-101",
+                    name: "Ahmad Zaki",
+                    email: "ahmad.zaki@gmail.com",
+                    minat: "Pemasaran Digital, Keusahawanan",
+                    date: "2026-09-08",
+                    status: "NEW"
+                },
+                {
+                    id: "SUB-102",
+                    name: "Siti Sarah",
+                    email: "siti.sarah@yahoo.com",
+                    minat: "Kesihatan & Kesejahteraan",
+                    date: "2026-09-02",
+                    status: "NEW"
+                },
+                {
+                    id: "SUB-103",
+                    name: "David Wong",
+                    email: "david.wong@tech.my",
+                    minat: "Teknologi & Digital",
+                    date: "2026-08-15",
+                    status: "EXISTING"
+                },
+                {
+                    id: "SUB-104",
+                    name: "Nurul Huda",
+                    email: "huda.nurul@outlook.com",
+                    minat: "Pendidikan & Pembelajaran",
+                    date: "2026-07-20",
+                    status: "EXISTING"
+                }
+            ]
+        };
 
-        const sampleTalents = [
-            { name: "Aina Ridzuan", niche: "Content Creator & Design", loc: "Selangor" },
-            { name: "Borneo Creative Studio", niche: "Videografi & Fotografi", loc: "Sabah" },
-            { name: "Khairul Amri", niche: "Digital Marketing & Branding", loc: "Johor" }
-        ];
-
-        function renderSampleData() {
-            // Home Agenda
-            const homeAgenda = document.getElementById('home-featured-agenda');
-            if (homeAgenda) {
-                homeAgenda.innerHTML = sampleAgenda.map(item => `
-                    <div class="bg-white rounded-2xl p-6 soft-border soft-shadow space-y-4 hover:border-[#126B4C]/40 transition">
-                        <div class="flex justify-between items-start">
-                            <span class="bg-[#F4F8F5] text-[#126B4C] border border-[#E2ECE6] text-[11px] font-semibold px-2.5 py-1 rounded-full">${item.category}</span>
-                            <span class="text-xs text-[#637069]">${item.mode}</span>
-                        </div>
-                        <h3 class="font-bold text-lg text-[#17231E] leading-snug">${item.title}</h3>
-                        <div class="text-xs text-[#637069] space-y-1 pt-2 border-t border-[#E5EAE7]">
-                            <p class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3.5 h-3.5 text-[#126B4C]"></i> ${item.date}</p>
-                            <p class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#126B4C]"></i> ${item.loc}</p>
-                        </div>
-                    </div>
-                `).join('');
+        // Load data from LocalStorage if available
+        if (localStorage.getItem("bayuone_data")) {
+            try {
+                const stored = JSON.parse(localStorage.getItem("bayuone_data"));
+                if (stored.applications) bayuData.applications = stored.applications;
+                if (stored.subscribers) bayuData.subscribers = stored.subscribers;
+            } catch (e) {
+                console.error("Failed loading stored data", e);
             }
-
-            // Agenda Page
-            const agendaList = document.getElementById('agenda-list');
-            if (agendaList) {
-                agendaList.innerHTML = sampleAgenda.map(item => `
-                    <div class="bg-white rounded-2xl p-6 soft-border soft-shadow space-y-4">
-                        <span class="bg-[#F4F8F5] text-[#126B4C] text-[11px] font-semibold px-2.5 py-1 rounded-full">${item.category}</span>
-                        <h3 class="font-bold text-lg text-[#17231E]">${item.title}</h3>
-                        <p class="text-xs text-[#637069]">${item.loc} • ${item.date}</p>
-                    </div>
-                `).join('');
-            }
-
-            // Trainer Page
-            const trainerList = document.getElementById('trainer-list');
-            if (trainerList) {
-                trainerList.innerHTML = sampleTrainers.map(item => `
-                    <div class="bg-white rounded-2xl p-6 soft-border soft-shadow text-center space-y-3">
-                        <div class="w-16 h-16 bg-[#F4F8F5] text-[#126B4C] rounded-full flex items-center justify-center font-bold text-xl mx-auto border border-[#E2ECE6]">
-                            ${item.name.charAt(0)}
-                        </div>
-                        <h3 class="font-bold text-base text-[#17231E]">${item.name}</h3>
-                        <span class="inline-block bg-[#F4F8F5] text-[#126B4C] text-xs font-medium px-3 py-1 rounded-full">${item.exp}</span>
-                        <p class="text-xs text-[#637069]">${item.loc}</p>
-                    </div>
-                `).join('');
-            }
-
-            // Talent Page
-            const talentList = document.getElementById('talent-list');
-            if (talentList) {
-                talentList.innerHTML = sampleTalents.map(item => `
-                    <div class="bg-white rounded-2xl p-6 soft-border soft-shadow text-center space-y-3">
-                        <div class="w-16 h-16 bg-[#F4F8F5] text-[#126B4C] rounded-full flex items-center justify-center font-bold text-xl mx-auto border border-[#E2ECE6]">
-                            ${item.name.charAt(0)}
-                        </div>
-                        <h3 class="font-bold text-base text-[#17231E]">${item.name}</h3>
-                        <span class="inline-block bg-[#F4F8F5] text-[#126B4C] text-xs font-medium px-3 py-1 rounded-full">${item.niche}</span>
-                        <p class="text-xs text-[#637069]">${item.loc}</p>
-                    </div>
-                `).join('');
-            }
-
-            lucide.createIcons();
         }
 
-        // Navigation state handler
-        function showSection(secId) {
-            const sections = ['home', 'agenda', 'trainer', 'talent', 'join', 'about', 'admin-login'];
-            sections.forEach(id => {
-                const el = document.getElementById(`sec-${id}`);
-                if (el) el.classList.add('hidden-section');
-            });
+        function saveData() {
+            localStorage.setItem("bayuone_data", JSON.stringify(bayuData));
+        }
 
-            const target = document.getElementById(`sec-${secId}`);
-            if (target) target.classList.remove('hidden-section');
+        // Determine Calculated Status
+        function getItemCalculatedStatus(item) {
+            if (item.remark === "Cancelled") return "CANCELLED";
+            if (item.remark === "Delete") return "DELETED";
+            if (item.approval === "Pending") return "PENDING";
+            
+            const endDate = new Date(item.tarikhSehingga);
+            if (isNaN(endDate.getTime())) return "ACTIVE";
+
+            if (TODAY > endDate) {
+                return "EXPIRED";
+            }
+
+            // Check if expiring within 7 days
+            const diffTime = endDate.getTime() - TODAY.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if (diffDays <= 7 && diffDays >= 0) {
+                return "EXPIRING";
+            }
+
+            return "ACTIVE";
+        }
+
+        // Check if item should appear publicly
+        function isPubliclyActive(item) {
+            const status = getItemCalculatedStatus(item);
+            return (item.approval === "Approved" && (status === "ACTIVE" || status === "EXPIRING"));
+        }
+
+        let currentTab = 'agenda';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Hide all views
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            const heroTitle = document.getElementById('hero-title');
+            const heroSub = document.getElementById('hero-subtitle');
+
+            if (tab === 'agenda') {
+                document.getElementById('view-agenda').classList.remove('hidden');
+                document.getElementById('nav-agenda')?.classList.add('active');
+                heroTitle.innerText = "Program & Aktiviti Terkini";
+                heroSub.innerText = "Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.";
+                filterAgenda();
+            } else if (tab === 'trainer') {
+                document.getElementById('view-trainer').classList.remove('hidden');
+                document.getElementById('nav-trainer')?.classList.add('active');
+                heroTitle.innerText = "Menghubungkan Kepakaran Profesional & Peluang";
+                heroSub.innerText = "Temui jurulatih profesional untuk agensi kerajaan, korporat, universiti dan jenama.";
+                filterTrainer();
+            } else if (tab === 'talent') {
+                document.getElementById('view-talent').classList.remove('hidden');
+                document.getElementById('nav-talent')?.classList.add('active');
+                heroTitle.innerText = "Kenali Bakat Tempatan";
+                heroSub.innerText = "Temui influencer, pencipta kandungan, penggiat kreatif, pengacara dan bakat tempatan lainnya.";
+                filterTalent();
+            } else if (tab === 'admin') {
+                document.getElementById('view-admin').classList.remove('hidden');
+                heroTitle.innerText = "Panel Kawalan Admin";
+                heroSub.innerHTML = `Pengurusan permohonan, status dan kelulusan platform <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>.`;
+                renderSubscriberDashboard(); // AMENDMENT 3
+                renderAdminTable();
+            }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -519,104 +1312,663 @@
             menu.classList.toggle('hidden');
         }
 
-        // Feedback Modal Controls
+        // Global Search
+        function handleGlobalSearch() {
+            const query = document.getElementById('global-search').value.toLowerCase();
+            if (!query) return;
+
+            if (currentTab === 'agenda') filterAgenda();
+            else if (currentTab === 'trainer') filterTrainer();
+            else if (currentTab === 'talent') filterTalent();
+        }
+
+        function triggerSearch() {
+            handleGlobalSearch();
+        }
+
+        function filterAgenda() {
+            const loc = document.getElementById('filter-agenda-location').value;
+            const mode = document.getElementById('filter-agenda-mode').value;
+            const cat = document.getElementById('filter-agenda-category').value;
+            const date = document.getElementById('filter-agenda-date').value;
+            const query = document.getElementById('global-search').value.toLowerCase();
+
+            const upcomingContainer = document.getElementById('grid-agenda-upcoming');
+            const endedContainer = document.getElementById('grid-agenda-ended');
+
+            upcomingContainer.innerHTML = "";
+            endedContainer.innerHTML = "";
+
+            let upcomingCount = 0;
+            let endedCount = 0;
+
+            const activeAgendas = bayuData.applications.filter(item => item.type === 'Agenda' && isPubliclyActive(item));
+
+            activeAgendas.forEach(item => {
+                // Apply filters
+                if (loc && item.location !== loc) return;
+                if (mode && item.mode !== mode) return;
+                if (cat && item.category !== cat) return;
+                if (date && item.date !== date) return;
+                if (query && !item.title.toLowerCase().includes(query) && !item.location.toLowerCase().includes(query)) return;
+
+                const eventDate = new Date(item.date);
+                const isEnded = TODAY > eventDate;
+
+                const cardHtml = `
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-2xs hover:shadow-md transition-all overflow-hidden flex flex-col h-full">
+                        <div class="relative h-48 bg-gray-100 overflow-hidden">
+                            <img src="${item.photo || 'https://placehold.co/600x400/126B4C/FFFFFF?text=BayuOne+Agenda'}" alt="${item.title}" class="w-full h-full object-cover">
+                            <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+                                ${item.label ? `<span class="badge-pill badge-${item.label.toLowerCase()}">${item.label}</span>` : ''}
+                                <span class="bg-white/90 backdrop-blur-xs text-brand-dark px-2.5 py-1 rounded-full text-xs font-bold border border-brand-border">${item.mode || 'Fizikal'}</span>
+                            </div>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <span class="text-[11px] font-bold uppercase text-brand tracking-wider">${item.category}</span>
+                                <h3 class="text-base font-bold text-brand-dark mt-1 line-clamp-2">${item.title}</h3>
+                                <div class="mt-3 space-y-1.5 text-xs text-brand-muted">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-regular fa-calendar text-brand"></i>
+                                        <span>${item.date}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-location-dot text-brand"></i>
+                                        <span>${item.location}</span>
+                                    </div>
+                                    ${item.name ? `
+                                    <div class="flex items-center gap-2 pt-1 border-t border-brand-border/60">
+                                        <i class="fa-solid fa-user-tie text-brand-muted"></i>
+                                        <span>PIC: ${item.name} ${item.phone ? `(${item.phone})` : ''}</span>
+                                    </div>` : ''}
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" rel="noopener" class="w-full bg-brand-bg hover:bg-brand hover:text-white text-brand-dark border border-brand-border text-xs font-bold py-2.5 rounded-xl transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-brands fa-tiktok"></i>
+                                    <span>Lihat Info</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if (isEnded) {
+                    endedContainer.innerHTML += cardHtml;
+                    endedCount++;
+                } else {
+                    upcomingContainer.innerHTML += cardHtml;
+                    upcomingCount++;
+                }
+            });
+
+            document.getElementById('count-upcoming').innerText = `${upcomingCount} Program`;
+            document.getElementById('count-ended').innerText = `${endedCount} Program`;
+
+            if (upcomingCount === 0) {
+                upcomingContainer.innerHTML = `<div class="col-span-full py-8 text-center text-brand-muted text-sm border border-dashed border-brand-border rounded-2xl">Tiada program akan datang dijumpai.</div>`;
+            }
+        }
+
+        function resetAgendaFilters() {
+            document.getElementById('filter-agenda-location').value = "";
+            document.getElementById('filter-agenda-mode').value = "";
+            document.getElementById('filter-agenda-category').value = "";
+            document.getElementById('filter-agenda-date').value = "";
+            document.getElementById('global-search').value = "";
+            filterAgenda();
+        }
+
+        function filterTrainer() {
+            const name = document.getElementById('filter-trainer-name').value.toLowerCase();
+            const exp = document.getElementById('filter-trainer-expertise').value;
+            const loc = document.getElementById('filter-trainer-location').value;
+            const cert = document.getElementById('filter-trainer-cert').value;
+
+            const grid = document.getElementById('grid-trainer');
+            grid.innerHTML = "";
+
+            const activeTrainers = bayuData.applications.filter(item => item.type === 'Trainer' && isPubliclyActive(item));
+
+            activeTrainers.forEach(item => {
+                if (name && !item.name.toLowerCase().includes(name)) return;
+                if (loc && item.location !== loc) return;
+                if (exp && Array.isArray(item.expertise) && !item.expertise.includes(exp)) return;
+                if (cert && Array.isArray(item.certs) && !item.certs.includes(cert)) return;
+
+                const expBadges = Array.isArray(item.expertise) ? item.expertise.map(e => `<span class="bg-brand-bg text-brand text-[10px] font-semibold px-2 py-0.5 rounded-full border border-brand-border">${e}</span>`).join(" ") : '';
+                const certBadges = Array.isArray(item.certs) ? item.certs.map(c => `<span class="bg-emerald-50 text-emerald-700 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-emerald-200"><i class="fa-solid fa-certificate text-[9px] mr-1"></i>${c}</span>`).join(" ") : '';
+
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-2xs hover:shadow-md transition-all p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="${item.photo || 'https://placehold.co/150x150/126B4C/FFFFFF?text=Trainer'}" alt="${item.name}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shadow-2xs shrink-0">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="text-base font-bold text-brand-dark">${item.name}</h3>
+                                        ${item.label ? `<span class="badge-pill badge-${item.label.toLowerCase()} text-[9px]">${item.label}</span>` : ''}
+                                    </div>
+                                    <span class="text-xs text-brand-muted flex items-center gap-1 mt-0.5">
+                                        <i class="fa-solid fa-location-dot text-brand"></i> ${item.location}
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3 mb-3">${item.summary || 'Profil trainer bertauliah.'}</p>
+                            
+                            <div class="space-y-2 mb-4">
+                                <div class="flex flex-wrap gap-1">${expBadges}</div>
+                                <div class="flex flex-wrap gap-1">${certBadges}</div>
+                            </div>
+                        </div>
+                        <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" rel="noopener" class="w-full bg-brand text-white hover:bg-brand-dark text-xs font-bold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <span>Kenali Trainer</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                `;
+            });
+
+            if (grid.children.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-8 text-center text-brand-muted text-sm border border-dashed border-brand-border rounded-2xl">Tiada profil trainer dijumpai.</div>`;
+            }
+        }
+
+        function resetTrainerFilters() {
+            document.getElementById('filter-trainer-name').value = "";
+            document.getElementById('filter-trainer-expertise').value = "";
+            document.getElementById('filter-trainer-location').value = "";
+            document.getElementById('filter-trainer-cert').value = "";
+            filterTrainer();
+        }
+
+        function filterTalent() {
+            const name = document.getElementById('filter-talent-name').value.toLowerCase();
+            const niche = document.getElementById('filter-talent-niche').value;
+            const loc = document.getElementById('filter-talent-location').value;
+
+            const grid = document.getElementById('grid-talent');
+            grid.innerHTML = "";
+
+            const activeTalents = bayuData.applications.filter(item => item.type === 'Talent' && isPubliclyActive(item));
+
+            activeTalents.forEach(item => {
+                if (name && !item.name.toLowerCase().includes(name)) return;
+                if (loc && item.location !== loc) return;
+                if (niche && item.niche !== niche) return;
+
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-2xs hover:shadow-md transition-all p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="${item.photo || 'https://placehold.co/150x150/126B4C/FFFFFF?text=Talent'}" alt="${item.name}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shadow-2xs shrink-0">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="text-base font-bold text-brand-dark">${item.name}</h3>
+                                        ${item.label ? `<span class="badge-pill badge-${item.label.toLowerCase()} text-[9px]">${item.label}</span>` : ''}
+                                    </div>
+                                    <span class="text-xs text-brand-muted flex items-center gap-1 mt-0.5">
+                                        <i class="fa-solid fa-location-dot text-brand"></i> ${item.location}
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="inline-block bg-brand-bg text-brand text-xs font-semibold px-2.5 py-1 rounded-full border border-brand-border mb-3">
+                                ${item.niche}
+                            </span>
+                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3 mb-4">${item.summary || 'Bakat & Pencipta Kandungan Tempatan.'}</p>
+                        </div>
+                        <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" rel="noopener" class="w-full bg-brand text-white hover:bg-brand-dark text-xs font-bold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <span>Kenali Talent</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                `;
+            });
+
+            if (grid.children.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-8 text-center text-brand-muted text-sm border border-dashed border-brand-border rounded-2xl">Tiada bakat tempatan dijumpai.</div>`;
+            }
+        }
+
+        function resetTalentFilters() {
+            document.getElementById('filter-talent-name').value = "";
+            document.getElementById('filter-talent-niche').value = "";
+            document.getElementById('filter-talent-location').value = "";
+            filterTalent();
+        }
+
+        // AMENDMENT 3 — SUBSCRIBE FORM UPDATES EXISTING DATABASE
+        function handleSubscribeSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('sub-name').value.trim();
+            const email = document.getElementById('sub-email').value.trim();
+            const checkboxes = document.querySelectorAll('input[name="sub_interest"]:checked');
+            const errorDiv = document.getElementById('sub-error');
+
+            if (checkboxes.length === 0) {
+                errorDiv.innerText = "Sila pilih sekurang-kurangnya satu minat.";
+                errorDiv.classList.remove('hidden');
+                return;
+            } else {
+                errorDiv.classList.add('hidden');
+            }
+
+            const minatArr = Array.from(checkboxes).map(cb => cb.value);
+            const minatStr = minatArr.join(', ');
+
+            // Add new subscriber to existing database architecture
+            const newSub = {
+                id: "SUB-" + Date.now(),
+                name: name,
+                email: email,
+                minat: minatStr,
+                date: TODAY.toISOString().split('T')[0],
+                status: "NEW"
+            };
+
+            if (!bayuData.subscribers) bayuData.subscribers = [];
+            bayuData.subscribers.unshift(newSub);
+            saveData();
+
+            // Refresh subscriber dashboard if visible
+            renderSubscriberDashboard();
+
+            // Hide form & show success
+            document.getElementById('subscribe-form').classList.add('hidden');
+            document.getElementById('sub-success-message').classList.remove('hidden');
+        }
+
+        function openRegisterModal() {
+            document.getElementById('modal-register').classList.remove('hidden');
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('modal-register').classList.add('hidden');
+        }
+
+        function setRegisterType(type) {
+            document.getElementById('reg-type').value = type;
+            
+            ['penganjur', 'trainer', 'talent'].forEach(t => {
+                const btn = document.getElementById(`btn-reg-${t}`);
+                const fields = document.getElementById(`fields-${t}`);
+                if (t === type) {
+                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs";
+                    fields.classList.remove('hidden');
+                } else {
+                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand";
+                    fields.classList.add('hidden');
+                }
+            });
+        }
+
+        function handleRegisterSubmit(e) {
+            e.preventDefault();
+            const type = document.getElementById('reg-type').value;
+            const newId = "APP-" + Math.floor(1000 + Math.random() * 9000);
+
+            let newApp = {
+                id: newId,
+                type: type === 'penganjur' ? 'Agenda' : (type === 'trainer' ? 'Trainer' : 'Talent'),
+                approval: "Pending",
+                validity: "1 Bulan",
+                tarikhDari: TODAY.toISOString().split('T')[0],
+                tarikhSehingga: new Date(TODAY.getTime() + (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0],
+                label: "",
+                remark: "",
+                photo: type === 'penganjur' ? "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800" : "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400"
+            };
+
+            if (type === 'penganjur') {
+                newApp.title = document.getElementById('reg-penganjur-title').value;
+                newApp.date = document.getElementById('reg-penganjur-date').value;
+                newApp.location = document.getElementById('reg-penganjur-location').value;
+                newApp.category = document.getElementById('reg-penganjur-category').value;
+                newApp.name = document.getElementById('reg-penganjur-pic-name').value;
+                newApp.phone = document.getElementById('reg-penganjur-pic-tel').value;
+                newApp.mode = document.getElementById('reg-penganjur-mode').value;
+                newApp.url = document.getElementById('reg-penganjur-url').value || TIKTOK_BAYUONE_URL;
+            } else if (type === 'trainer') {
+                newApp.name = document.getElementById('reg-trainer-name').value;
+                newApp.location = document.getElementById('reg-trainer-location').value;
+                newApp.summary = document.getElementById('reg-trainer-summary').value;
+                newApp.url = document.getElementById('reg-trainer-url').value || TIKTOK_BAYUONE_URL;
+                
+                const expList = Array.from(document.querySelectorAll('input[name="trainer_exp"]:checked')).map(cb => cb.value);
+                newApp.expertise = expList.length > 0 ? expList : ["Pengurusan & Kepimpinan"];
+                
+                const certList = Array.from(document.querySelectorAll('input[name="trainer_cert"]:checked')).map(cb => cb.value);
+                newApp.certs = certList;
+            } else if (type === 'talent') {
+                newApp.name = document.getElementById('reg-talent-name').value;
+                newApp.location = document.getElementById('reg-talent-location').value;
+                newApp.niche = document.getElementById('reg-talent-niche').value;
+                newApp.summary = document.getElementById('reg-talent-summary').value;
+                newApp.url = document.getElementById('reg-talent-url').value || TIKTOK_BAYUONE_URL;
+            }
+
+            bayuData.applications.unshift(newApp);
+            saveData();
+            closeRegisterModal();
+
+            alert("Permohonan anda telah berjaya dihantar! Status semasa: MENUNGGU SEMAKAN ADMIN.");
+            document.getElementById('form-register').reset();
+        }
+
         function openFeedbackModal() {
             document.getElementById('modal-feedback').classList.remove('hidden');
         }
+
         function closeFeedbackModal() {
             document.getElementById('modal-feedback').classList.add('hidden');
         }
 
-        // Join Application Tab Handler
-        let currentJoinTab = 'organiser';
-        function switchJoinTab(type) {
-            currentJoinTab = type;
-            ['organiser', 'trainer', 'talent'].forEach(t => {
-                const btn = document.getElementById(`tab-btn-${t}`);
-                if (t === type) {
-                    btn.className = 'py-3 rounded-xl bg-white text-[#126B4C] soft-shadow font-semibold';
-                } else {
-                    btn.className = 'py-3 rounded-xl text-[#637069]';
-                }
-            });
-            renderJoinFormFields();
-        }
-
-        function renderJoinFormFields() {
-            const container = document.getElementById('form-fields');
-            if (currentJoinTab === 'organiser') {
-                container.innerHTML = `
-                    <input type="text" placeholder="Nama Organisasi / Syarikat" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <input type="text" placeholder="Tajuk Program" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-xs font-semibold text-[#17231E]">Tarikh Mula</label>
-                            <input type="date" required class="w-full px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                        </div>
-                        <div>
-                            <label class="text-xs font-semibold text-[#17231E]">Tarikh Tamat</label>
-                            <input type="date" required class="w-full px-4 py-2.5 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                        </div>
-                    </div>
-                    <input type="text" placeholder="Lokasi Program" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <textarea placeholder="Penerangan Ringkas Program" rows="3" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]"></textarea>
-                `;
-            } else if (currentJoinTab === 'trainer') {
-                container.innerHTML = `
-                    <input type="text" placeholder="Nama Penuh" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <input type="email" placeholder="Emel Kontak" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <input type="text" placeholder="Bidang Kepakaran (cth: Kepimpinan, Digital Marketing)" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <textarea placeholder="Biodata & Ringkasan Pengalaman" rows="3" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]"></textarea>
-                `;
-            } else {
-                container.innerHTML = `
-                    <input type="text" placeholder="Nama / Nama Pentas" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <input type="email" placeholder="Emel Kontak" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <input type="text" placeholder="Niche (cth: Content Creator, Fotografi, Muzik)" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]">
-                    <textarea placeholder="Ringkasan Profil & Portfolio" rows="3" required class="w-full px-4 py-3 soft-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#126B4C]"></textarea>
-                `;
-            }
-        }
-
-        // Submissions handlers
-        function handleSubscribe(e) {
-            e.preventDefault();
-            alert('Terima kasih! Anda kini dalam senarai hebahan BayuOne.');
-            e.target.reset();
-        }
-
-        function handleApplicationSubmit(e) {
-            e.preventDefault();
-            alert('Terima Kasih! Permohonan anda telah diterima dan sedang dalam semakan admin.');
-            e.target.reset();
-        }
-
         function handleFeedbackSubmit(e) {
             e.preventDefault();
-            alert('Terima Kasih Atas Maklum Balas Anda! Maklum balas anda telah diterima.');
             closeFeedbackModal();
-            e.target.reset();
+            document.getElementById('modal-feedback-success').classList.remove('hidden');
+        }
+
+        function closeFeedbackSuccessModal() {
+            document.getElementById('modal-feedback-success').classList.add('hidden');
+        }
+
+        function openAdminLoginModal() {
+            document.getElementById('modal-admin-login').classList.remove('hidden');
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('modal-admin-login').classList.add('hidden');
         }
 
         function handleAdminLogin(e) {
             e.preventDefault();
-            alert('Sistem pengesahan sedang berhubung dengan Supabase. Sila pastikan environment variables telah dikonfigurasi.');
+            closeAdminLoginModal();
+            switchTab('admin');
         }
 
-        function handleGlobalSearch() {
-            const query = document.getElementById('global-search').value;
-            if (query.trim()) {
-                showSection('agenda');
+        function logoutAdmin() {
+            switchTab('agenda');
+        }
+
+        // ================= AMENDMENT 3 JS FUNCTIONS: SUBSCRIBER DASHBOARD =================
+        function renderSubscriberDashboard() {
+            const subscribers = bayuData.subscribers || [];
+            const tbody = document.getElementById('subscriber-table-body');
+            tbody.innerHTML = "";
+
+            let totalCount = subscribers.length;
+            let newCount = 0;
+            let existingCount = 0;
+
+            subscribers.forEach(sub => {
+                const isNew = sub.status === "NEW" || sub.date >= "2026-09-01";
+                if (isNew) newCount++;
+                else existingCount++;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-brand-bg/50 transition-colors">
+                        <td class="p-3.5 font-bold text-brand-dark flex items-center gap-2">
+                            <span>${sub.name}</span>
+                            ${isNew ? `<span class="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-1.5 py-0.5 rounded">NEW</span>` : ''}
+                        </td>
+                        <td class="p-3.5 text-brand-muted font-medium">${sub.email}</td>
+                        <td class="p-3.5 text-brand-dark max-w-xs">${sub.minat}</td>
+                        <td class="p-3.5 text-right space-x-1">
+                            <button onclick="editSubscriber('${sub.id}')" class="bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 px-3 py-1 rounded-lg text-xs font-bold transition-all">
+                                <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
+                            </button>
+                            <button onclick="removeSubscriber('${sub.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-3 py-1 rounded-lg text-xs font-bold transition-all">
+                                <i class="fa-solid fa-trash-can mr-1"></i> Remove
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            if (subscribers.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-brand-muted text-xs">Tiada maklumat pelanggan dijumpai.</td></tr>`;
+            }
+
+            // Update Counts
+            document.getElementById('stat-sub-total').innerText = totalCount;
+            document.getElementById('stat-sub-new').innerText = newCount;
+            document.getElementById('stat-sub-existing').innerText = existingCount;
+        }
+
+        function editSubscriber(id) {
+            const sub = (bayuData.subscribers || []).find(s => s.id === id);
+            if (!sub) return;
+
+            document.getElementById('edit-sub-id').value = sub.id;
+            document.getElementById('edit-sub-name').value = sub.name;
+            document.getElementById('edit-sub-email').value = sub.email;
+            document.getElementById('edit-sub-minat').value = sub.minat;
+
+            document.getElementById('modal-edit-subscriber').classList.remove('hidden');
+        }
+
+        function closeEditSubscriberModal() {
+            document.getElementById('modal-edit-subscriber').classList.add('hidden');
+        }
+
+        function handleSaveSubscriber(e) {
+            e.preventDefault();
+            const id = document.getElementById('edit-sub-id').value;
+            const sub = (bayuData.subscribers || []).find(s => s.id === id);
+
+            if (sub) {
+                sub.name = document.getElementById('edit-sub-name').value.trim();
+                sub.email = document.getElementById('edit-sub-email').value.trim();
+                sub.minat = document.getElementById('edit-sub-minat').value.trim();
+                saveData();
+                renderSubscriberDashboard();
+            }
+
+            closeEditSubscriberModal();
+        }
+
+        function removeSubscriber(id) {
+            if (confirm("Adakah anda pasti mahu memadam subscriber ini?")) {
+                bayuData.subscribers = (bayuData.subscribers || []).filter(s => s.id !== id);
+                saveData();
+                renderSubscriberDashboard();
             }
         }
+        // ================= END AMENDMENT 3 JS FUNCTIONS =================
 
-        function renderAgenda() {
-            renderSampleData();
+        function renderAdminTable() {
+            const query = document.getElementById('admin-search').value.toLowerCase();
+            const filterType = document.getElementById('admin-filter-type').value;
+            const filterApproval = document.getElementById('admin-filter-approval').value;
+            const filterStatus = document.getElementById('admin-filter-status').value;
+
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = "";
+
+            let stats = { total: 0, pending: 0, approved: 0, active: 0, expiring: 0, expired: 0, cancelled: 0 };
+
+            bayuData.applications.forEach(item => {
+                const status = getItemCalculatedStatus(item);
+                
+                // Statistics Counter
+                stats.total++;
+                if (item.approval === 'Pending') stats.pending++;
+                if (item.approval === 'Approved') stats.approved++;
+                if (status === 'ACTIVE') stats.active++;
+                if (status === 'EXPIRING') stats.expiring++;
+                if (status === 'EXPIRED') stats.expired++;
+                if (status === 'CANCELLED' || status === 'DELETED') stats.cancelled++;
+
+                // Table Filtering
+                if (filterType && item.type !== filterType) return;
+                if (filterApproval && item.approval !== filterApproval) return;
+                if (filterStatus && status !== filterStatus) return;
+                if (query && !item.name?.toLowerCase().includes(query) && !item.title?.toLowerCase().includes(query) && !item.id.toLowerCase().includes(query)) return;
+
+                let statusBadge = "";
+                if (status === 'PENDING') statusBadge = `<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-semibold text-[10px]">Menunggu Semakan</span>`;
+                else if (status === 'ACTIVE') statusBadge = `<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold text-[10px]">Aktif</span>`;
+                else if (status === 'EXPIRING') statusBadge = `<span class="px-2 py-0.5 rounded-full bg-orange-100 text-orange-800 font-semibold text-[10px]">Akan Tamat</span>`;
+                else if (status === 'EXPIRED') statusBadge = `<span class="px-2 py-0.5 rounded-full bg-red-100 text-red-800 font-semibold text-[10px]">Luput</span>`;
+                else statusBadge = `<span class="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-semibold text-[10px]">${status}</span>`;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-brand-bg/50 transition-colors">
+                        <td class="p-3">
+                            <img src="${item.photo || 'https://placehold.co/100x100'}" class="w-10 h-10 rounded-lg object-cover border border-brand-border">
+                        </td>
+                        <td class="p-3 font-bold text-brand-dark">
+                            ${item.type}
+                            <div class="text-[10px] text-brand-muted font-normal">${item.id}</div>
+                        </td>
+                        <td class="p-3">
+                            <div class="font-bold text-brand-dark">${item.name || item.title}</div>
+                            <div class="text-[10px] text-brand-muted">${item.org || item.location}</div>
+                        </td>
+                        <td class="p-3">
+                            ${item.approval === 'Approved' ? '<span class="text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> Diluluskan</span>' : '<span class="text-amber-600 font-bold"><i class="fa-regular fa-clock"></i> Pending</span>'}
+                            <div class="mt-0.5">${statusBadge}</div>
+                        </td>
+                        <td class="p-3 font-semibold text-brand-dark">${item.validity || '1 Bulan'}</td>
+                        <td class="p-3 text-[11px] text-brand-muted">
+                            ${item.tarikhDari || '-'} hingga ${item.tarikhSehingga || '-'}
+                        </td>
+                        <td class="p-3">
+                            ${item.label ? `<span class="badge-pill badge-${item.label.toLowerCase()} text-[9px]">${item.label}</span>` : '-'}
+                        </td>
+                        <td class="p-3 text-right">
+                            <button onclick="openAdminReviewModal('${item.id}')" class="bg-brand text-white hover:bg-brand-dark px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all">
+                                Semak / Edit
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Update Statistics Card DOM
+            document.getElementById('stat-total').innerText = stats.total;
+            document.getElementById('stat-pending').innerText = stats.pending;
+            document.getElementById('stat-approved').innerText = stats.approved;
+            document.getElementById('stat-active').innerText = stats.active;
+            document.getElementById('stat-expiring').innerText = stats.expiring;
+            document.getElementById('stat-expired').innerText = stats.expired;
+            document.getElementById('stat-cancelled').innerText = stats.cancelled;
         }
 
-        // Initial setup
-        renderJoinFormFields();
-        renderSampleData();
+        function openAdminReviewModal(id) {
+            const item = bayuData.applications.find(a => a.id === id);
+            if (!item) return;
+
+            const modalBody = document.getElementById('admin-review-body');
+            modalBody.innerHTML = `
+                <form onsubmit="saveAdminReview(event, '${item.id}')" class="space-y-4 text-xs">
+                    <div class="grid grid-cols-2 gap-3 bg-brand-bg p-3 rounded-xl border border-brand-border">
+                        <div>
+                            <span class="text-brand-muted block">ID Permohonan:</span>
+                            <span class="font-bold text-brand-dark">${item.id} (${item.type})</span>
+                        </div>
+                        <div>
+                            <span class="text-brand-muted block">Nama / Tajuk:</span>
+                            <span class="font-bold text-brand-dark">${item.name || item.title}</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-bold text-brand-dark mb-1">Status Kelulusan</label>
+                            <select id="rev-approval" class="w-full border border-brand-border rounded-xl p-2 font-semibold">
+                                <option value="Pending" ${item.approval === 'Pending' ? 'selected' : ''}>Pending (Menunggu Semakan)</option>
+                                <option value="Approved" ${item.approval === 'Approved' ? 'selected' : ''}>Approved (Diluluskan)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-brand-dark mb-1">Pilihan Label Promosi</label>
+                            <select id="rev-label" class="w-full border border-brand-border rounded-xl p-2">
+                                <option value="" ${!item.label ? 'selected' : ''}>Tiada Label</option>
+                                <option value="Featured" ${item.label === 'Featured' ? 'selected' : ''}>Featured</option>
+                                <option value="Promoted" ${item.label === 'Promoted' ? 'selected' : ''}>Promoted</option>
+                                <option value="Top" ${item.label === 'Top' ? 'selected' : ''}>Top</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block font-bold text-brand-dark mb-1">Tempoh Sah</label>
+                            <select id="rev-validity" class="w-full border border-brand-border rounded-xl p-2">
+                                <option value="1 Bulan" ${item.validity === '1 Bulan' ? 'selected' : ''}>1 Bulan</option>
+                                <option value="3 Bulan" ${item.validity === '3 Bulan' ? 'selected' : ''}>3 Bulan</option>
+                                <option value="6 Bulan" ${item.validity === '6 Bulan' ? 'selected' : ''}>6 Bulan</option>
+                                <option value="1 Tahun" ${item.validity === '1 Tahun' ? 'selected' : ''}>1 Tahun</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-brand-dark mb-1">Tarikh Mula</label>
+                            <input type="date" id="rev-dari" value="${item.tarikhDari || ''}" class="w-full border border-brand-border rounded-xl p-2">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-brand-dark mb-1">Tarikh Tamat</label>
+                            <input type="date" id="rev-hingga" value="${item.tarikhSehingga || ''}" class="w-full border border-brand-border rounded-xl p-2">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-brand-dark mb-1">URL Gambar / Poster Banner</label>
+                        <input type="url" id="rev-photo" value="${item.photo || ''}" placeholder="https://..." class="w-full border border-brand-border rounded-xl p-2">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-brand-dark mb-1">Catatan Admin / Status Khas</label>
+                        <select id="rev-remark" class="w-full border border-brand-border rounded-xl p-2">
+                            <option value="" ${!item.remark ? 'selected' : ''}>Normal / Aktif</option>
+                            <option value="Cancelled" ${item.remark === 'Cancelled' ? 'selected' : ''}>Batalkan (Cancelled)</option>
+                            <option value="Delete" ${item.remark === 'Delete' ? 'selected' : ''}>Padam (Delete)</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-3 flex gap-2">
+                        <button type="button" onclick="closeAdminReviewModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs">
+                            Batal
+                        </button>
+                        <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-xs">
+                            Simpan Kemaskini
+                        </button>
+                    </div>
+                </form>
+            `;
+
+            document.getElementById('modal-admin-review').classList.remove('hidden');
+        }
+
+        function closeAdminReviewModal() {
+            document.getElementById('modal-admin-review').classList.add('hidden');
+        }
+
+        function saveAdminReview(e, id) {
+            e.preventDefault();
+            const item = bayuData.applications.find(a => a.id === id);
+            if (!item) return;
+
+            item.approval = document.getElementById('rev-approval').value;
+            item.label = document.getElementById('rev-label').value;
+            item.validity = document.getElementById('rev-validity').value;
+            item.tarikhDari = document.getElementById('rev-dari').value;
+            item.tarikhSehingga = document.getElementById('rev-hingga').value;
+            item.photo = document.getElementById('rev-photo').value;
+            item.remark = document.getElementById('rev-remark').value;
+
+            saveData();
+            renderAdminTable();
+            closeAdminReviewModal();
+        }
+
+        // Initialize default view on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            switchTab('agenda');
+        });
     </script>
 </body>
 </html>
