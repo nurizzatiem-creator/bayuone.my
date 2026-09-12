@@ -2567,19 +2567,20 @@
 function handleRegisterSubmit(e) {
     e.preventDefault();
 
-    // 1. Dapatkan jenis borang yang sedang dipilih (penganjur, trainer, atau talent)
-    const type = document.getElementById('reg-type').value;
+    // 1. Dapatkan jenis borang secara selamat (Lalai: penganjur)
+    const typeEl = document.getElementById('reg-type');
+    const type = typeEl ? typeEl.value : 'penganjur';
 
     let newRecord = {
         id: 'APP-' + Date.now(),
-        type: type, // penganjur, trainer, atau talent
+        type: type,
         approval: 'Pending',
         createdAt: new Date().toISOString()
     };
 
-    // 2. Kumpul data mengikut jenis borang yang dihantar
+    // 2. Kumpul data mengikut jenis borang (guna pembacaan selamat)
     if (type === 'penganjur') {
-        newRecord.name = document.getElementById('reg-penganjur-title')?.value || '';
+        newRecord.name = document.getElementById('reg-penganjur-title')?.value || document.getElementById('reg-penganjur-name')?.value || 'Penganjur Baru';
         newRecord.email = document.getElementById('reg-penganjur-email')?.value || '';
         newRecord.date = document.getElementById('reg-penganjur-date')?.value || '';
         newRecord.state = document.getElementById('reg-penganjur-state')?.value || '';
@@ -2587,18 +2588,17 @@ function handleRegisterSubmit(e) {
         newRecord.category = document.getElementById('reg-penganjur-category')?.value || '';
     } 
     else if (type === 'trainer') {
-        newRecord.name = document.getElementById('reg-trainer-name')?.value || '';
+        newRecord.name = document.getElementById('reg-trainer-name')?.value || 'Trainer Baru';
         newRecord.email = document.getElementById('reg-trainer-email')?.value || '';
         newRecord.state = document.getElementById('reg-trainer-state')?.value || '';
         newRecord.location = document.getElementById('reg-trainer-sabah-loc')?.value || newRecord.state;
         newRecord.summary = document.getElementById('reg-trainer-summary')?.value || '';
         
-        // Kumpul kepakaran yang ditanda (checkbox)
         const expBoxes = document.querySelectorAll('input[name="trainer_exp"]:checked');
-        newRecord.expertise = Array.from(expBoxes).map(cb => cb.value).join(', ');
+        newRecord.expertise = expBoxes.length > 0 ? Array.from(expBoxes).map(cb => cb.value).join(', ') : '-';
     } 
     else if (type === 'talent') {
-        newRecord.name = document.getElementById('reg-talent-name')?.value || '';
+        newRecord.name = document.getElementById('reg-talent-name')?.value || 'Talent Baru';
         newRecord.email = document.getElementById('reg-talent-email')?.value || '';
         newRecord.state = document.getElementById('reg-talent-state')?.value || '';
         newRecord.location = document.getElementById('reg-talent-sabah-loc')?.value || newRecord.state;
@@ -2606,28 +2606,34 @@ function handleRegisterSubmit(e) {
         newRecord.summary = document.getElementById('reg-talent-summary')?.value || '';
     }
 
-    // 3. Simpan data baru ke dalam database Admin Panel (array applications)
-    if (typeof applications !== 'undefined') {
+    // 3. Simpan data ke dalam senarai Admin Panel
+    if (typeof applications !== 'undefined' && Array.isArray(applications)) {
         applications.push(newRecord);
     }
 
-    // 4. Kemaskini jadual Admin Panel secara serta-merta
+    // 4. Kemaskini paparan jadual Admin Panel
     if (typeof renderAdminApplications === 'function') {
         renderAdminApplications();
     }
 
-    // 5. Tutup modal borang pendaftaran
+    // 5. Tutup Borang Pendaftaran
     if (typeof closeRegisterModal === 'function') {
         closeRegisterModal();
     }
 
-    // 6. Reset borang
-    document.getElementById('form-register').reset();
+    // 6. Reset Isi Borang
+    const regForm = document.getElementById('form-register');
+    if (regForm) {
+        regForm.reset();
+    }
 
-    // 7. Buka Popup Terima Kasih ("Permohonan Berjaya Dihantar")
+    // 7. Paparkan Modal "Permohonan Berjaya Dihantar"
     const successModal = document.getElementById('modal-submission-success');
     if (successModal) {
         successModal.classList.remove('hidden');
+        successModal.style.display = 'flex'; // Memastikan modal benar-benar kelihatan
+    } else {
+        alert('Permohonan anda telah berjaya dihantar!');
     }
 }
 
