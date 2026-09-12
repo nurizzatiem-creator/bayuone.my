@@ -1157,7 +1157,7 @@
                 for (const [division, districts] of Object.entries(SABAH_DIVISIONS)) {
                     let groupOpt = `<optgroup label="${division}">`;
                     districts.forEach(dist => {
-                        groupOpt += `<option value="${dist}, Sabah">${dist} (${division})</option>`;
+                        groupOpt += `<option value="${dist}, Sabah">${dist}</option>`;
                     });
                     groupOpt += `</optgroup>`;
                     sabahSelect.innerHTML += groupOpt;
