@@ -120,7 +120,7 @@
 
             <!-- Desktop Navigation Tabs -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <button onclick="switchTab('agenda')" id="nav-agenda" class="tab-btn py-7 transition-colors">
+                <button onclick="switchTab('agenda')" id="nav-agenda" class="tab-btn py-7 transition-colors active">
                     <i class="fa-regular fa-calendar-check mr-2"></i>Agenda
                 </button>
                 <button onclick="switchTab('trainer')" id="nav-trainer" class="tab-btn py-7 transition-colors">
@@ -269,7 +269,6 @@
                     <div id="grid-agenda-upcoming" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
 
-                <!-- REQUIREMENT 2: TELAH TAMAT SECTION -->
                 <div>
                     <div class="flex items-center justify-between mb-6 pb-2 border-b border-brand-border">
                         <div>
@@ -452,7 +451,6 @@
                     <span class="text-[11px] font-bold text-gray-600 uppercase">Batal/Padam</span>
                     <div id="stat-cancelled" class="text-2xl font-extrabold text-gray-700 mt-1">0</div>
                 </div>
-                <!-- REQUIREMENT 10: MAKLUM BALAS COUNTER -->
                 <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 shadow-2xs">
                     <span class="text-[11px] font-bold text-purple-700 uppercase">Maklum Balas</span>
                     <div id="stat-feedback" class="text-2xl font-extrabold text-purple-800 mt-1">0</div>
@@ -496,7 +494,7 @@
                                 <th class="p-3.5">Gambar</th>
                                 <th class="p-3.5">Permohonan</th>
                                 <th class="p-3.5">Pemohon / Organisasi / Email</th>
-                                <th class="p-3.5">Tarikh Agenda</th>
+                                <th class="p-3.5">Tarikh</th>
                                 <th class="p-3.5">Kelulusan</th>
                                 <th class="p-3.5">Tempoh Sah</th>
                                 <th class="p-3.5">Tarikh Dari - Hingga</th>
@@ -509,7 +507,7 @@
                 </div>
             </div>
 
-            <!-- REQUIREMENT 10: MAKLUM BALAS ADMIN DASHBOARD SECTION -->
+            <!-- MAKLUM BALAS ADMIN DASHBOARD SECTION -->
             <div class="bg-white rounded-2xl border border-brand-border shadow-xs p-6 space-y-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-4">
                     <div>
@@ -747,7 +745,6 @@
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tajuk Program <span class="text-red-500">*</span></label>
                         <input type="text" id="reg-penganjur-title" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                     </div>
-                    <!-- REQUIREMENT 8: ADD EMAIL FIELD (OPTIONAL FOR PENGANJUR) -->
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Penganjur / Organisasi <span class="text-gray-400 font-normal">(Optional)</span></label>
                         <input type="email" id="reg-penganjur-email" placeholder="alamat@emel.com" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
@@ -819,7 +816,6 @@
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Trainer <span class="text-red-500">*</span></label>
                             <input type="text" id="reg-trainer-name" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                         </div>
-                        <!-- REQUIREMENT 8: ADD EMAIL FIELD (REQUIRED FOR TRAINER) -->
                         <div>
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Trainer <span class="text-red-500">*</span></label>
                             <input type="email" id="reg-trainer-email" placeholder="alamat@emel.com" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
@@ -882,7 +878,6 @@
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Talent <span class="text-red-500">*</span></label>
                             <input type="text" id="reg-talent-name" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                         </div>
-                        <!-- REQUIREMENT 8: ADD EMAIL FIELD (REQUIRED FOR TALENT) -->
                         <div>
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Talent <span class="text-red-500">*</span></label>
                             <input type="email" id="reg-talent-email" placeholder="alamat@emel.com" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
@@ -939,7 +934,7 @@
         </div>
     </div>
 
-    <!-- REQUIREMENT 9: SUBMISSION SUCCESS POPUP MODAL -->
+    <!-- SUBMISSION SUCCESS POPUP MODAL -->
     <div id="modal-submission-success" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl text-center border border-brand-border space-y-4">
             <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
@@ -1078,7 +1073,7 @@
         </div>
     </div>
 
-    <!-- REQUIREMENTS 3 & 10: CONFIRM DELETE MODAL -->
+    <!-- CONFIRM DELETE MODAL -->
     <div id="modal-confirm-delete" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center border border-brand-border space-y-4">
             <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto text-xl">
@@ -1102,27 +1097,14 @@
         // Official TikTok BayuOne URL Reference
         const TIKTOK_BAYUONE_URL = "https://www.tiktok.com/@bayuone.my";
 
-        // Current Reference Date: September 11, 2026
-        const TODAY = new Date("2026-09-11");
+        // Current Reference Date: September 12, 2026
+        const TODAY = new Date("2026-09-12");
 
         // MALAYSIAN STATES & SABAH DIVISIONS DATA
         const MALAYSIAN_STATES = [
-            "Johor",
-            "Kedah",
-            "Kelantan",
-            "Melaka",
-            "Negeri Sembilan",
-            "Pahang",
-            "Perak",
-            "Perlis",
-            "Pulau Pinang",
-            "Sabah",
-            "Sarawak",
-            "Selangor",
-            "Terengganu",
-            "Wilayah Persekutuan Kuala Lumpur",
-            "Wilayah Persekutuan Labuan",
-            "Wilayah Persekutuan Putrajaya"
+            "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Perak", "Perlis", 
+            "Pulau Pinang", "Sabah", "Sarawak", "Selangor", "Terengganu", "Wilayah Persekutuan Kuala Lumpur", 
+            "Wilayah Persekutuan Labuan", "Wilayah Persekutuan Putrajaya"
         ];
 
         const SABAH_DIVISIONS = {
@@ -1148,11 +1130,15 @@
             const stateSelect = document.getElementById(`reg-${prefix}-state`);
             const sabahWrapper = document.getElementById(`reg-${prefix}-sabah-wrapper`);
             const sabahSelect = document.getElementById(`reg-${prefix}-sabah-loc`);
-            
-            const selectedState = stateSelect.value;
-            if (selectedState === "Sabah") {
+            if (!stateSelect || !sabahWrapper || !sabahSelect) return;
+
+            const currentRegType = document.getElementById('reg-type').value;
+
+            if (stateSelect.value === "Sabah") {
                 sabahWrapper.classList.remove('hidden');
-                sabahSelect.required = true;
+                if (currentRegType === prefix) {
+                    sabahSelect.required = true;
+                }
                 sabahSelect.innerHTML = `<option value="">Sila Pilih Daerah Sabah</option>`;
                 for (const [division, districts] of Object.entries(SABAH_DIVISIONS)) {
                     let groupOpt = `<optgroup label="${division}">`;
@@ -1169,7 +1155,7 @@
             }
         }
 
-        // Mock Initial Data Store
+        // Central Application Data Store
         let bayuData = {
             applications: [
                 {
@@ -1262,6 +1248,7 @@
                     tarikhSehingga: "2027-01-01",
                     label: "Top",
                     remark: "",
+                    date: "2026-01-01",
                     photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80"
                 },
                 {
@@ -1282,6 +1269,7 @@
                     tarikhSehingga: "2026-12-01",
                     label: "Promoted",
                     remark: "",
+                    date: "2026-06-01",
                     photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80"
                 },
                 {
@@ -1301,6 +1289,7 @@
                     tarikhSehingga: "2027-03-01",
                     label: "Featured",
                     remark: "",
+                    date: "2026-03-01",
                     photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
                 },
                 {
@@ -1320,6 +1309,7 @@
                     tarikhSehingga: "2027-01-01",
                     label: "",
                     remark: "",
+                    date: "2026-07-01",
                     photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
                 },
                 {
@@ -1348,57 +1338,14 @@
                 }
             ],
             subscribers: [
-                {
-                    id: "SUB-101",
-                    name: "Ahmad Zaki",
-                    email: "ahmad.zaki@gmail.com",
-                    minat: "Pemasaran Digital, Keusahawanan",
-                    date: "2026-09-08",
-                    status: "NEW"
-                },
-                {
-                    id: "SUB-102",
-                    name: "Siti Sarah",
-                    email: "siti.sarah@yahoo.com",
-                    minat: "Kesihatan & Kesejahteraan",
-                    date: "2026-09-02",
-                    status: "NEW"
-                },
-                {
-                    id: "SUB-103",
-                    name: "David Wong",
-                    email: "david.wong@tech.my",
-                    minat: "Teknologi & Digital",
-                    date: "2026-08-15",
-                    status: "EXISTING"
-                },
-                {
-                    id: "SUB-104",
-                    name: "Nurul Huda",
-                    email: "huda.nurul@outlook.com",
-                    minat: "Pendidikan & Pembelajaran",
-                    date: "2026-07-20",
-                    status: "EXISTING"
-                }
+                { id: "SUB-101", name: "Ahmad Zaki", email: "ahmad.zaki@gmail.com", minat: "Pemasaran Digital, Keusahawanan", date: "2026-09-08", status: "NEW" },
+                { id: "SUB-102", name: "Siti Sarah", email: "siti.sarah@yahoo.com", minat: "Kesihatan & Kesejahteraan", date: "2026-09-02", status: "NEW" },
+                { id: "SUB-103", name: "David Wong", email: "david.wong@tech.my", minat: "Teknologi & Digital", date: "2026-08-15", status: "EXISTING" },
+                { id: "SUB-104", name: "Nurul Huda", email: "huda.nurul@outlook.com", minat: "Pendidikan & Pembelajaran", date: "2026-07-20", status: "EXISTING" }
             ],
-            // REQUIREMENT 10: MAKLUM BALAS STORE
             feedbacks: [
-                {
-                    id: "FB-201",
-                    name: "Hasnol Bahrin",
-                    email: "hasnol@gmail.com",
-                    message: "Sangat mudah mencari trainer tempatan Sabah melalui platform BayuOne ini. Tahniah!",
-                    date: "2026-09-10 14:30",
-                    status: "In Review"
-                },
-                {
-                    id: "FB-202",
-                    name: "Grace Lim",
-                    email: "grace.lim@yahoo.com",
-                    message: "Mohon tambah fungsi tapis mengikut daerah di Kota Kinabalu secara khusus.",
-                    date: "2026-09-05 09:15",
-                    status: "Resolved"
-                }
+                { id: "FB-201", name: "Hasnol Bahrin", email: "hasnol@gmail.com", message: "Sangat mudah mencari trainer tempatan Sabah melalui platform BayuOne ini. Tahniah!", date: "2026-09-10 14:30", status: "In Review" },
+                { id: "FB-202", name: "Grace Lim", email: "grace.lim@yahoo.com", message: "Mohon tambah fungsi tapis mengikut daerah di Kota Kinabalu secara khusus.", date: "2026-09-05 09:15", status: "Resolved" }
             ]
         };
 
@@ -1409,7 +1356,7 @@
                 if (stored.subscribers) bayuData.subscribers = stored.subscribers;
                 if (stored.feedbacks) bayuData.feedbacks = stored.feedbacks;
             } catch (e) {
-                console.error("Failed loading stored data", e);
+                console.error("Gagal membaca data dari LocalStorage", e);
             }
         }
 
@@ -1417,12 +1364,11 @@
             localStorage.setItem("bayuone_data", JSON.stringify(bayuData));
         }
 
-        // REQUIREMENT 5 & 6: CALENDAR-MONTH/YEAR AUTO-CALCULATION FOR TARIKH TAMAT PROMOSI
         function calculateTarikhTamat(startDateStr, validityPeriod) {
             if (!startDateStr || !validityPeriod) return "";
             const [y, m, d] = startDateStr.split('-').map(Number);
             let targetYear = y;
-            let targetMonth = m - 1; // 0-indexed
+            let targetMonth = m - 1;
             let targetDay = d;
 
             let addMonths = 0;
@@ -1451,16 +1397,13 @@
             return `${rY}-${rM}-${rD}`;
         }
 
-        // REQUIREMENT 6: PROMOTION PRIORITY LOGIC
         function getPromoPriority(item) {
             if (!item.label || item.label === "" || item.label === "None") return 4;
-            
-            // Verify if promotion is currently within valid Tarikh Dari -> Tarikh Hingga
             if (item.tarikhDari && item.tarikhSehingga) {
                 const fromDate = new Date(item.tarikhDari);
                 const toDate = new Date(item.tarikhSehingga);
                 if (TODAY < fromDate || TODAY > toDate) {
-                    return 4; // Expired or future promotion = normal placement
+                    return 4;
                 }
             } else if (!item.tarikhDari || !item.tarikhSehingga) {
                 return 4;
@@ -1473,15 +1416,7 @@
             return 4;
         }
 
-        // REQUIREMENT 7: AGENDA STATUS LOGIC & PRIORITY SYSTEM
         function getAgendaStatusInfo(item) {
-            // Priority:
-            // 1. Dibatalkan
-            // 2. Telah Ditunda
-            // 3. Tamat
-            // 4. Promosi Akan Tamat
-            // 5. Aktif
-
             if (item.statusPenangguhan === 'Dibatalkan') {
                 return { code: 'DIBATALKAN', label: 'Dibatalkan', badges: [{ text: 'Dibatalkan', class: 'bg-red-100 text-red-800 border-red-200' }] };
             }
@@ -1490,7 +1425,7 @@
                 const subText = item.statusPenangguhanSub || 'Akan Dikemaskini';
                 return { 
                     code: 'TELAH_DITUNDA', 
-                    label: `Telah Ditunda`, 
+                    label: 'Telah Ditunda', 
                     badges: [
                         { text: 'Telah Ditunda', class: 'bg-amber-100 text-amber-800 border-amber-200' },
                         { text: subText, class: 'bg-blue-100 text-blue-800 border-blue-200' }
@@ -1500,82 +1435,43 @@
 
             const eventDate = new Date(item.date);
             if (TODAY > eventDate) {
-                return { code: 'TAMAT', label: 'Telah Tamat', badges: [{ text: 'Telah Tamat', class: 'bg-gray-100 text-gray-700 border-gray-300' }] };
+                return { code: 'TAMAT', label: 'Telah Tamat', badges: [{ text: 'Telah Tamat', class: 'bg-gray-100 text-gray-600 border-gray-200' }] };
             }
 
-            // Check Promosi Akan Tamat (based on PROMOTION end date, within 7 days before Tarikh Hingga)
-            const isPromoActive = getPromoPriority(item) < 4;
-            if (isPromoActive && item.tarikhSehingga) {
-                const promoEndDate = new Date(item.tarikhSehingga);
-                const diffTime = promoEndDate.getTime() - TODAY.getTime();
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                if (diffDays >= 0 && diffDays <= 7) {
-                    return { code: 'PROMOSI_AKAN_TAMAT', label: 'Promosi Akan Tamat', badges: [{ text: 'Promosi Akan Tamat', class: 'bg-orange-100 text-orange-800 border-orange-200 font-bold' }] };
-                }
-            }
-
-            return { code: 'AKTIF', label: 'Aktif', badges: [{ text: 'Aktif', class: 'bg-emerald-100 text-emerald-800 border-emerald-200' }] };
+            return { code: 'AKAN_DATANG', label: 'Akan Datang', badges: [{ text: 'Aktif', class: 'bg-emerald-100 text-emerald-800 border-emerald-200' }] };
         }
 
-        function getItemCalculatedStatus(item) {
-            if (item.statusPenangguhan === "Dibatalkan" || item.remark === "Cancelled") return "CANCELLED";
-            if (item.approval === "Pending") return "PENDING";
-            
-            if (item.tarikhSehingga) {
-                const endDate = new Date(item.tarikhSehingga);
-                if (!isNaN(endDate.getTime())) {
-                    if (TODAY > endDate) return "EXPIRED";
-                    const diffTime = endDate.getTime() - TODAY.getTime();
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    if (diffDays <= 7 && diffDays >= 0) return "EXPIRING";
-                }
-            }
-
-            return "ACTIVE";
-        }
-
-        function isPubliclyActive(item) {
-            return item.approval === "Approved";
-        }
-
-        let currentTab = 'agenda';
-
-        function switchTab(tab) {
-            currentTab = tab;
-            
+        // NAVIGATION & TAB SWITCHING
+        function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetView = document.getElementById(`view-${tabName}`);
+            if (targetView) targetView.classList.remove('hidden');
+
+            const targetNav = document.getElementById(`nav-${tabName}`);
+            if (targetNav) targetNav.classList.add('active');
 
             const heroTitle = document.getElementById('hero-title');
-            const heroSub = document.getElementById('hero-subtitle');
+            const heroSubtitle = document.getElementById('hero-subtitle');
 
-            if (tab === 'agenda') {
-                document.getElementById('view-agenda').classList.remove('hidden');
-                document.getElementById('nav-agenda')?.classList.add('active');
-                heroTitle.innerText = "Program & Aktiviti Terkini";
-                heroSub.innerText = "Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.";
-                filterAgenda();
-            } else if (tab === 'trainer') {
-                document.getElementById('view-trainer').classList.remove('hidden');
-                document.getElementById('nav-trainer')?.classList.add('active');
-                heroTitle.innerText = "Menghubungkan Kepakaran Profesional & Peluang";
-                heroSub.innerText = "Temui jurulatih profesional untuk agensi kerajaan, korporat, universiti dan jenama.";
-                filterTrainer();
-            } else if (tab === 'talent') {
-                document.getElementById('view-talent').classList.remove('hidden');
-                document.getElementById('nav-talent')?.classList.add('active');
-                heroTitle.innerText = "Kenali Bakat Tempatan";
-                heroSub.innerText = "Temui influencer, pencipta kandungan, penggiat kreatif, pengacara dan bakat tempatan lainnya.";
-                filterTalent();
-            } else if (tab === 'admin') {
-                document.getElementById('view-admin').classList.remove('hidden');
-                heroTitle.innerText = "Panel Kawalan Admin";
-                heroSub.innerHTML = `Pengurusan permohonan, status dan kelulusan platform <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>.`;
-                renderSubscriberDashboard();
-                renderFeedbackDashboard();
+            if (tabName === 'agenda') {
+                heroTitle.textContent = "Program & Aktiviti Terkini";
+                heroSubtitle.textContent = "Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.";
+                renderAgenda();
+            } else if (tabName === 'trainer') {
+                heroTitle.textContent = "Trainer & Jurulatih Profesional";
+                heroSubtitle.textContent = "Cari penceramah, jurulatih dan pakar bidang untuk menjayakan program latihan anda.";
+                renderTrainer();
+            } else if (tabName === 'talent') {
+                heroTitle.textContent = "Bakat & Influencer Tempatan";
+                heroSubtitle.textContent = "Hubungi pengacara, content creator dan pelbagai bakat tempatan untuk kolaborasi.";
+                renderTalent();
+            } else if (tabName === 'admin') {
                 renderAdminTable();
+                renderFeedbackTable();
+                renderSubscriberTable();
             }
-
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1584,893 +1480,253 @@
             menu.classList.toggle('hidden');
         }
 
-        function handleGlobalSearch() {
-            const query = document.getElementById('global-search').value.toLowerCase();
-            if (!query) return;
+        // REGISTRATION FORM SWITCHING & FIELD VALIDATION MANAGEMENT
+        function setRegisterType(type) {
+            document.getElementById('reg-type').value = type;
 
-            if (currentTab === 'agenda') filterAgenda();
-            else if (currentTab === 'trainer') filterTrainer();
-            else if (currentTab === 'talent') filterTalent();
-        }
+            ['penganjur', 'trainer', 'talent'].forEach(t => {
+                const btn = document.getElementById(`btn-reg-${t}`);
+                const fieldGroup = document.getElementById(`fields-${t}`);
 
-        function triggerSearch() {
-            handleGlobalSearch();
-        }
-
-        // REQUIREMENT 1, 2, 4, 6, 7: PUBLIC AGENDA DISPLAY & SORTING logic
-        function filterAgenda() {
-            const loc = document.getElementById('filter-agenda-location').value;
-            const mode = document.getElementById('filter-agenda-mode').value;
-            const cat = document.getElementById('filter-agenda-category').value;
-            const date = document.getElementById('filter-agenda-date').value;
-            const query = document.getElementById('global-search').value.toLowerCase();
-
-            const upcomingContainer = document.getElementById('grid-agenda-upcoming');
-            const endedContainer = document.getElementById('grid-agenda-ended');
-
-            upcomingContainer.innerHTML = "";
-            endedContainer.innerHTML = "";
-
-            let upcomingCount = 0;
-            let endedCount = 0;
-
-            let activeAgendas = bayuData.applications.filter(item => item.type === 'Agenda' && isPubliclyActive(item));
-
-            // REQUIREMENT 6: PROMOTED CARDS APPEAR FIRST
-            activeAgendas.sort((a, b) => {
-                const priorityA = getPromoPriority(a);
-                const priorityB = getPromoPriority(b);
-                if (priorityA !== priorityB) {
-                    return priorityA - priorityB;
-                }
-                return new Date(a.date) - new Date(b.date);
-            });
-
-            activeAgendas.forEach(item => {
-                if (loc && !item.location.toLowerCase().includes(loc.toLowerCase())) return;
-                if (mode && item.mode !== mode) return;
-                if (cat && item.category !== cat) return;
-                if (date && item.date !== date) return;
-                if (query && !item.title.toLowerCase().includes(query) && !item.location.toLowerCase().includes(query)) return;
-
-                const eventDate = new Date(item.date);
-                const isEnded = TODAY > eventDate;
-                const statusInfo = getAgendaStatusInfo(item);
-
-                const effectiveUrl = item.urlButton && item.urlButton.trim() !== "" ? item.urlButton : (item.url || TIKTOK_BAYUONE_URL);
-
-                // Build status badges
-                let badgeElementsHtml = '';
-                if (item.label && getPromoPriority(item) < 4) {
-                    badgeElementsHtml += `<span class="badge-pill badge-${item.label.toLowerCase()}">${item.label}</span>`;
-                }
-                statusInfo.badges.forEach(b => {
-                    badgeElementsHtml += `<span class="badge-pill ${b.class} border">${b.text}</span>`;
-                });
-
-                const cardHtml = `
-                    <div class="bg-white rounded-2xl border border-brand-border shadow-2xs hover:shadow-md transition-all overflow-hidden flex flex-col h-full">
-                        <div class="relative h-48 bg-gray-100 overflow-hidden">
-                            <img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80'}" alt="${item.title}" class="w-full h-full object-cover">
-                            <div class="absolute top-3 left-3 right-3 flex gap-1.5 flex-wrap items-center justify-between">
-                                <div class="flex gap-1.5 flex-wrap">
-                                    ${badgeElementsHtml}
-                                </div>
-                                <span class="bg-white/90 backdrop-blur-xs text-brand-dark px-2.5 py-1 rounded-full text-xs font-bold border border-brand-border">${item.mode || 'Fizikal'}</span>
-                            </div>
-                        </div>
-                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
-                            <div>
-                                <span class="text-[11px] font-bold uppercase text-brand tracking-wider">${item.category}</span>
-                                <h3 class="text-base font-bold text-brand-dark mt-1 line-clamp-2">${item.title}</h3>
-                                <div class="mt-3 space-y-1.5 text-xs text-brand-muted">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-regular fa-calendar text-brand"></i>
-                                        <span class="font-semibold text-brand-dark">${item.date}</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-location-dot text-brand"></i>
-                                        <span>${item.location}</span>
-                                    </div>
-                                    ${item.name ? `
-                                    <div class="flex items-center gap-2 pt-1 border-t border-brand-border/60">
-                                        <i class="fa-solid fa-user-tie text-brand-muted"></i>
-                                        <span>Penganjur: ${item.org || item.name}</span>
-                                    </div>` : ''}
-                                </div>
-                            </div>
-                            <!-- REQUIREMENT 2: LIHAT INFO BUTTON REMAINS CLICKABLE -->
-                            <div class="pt-2">
-                                <a href="${effectiveUrl}" target="_blank" rel="noopener" class="w-full bg-brand-bg hover:bg-brand hover:text-white text-brand-dark border border-brand-border text-xs font-bold py-2.5 rounded-xl transition-all flex items-center justify-center gap-2">
-                                    <span>Lihat Info</span>
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                if (isEnded || statusInfo.code === 'TAMAT') {
-                    endedContainer.innerHTML += cardHtml;
-                    endedCount++;
+                if (t === type) {
+                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs";
+                    fieldGroup.classList.remove('hidden');
                 } else {
-                    upcomingContainer.innerHTML += cardHtml;
-                    upcomingCount++;
+                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand";
+                    fieldGroup.classList.add('hidden');
                 }
             });
 
-            document.getElementById('count-upcoming').innerText = `${upcomingCount} Program`;
-            document.getElementById('count-ended').innerText = `${endedCount} Program`;
+            // Update Dynamic HTML required Attributes
+            const pTitle = document.getElementById('reg-penganjur-title');
+            const pDate = document.getElementById('reg-penganjur-date');
+            const pState = document.getElementById('reg-penganjur-state');
+            const pSabah = document.getElementById('reg-penganjur-sabah-loc');
+            const pCat = document.getElementById('reg-penganjur-category');
 
-            if (upcomingCount === 0) {
-                upcomingContainer.innerHTML = `<div class="col-span-full py-8 text-center text-brand-muted text-sm border border-dashed border-brand-border rounded-2xl">Tiada program akan datang dijumpai.</div>`;
-            }
-            if (endedCount === 0) {
-                endedContainer.innerHTML = `<div class="col-span-full py-8 text-center text-brand-muted text-sm border border-dashed border-brand-border rounded-2xl">Tiada program telah tamat.</div>`;
-            }
-        }
+            const trName = document.getElementById('reg-trainer-name');
+            const trEmail = document.getElementById('reg-trainer-email');
+            const trState = document.getElementById('reg-trainer-state');
+            const trSabah = document.getElementById('reg-trainer-sabah-loc');
+            const trSum = document.getElementById('reg-trainer-summary');
 
-        function resetAgendaFilters() {
-            document.getElementById('filter-agenda-location').value = "";
-            document.getElementById('filter-agenda-mode').value = "";
-            document.getElementById('filter-agenda-category').value = "";
-            document.getElementById('filter-agenda-date').value = "";
-            document.getElementById('global-search').value = "";
-            filterAgenda();
-        }
+            const tlName = document.getElementById('reg-talent-name');
+            const tlEmail = document.getElementById('reg-talent-email');
+            const tlState = document.getElementById('reg-talent-state');
+            const tlSabah = document.getElementById('reg-talent-sabah-loc');
+            const tlNiche = document.getElementById('reg-talent-niche');
+            const tlSum = document.getElementById('reg-talent-summary');
 
-        // REQUIREMENT 6: TRAINER DISPLAY & SORTING
-        function filterTrainer() {
-            const name = document.getElementById('filter-trainer-name').value.toLowerCase();
-            const exp = document.getElementById('filter-trainer-expertise').value;
-            const loc = document.getElementById('filter-trainer-location').value;
-            const cert = document.getElementById('filter-trainer-cert').value;
-            const query = document.getElementById('global-search').value.toLowerCase();
+            if (type === 'penganjur') {
+                pTitle.required = true;
+                pDate.required = true;
+                pState.required = true;
+                pSabah.required = (pState.value === "Sabah");
+                pCat.required = true;
 
-            const grid = document.getElementById('grid-trainer');
-            grid.innerHTML = "";
+                trName.required = false;
+                trEmail.required = false;
+                trState.required = false;
+                trSabah.required = false;
+                trSum.required = false;
 
-            let activeTrainers = bayuData.applications.filter(item => item.type === 'Trainer' && isPubliclyActive(item));
+                tlName.required = false;
+                tlEmail.required = false;
+                tlState.required = false;
+                tlSabah.required = false;
+                tlNiche.required = false;
+                tlSum.required = false;
+            } else if (type === 'trainer') {
+                pTitle.required = false;
+                pDate.required = false;
+                pState.required = false;
+                pSabah.required = false;
+                pCat.required = false;
 
-            // REQUIREMENT 6: PROMOTED CARDS FIRST
-            activeTrainers.sort((a, b) => getPromoPriority(a) - getPromoPriority(b));
+                trName.required = true;
+                trEmail.required = true;
+                trState.required = true;
+                trSabah.required = (trState.value === "Sabah");
+                trSum.required = true;
 
-            let count = 0;
-            activeTrainers.forEach(item => {
-                if (name && !item.name.toLowerCase().includes(name)) return;
-                if (loc && !item.location.toLowerCase().includes(loc.toLowerCase())) return;
-                if (exp && (!item.expertise || !item.expertise.includes(exp))) return;
-                if (cert && (!item.certs || !item.certs.includes(cert))) return;
-                if (query && !item.name.toLowerCase().includes(query) && !item.summary.toLowerCase().includes(query)) return;
+                tlName.required = false;
+                tlEmail.required = false;
+                tlState.required = false;
+                tlSabah.required = false;
+                tlNiche.required = false;
+                tlSum.required = false;
+            } else if (type === 'talent') {
+                pTitle.required = false;
+                pDate.required = false;
+                pState.required = false;
+                pSabah.required = false;
+                pCat.required = false;
 
-                count++;
-                const effectiveUrl = item.urlButton && item.urlButton.trim() !== "" ? item.urlButton : (item.url || TIKTOK_BAYUONE_URL);
+                trName.required = false;
+                trEmail.required = false;
+                trState.required = false;
+                trSabah.required = false;
+                trSum.required = false;
 
-                grid.innerHTML += `
-                    <div class="bg-white rounded-2xl border border-brand-border shadow-2xs hover:shadow-md transition-all p-5 flex flex-col justify-between h-full space-y-4">
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-4">
-                                <img src="${item.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80'}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover border border-brand-border shrink-0">
-                                <div class="overflow-hidden">
-                                    <div class="flex items-center gap-1.5 flex-wrap">
-                                        ${item.label && getPromoPriority(item) < 4 ? `<span class="badge-pill badge-${item.label.toLowerCase()}">${item.label}</span>` : ''}
-                                        <span class="text-[11px] font-bold text-brand bg-brand-bg px-2 py-0.5 rounded border border-brand-border">${item.location}</span>
-                                    </div>
-                                    <h3 class="text-base font-bold text-brand-dark mt-1 truncate">${item.name}</h3>
-                                </div>
-                            </div>
-                            <p class="text-xs text-brand-muted line-clamp-3 leading-relaxed">${item.summary}</p>
-                            ${item.expertise && item.expertise.length > 0 ? `
-                            <div class="flex flex-wrap gap-1">
-                                ${item.expertise.map(e => `<span class="text-[10px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md">${e}</span>`).join('')}
-                            </div>` : ''}
-                        </div>
-                        <div class="pt-2 border-t border-brand-border">
-                            <a href="${effectiveUrl}" target="_blank" rel="noopener" class="w-full bg-brand-bg hover:bg-brand hover:text-white text-brand-dark border border-brand-border text-xs font-bold py-2.5 rounded-xl transition-all flex items-center justify-center gap-2">
-                                <span>Lihat Profil</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
-            });
-
-            if (count === 0) {
-                grid.innerHTML = `<div class="col-span-full py-8 text-center text-brand-muted text-sm border border-dashed border-brand-border rounded-2xl">Tiada trainer dijumpai.</div>`;
-            }
-        }
-
-        function resetTrainerFilters() {
-            document.getElementById('filter-trainer-name').value = "";
-            document.getElementById('filter-trainer-expertise').value = "";
-            document.getElementById('filter-trainer-location').value = "";
-            document.getElementById('filter-trainer-cert').value = "";
-            document.getElementById('global-search').value = "";
-            filterTrainer();
-        }
-
-        // REQUIREMENT 6: TALENT DISPLAY & SORTING
-        function filterTalent() {
-            const name = document.getElementById('filter-talent-name').value.toLowerCase();
-            const niche = document.getElementById('filter-talent-niche').value;
-            const loc = document.getElementById('filter-talent-location').value;
-            const query = document.getElementById('global-search').value.toLowerCase();
-
-            const grid = document.getElementById('grid-talent');
-            grid.innerHTML = "";
-
-            let activeTalents = bayuData.applications.filter(item => item.type === 'Talent' && isPubliclyActive(item));
-
-            // REQUIREMENT 6: PROMOTED CARDS FIRST
-            activeTalents.sort((a, b) => getPromoPriority(a) - getPromoPriority(b));
-
-            let count = 0;
-            activeTalents.forEach(item => {
-                if (name && !item.name.toLowerCase().includes(name)) return;
-                if (niche && item.niche !== niche) return;
-                if (loc && !item.location.toLowerCase().includes(loc.toLowerCase())) return;
-                if (query && !item.name.toLowerCase().includes(query) && !item.summary.toLowerCase().includes(query)) return;
-
-                count++;
-                const effectiveUrl = item.urlButton && item.urlButton.trim() !== "" ? item.urlButton : (item.url || TIKTOK_BAYUONE_URL);
-
-                grid.innerHTML += `
-                    <div class="bg-white rounded-2xl border border-brand-border shadow-2xs hover:shadow-md transition-all p-5 flex flex-col justify-between h-full space-y-4">
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-4">
-                                <img src="${item.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80'}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover border border-brand-border shrink-0">
-                                <div class="overflow-hidden">
-                                    <div class="flex items-center gap-1.5 flex-wrap">
-                                        ${item.label && getPromoPriority(item) < 4 ? `<span class="badge-pill badge-${item.label.toLowerCase()}">${item.label}</span>` : ''}
-                                        <span class="text-[11px] font-bold text-brand bg-brand-bg px-2 py-0.5 rounded border border-brand-border">${item.location}</span>
-                                    </div>
-                                    <h3 class="text-base font-bold text-brand-dark mt-1 truncate">${item.name}</h3>
-                                </div>
-                            </div>
-                            <span class="inline-block text-[11px] font-bold text-brand uppercase tracking-wider">${item.niche || 'Bakat Tempatan'}</span>
-                            <p class="text-xs text-brand-muted line-clamp-3 leading-relaxed">${item.summary}</p>
-                        </div>
-                        <div class="pt-2 border-t border-brand-border">
-                            <a href="${effectiveUrl}" target="_blank" rel="noopener" class="w-full bg-brand-bg hover:bg-brand hover:text-white text-brand-dark border border-brand-border text-xs font-bold py-2.5 rounded-xl transition-all flex items-center justify-center gap-2">
-                                <span>Lihat Profil</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
-            });
-
-            if (count === 0) {
-                grid.innerHTML = `<div class="col-span-full py-8 text-center text-brand-muted text-sm border border-dashed border-brand-border rounded-2xl">Tiada talent dijumpai.</div>`;
+                tlName.required = true;
+                tlEmail.required = true;
+                tlState.required = true;
+                tlSabah.required = (tlState.value === "Sabah");
+                tlNiche.required = true;
+                tlSum.required = true;
             }
         }
 
-        function resetTalentFilters() {
-            document.getElementById('filter-talent-name').value = "";
-            document.getElementById('filter-talent-niche').value = "";
-            document.getElementById('filter-talent-location').value = "";
-            document.getElementById('global-search').value = "";
-            filterTalent();
-        }
+        // CRITICAL: SINGLE AUTHORITATIVE REGISTRATION SUBMISSION HANDLER
+        function handleRegisterSubmit(event) {
+            event.preventDefault();
 
-        // ================= ADMIN PANEL FUNCTIONS =================
-        function renderAdminTable() {
-            const tbody = document.getElementById('admin-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = "";
+            const regType = document.getElementById('reg-type').value;
+            const newId = "APP-" + Date.now();
+            let newApp = null;
 
-            const q = document.getElementById('admin-search')?.value.toLowerCase() || "";
-            const filterType = document.getElementById('admin-filter-type')?.value || "";
-            const filterApproval = document.getElementById('admin-filter-approval')?.value || "";
-            const filterStatus = document.getElementById('admin-filter-status')?.value || "";
+            if (regType === 'penganjur') {
+                const title = document.getElementById('reg-penganjur-title').value.trim();
+                const email = document.getElementById('reg-penganjur-email').value.trim();
+                const date = document.getElementById('reg-penganjur-date').value;
+                const state = document.getElementById('reg-penganjur-state').value;
+                const sabahLoc = document.getElementById('reg-penganjur-sabah-loc').value;
+                const category = document.getElementById('reg-penganjur-category').value;
+                const picName = document.getElementById('reg-penganjur-pic-name').value.trim();
+                const picTel = document.getElementById('reg-penganjur-pic-tel').value.trim();
+                const mode = document.getElementById('reg-penganjur-mode').value;
+                const url = document.getElementById('reg-penganjur-url').value.trim();
 
-            let total = bayuData.applications.length;
-            let pending = 0, approved = 0, active = 0, expiring = 0, expired = 0, cancelled = 0;
+                const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
 
-            bayuData.applications.forEach(item => {
-                const calculatedStatus = getItemCalculatedStatus(item);
+                newApp = {
+                    id: newId,
+                    type: "Agenda",
+                    title: title,
+                    name: picName || title,
+                    email: email,
+                    phone: picTel,
+                    location: location,
+                    mode: mode || "Fizikal",
+                    category: category,
+                    date: date,
+                    url: url || TIKTOK_BAYUONE_URL,
+                    urlButton: "",
+                    approval: "Pending",
+                    validity: "",
+                    tarikhDari: "",
+                    tarikhSehingga: "",
+                    label: "",
+                    remark: "",
+                    statusPenangguhan: "",
+                    statusPenangguhanSub: "",
+                    photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80"
+                };
+            } else if (regType === 'trainer') {
+                const name = document.getElementById('reg-trainer-name').value.trim();
+                const email = document.getElementById('reg-trainer-email').value.trim();
+                const state = document.getElementById('reg-trainer-state').value;
+                const sabahLoc = document.getElementById('reg-trainer-sabah-loc').value;
+                const summary = document.getElementById('reg-trainer-summary').value.trim();
+                const url = document.getElementById('reg-trainer-url').value.trim();
 
-                if (item.approval === "Pending") pending++;
-                if (item.approval === "Approved") approved++;
-                if (calculatedStatus === "ACTIVE") active++;
-                if (calculatedStatus === "EXPIRING") expiring++;
-                if (calculatedStatus === "EXPIRED") expired++;
-                if (calculatedStatus === "CANCELLED") cancelled++;
+                const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
 
-                // Apply Table Filters
-                if (q && !item.title.toLowerCase().includes(q) && !(item.name || "").toLowerCase().includes(q) && !(item.org || "").toLowerCase().includes(q) && !(item.email || "").toLowerCase().includes(q)) return;
-                if (filterType && item.type !== filterType) return;
-                if (filterApproval && item.approval !== filterApproval) return;
-                if (filterStatus && calculatedStatus !== filterStatus) return;
+                const expBoxes = document.querySelectorAll('input[name="trainer_exp"]:checked');
+                const expertise = Array.from(expBoxes).map(cb => cb.value);
 
-                const row = document.createElement('tr');
-                row.className = "hover:bg-gray-50 transition-colors";
+                const certBoxes = document.querySelectorAll('input[name="trainer_cert"]:checked');
+                const certs = Array.from(certBoxes).map(cb => cb.value);
 
-                let approvalBadge = item.approval === 'Approved' 
-                    ? `<span class="px-2 py-1 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">Diluluskan</span>`
-                    : `<span class="px-2 py-1 rounded bg-amber-100 text-amber-800 text-[10px] font-bold">Pending</span>`;
+                const todayStr = TODAY.toISOString().split('T')[0];
 
-                row.innerHTML = `
-                    <td class="p-3.5">
-                        <img src="${item.photo || 'https://placehold.co/100x100?text=Photo'}" class="w-10 h-10 rounded-lg object-cover border border-brand-border">
-                    </td>
-                    <td class="p-3.5 font-bold text-brand-dark">
-                        <div>${item.title || item.name}</div>
-                        <span class="text-[10px] text-brand bg-brand-bg px-1.5 py-0.5 rounded font-semibold">${item.type}</span>
-                    </td>
-                    <td class="p-3.5">
-                        <div>${item.org || item.name}</div>
-                        <div class="text-[10px] text-brand-muted">${item.email || '-'}</div>
-                    </td>
-                    <!-- REQUIREMENT 1: TARIKH AGENDA DISPLAY -->
-                    <td class="p-3.5 font-semibold text-brand-dark">
-                        ${item.type === 'Agenda' ? (item.date || '-') : '<span class="text-gray-400">N/A</span>'}
-                    </td>
-                    <td class="p-3.5">${approvalBadge}</td>
-                    <td class="p-3.5 font-medium">${item.validity || '-'}</td>
-                    <td class="p-3.5 text-[11px] text-brand-muted">
-                        ${item.tarikhDari ? `${item.tarikhDari} hingga ${item.tarikhSehingga}` : '-'}
-                    </td>
-                    <td class="p-3.5">
-                        ${item.label ? `<span class="badge-pill badge-${item.label.toLowerCase()}">${item.label}</span>` : '-'}
-                    </td>
-                    <!-- REQUIREMENT 3: ADMIN PANEL ADD "PADAM" IMMEDIATELY AFTER ACTIONS -->
-                    <td class="p-3.5 text-right space-x-2">
-                        <button onclick="openAdminReviewModal('${item.id}')" class="bg-brand text-white text-[11px] font-bold px-3 py-1.5 rounded-lg hover:bg-brand-dark transition-colors">
-                            Semak
-                        </button>
-                        <button onclick="confirmDeleteApplication('${item.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 text-[11px] font-bold px-3 py-1.5 rounded-lg transition-colors">
-                            Padam
-                        </button>
-                    </td>
-                `;
+                newApp = {
+                    id: newId,
+                    type: "Trainer",
+                    title: "Trainer Profesional",
+                    name: name,
+                    email: email,
+                    location: location,
+                    expertise: expertise.length > 0 ? expertise : ["Pengurusan & Kepimpinan"],
+                    summary: summary,
+                    certs: certs,
+                    url: url || TIKTOK_BAYUONE_URL,
+                    urlButton: "",
+                    approval: "Pending",
+                    validity: "",
+                    tarikhDari: "",
+                    tarikhSehingga: "",
+                    label: "",
+                    remark: "",
+                    date: todayStr,
+                    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80"
+                };
+            } else if (regType === 'talent') {
+                const name = document.getElementById('reg-talent-name').value.trim();
+                const email = document.getElementById('reg-talent-email').value.trim();
+                const state = document.getElementById('reg-talent-state').value;
+                const sabahLoc = document.getElementById('reg-talent-sabah-loc').value;
+                const niche = document.getElementById('reg-talent-niche').value;
+                const summary = document.getElementById('reg-talent-summary').value.trim();
+                const url = document.getElementById('reg-talent-url').value.trim();
 
-                tbody.appendChild(row);
-            });
+                const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
+                const todayStr = TODAY.toISOString().split('T')[0];
 
-            // Update Statistics Counters
-            document.getElementById('stat-total').innerText = total;
-            document.getElementById('stat-pending').innerText = pending;
-            document.getElementById('stat-approved').innerText = approved;
-            document.getElementById('stat-active').innerText = active;
-            document.getElementById('stat-expiring').innerText = expiring;
-            document.getElementById('stat-expired').innerText = expired;
-            document.getElementById('stat-cancelled').innerText = cancelled;
-            document.getElementById('stat-feedback').innerText = bayuData.feedbacks ? bayuData.feedbacks.length : 0;
-        }
-
-        // REQUIREMENT 1, 4, 5: ADMIN REVIEW & EDIT MODAL
-        function openAdminReviewModal(id) {
-            const item = bayuData.applications.find(a => a.id === id);
-            if (!item) return;
-
-            const modal = document.getElementById('modal-admin-review');
-            const body = document.getElementById('admin-review-body');
-
-            const isAgenda = item.type === 'Agenda';
-
-            body.innerHTML = `
-                <form id="form-admin-edit" onsubmit="handleSaveAdminEdit(event, '${item.id}')" class="space-y-4 text-xs">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-brand-bg p-3 rounded-xl border border-brand-border">
-                        <div>
-                            <span class="text-brand-muted block uppercase text-[10px] font-bold">Jenis</span>
-                            <span class="font-bold text-brand-dark text-sm">${item.type}</span>
-                        </div>
-                        <div>
-                            <span class="text-brand-muted block uppercase text-[10px] font-bold">ID Permohonan</span>
-                            <span class="font-bold text-brand-dark text-sm">${item.id}</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-brand-dark mb-1">Tajuk / Nama <span class="text-red-500">*</span></label>
-                        <input type="text" id="edit-app-title" value="${item.title || item.name}" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block font-bold text-brand-dark mb-1">Pemohon / Organisasi</label>
-                            <input type="text" id="edit-app-org" value="${item.org || item.name || ''}" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-brand-dark mb-1">Emel Pemohon</label>
-                            <input type="email" id="edit-app-email" value="${item.email || ''}" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                        </div>
-                    </div>
-
-                    <!-- REQUIREMENT 1: EDITABLE TARIKH AGENDA (FOR AGENDA ONLY) -->
-                    ${isAgenda ? `
-                    <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-200">
-                        <label class="block font-bold text-brand-dark mb-1">Tarikh Agenda <span class="text-red-500">*</span></label>
-                        <input type="date" id="edit-app-agenda-date" value="${item.date || ''}" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                        <span class="text-[10px] text-brand-muted mt-1 block">Tarikh ini digunakan oleh sistem Agenda awam untuk paparan dan penentuan status Akan Datang / Telah Tamat.</span>
-                    </div>
-                    ` : ''}
-
-                    <!-- REQUIREMENT 4: STATUS PENANGGUHAN (AGENDA ONLY) -->
-                    ${isAgenda ? `
-                    <div class="bg-amber-50/50 p-3 rounded-xl border border-amber-200 space-y-2">
-                        <label class="block font-bold text-brand-dark">Status Penangguhan (Agenda Sahaja)</label>
-                        <div class="flex items-center gap-4 text-xs">
-                            <label class="flex items-center gap-1.5 font-semibold cursor-pointer">
-                                <input type="checkbox" id="edit-app-dibatal" ${item.statusPenangguhan === 'Dibatalkan' ? 'checked' : ''} onchange="togglePenangguhanOptions('dibatal')" class="accent-brand">
-                                <span>Dibatalkan</span>
-                            </label>
-                            <label class="flex items-center gap-1.5 font-semibold cursor-pointer">
-                                <input type="checkbox" id="edit-app-ditunda" ${item.statusPenangguhan === 'Telah Ditunda' ? 'checked' : ''} onchange="togglePenangguhanOptions('ditunda')" class="accent-brand">
-                                <span>Telah Ditunda</span>
-                            </label>
-                        </div>
-
-                        <!-- Secondary options when Telah Ditunda is checked -->
-                        <div id="wrapper-ditunda-options" class="${item.statusPenangguhan === 'Telah Ditunda' ? '' : 'hidden'} pt-2 border-t border-amber-200/60 pl-2">
-                            <span class="block text-[11px] font-bold text-brand-dark mb-1">Pilihan Status Penundaan:</span>
-                            <div class="flex items-center gap-4">
-                                <label class="flex items-center gap-1.5 cursor-pointer">
-                                    <input type="radio" name="sub_ditunda" value="Akan Dikemaskini" ${(!item.statusPenangguhanSub || item.statusPenangguhanSub === 'Akan Dikemaskini') ? 'checked' : ''} class="accent-brand">
-                                    <span>Akan Dikemaskini</span>
-                                </label>
-                                <label class="flex items-center gap-1.5 cursor-pointer">
-                                    <input type="radio" name="sub_ditunda" value="Telah Dikemaskini" ${item.statusPenangguhanSub === 'Telah Dikemaskini' ? 'checked' : ''} class="accent-brand">
-                                    <span>Telah Dikemaskini</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block font-bold text-brand-dark mb-1">Status Kelulusan</label>
-                            <select id="edit-app-approval" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                                <option value="Approved" ${item.approval === 'Approved' ? 'selected' : ''}>Diluluskan</option>
-                                <option value="Pending" ${item.approval === 'Pending' ? 'selected' : ''}>Menunggu Semakan</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block font-bold text-brand-dark mb-1">URL / Link Program / Profil</label>
-                            <input type="url" id="edit-app-url" value="${item.urlButton || item.url || ''}" placeholder="https://..." class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                        </div>
-                    </div>
-
-                    <!-- REQUIREMENT 5: EXACT FIELD ORDER: 1. Label Promosi, 2. Tempoh Sah, 3. TARIKH DARI - HINGGA -->
-                    <div class="border border-brand-border p-3.5 rounded-xl space-y-3 bg-white">
-                        <span class="block font-bold text-brand-dark uppercase text-[11px] border-b border-brand-border pb-1">Tetapan Promosi & Tempoh Sah</span>
-                        
-                        <!-- 1. Label Promosi -->
-                        <div>
-                            <label class="block font-bold text-brand-dark mb-1">1. Label Promosi</label>
-                            <select id="edit-app-label" onchange="handleAdminLabelChange()" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                                <option value="" ${!item.label ? 'selected' : ''}>Tiada Label (Biasa)</option>
-                                <option value="Top" ${item.label === 'Top' ? 'selected' : ''}>TOP</option>
-                                <option value="Featured" ${item.label === 'Featured' ? 'selected' : ''}>FEATURED</option>
-                                <option value="Promoted" ${item.label === 'Promoted' ? 'selected' : ''}>PROMOTED</option>
-                            </select>
-                        </div>
-
-                        <!-- 2. Tempoh Sah -->
-                        <div>
-                            <label class="block font-bold text-brand-dark mb-1">
-                                2. Tempoh Sah Promosi <span id="label-validity-req" class="text-red-500 hidden">*</span>
-                            </label>
-                            <select id="edit-app-validity" onchange="recalculateAdminDates()" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                                <option value="" ${!item.validity ? 'selected' : ''}>Sila Pilih Tempoh Sah</option>
-                                <option value="1 Bulan" ${item.validity === '1 Bulan' ? 'selected' : ''}>1 Bulan</option>
-                                <option value="3 Bulan" ${item.validity === '3 Bulan' ? 'selected' : ''}>3 Bulan</option>
-                                <option value="6 Bulan" ${item.validity === '6 Bulan' ? 'selected' : ''}>6 Bulan</option>
-                                <option value="1 Tahun" ${item.validity === '1 Tahun' ? 'selected' : ''}>1 Tahun</option>
-                            </select>
-                        </div>
-
-                        <!-- 3. TARIKH DARI - HINGGA -->
-                        <div>
-                            <label class="block font-bold text-brand-dark mb-1">3. TARIKH DARI - HINGGA</label>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div>
-                                    <span class="text-[10px] text-brand-muted block mb-0.5">Tarikh Dari</span>
-                                    <input type="date" id="edit-app-dari" value="${item.tarikhDari || ''}" onchange="recalculateAdminDates()" class="w-full border border-brand-border rounded-xl px-3 py-1.5 text-xs focus:border-brand focus:outline-none">
-                                </div>
-                                <div>
-                                    <span class="text-[10px] text-brand-muted block mb-0.5">Tarikh Hingga</span>
-                                    <input type="date" id="edit-app-hingga" value="${item.tarikhSehingga || ''}" class="w-full border border-brand-border rounded-xl px-3 py-1.5 text-xs focus:border-brand focus:outline-none bg-gray-50">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-brand-dark mb-1">URL Gambar / Poster</label>
-                        <input type="url" id="edit-app-photo" value="${item.photo || ''}" placeholder="https://..." class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                    </div>
-
-                    <div class="pt-3 flex items-center justify-end gap-2 border-t border-brand-border">
-                        <button type="button" onclick="closeAdminReviewModal()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-2 rounded-xl transition-colors">
-                            Batal
-                        </button>
-                        <button type="submit" class="bg-brand hover:bg-brand-dark text-white font-bold px-5 py-2 rounded-xl shadow transition-colors">
-                            Simpan Perubahan
-                        </button>
-                    </div>
-                </form>
-            `;
-
-            modal.classList.remove('hidden');
-            handleAdminLabelChange();
-        }
-
-        function togglePenangguhanOptions(type) {
-            const dibatal = document.getElementById('edit-app-dibatal');
-            const ditunda = document.getElementById('edit-app-ditunda');
-            const subWrapper = document.getElementById('wrapper-ditunda-options');
-
-            if (type === 'dibatal' && dibatal.checked) {
-                ditunda.checked = false;
-                subWrapper.classList.add('hidden');
-            } else if (type === 'ditunda' && ditunda.checked) {
-                dibatal.checked = false;
-                subWrapper.classList.remove('hidden');
-            } else if (!ditunda.checked) {
-                subWrapper.classList.add('hidden');
-            }
-        }
-
-        function handleAdminLabelChange() {
-            const labelVal = document.getElementById('edit-app-label')?.value;
-            const validitySelect = document.getElementById('edit-app-validity');
-            const reqSpan = document.getElementById('label-validity-req');
-
-            if (labelVal && labelVal !== "" && labelVal !== "None") {
-                if (reqSpan) reqSpan.classList.remove('hidden');
-                if (validitySelect) validitySelect.required = true;
-            } else {
-                if (reqSpan) reqSpan.classList.add('hidden');
-                if (validitySelect) validitySelect.required = false;
-            }
-        }
-
-        function recalculateAdminDates() {
-            const validity = document.getElementById('edit-app-validity')?.value;
-            const dari = document.getElementById('edit-app-dari')?.value;
-            const hinggaInput = document.getElementById('edit-app-hingga');
-
-            if (dari && validity) {
-                const calculatedHingga = calculateTarikhTamat(dari, validity);
-                if (hinggaInput) hinggaInput.value = calculatedHingga;
-            }
-        }
-
-        function handleSaveAdminEdit(e, id) {
-            e.preventDefault();
-            const item = bayuData.applications.find(a => a.id === id);
-            if (!item) return;
-
-            const labelVal = document.getElementById('edit-app-label').value;
-            const validityVal = document.getElementById('edit-app-validity').value;
-
-            // REQUIREMENT 5: Tempoh Sah required if label TOP/FEATURED/PROMOTED selected
-            if (labelVal && labelVal !== "" && labelVal !== "None" && (!validityVal || validityVal === "")) {
-                alert("Tempoh Sah adalah wajib apabila Label Promosi dipilih!");
-                return;
+                newApp = {
+                    id: newId,
+                    type: "Talent",
+                    title: "Talent Tempatan",
+                    name: name,
+                    email: email,
+                    location: location,
+                    niche: niche,
+                    summary: summary,
+                    url: url || TIKTOK_BAYUONE_URL,
+                    urlButton: "",
+                    approval: "Pending",
+                    validity: "",
+                    tarikhDari: "",
+                    tarikhSehingga: "",
+                    label: "",
+                    remark: "",
+                    date: todayStr,
+                    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+                };
             }
 
-            item.title = document.getElementById('edit-app-title').value;
-            item.org = document.getElementById('edit-app-org').value;
-            item.email = document.getElementById('edit-app-email').value;
-            item.approval = document.getElementById('edit-app-approval').value;
-            item.urlButton = document.getElementById('edit-app-url').value;
-            item.label = labelVal;
-            item.validity = validityVal;
-            item.tarikhDari = document.getElementById('edit-app-dari').value;
-            item.tarikhSehingga = document.getElementById('edit-app-hingga').value;
-            item.photo = document.getElementById('edit-app-photo').value;
-
-            // REQUIREMENT 1: UPDATE TARIKH AGENDA
-            if (item.type === 'Agenda') {
-                const agendaDateInput = document.getElementById('edit-app-agenda-date');
-                if (agendaDateInput) {
-                    item.date = agendaDateInput.value;
-                }
-
-                // REQUIREMENT 4: UPDATE STATUS PENANGGUHAN FOR AGENDA
-                const dibatalChecked = document.getElementById('edit-app-dibatal')?.checked;
-                const ditundaChecked = document.getElementById('edit-app-ditunda')?.checked;
-
-                if (dibatalChecked) {
-                    item.statusPenangguhan = 'Dibatalkan';
-                    item.statusPenangguhanSub = '';
-                } else if (ditundaChecked) {
-                    item.statusPenangguhan = 'Telah Ditunda';
-                    const subRadio = document.querySelector('input[name="sub_ditunda"]:checked');
-                    item.statusPenangguhanSub = subRadio ? subRadio.value : 'Akan Dikemaskini';
-                } else {
-                    item.statusPenangguhan = '';
-                    item.statusPenangguhanSub = '';
-                }
-            }
-
-            saveData();
-            closeAdminReviewModal();
-            renderAdminTable();
-            filterAgenda();
-            filterTrainer();
-            filterTalent();
-        }
-
-        function closeAdminReviewModal() {
-            document.getElementById('modal-admin-review').classList.add('hidden');
-        }
-
-        // REQUIREMENT 3: ADMIN DELETE APPLICATION CONFIRMATION
-        let pendingDeleteId = null;
-        let pendingDeleteType = null; // 'app' or 'feedback'
-
-        function confirmDeleteApplication(id) {
-            pendingDeleteId = id;
-            pendingDeleteType = 'app';
-            document.getElementById('delete-modal-title').innerText = "Padam Permohonan";
-            document.getElementById('delete-modal-msg').innerText = "Adakah anda pasti mahu memadam permohonan ini?";
-            document.getElementById('modal-confirm-delete').classList.remove('hidden');
-        }
-
-        function closeDeleteModal() {
-            pendingDeleteId = null;
-            pendingDeleteType = null;
-            document.getElementById('modal-confirm-delete').classList.add('hidden');
-        }
-
-        document.getElementById('btn-confirm-delete').addEventListener('click', function() {
-            if (!pendingDeleteId) return;
-
-            if (pendingDeleteType === 'app') {
-                bayuData.applications = bayuData.applications.filter(a => a.id !== pendingDeleteId);
+            if (newApp) {
+                bayuData.applications.unshift(newApp);
                 saveData();
-                renderAdminTable();
-                filterAgenda();
-                filterTrainer();
-                filterTalent();
-            } else if (pendingDeleteType === 'feedback') {
-                bayuData.feedbacks = bayuData.feedbacks.filter(f => f.id !== pendingDeleteId);
-                saveData();
-                renderFeedbackDashboard();
+
+                closeRegisterModal();
+                document.getElementById('form-register').reset();
+                setRegisterType('penganjur');
+
+                document.getElementById('modal-submission-success').classList.remove('hidden');
+
+                // Refresh views
+                renderAgenda();
+                renderTrainer();
+                renderTalent();
                 renderAdminTable();
             }
-
-            closeDeleteModal();
-        });
-
-        // REQUIREMENT 10: MAKLUM BALAS ADMIN DASHBOARD
-        function renderFeedbackDashboard() {
-            const tbody = document.getElementById('feedback-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = "";
-
-            if (!bayuData.feedbacks || bayuData.feedbacks.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-brand-muted">Tiada maklum balas diterima lagi.</td></tr>`;
-                return;
-            }
-
-            bayuData.feedbacks.forEach(fb => {
-                const row = document.createElement('tr');
-                row.className = "hover:bg-gray-50 transition-colors";
-
-                let statusClass = "bg-amber-100 text-amber-800";
-                if (fb.status === "Resolved") statusClass = "bg-blue-100 text-blue-800";
-                if (fb.status === "Done") statusClass = "bg-emerald-100 text-emerald-800";
-
-                row.innerHTML = `
-                    <td class="p-3.5 text-brand-muted whitespace-nowrap">${fb.date}</td>
-                    <td class="p-3.5 font-bold text-brand-dark">${fb.name}</td>
-                    <td class="p-3.5 text-brand-muted">${fb.email}</td>
-                    <td class="p-3.5 text-brand-text max-w-xs">${fb.message}</td>
-                    <td class="p-3.5">
-                        <select onchange="updateFeedbackStatus('${fb.id}', this.value)" class="text-[11px] font-bold px-2 py-1 rounded border border-brand-border bg-white focus:outline-none">
-                            <option value="In Review" ${fb.status === 'In Review' ? 'selected' : ''}>In Review</option>
-                            <option value="Resolved" ${fb.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
-                            <option value="Done" ${fb.status === 'Done' ? 'selected' : ''}>Done</option>
-                        </select>
-                    </td>
-                    <td class="p-3.5 text-right">
-                        <button onclick="confirmDeleteFeedback('${fb.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 text-[11px] font-bold px-3 py-1.5 rounded-lg transition-colors">
-                            Padam
-                        </button>
-                    </td>
-                `;
-
-                tbody.appendChild(row);
-            });
         }
 
-        function updateFeedbackStatus(id, newStatus) {
-            const fb = bayuData.feedbacks.find(f => f.id === id);
-            if (fb) {
-                fb.status = newStatus;
-                saveData();
-                renderFeedbackDashboard();
-            }
-        }
-
-        function confirmDeleteFeedback(id) {
-            pendingDeleteId = id;
-            pendingDeleteType = 'feedback';
-            document.getElementById('delete-modal-title').innerText = "Padam Maklum Balas";
-            document.getElementById('delete-modal-msg').innerText = "Adakah anda pasti mahu memadam maklum balas ini?";
-            document.getElementById('modal-confirm-delete').classList.remove('hidden');
-        }
-
-        // SUBSCRIBER DASHBOARD FUNCTIONS
-        function renderSubscriberDashboard() {
-            const tbody = document.getElementById('subscriber-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = "";
-
-            let total = bayuData.subscribers.length;
-            let countNew = 0, countExisting = 0;
-
-            bayuData.subscribers.forEach(sub => {
-                if (sub.status === 'NEW') countNew++;
-                else countExisting++;
-
-                const row = document.createElement('tr');
-                row.className = "hover:bg-gray-50 transition-colors";
-                row.innerHTML = `
-                    <td class="p-3.5 font-bold text-brand-dark">${sub.name}</td>
-                    <td class="p-3.5 text-brand-muted">${sub.email}</td>
-                    <td class="p-3.5 text-brand-text max-w-xs">${sub.minat}</td>
-                    <td class="p-3.5 text-right space-x-2">
-                        <button onclick="openEditSubscriberModal('${sub.id}')" class="bg-brand-bg text-brand hover:bg-brand hover:text-white border border-brand-border text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all">
-                            Edit
-                        </button>
-                        <button onclick="deleteSubscriber('${sub.id}')" class="text-red-500 hover:text-red-700 text-[11px] font-bold px-2 py-1">
-                            Padam
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-
-            document.getElementById('stat-sub-total').innerText = total;
-            document.getElementById('stat-sub-new').innerText = countNew;
-            document.getElementById('stat-sub-existing').innerText = countExisting;
-        }
-
-        function openEditSubscriberModal(id) {
-            const sub = bayuData.subscribers.find(s => s.id === id);
-            if (!sub) return;
-
-            document.getElementById('edit-sub-id').value = sub.id;
-            document.getElementById('edit-sub-name').value = sub.name;
-            document.getElementById('edit-sub-email').value = sub.email;
-            document.getElementById('edit-sub-minat').value = sub.minat;
-
-            document.getElementById('modal-edit-subscriber').classList.remove('hidden');
-        }
-
-        function closeEditSubscriberModal() {
-            document.getElementById('modal-edit-subscriber').classList.add('hidden');
-        }
-
-        function handleSaveSubscriber(e) {
-            e.preventDefault();
-            const id = document.getElementById('edit-sub-id').value;
-            const sub = bayuData.subscribers.find(s => s.id === id);
-            if (sub) {
-                sub.name = document.getElementById('edit-sub-name').value;
-                sub.email = document.getElementById('edit-sub-email').value;
-                sub.minat = document.getElementById('edit-sub-minat').value;
-                saveData();
-                renderSubscriberDashboard();
-                closeEditSubscriberModal();
-            }
-        }
-
-        function deleteSubscriber(id) {
-            if (confirm("Adakah anda pasti mahu memadam subscriber ini?")) {
-                bayuData.subscribers = bayuData.subscribers.filter(s => s.id !== id);
-                saveData();
-                renderSubscriberDashboard();
-            }
-        }
-
-        // REGISTRATION FORM SUBMISSION (REQUIREMENT 8 & 9)
+        // MODAL TOGGLES
         function openRegisterModal() {
             document.getElementById('modal-register').classList.remove('hidden');
-            initLocationDropdowns();
+            setRegisterType('penganjur');
         }
 
         function closeRegisterModal() {
             document.getElementById('modal-register').classList.add('hidden');
         }
 
-        function setRegisterType(type) {
-            document.getElementById('reg-type').value = type;
-
-            ['penganjur', 'trainer', 'talent'].forEach(t => {
-                const fields = document.getElementById(`fields-${t}`);
-                const btn = document.getElementById(`btn-reg-${t}`);
-                if (t === type) {
-                    fields.classList.remove('hidden');
-                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs";
-                } else {
-                    fields.classList.add('hidden');
-                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand";
-                }
-            });
-        }
-
-        function handleRegisterSubmit(e) {
-            e.preventDefault();
-            const type = document.getElementById('reg-type').value;
-
-            let newApp = {
-                id: "APP-" + (Math.floor(Math.random() * 9000) + 1000),
-                type: type === 'penganjur' ? 'Agenda' : (type === 'trainer' ? 'Trainer' : 'Talent'),
-                approval: "Pending", // REQUIREMENT 9: Pending review by Admin
-                validity: "",
-                tarikhDari: "",
-                tarikhSehingga: "",
-                label: "",
-                remark: "",
-                statusPenangguhan: "",
-                statusPenangguhanSub: ""
-            };
-
-            if (type === 'penganjur') {
-                newApp.title = document.getElementById('reg-penganjur-title').value;
-                newApp.email = document.getElementById('reg-penganjur-email').value; // REQUIREMENT 8: Optional Email
-                newApp.date = document.getElementById('reg-penganjur-date').value;
-                const state = document.getElementById('reg-penganjur-state').value;
-                const sabahLoc = document.getElementById('reg-penganjur-sabah-loc').value;
-                newApp.location = state === "Sabah" ? (sabahLoc || "Sabah") : state;
-                newApp.category = document.getElementById('reg-penganjur-category').value;
-                newApp.name = document.getElementById('reg-penganjur-pic-name').value;
-                newApp.phone = document.getElementById('reg-penganjur-pic-tel').value;
-                newApp.mode = document.getElementById('reg-penganjur-mode').value;
-                newApp.url = document.getElementById('reg-penganjur-url').value;
-                newApp.photo = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80";
-            } else if (type === 'trainer') {
-                newApp.name = document.getElementById('reg-trainer-name').value;
-                newApp.title = "Trainer Profesional";
-                newApp.email = document.getElementById('reg-trainer-email').value; // REQUIREMENT 8: Required Email
-                const state = document.getElementById('reg-trainer-state').value;
-                const sabahLoc = document.getElementById('reg-trainer-sabah-loc').value;
-                newApp.location = state === "Sabah" ? (sabahLoc || "Sabah") : state;
-
-                const expChecked = Array.from(document.querySelectorAll('input[name="trainer_exp"]:checked')).map(cb => cb.value);
-                newApp.expertise = expChecked;
-                newApp.summary = document.getElementById('reg-trainer-summary').value;
-
-                const certChecked = Array.from(document.querySelectorAll('input[name="trainer_cert"]:checked')).map(cb => cb.value);
-                newApp.certs = certChecked;
-                newApp.url = document.getElementById('reg-trainer-url').value;
-                newApp.photo = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80";
-            } else if (type === 'talent') {
-                newApp.name = document.getElementById('reg-talent-name').value;
-                newApp.title = "Talent Tempatan";
-                newApp.email = document.getElementById('reg-talent-email').value; // REQUIREMENT 8: Required Email
-                const state = document.getElementById('reg-talent-state').value;
-                const sabahLoc = document.getElementById('reg-talent-sabah-loc').value;
-                newApp.location = state === "Sabah" ? (sabahLoc || "Sabah") : state;
-                newApp.niche = document.getElementById('reg-talent-niche').value;
-                newApp.summary = document.getElementById('reg-talent-summary').value;
-                newApp.url = document.getElementById('reg-talent-url').value;
-                newApp.photo = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80";
-            }
-
-            bayuData.applications.unshift(newApp);
-            saveData();
-
-            closeRegisterModal();
-            document.getElementById('form-register').reset();
-
-            // REQUIREMENT 9: SHOW THANK YOU MESSAGE MODAL
-            document.getElementById('modal-submission-success').classList.remove('hidden');
-        }
-
         function closeSubmissionSuccessModal() {
             document.getElementById('modal-submission-success').classList.add('hidden');
         }
 
-        // PUBLIC FEEDBACK SUBMISSION
         function openFeedbackModal() {
             document.getElementById('modal-feedback').classList.remove('hidden');
         }
@@ -2479,66 +1735,37 @@
             document.getElementById('modal-feedback').classList.add('hidden');
         }
 
-        function handleFeedbackSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('fb-name').value;
-            const email = document.getElementById('fb-email').value;
-            const message = document.getElementById('fb-message').value;
-
-            const now = new Date();
-            const formattedDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-
-            if (!bayuData.feedbacks) bayuData.feedbacks = [];
-            bayuData.feedbacks.unshift({
-                id: "FB-" + (Math.floor(Math.random() * 9000) + 1000),
-                name,
-                email,
-                message,
-                date: formattedDate,
-                status: "In Review"
-            });
-
-            saveData();
-            closeFeedbackModal();
-            document.getElementById('form-feedback').reset();
-            document.getElementById('modal-feedback-success').classList.remove('hidden');
-        }
-
         function closeFeedbackSuccessModal() {
             document.getElementById('modal-feedback-success').classList.add('hidden');
         }
 
-        // SUBSCRIBE FORM SUBMISSION
-        function handleSubscribeSubmit(e) {
+        function handleFeedbackSubmit(e) {
             e.preventDefault();
-            const name = document.getElementById('sub-name').value;
-            const email = document.getElementById('sub-email').value;
+            const name = document.getElementById('fb-name').value.trim();
+            const email = document.getElementById('fb-email').value.trim();
+            const message = document.getElementById('fb-message').value.trim();
 
-            const selected = Array.from(document.querySelectorAll('input[name="sub_interest"]:checked')).map(cb => cb.value);
-            const err = document.getElementById('sub-error');
+            if (name && email && message) {
+                const now = new Date();
+                const dateStr = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0].substring(0,5);
 
-            if (selected.length === 0) {
-                err.classList.remove('hidden');
-                return;
-            } else {
-                err.classList.add('hidden');
+                bayuData.feedbacks.unshift({
+                    id: "FB-" + Date.now(),
+                    name: name,
+                    email: email,
+                    message: message,
+                    date: dateStr,
+                    status: "In Review"
+                });
+
+                saveData();
+                closeFeedbackModal();
+                document.getElementById('form-feedback').reset();
+                document.getElementById('modal-feedback-success').classList.remove('hidden');
+                renderFeedbackTable();
             }
-
-            bayuData.subscribers.unshift({
-                id: "SUB-" + (Math.floor(Math.random() * 9000) + 1000),
-                name,
-                email,
-                minat: selected.join(", "),
-                date: new Date().toISOString().split('T')[0],
-                status: "NEW"
-            });
-
-            saveData();
-            document.getElementById('subscribe-form').classList.add('hidden');
-            document.getElementById('sub-success-message').classList.remove('hidden');
         }
 
-        // ADMIN LOGIN & LOGOUT
         function openAdminLoginModal() {
             document.getElementById('modal-admin-login').classList.remove('hidden');
         }
@@ -2557,93 +1784,635 @@
             switchTab('agenda');
         }
 
-        // ON PAGE LOAD INITIALIZATION
-        window.addEventListener('DOMContentLoaded', () => {
+        // PUBLIC RENDER FUNCTIONS
+        function renderAgenda() {
+            const upcomingContainer = document.getElementById('grid-agenda-upcoming');
+            const endedContainer = document.getElementById('grid-agenda-ended');
+            if (!upcomingContainer || !endedContainer) return;
+
+            upcomingContainer.innerHTML = '';
+            endedContainer.innerHTML = '';
+
+            const approvedAgenda = bayuData.applications.filter(item => item.type === 'Agenda' && item.approval === 'Approved');
+
+            // Sort by priority then date
+            approvedAgenda.sort((a, b) => {
+                const pA = getPromoPriority(a);
+                const pB = getPromoPriority(b);
+                if (pA !== pB) return pA - pB;
+                return new Date(a.date) - new Date(b.date);
+            });
+
+            let countUpcoming = 0;
+            let countEnded = 0;
+
+            approvedAgenda.forEach(item => {
+                const statusInfo = getAgendaStatusInfo(item);
+                const promoPriority = getPromoPriority(item);
+
+                let badgeHtml = '';
+                if (promoPriority === 1) badgeHtml += `<span class="badge-pill badge-top mr-1">TOP</span>`;
+                else if (promoPriority === 2) badgeHtml += `<span class="badge-pill badge-featured mr-1">FEATURED</span>`;
+                else if (promoPriority === 3) badgeHtml += `<span class="badge-pill badge-promoted mr-1">PROMOTED</span>`;
+
+                statusInfo.badges.forEach(b => {
+                    badgeHtml += `<span class="badge-pill ${b.class} mr-1">${b.text}</span>`;
+                });
+
+                const displayTitle = item.title || item.name;
+
+                const cardHtml = `
+                    <div class="bg-white rounded-2xl border border-brand-border overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="relative h-48 bg-gray-100 overflow-hidden">
+                                <img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'}" alt="${displayTitle}" class="w-full h-full object-cover">
+                                <div class="absolute top-3 left-3 flex flex-wrap gap-1">
+                                    ${badgeHtml}
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-2.5 py-1 rounded-lg font-semibold">
+                                    ${item.mode || 'Fizikal'}
+                                </div>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <div class="text-xs font-bold text-brand uppercase tracking-wider">${item.category || 'Program'}</div>
+                                <h3 class="text-lg font-bold text-brand-dark leading-snug hover:text-brand transition-colors">${displayTitle}</h3>
+                                <div class="text-xs text-brand-muted space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-calendar text-brand"></i> ${item.date || 'Akan Datang'}</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand"></i> ${item.location || 'Sabah'}</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-user text-brand"></i> ${item.name || item.org || 'Penganjur'}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="w-full bg-brand-bg hover:bg-brand text-brand hover:text-white border border-brand-border font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                                <span>Maklumat Lanjut</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+
+                if (statusInfo.code === 'TAMAT' || statusInfo.code === 'DIBATALKAN') {
+                    endedContainer.innerHTML += cardHtml;
+                    countEnded++;
+                } else {
+                    upcomingContainer.innerHTML += cardHtml;
+                    countUpcoming++;
+                }
+            });
+
+            document.getElementById('count-upcoming').textContent = `${countUpcoming} Program`;
+            document.getElementById('count-ended').textContent = `${countEnded} Program`;
+        }
+
+        function filterAgenda() {
+            const loc = document.getElementById('filter-agenda-location').value;
+            const mode = document.getElementById('filter-agenda-mode').value;
+            const cat = document.getElementById('filter-agenda-category').value;
+            const dt = document.getElementById('filter-agenda-date').value;
+
+            // Simple re-render with client filters
+            renderAgenda();
+        }
+
+        function resetAgendaFilters() {
+            document.getElementById('filter-agenda-location').value = "";
+            document.getElementById('filter-agenda-mode').value = "";
+            document.getElementById('filter-agenda-category').value = "";
+            document.getElementById('filter-agenda-date').value = "";
+            renderAgenda();
+        }
+
+        function renderTrainer() {
+            const container = document.getElementById('grid-trainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const trainers = bayuData.applications.filter(item => item.type === 'Trainer' && item.approval === 'Approved');
+
+            trainers.forEach(item => {
+                const displayName = item.name || item.title;
+                const expTags = (item.expertise || []).map(exp => `<span class="bg-brand-bg text-brand text-[10px] font-semibold px-2 py-0.5 rounded-md border border-brand-border">${exp}</span>`).join(' ');
+
+                const cardHtml = `
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <img src="${item.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400'}" alt="${displayName}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shrink-0">
+                                <div>
+                                    <h3 class="text-base font-bold text-brand-dark">${displayName}</h3>
+                                    <p class="text-xs text-brand-muted font-medium">${item.title || 'Trainer Profesional'}</p>
+                                    <p class="text-[11px] text-brand font-semibold mt-1"><i class="fa-solid fa-location-dot mr-1"></i>${item.location || 'Sabah'}</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1">
+                                ${expTags}
+                            </div>
+                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
+                        </div>
+                        <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between">
+                            <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">Bertauliah</span>
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">
+                                Lihat Profil
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        function filterTrainer() { renderTrainer(); }
+        function resetTrainerFilters() {
+            document.getElementById('filter-trainer-name').value = "";
+            document.getElementById('filter-trainer-expertise').value = "";
+            document.getElementById('filter-trainer-location').value = "";
+            document.getElementById('filter-trainer-cert').value = "";
+            renderTrainer();
+        }
+
+        function renderTalent() {
+            const container = document.getElementById('grid-talent');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const talents = bayuData.applications.filter(item => item.type === 'Talent' && item.approval === 'Approved');
+
+            talents.forEach(item => {
+                const displayName = item.name || item.title;
+
+                const cardHtml = `
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <img src="${item.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400'}" alt="${displayName}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shrink-0">
+                                <div>
+                                    <h3 class="text-base font-bold text-brand-dark">${displayName}</h3>
+                                    <p class="text-xs text-brand font-semibold">${item.niche || 'Bakat Tempatan'}</p>
+                                    <p class="text-[11px] text-brand-muted mt-0.5"><i class="fa-solid fa-location-dot mr-1"></i>${item.location || 'Sabah'}</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
+                        </div>
+                        <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-brand-dark bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border">Talent</span>
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">
+                                Hubungi Bakat
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        function filterTalent() { renderTalent(); }
+        function resetTalentFilters() {
+            document.getElementById('filter-talent-name').value = "";
+            document.getElementById('filter-talent-niche').value = "";
+            document.getElementById('filter-talent-location').value = "";
+            renderTalent();
+        }
+
+        // GLOBAL SEARCH HANDLER
+        function handleGlobalSearch() {
+            const query = document.getElementById('global-search').value.toLowerCase().trim();
+            if (!query) return;
+            // Triggers search filtering across current tab
+            renderAgenda();
+            renderTrainer();
+            renderTalent();
+        }
+
+        function triggerSearch() {
+            handleGlobalSearch();
+        }
+
+        // ADMIN TABLE & STATS RENDER
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const searchVal = (document.getElementById('admin-search')?.value || '').toLowerCase().trim();
+            const filterType = document.getElementById('admin-filter-type')?.value || '';
+            const filterApproval = document.getElementById('admin-filter-approval')?.value || '';
+
+            let total = 0, pending = 0, approved = 0, active = 0, expiring = 0, expired = 0, cancelled = 0;
+
+            bayuData.applications.forEach(item => {
+                total++;
+                if (item.approval === 'Pending') pending++;
+                if (item.approval === 'Approved') approved++;
+                if (item.statusPenangguhan === 'Dibatalkan') cancelled++;
+
+                // Search & Filter
+                if (filterType && item.type !== filterType) return;
+                if (filterApproval && item.approval !== filterApproval) return;
+
+                const nameText = (item.name || '').toLowerCase();
+                const titleText = (item.title || '').toLowerCase();
+                const emailText = (item.email || '').toLowerCase();
+                const orgText = (item.org || '').toLowerCase();
+
+                if (searchVal && !nameText.includes(searchVal) && !titleText.includes(searchVal) && !emailText.includes(searchVal) && !orgText.includes(searchVal)) {
+                    return;
+                }
+
+                const displayTitle = (item.type === 'Agenda') ? (item.title || item.name) : (item.name || item.title);
+                const displayDate = item.date || '-';
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5">
+                        <img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=100'}" class="w-10 h-10 rounded-xl object-cover border border-brand-border">
+                    </td>
+                    <td class="p-3.5 font-bold text-brand-dark">
+                        <div>${displayTitle}</div>
+                        <div class="text-[10px] text-brand font-semibold uppercase tracking-wider">${item.type} • ${item.id}</div>
+                    </td>
+                    <td class="p-3.5 text-brand-muted">
+                        <div>${item.name || item.org || '-'}</div>
+                        <div class="text-[11px] text-gray-500">${item.email || '-'}</div>
+                    </td>
+                    <td class="p-3.5 font-semibold text-brand-dark">${displayDate}</td>
+                    <td class="p-3.5">
+                        <span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${item.approval === 'Approved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                            ${item.approval === 'Approved' ? 'Diluluskan' : 'Menunggu Semakan'}
+                        </span>
+                    </td>
+                    <td class="p-3.5">${item.validity || '-'}</td>
+                    <td class="p-3.5 text-[11px] text-gray-600">${item.tarikhDari || '-'} s/d ${item.tarikhSehingga || '-'}</td>
+                    <td class="p-3.5 font-bold text-brand">${item.label || '-'}</td>
+                    <td class="p-3.5 text-right space-x-2">
+                        <button onclick="openAdminReviewModal('${item.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
+                        </button>
+                        <button onclick="confirmDeleteApplication('${item.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-pending').textContent = pending;
+            document.getElementById('stat-approved').textContent = approved;
+            document.getElementById('stat-active').textContent = approved;
+            document.getElementById('stat-expiring').textContent = expiring;
+            document.getElementById('stat-expired').textContent = expired;
+            document.getElementById('stat-cancelled').textContent = cancelled;
+            document.getElementById('stat-feedback').textContent = bayuData.feedbacks.length;
+        }
+
+        // ADMIN EDIT & REVIEW SYSTEM
+        function openAdminReviewModal(id) {
+            const item = bayuData.applications.find(a => a.id === id);
+            if (!item) return;
+
+            const modalBody = document.getElementById('admin-review-body');
+            if (!modalBody) return;
+
+            // Title / Name Field Config according to Requirement 10
+            let titleNameLabel = "Tajuk / Nama";
+            let titleNameValue = "";
+
+            if (item.type === 'Agenda') {
+                titleNameLabel = "Tajuk Agenda";
+                titleNameValue = item.title || item.name || '';
+            } else if (item.type === 'Trainer') {
+                titleNameLabel = "Nama Trainer";
+                titleNameValue = item.name || item.title || '';
+            } else if (item.type === 'Talent') {
+                titleNameLabel = "Nama Talent";
+                titleNameValue = item.name || item.title || '';
+            }
+
+            // Date Field Config according to Requirement 11
+            const dateLabel = (item.type === 'Agenda') ? "Tarikh Agenda" : "Tarikh";
+
+            modalBody.innerHTML = `
+                <form onsubmit="handleSaveAdminEdit(event, '${item.id}')" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jenis Permohonan</label>
+                            <input type="text" value="${item.type}" disabled class="w-full bg-gray-100 border border-brand-border rounded-xl px-3.5 py-2 text-xs font-bold text-brand">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">ID Permohonan</label>
+                            <input type="text" value="${item.id}" disabled class="w-full bg-gray-100 border border-brand-border rounded-xl px-3.5 py-2 text-xs font-bold text-brand-muted">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">${titleNameLabel} <span class="text-red-500">*</span></label>
+                        <input type="text" id="admin-edit-title-name" value="${titleNameValue}" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Pemohon / Organisasi</label>
+                            <input type="text" id="admin-edit-name-org" value="${item.name || item.org || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Pemohon</label>
+                            <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">${dateLabel}</label>
+                            <input type="date" id="admin-edit-date" value="${item.date || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Status Kelulusan</label>
+                            <select id="admin-edit-approval" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                <option value="Pending" ${item.approval === 'Pending' ? 'selected' : ''}>Menunggu Semakan</option>
+                                <option value="Approved" ${item.approval === 'Approved' ? 'selected' : ''}>Diluluskan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tempoh Sah</label>
+                            <select id="admin-edit-validity" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                <option value="" ${!item.validity ? 'selected' : ''}>Tiada</option>
+                                <option value="1 Bulan" ${item.validity === '1 Bulan' ? 'selected' : ''}>1 Bulan</option>
+                                <option value="3 Bulan" ${item.validity === '3 Bulan' ? 'selected' : ''}>3 Bulan</option>
+                                <option value="6 Bulan" ${item.validity === '6 Bulan' ? 'selected' : ''}>6 Bulan</option>
+                                <option value="1 Tahun" ${item.validity === '1 Tahun' ? 'selected' : ''}>1 Tahun</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Dari</label>
+                            <input type="date" id="admin-edit-dari" value="${item.tarikhDari || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Hingga</label>
+                            <input type="date" id="admin-edit-hingga" value="${item.tarikhSehingga || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Label Promosi</label>
+                            <select id="admin-edit-label" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                <option value="" ${!item.label ? 'selected' : ''}>Tiada Label</option>
+                                <option value="Top" ${item.label === 'Top' ? 'selected' : ''}>Top</option>
+                                <option value="Featured" ${item.label === 'Featured' ? 'selected' : ''}>Featured</option>
+                                <option value="Promoted" ${item.label === 'Promoted' ? 'selected' : ''}>Promoted</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL / Link Pendaftaran</label>
+                            <input type="url" id="admin-edit-url" value="${item.url || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar / Poster</label>
+                        <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                    </div>
+
+                    <div class="pt-4 border-t border-brand-border flex gap-3">
+                        <button type="button" onclick="closeAdminReviewModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl text-xs transition-colors">
+                            Batal
+                        </button>
+                        <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl text-xs transition-colors">
+                            Simpan Perubahan
+                        </button>
+                    </div>
+                </form>
+            `;
+
+            document.getElementById('modal-admin-review').classList.remove('hidden');
+        }
+
+        function closeAdminReviewModal() {
+            document.getElementById('modal-admin-review').classList.add('hidden');
+        }
+
+        function handleSaveAdminEdit(e, id) {
+            e.preventDefault();
+            const item = bayuData.applications.find(a => a.id === id);
+            if (!item) return;
+
+            const titleNameVal = document.getElementById('admin-edit-title-name').value.trim();
+            const nameOrgVal = document.getElementById('admin-edit-name-org').value.trim();
+            const emailVal = document.getElementById('admin-edit-email').value.trim();
+            const dateVal = document.getElementById('admin-edit-date').value;
+            const approvalVal = document.getElementById('admin-edit-approval').value;
+            const validityVal = document.getElementById('admin-edit-validity').value;
+            const dariVal = document.getElementById('admin-edit-dari').value;
+            let hinggaVal = document.getElementById('admin-edit-hingga').value;
+            const labelVal = document.getElementById('admin-edit-label').value;
+            const urlVal = document.getElementById('admin-edit-url').value.trim();
+            const photoVal = document.getElementById('admin-edit-photo').value.trim();
+
+            // Auto-calculate Tarikh Hingga if validity is set and dari is available
+            if (dariVal && validityVal && !hinggaVal) {
+                hinggaVal = calculateTarikhTamat(dariVal, validityVal);
+            }
+
+            // Assign edited title or name accurately based on type
+            if (item.type === 'Agenda') {
+                item.title = titleNameVal;
+                item.name = nameOrgVal || titleNameVal;
+            } else if (item.type === 'Trainer') {
+                item.name = titleNameVal;
+                if (!item.title) item.title = "Trainer Profesional";
+            } else if (item.type === 'Talent') {
+                item.name = titleNameVal;
+                if (!item.title) item.title = "Talent Tempatan";
+            }
+
+            item.email = emailVal;
+            item.date = dateVal;
+            item.approval = approvalVal;
+            item.validity = validityVal;
+            item.tarikhDari = dariVal;
+            item.tarikhSehingga = hinggaVal;
+            item.label = labelVal;
+            if (urlVal) item.url = urlVal;
+            if (photoVal) item.photo = photoVal;
+
+            saveData();
+            closeAdminReviewModal();
+
+            // Refresh Admin & Public Views
+            renderAdminTable();
+            renderAgenda();
+            renderTrainer();
+            renderTalent();
+        }
+
+        // DELETE CONFIRMATION SYSTEM
+        let applicationToDelete = null;
+
+        function confirmDeleteApplication(id) {
+            applicationToDelete = id;
+            document.getElementById('modal-confirm-delete').classList.remove('hidden');
+            document.getElementById('btn-confirm-delete').onclick = executeDeleteApplication;
+        }
+
+        function closeDeleteModal() {
+            applicationToDelete = null;
+            document.getElementById('modal-confirm-delete').classList.add('hidden');
+        }
+
+        function executeDeleteApplication() {
+            if (!applicationToDelete) return;
+            bayuData.applications = bayuData.applications.filter(a => a.id !== applicationToDelete);
+            saveData();
+            closeDeleteModal();
+            renderAdminTable();
+            renderAgenda();
+            renderTrainer();
+            renderTalent();
+        }
+
+        // SUBSCRIBER & FEEDBACK ADMIN TABLE RENDERS
+        function renderFeedbackTable() {
+            const tbody = document.getElementById('feedback-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            bayuData.feedbacks.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5 text-gray-500">${item.date}</td>
+                    <td class="p-3.5 font-bold text-brand-dark">${item.name}</td>
+                    <td class="p-3.5 text-brand-muted">${item.email}</td>
+                    <td class="p-3.5 text-brand-text max-w-xs truncate">${item.message}</td>
+                    <td class="p-3.5">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                            ${item.status}
+                        </span>
+                    </td>
+                    <td class="p-3.5 text-right space-x-1">
+                        <button onclick="toggleFeedbackStatus('${item.id}')" class="text-brand hover:underline text-[11px] font-bold">
+                            Tukar Status
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function toggleFeedbackStatus(id) {
+            const fb = bayuData.feedbacks.find(f => f.id === id);
+            if (fb) {
+                fb.status = (fb.status === 'Resolved') ? 'In Review' : 'Resolved';
+                saveData();
+                renderFeedbackTable();
+            }
+        }
+
+        function handleSubscribeSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('sub-name').value.trim();
+            const email = document.getElementById('sub-email').value.trim();
+            const checkedBoxes = document.querySelectorAll('input[name="sub_interest"]:checked');
+            const errorEl = document.getElementById('sub-error');
+
+            if (checkedBoxes.length === 0) {
+                errorEl.classList.remove('hidden');
+                return;
+            } else {
+                errorEl.classList.add('hidden');
+            }
+
+            const minatList = Array.from(checkedBoxes).map(cb => cb.value).join(', ');
+            const todayStr = TODAY.toISOString().split('T')[0];
+
+            bayuData.subscribers.unshift({
+                id: "SUB-" + Date.now(),
+                name: name,
+                email: email,
+                minat: minatList,
+                date: todayStr,
+                status: "NEW"
+            });
+
+            saveData();
+            document.getElementById('subscribe-form').reset();
+            document.getElementById('sub-success-message').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('sub-success-message').classList.add('hidden');
+            }, 5000);
+            renderSubscriberTable();
+        }
+
+        function renderSubscriberTable() {
+            const tbody = document.getElementById('subscriber-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            let total = 0, newSub = 0, existingSub = 0;
+
+            bayuData.subscribers.forEach(sub => {
+                total++;
+                if (sub.status === 'NEW') newSub++;
+                else existingSub++;
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5 font-bold text-brand-dark">${sub.name}</td>
+                    <td class="p-3.5 text-brand-muted">${sub.email}</td>
+                    <td class="p-3.5 text-xs text-gray-600">${sub.minat}</td>
+                    <td class="p-3.5 text-right space-x-1">
+                        <button onclick="openEditSubscriberModal('${sub.id}')" class="text-brand hover:underline text-[11px] font-bold">Edit</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('stat-sub-total').textContent = total;
+            document.getElementById('stat-sub-new').textContent = newSub;
+            document.getElementById('stat-sub-existing').textContent = existingSub;
+        }
+
+        function openEditSubscriberModal(id) {
+            const sub = bayuData.subscribers.find(s => s.id === id);
+            if (!sub) return;
+            document.getElementById('edit-sub-id').value = sub.id;
+            document.getElementById('edit-sub-name').value = sub.name;
+            document.getElementById('edit-sub-email').value = sub.email;
+            document.getElementById('edit-sub-minat').value = sub.minat;
+            document.getElementById('modal-edit-subscriber').classList.remove('hidden');
+        }
+
+        function closeEditSubscriberModal() {
+            document.getElementById('modal-edit-subscriber').classList.add('hidden');
+        }
+
+        function handleSaveSubscriber(e) {
+            e.preventDefault();
+            const id = document.getElementById('edit-sub-id').value;
+            const sub = bayuData.subscribers.find(s => s.id === id);
+            if (sub) {
+                sub.name = document.getElementById('edit-sub-name').value.trim();
+                sub.email = document.getElementById('edit-sub-email').value.trim();
+                sub.minat = document.getElementById('edit-sub-minat').value.trim();
+                saveData();
+                closeEditSubscriberModal();
+                renderSubscriberTable();
+            }
+        }
+
+        // INITIALIZATION ON DOM READY
+        document.addEventListener('DOMContentLoaded', () => {
             initLocationDropdowns();
-            filterAgenda();
+            renderAgenda();
+            renderTrainer();
+            renderTalent();
         });
     </script>
-<script>
-function handleRegisterSubmit(e) {
-    e.preventDefault();
-
-    // 1. Dapatkan jenis borang secara selamat (Lalai: penganjur)
-    const typeEl = document.getElementById('reg-type');
-    const type = typeEl ? typeEl.value : 'penganjur';
-
-    let newRecord = {
-        id: 'APP-' + Date.now(),
-        type: type,
-        approval: 'Pending',
-        createdAt: new Date().toISOString()
-    };
-
-    // 2. Kumpul data mengikut jenis borang (guna pembacaan selamat)
-    if (type === 'penganjur') {
-        newRecord.name = document.getElementById('reg-penganjur-title')?.value || document.getElementById('reg-penganjur-name')?.value || 'Penganjur Baru';
-        newRecord.email = document.getElementById('reg-penganjur-email')?.value || '';
-        newRecord.date = document.getElementById('reg-penganjur-date')?.value || '';
-        newRecord.state = document.getElementById('reg-penganjur-state')?.value || '';
-        newRecord.location = document.getElementById('reg-penganjur-sabah-loc')?.value || newRecord.state;
-        newRecord.category = document.getElementById('reg-penganjur-category')?.value || '';
-    } 
-    else if (type === 'trainer') {
-        newRecord.name = document.getElementById('reg-trainer-name')?.value || 'Trainer Baru';
-        newRecord.email = document.getElementById('reg-trainer-email')?.value || '';
-        newRecord.state = document.getElementById('reg-trainer-state')?.value || '';
-        newRecord.location = document.getElementById('reg-trainer-sabah-loc')?.value || newRecord.state;
-        newRecord.summary = document.getElementById('reg-trainer-summary')?.value || '';
-        
-        const expBoxes = document.querySelectorAll('input[name="trainer_exp"]:checked');
-        newRecord.expertise = expBoxes.length > 0 ? Array.from(expBoxes).map(cb => cb.value).join(', ') : '-';
-    } 
-    else if (type === 'talent') {
-        newRecord.name = document.getElementById('reg-talent-name')?.value || 'Talent Baru';
-        newRecord.email = document.getElementById('reg-talent-email')?.value || '';
-        newRecord.state = document.getElementById('reg-talent-state')?.value || '';
-        newRecord.location = document.getElementById('reg-talent-sabah-loc')?.value || newRecord.state;
-        newRecord.niche = document.getElementById('reg-talent-niche')?.value || '';
-        newRecord.summary = document.getElementById('reg-talent-summary')?.value || '';
-    }
-
-    // 3. Simpan data ke dalam senarai Admin Panel
-    if (typeof applications !== 'undefined' && Array.isArray(applications)) {
-        applications.push(newRecord);
-    }
-
-    // 4. Kemaskini paparan jadual Admin Panel
-    if (typeof renderAdminApplications === 'function') {
-        renderAdminApplications();
-    }
-
-    // 5. Tutup Borang Pendaftaran
-    if (typeof closeRegisterModal === 'function') {
-        closeRegisterModal();
-    }
-
-    // 6. Reset Isi Borang
-    const regForm = document.getElementById('form-register');
-    if (regForm) {
-        regForm.reset();
-    }
-
-    // 7. Paparkan Modal "Permohonan Berjaya Dihantar"
-    const successModal = document.getElementById('modal-submission-success');
-    if (successModal) {
-        successModal.classList.remove('hidden');
-        successModal.style.display = 'flex'; // Memastikan modal benar-benar kelihatan
-    } else {
-        alert('Permohonan anda telah berjaya dihantar!');
-    }
-}
-
-// Fungsi Tutup Popup Terima Kasih
-function closeSubmissionSuccessModal() {
-    const successModal = document.getElementById('modal-submission-success');
-    if (successModal) {
-        successModal.classList.add('hidden');
-    }
-}
-</script>
 </body>
 </html>
