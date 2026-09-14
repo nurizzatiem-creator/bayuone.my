@@ -1446,11 +1446,11 @@
             <form onsubmit="handleAdminLogin(event)" class="space-y-3">
                 <div>
                     <label class="block text-xs font-bold text-brand-dark mb-1">Emel Admin</label>
-                    <input type="email" id="admin-login-email" value="admin@bayuone.my" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                    <input type="email" id="admin-login-email" placeholder="emel@anda.com" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-brand-dark mb-1">Katalaluan</label>
-                    <input type="password" id="admin-login-pass" value="admin123" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                    <input type="password" id="admin-login-pass" placeholder="Katalaluan" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                 </div>
                 <button type="submit" class="w-full bg-brand text-white font-bold py-2.5 rounded-xl text-xs hover:bg-brand-dark transition-colors">
                     Log Masuk
@@ -1527,8 +1527,25 @@
         </div>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- SUPABASE LIBRARY (must load before initialization)          -->
+    <!-- ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- APPLICATION JAVASCRIPT LOGIC -->
     <script>
+        // ============================================================
+        // ⚠️⚠️⚠️ SUPABASE CONFIGURATION - REPLACE THESE VALUES ⚠️⚠️⚠️
+        // ============================================================
+        // 1. Go to your Supabase Dashboard → Project Settings → API Keys
+        // 2. Copy the "Project URL" and paste below as SUPABASE_URL
+        // 3. Copy the "Publishable key" (or "anon public" key) and paste as SUPABASE_ANON_KEY
+        // ============================================================
+        const SUPABASE_URL = 'https://voxnrgoitktdiyvsvfac.supabase.co'; // ⚠️ REPLACE ME (e.g. https://abcdefgh.supabase.co)
+        const SUPABASE_ANON_KEY = 'sb_publishable_vjUIAoqsAJRadmN3DM-04w_jh1oNkl9'; // ⚠️ REPLACE ME (starts with sb_publishable_ or eyJ...)
+        const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // ============================================================
+
         const TIKTOK_BAYUONE_URL = "https://www.tiktok.com/@bayuone.my";
         const TODAY = new Date("2026-09-12");
 
@@ -2275,8 +2292,56 @@
 
         function openAdminLoginModal() { document.getElementById('modal-admin-login').classList.remove('hidden'); }
         function closeAdminLoginModal() { document.getElementById('modal-admin-login').classList.add('hidden'); }
-        function handleAdminLogin(e) { e.preventDefault(); closeAdminLoginModal(); switchTab('admin'); }
-        function logoutAdmin() { switchTab('agenda'); }
+
+        // ============================================================
+        // 🔐 SECURE ADMIN LOGIN via Supabase Auth
+        // ============================================================
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('admin-login-email').value;
+            const password = document.getElementById('admin-login-pass').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
+            // Disable button during login attempt
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Log Masuk...';
+            }
+
+            // Call Supabase to sign in
+            const { data, error } = await db.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
+
+            // Re-enable button
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Log Masuk';
+            }
+
+            if (error) {
+                alert('Log masuk gagal: ' + error.message);
+                return;
+            }
+
+            // Login successful
+            closeAdminLoginModal();
+            switchTab('admin');
+        }
+
+        // ============================================================
+        // 🔐 SECURE LOGOUT via Supabase Auth
+        // ============================================================
+        async function logoutAdmin() {
+            try {
+                await db.auth.signOut();
+            } catch (err) {
+                console.warn('Sign out error:', err.message);
+            }
+            switchTab('agenda');
+        }
 
         // ===================== BANNER ADMIN =====================
         function openBannerModal(id) {
@@ -3522,7 +3587,10 @@
 
         document.getElementById('reg-trainer-cert-custom')?.addEventListener('input', updateTrainerCertCustomCounter);
 
-        document.addEventListener('DOMContentLoaded', () => {
+        // ============================================================
+        // 🔐 SESSION CHECK ON PAGE LOAD
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', async () => {
             initLocationDropdowns();
             renderAgenda();
             renderTrainer();
@@ -3536,6 +3604,18 @@
             const regForm = document.getElementById('form-register');
             if (regForm) {
                 regForm.addEventListener('submit', handleRegisterSubmit);
+            }
+
+            // Check if a user is already logged in via Supabase
+            try {
+                const { data: { session } } = await db.auth.getSession();
+                if (session) {
+                    console.log("User is logged in:", session.user.email);
+                    // Optionally auto-switch to admin view on reload:
+                    // switchTab('admin');
+                }
+            } catch (err) {
+                console.warn('Session check skipped:', err.message);
             }
         });
     </script>
