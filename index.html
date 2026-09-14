@@ -254,6 +254,7 @@
             </div>
 
             <div class="space-y-12">
+                <!-- Section 1: Akan Datang & Sedang Berlangsung -->
                 <div>
                     <div class="flex items-center justify-between mb-6 pb-2 border-b border-brand-border">
                         <div>
@@ -269,6 +270,16 @@
                     <div id="grid-agenda-upcoming" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
 
+                <!-- AMENDMENT 2: ACTIVE PUBLIC AD BANNER (EXACTLY BETWEEN THE TWO SECTIONS) -->
+                <div id="public-banner-container" class="my-8 hidden">
+                    <div class="flex justify-center items-center">
+                        <div class="w-full max-w-[970px] overflow-hidden rounded-xl border border-brand-border shadow-xs hover:shadow-md transition-shadow">
+                            <img id="public-banner-img" src="" alt="Iklan Banner" class="w-full max-w-[970px] h-auto md:h-[90px] object-contain mx-auto block">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Telah Tamat -->
                 <div>
                     <div class="flex items-center justify-between mb-6 pb-2 border-b border-brand-border">
                         <div>
@@ -404,7 +415,6 @@
         </div>
 
 
-
         <!-- ================= ADMIN DASHBOARD VIEW ================= -->
         <div id="view-admin" class="tab-content hidden space-y-8">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-brand-bg p-6 rounded-2xl border border-brand-border">
@@ -505,6 +515,40 @@
                             </tr>
                         </thead>
                         <tbody id="admin-table-body" class="divide-y divide-brand-border"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- AMENDMENT 2: ADMIN BANNER SECTION -->
+            <div class="bg-white rounded-2xl border border-brand-border shadow-xs p-6 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-4">
+                    <div>
+                        <h3 class="text-xl font-extrabold text-brand-dark uppercase tracking-wide flex items-center gap-2">
+                            <i class="fa-solid fa-rectangle-ad text-brand"></i>
+                            PENGURUSAN BANNER
+                        </h3>
+                        <p class="text-xs text-brand-muted">Muat naik, edit dan pantau status banner iklan di laman Agenda.</p>
+                    </div>
+                    <button onclick="openBannerModal()" class="bg-brand hover:bg-brand-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xs transition-colors flex items-center gap-1.5 self-start sm:self-auto">
+                        <i class="fa-solid fa-plus"></i> Tambah Banner
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto border border-brand-border rounded-xl">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-brand-border text-brand-muted uppercase font-bold tracking-wider">
+                                <th class="p-3.5">Foto Preview</th>
+                                <th class="p-3.5">Nama Iklan</th>
+                                <th class="p-3.5">Nama Syarikat / Individu</th>
+                                <th class="p-3.5">Tempoh Iklan</th>
+                                <th class="p-3.5">Tarikh Mula</th>
+                                <th class="p-3.5">Tarikh Tamat</th>
+                                <th class="p-3.5">Status</th>
+                                <th class="p-3.5 text-right">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="banner-table-body" class="divide-y divide-brand-border"></tbody>
                     </table>
                 </div>
             </div>
@@ -659,14 +703,7 @@
                             Saya Nak Dapatkan Update Program & Acara Terkini
                         </button>
                     </div>
-                
-<div class="form-group">
-  <label for="agenda-harga-yuran">Harga Yuran <span style="font-weight:400;">(optional)</span></label>
-  <input type="number" id="agenda-harga-yuran" name="hargaYuran" min="0" step="0.01" placeholder="RM0 = Percuma">
-  <small>Masukkan RM0 jika percuma. Jika berbayar, masukkan jumlah yuran.</small>
-</div>
-
-</form>
+                </form>
 
                 <div id="sub-success-message" class="hidden p-6 bg-emerald-900/80 border border-emerald-500/30 rounded-2xl text-emerald-100 font-semibold text-center animate-fade-in">
                     <i class="fa-solid fa-circle-check text-3xl text-emerald-400 mb-2 block"></i>
@@ -777,6 +814,26 @@
                             <option value="">Sila Pilih Daerah Sabah</option>
                         </select>
                     </div>
+
+                    <!-- AMENDMENT 1: HARGA YURAN FIELD (OPTIONAL) -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Harga Yuran <span class="text-gray-400 font-normal">(Optional)</span></label>
+                        <div class="flex items-center gap-4 mb-2">
+                            <label class="flex items-center gap-1.5 text-xs text-brand-text font-medium cursor-pointer">
+                                <input type="radio" name="reg-penganjur-fee-choice" value="Percuma" checked onchange="toggleFeeInput('penganjur')" class="accent-brand">
+                                Percuma
+                            </label>
+                            <label class="flex items-center gap-1.5 text-xs text-brand-text font-medium cursor-pointer">
+                                <input type="radio" name="reg-penganjur-fee-choice" value="Berbayar" onchange="toggleFeeInput('penganjur')" class="accent-brand">
+                                Berbayar
+                            </label>
+                        </div>
+                        <div id="reg-penganjur-fee-input-container" class="hidden relative items-center">
+                            <span class="absolute left-3 text-xs font-bold text-brand-muted">RM</span>
+                            <input type="number" id="reg-penganjur-fee-amount" min="0" step="1" placeholder="50" class="w-full bg-white border border-brand-border rounded-xl pl-10 pr-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                    </div>
+
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Kategori <span class="text-red-500">*</span></label>
                         <select id="reg-penganjur-category" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
@@ -988,6 +1045,53 @@
         </div>
     </div>
 
+    <!-- AMENDMENT 3: MAKLUM BALAS LIHAT PENUH / PREVIEW MODAL -->
+    <div id="modal-feedback-preview" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border border-brand-border space-y-4">
+            <button onclick="closeFeedbackPreviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="flex items-center gap-2 border-b border-brand-border pb-3">
+                <div class="w-9 h-9 rounded-xl bg-brand-bg text-brand flex items-center justify-center font-bold text-sm">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-brand-dark">Butiran Maklum Balas</h3>
+                    <p class="text-[11px] text-brand-muted" id="fb-preview-date"></p>
+                </div>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-3 bg-brand-bg p-3 rounded-xl border border-brand-border">
+                    <div>
+                        <span class="text-[10px] font-bold text-brand-muted uppercase">Nama</span>
+                        <div id="fb-preview-name" class="font-bold text-brand-dark text-sm mt-0.5"></div>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-brand-muted uppercase">Emel</span>
+                        <div id="fb-preview-email" class="font-semibold text-brand-text text-xs mt-0.5"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text-[10px] font-bold text-brand-muted uppercase">Status Maklum Balas</span>
+                    <div id="fb-preview-status" class="mt-1"></div>
+                </div>
+
+                <div>
+                    <span class="text-[10px] font-bold text-brand-muted uppercase">Kandungan Maklum Balas Penuh</span>
+                    <div id="fb-preview-message" class="mt-1 bg-gray-50 border border-brand-border p-4 rounded-xl text-brand-text text-sm leading-relaxed whitespace-pre-wrap max-h-64 overflow-y-auto"></div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="closeFeedbackPreviewModal()" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+                    Tutup Preview
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- FEEDBACK SUCCESS POPUP -->
     <div id="modal-feedback-success" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center border border-brand-border space-y-4">
@@ -1029,6 +1133,69 @@
                 <button type="submit" class="w-full bg-brand text-white font-bold py-2.5 rounded-xl text-xs hover:bg-brand-dark transition-colors">
                     Log Masuk
                 </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AMENDMENT 2: ADMIN BANNER FORM MODAL -->
+    <div id="modal-admin-banner" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative my-8 border border-brand-border">
+            <button onclick="closeBannerModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <h3 id="banner-modal-title" class="text-lg font-bold text-brand-dark mb-1">Tambah Banner Iklan</h3>
+            <p class="text-xs text-brand-muted mb-4">Isi maklumat iklan banner di bawah. Tarikh tamat akan dikira secara automatik.</p>
+
+            <form id="form-admin-banner" onsubmit="handleBannerFormSubmit(event)" class="space-y-4">
+                <input type="hidden" id="banner-id">
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Foto Banner <span class="text-red-500">*</span></label>
+                    <input type="url" id="banner-url" required placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                    <p class="text-[11px] text-brand-muted mt-1 font-medium">Saiz disyorkan: 970 × 90 px</p>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Iklan <span class="text-red-500">*</span></label>
+                    <input type="text" id="banner-nama-iklan" required placeholder="Contoh: Promosi Kursus AI" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Syarikat / Individu <span class="text-red-500">*</span></label>
+                    <input type="text" id="banner-syarikat" required placeholder="Contoh: ABC Training Sdn. Bhd." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tempoh Iklan <span class="text-red-500">*</span></label>
+                        <select id="banner-tempoh" onchange="calculateBannerEndDate()" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                            <option value="1 Bulan">1 Bulan</option>
+                            <option value="3 Bulan">3 Bulan</option>
+                            <option value="6 Bulan">6 Bulan</option>
+                            <option value="1 Tahun">1 Tahun</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Mula <span class="text-red-500">*</span></label>
+                        <input type="date" id="banner-tarikh-mula" onchange="calculateBannerEndDate()" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Tamat</label>
+                        <input type="date" id="banner-tarikh-tamat" readonly class="w-full bg-gray-100 border border-brand-border rounded-xl px-3 py-2 text-xs text-brand-muted cursor-not-allowed focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeBannerModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs transition-colors">
+                        Batal
+                    </button>
+                    <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+                        Simpan Banner
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -1106,7 +1273,7 @@
         // Official TikTok BayuOne URL Reference
         const TIKTOK_BAYUONE_URL = "https://www.tiktok.com/@bayuone.my";
 
-        // Current Reference Date: September 12, 2026
+        // Current Reference Date
         const TODAY = new Date("2026-09-12");
 
         // MALAYSIAN STATES & SABAH DIVISIONS DATA
@@ -1164,6 +1331,23 @@
             }
         }
 
+        // AMENDMENT 1: TOGGLE FEE INPUT FOR PENGANJUR FORM
+        function toggleFeeInput(prefix) {
+            const feeChoice = document.querySelector(`input[name="reg-${prefix}-fee-choice"]:checked`);
+            const container = document.getElementById(`reg-${prefix}-fee-input-container`);
+            const input = document.getElementById(`reg-${prefix}-fee-amount`);
+            if (!feeChoice || !container) return;
+
+            if (feeChoice.value === "Berbayar") {
+                container.classList.remove('hidden');
+                container.classList.add('flex');
+            } else {
+                container.classList.add('hidden');
+                container.classList.remove('flex');
+                if (input) input.value = '';
+            }
+        }
+
         // Central Application Data Store
         let bayuData = {
             applications: [
@@ -1178,6 +1362,7 @@
                     location: "Kota Kinabalu",
                     mode: "Fizikal",
                     category: "Bengkel",
+                    hargaYuran: "RM100",
                     date: "2026-09-25",
                     url: TIKTOK_BAYUONE_URL,
                     urlButton: "https://t.me/bayuone_bengkel",
@@ -1202,6 +1387,7 @@
                     location: "Kota Kinabalu",
                     mode: "Hybrid",
                     category: "Persidangan & Konvensyen",
+                    hargaYuran: "Percuma",
                     date: "2026-10-12",
                     url: TIKTOK_BAYUONE_URL,
                     urlButton: "",
@@ -1226,6 +1412,7 @@
                     location: "Tawau",
                     mode: "Fizikal",
                     category: "Seminar & Forum",
+                    hargaYuran: "Percuma",
                     date: "2026-08-15",
                     url: TIKTOK_BAYUONE_URL,
                     urlButton: "https://wa.me/60138119988",
@@ -1332,6 +1519,7 @@
                     location: "Tuaran",
                     mode: "Fizikal",
                     category: "Komuniti & Sosial",
+                    hargaYuran: "RM50",
                     date: "2026-11-05",
                     url: TIKTOK_BAYUONE_URL,
                     urlButton: "",
@@ -1346,6 +1534,18 @@
                     photo: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80"
                 }
             ],
+            // AMENDMENT 2: BANNER DATA PERSISTENCE
+            banners: [
+                {
+                    id: "BAN-1001",
+                    url: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&auto=format&fit=crop&q=80",
+                    namaIklan: "Promosi Kursus AI & Pemasaran Digital",
+                    syarikat: "Sabah Tech Academy Sdn. Bhd.",
+                    tempoh: "1 Bulan",
+                    tarikhMula: "2026-09-01",
+                    tarikhTamat: "2026-10-01"
+                }
+            ],
             subscribers: [
                 { id: "SUB-101", name: "Ahmad Zaki", email: "ahmad.zaki@gmail.com", minat: "Pemasaran Digital, Keusahawanan", date: "2026-09-08", status: "NEW" },
                 { id: "SUB-102", name: "Siti Sarah", email: "siti.sarah@yahoo.com", minat: "Kesihatan & Kesejahteraan", date: "2026-09-02", status: "NEW" },
@@ -1354,7 +1554,7 @@
             ],
             feedbacks: [
                 { id: "FB-201", name: "Hasnol Bahrin", email: "hasnol@gmail.com", message: "Sangat mudah mencari trainer tempatan Sabah melalui platform BayuOne ini. Tahniah!", date: "2026-09-10 14:30", status: "In Review" },
-                { id: "FB-202", name: "Grace Lim", email: "grace.lim@yahoo.com", message: "Mohon tambah fungsi tapis mengikut daerah di Kota Kinabalu secara khusus.", date: "2026-09-05 09:15", status: "Resolved" }
+                { id: "FB-202", name: "Grace Lim", email: "grace.lim@yahoo.com", message: "Mohon tambah fungsi tapis mengikut daerah di Kota Kinabalu secara khusus.\n\nSecara keseluruhannya susunan laman web amat kemas dan mesra pengguna.", date: "2026-09-05 09:15", status: "Resolved" }
             ]
         };
 
@@ -1362,6 +1562,7 @@
             try {
                 const stored = JSON.parse(localStorage.getItem("bayuone_data"));
                 if (stored.applications) bayuData.applications = stored.applications;
+                if (stored.banners) bayuData.banners = stored.banners;
                 if (stored.subscribers) bayuData.subscribers = stored.subscribers;
                 if (stored.feedbacks) bayuData.feedbacks = stored.feedbacks;
             } catch (e) {
@@ -1447,7 +1648,7 @@
                 return { code: 'TAMAT', label: 'Telah Tamat', badges: [{ text: 'Telah Tamat', class: 'bg-gray-100 text-gray-600 border-gray-200' }] };
             }
 
-            return { code: 'AKAN_DATANG', label: 'Akan Datang', badges: [{ text: 'Aktif', class: 'bg-emerald-100 text-emerald-800 border-emerald-200' }] };
+            return { code: 'AKAN_DATANG', label: 'Akan Datang', badges: [] };
         }
 
         // NAVIGATION & TAB SWITCHING
@@ -1465,691 +1666,656 @@
             const heroSubtitle = document.getElementById('hero-subtitle');
 
             if (tabName === 'agenda') {
-                heroTitle.textContent = "Program & Aktiviti Terkini";
-                heroSubtitle.textContent = "Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.";
-                renderAgenda();
+                if (heroTitle) heroTitle.textContent = "Program & Aktiviti Terkini";
+                if (heroSubtitle) heroSubtitle.textContent = "Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.";
+                renderAgendaGrid();
+                renderPublicBanner();
             } else if (tabName === 'trainer') {
-                heroTitle.textContent = "Trainer & Jurulatih Profesional";
-                heroSubtitle.textContent = "Cari penceramah, jurulatih dan pakar bidang untuk menjayakan program latihan anda.";
-                renderTrainer();
+                if (heroTitle) heroTitle.textContent = "Direktori Trainer Profesional";
+                if (heroSubtitle) heroSubtitle.textContent = "Cari penceramah, fasilitator dan pakar runding bertauliah untuk program & latihan anda.";
+                renderTrainerGrid();
             } else if (tabName === 'talent') {
-                heroTitle.textContent = "Bakat & Influencer Tempatan";
-                heroSubtitle.textContent = "Hubungi pengacara, content creator dan pelbagai bakat tempatan untuk kolaborasi.";
-                renderTalent();
+                if (heroTitle) heroTitle.textContent = "Katalog Bakat & Pencipta Kandungan";
+                if (heroSubtitle) heroSubtitle.textContent = "Hubungi pengacara, influencer, seniman dan bakat tempatan untuk kolaborasi acara.";
+                renderTalentGrid();
             } else if (tabName === 'admin') {
                 renderAdminTable();
+                renderBannerTable();
                 renderFeedbackTable();
                 renderSubscriberTable();
             }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (!menu || !icon) return;
             menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = "fa-solid fa-bars";
+            } else {
+                icon.className = "fa-solid fa-xmark";
+            }
         }
 
-        // REGISTRATION FORM SWITCHING & FIELD VALIDATION MANAGEMENT
+        // ================= RENDER AGENDA GRID =================
+        function renderAgendaGrid() {
+            const upcomingGrid = document.getElementById('grid-agenda-upcoming');
+            const endedGrid = document.getElementById('grid-agenda-ended');
+            const countUpcoming = document.getElementById('count-upcoming');
+            const countEnded = document.getElementById('count-ended');
+
+            if (!upcomingGrid || !endedGrid) return;
+
+            const loc = document.getElementById('filter-agenda-location')?.value || "";
+            const mode = document.getElementById('filter-agenda-mode')?.value || "";
+            const cat = document.getElementById('filter-agenda-category')?.value || "";
+            const dt = document.getElementById('filter-agenda-date')?.value || "";
+            const q = document.getElementById('global-search')?.value.toLowerCase().trim() || "";
+
+            let items = bayuData.applications.filter(a => a.type === "Agenda" && a.approval === "Approved");
+
+            if (loc) items = items.filter(a => a.location.toLowerCase().includes(loc.toLowerCase()));
+            if (mode) items = items.filter(a => a.mode === mode);
+            if (cat) items = items.filter(a => a.category === cat);
+            if (dt) items = items.filter(a => a.date === dt);
+            if (q) items = items.filter(a => a.title.toLowerCase().includes(q) || a.org.toLowerCase().includes(q) || a.location.toLowerCase().includes(q));
+
+            items.sort((a, b) => getPromoPriority(a) - getPromoPriority(b));
+
+            const upcomingList = [];
+            const endedList = [];
+
+            items.forEach(item => {
+                const statusInfo = getAgendaStatusInfo(item);
+                if (statusInfo.code === 'TAMAT') {
+                    endedList.push(item);
+                } else {
+                    upcomingList.push(item);
+                }
+            });
+
+            if (countUpcoming) countUpcoming.textContent = `${upcomingList.length} Program`;
+            if (countEnded) countEnded.textContent = `${endedList.length} Program`;
+
+            upcomingGrid.innerHTML = upcomingList.length ? upcomingList.map(item => createAgendaCardHTML(item)).join('') : '<div class="col-span-full text-center py-12 text-brand-muted font-medium bg-brand-bg/50 rounded-2xl border border-brand-border">Tiada program berlangsung / akan datang ditemui.</div>';
+            endedGrid.innerHTML = endedList.length ? endedList.map(item => createAgendaCardHTML(item)).join('') : '<div class="col-span-full text-center py-8 text-brand-muted text-sm italic">Tiada rekod program tamat.</div>';
+        }
+
+        // AMENDMENT 1: DISPLAY HARGA YURAN IN PUBLIC AGENDA CARD
+        function createAgendaCardHTML(item) {
+            const dateObj = new Date(item.date);
+            const formattedDate = dateObj.toLocaleDateString('ms-MY', { day: 'numeric', month: 'short', year: 'numeric' });
+            const statusInfo = getAgendaStatusInfo(item);
+
+            let labelBadge = "";
+            const prio = getPromoPriority(item);
+            if (prio === 1) labelBadge = `<span class="badge-pill badge-top font-bold">TOP</span>`;
+            else if (prio === 2) labelBadge = `<span class="badge-pill badge-featured font-bold">FEATURED</span>`;
+            else if (prio === 3) labelBadge = `<span class="badge-pill badge-promoted font-bold">PROMOTED</span>`;
+
+            // Display Harga Yuran as requested in Amendment 1
+            const feeText = item.hargaYuran ? (item.hargaYuran.toLowerCase() === 'percuma' ? 'Percuma' : item.hargaYuran) : 'Percuma';
+            const feeBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">Harga Yuran: ${feeText}</span>`;
+
+            let badgesHTML = feeBadge;
+            if (statusInfo.badges && statusInfo.badges.length > 0) {
+                statusInfo.badges.forEach(b => {
+                    badgesHTML += `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${b.class}">${b.text}</span>`;
+                });
+            }
+
+            const picContactHTML = (item.name || item.phone) ? `
+                <div class="pt-2 border-t border-brand-border/60 text-xs text-brand-muted flex items-center gap-2">
+                    <i class="fa-solid fa-user-tie text-brand"></i>
+                    <span>PIC: ${item.name || 'Penganjur'} ${item.phone ? `(${item.phone})` : ''}</span>
+                </div>
+            ` : '';
+
+            return `
+                <div class="bg-white rounded-2xl border border-brand-border overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-gray-100">
+                            <img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80'}" alt="${item.title}" class="w-full h-full object-cover">
+                            <div class="absolute top-3 left-3 flex flex-wrap items-center gap-1.5 z-10">
+                                ${labelBadge}
+                                ${badgesHTML}
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm border border-brand-border px-3 py-1 rounded-xl text-xs font-bold text-brand-dark shadow-xs">
+                                ${item.mode || 'Fizikal'}
+                            </div>
+                        </div>
+
+                        <div class="p-5 space-y-3">
+                            <div class="flex items-center justify-between text-xs text-brand-muted font-medium">
+                                <span class="bg-brand-bg px-2.5 py-1 rounded-md text-brand font-semibold">${item.category || 'Program'}</span>
+                                <span class="flex items-center gap-1"><i class="fa-regular fa-calendar"></i> ${formattedDate}</span>
+                            </div>
+
+                            <h3 class="text-base font-bold text-brand-dark leading-snug hover:text-brand transition-colors line-clamp-2">
+                                ${item.title}
+                            </h3>
+
+                            <div class="text-xs text-brand-muted space-y-1">
+                                <p class="flex items-center gap-2"><i class="fa-solid fa-building text-brand"></i> <span class="truncate">${item.org || item.name}</span></p>
+                                <p class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand"></i> <span>${item.location}</span></p>
+                            </div>
+
+                            ${picContactHTML}
+                        </div>
+                    </div>
+
+                    <div class="p-5 pt-0">
+                        <a href="${item.urlButton || item.url || TIKTOK_BAYUONE_URL}" target="_blank" rel="noopener noreferrer" class="block w-full bg-brand hover:bg-brand-dark text-white text-center text-xs font-bold py-2.5 rounded-xl shadow-2xs transition-colors">
+                            Maklumat Lanjut & Daftar <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterAgenda() { renderAgendaGrid(); }
+        function resetAgendaFilters() {
+            document.getElementById('filter-agenda-location').value = "";
+            document.getElementById('filter-agenda-mode').value = "";
+            document.getElementById('filter-agenda-category').value = "";
+            document.getElementById('filter-agenda-date').value = "";
+            renderAgendaGrid();
+        }
+
+        // ================= AMENDMENT 2: RENDER PUBLIC BANNER =================
+        function renderPublicBanner() {
+            const container = document.getElementById('public-banner-container');
+            const img = document.getElementById('public-banner-img');
+            if (!container || !img) return;
+
+            const currentDateStr = TODAY.toISOString().split('T')[0];
+
+            // Filter banners with status "Sedang Aktif": currentDate >= tarikhMula AND currentDate < tarikhTamat
+            const activeBanners = (bayuData.banners || []).filter(b => {
+                if (!b.tarikhMula || !b.tarikhTamat) return false;
+                return (currentDateStr >= b.tarikhMula && currentDateStr < b.tarikhTamat);
+            });
+
+            if (activeBanners.length > 0) {
+                const activeBanner = activeBanners[0]; // ONLY ONE active banner displayed
+                img.src = activeBanner.url;
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+                img.src = '';
+            }
+        }
+
+        // ================= RENDER TRAINER GRID =================
+        function renderTrainerGrid() {
+            const grid = document.getElementById('grid-trainer');
+            if (!grid) return;
+
+            const nameQ = document.getElementById('filter-trainer-name')?.value.toLowerCase().trim() || "";
+            const exp = document.getElementById('filter-trainer-expertise')?.value || "";
+            const loc = document.getElementById('filter-trainer-location')?.value || "";
+            const cert = document.getElementById('filter-trainer-cert')?.value || "";
+
+            let items = bayuData.applications.filter(a => a.type === "Trainer" && a.approval === "Approved");
+
+            if (nameQ) items = items.filter(a => a.name.toLowerCase().includes(nameQ));
+            if (exp) items = items.filter(a => a.expertise && a.expertise.includes(exp));
+            if (loc) items = items.filter(a => a.location.toLowerCase().includes(loc.toLowerCase()));
+            if (cert) items = items.filter(a => a.certs && a.certs.includes(cert));
+
+            items.sort((a, b) => getPromoPriority(a) - getPromoPriority(b));
+
+            if (!items.length) {
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-brand-muted font-medium bg-brand-bg/50 rounded-2xl border border-brand-border">Tiada rekod trainer ditemui mengikut tapisan.</div>';
+                return;
+            }
+
+            grid.innerHTML = items.map(item => {
+                let labelBadge = "";
+                const prio = getPromoPriority(item);
+                if (prio === 1) labelBadge = `<span class="badge-pill badge-top font-bold">TOP</span>`;
+                else if (prio === 2) labelBadge = `<span class="badge-pill badge-featured font-bold">FEATURED</span>`;
+                else if (prio === 3) labelBadge = `<span class="badge-pill badge-promoted font-bold">PROMOTED</span>`;
+
+                const expBadges = (item.expertise || []).map(e => `<span class="bg-brand-bg text-brand text-[11px] font-semibold px-2.5 py-1 rounded-lg border border-brand-border">${e}</span>`).join(' ');
+                const certBadges = (item.certs || []).map(c => `<span class="bg-amber-50 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-200"><i class="fa-solid fa-award mr-1"></i>${c}</span>`).join(' ');
+
+                return `
+                    <div class="bg-white rounded-2xl border border-brand-border overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden bg-gray-100 shrink-0 border border-brand-border">
+                                    <img src="${item.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80'}" alt="${item.name}" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-grow">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-base font-bold text-brand-dark leading-tight">${item.name}</h3>
+                                        ${labelBadge}
+                                    </div>
+                                    <p class="text-xs text-brand-muted mt-1 flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-brand"></i> ${item.location}</p>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
+
+                            <div class="space-y-2">
+                                <div class="flex flex-wrap gap-1.5">${expBadges}</div>
+                                <div class="flex flex-wrap gap-1">${certBadges}</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-5 mt-4 border-t border-brand-border/60">
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" rel="noopener noreferrer" class="block w-full bg-brand hover:bg-brand-dark text-white text-center text-xs font-bold py-2.5 rounded-xl shadow-2xs transition-colors">
+                                Lihat Profil / Hubungi <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterTrainer() { renderTrainerGrid(); }
+        function resetTrainerFilters() {
+            document.getElementById('filter-trainer-name').value = "";
+            document.getElementById('filter-trainer-expertise').value = "";
+            document.getElementById('filter-trainer-location').value = "";
+            document.getElementById('filter-trainer-cert').value = "";
+            renderTrainerGrid();
+        }
+
+        // ================= RENDER TALENT GRID =================
+        function renderTalentGrid() {
+            const grid = document.getElementById('grid-talent');
+            if (!grid) return;
+
+            const nameQ = document.getElementById('filter-talent-name')?.value.toLowerCase().trim() || "";
+            const niche = document.getElementById('filter-talent-niche')?.value || "";
+            const loc = document.getElementById('filter-talent-location')?.value || "";
+
+            let items = bayuData.applications.filter(a => a.type === "Talent" && a.approval === "Approved");
+
+            if (nameQ) items = items.filter(a => a.name.toLowerCase().includes(nameQ));
+            if (niche) items = items.filter(a => a.niche === niche);
+            if (loc) items = items.filter(a => a.location.toLowerCase().includes(loc.toLowerCase()));
+
+            items.sort((a, b) => getPromoPriority(a) - getPromoPriority(b));
+
+            if (!items.length) {
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-brand-muted font-medium bg-brand-bg/50 rounded-2xl border border-brand-border">Tiada rekod talent ditemui mengikut tapisan.</div>';
+                return;
+            }
+
+            grid.innerHTML = items.map(item => {
+                let labelBadge = "";
+                const prio = getPromoPriority(item);
+                if (prio === 1) labelBadge = `<span class="badge-pill badge-top font-bold">TOP</span>`;
+                else if (prio === 2) labelBadge = `<span class="badge-pill badge-featured font-bold">FEATURED</span>`;
+                else if (prio === 3) labelBadge = `<span class="badge-pill badge-promoted font-bold">PROMOTED</span>`;
+
+                return `
+                    <div class="bg-white rounded-2xl border border-brand-border overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden bg-gray-100 shrink-0 border border-brand-border">
+                                    <img src="${item.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80'}" alt="${item.name}" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-grow">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-base font-bold text-brand-dark leading-tight">${item.name}</h3>
+                                        ${labelBadge}
+                                    </div>
+                                    <p class="text-xs text-brand font-semibold mt-1">${item.niche || 'Kreatif & Hiburan'}</p>
+                                    <p class="text-xs text-brand-muted mt-0.5 flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-brand"></i> ${item.location}</p>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
+                        </div>
+
+                        <div class="pt-5 mt-4 border-t border-brand-border/60">
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" rel="noopener noreferrer" class="block w-full bg-brand hover:bg-brand-dark text-white text-center text-xs font-bold py-2.5 rounded-xl shadow-2xs transition-colors">
+                                Lihat Profil / Hubungi <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterTalent() { renderTalentGrid(); }
+        function resetTalentFilters() {
+            document.getElementById('filter-talent-name').value = "";
+            document.getElementById('filter-talent-niche').value = "";
+            document.getElementById('filter-talent-location').value = "";
+            renderTalentGrid();
+        }
+
+        // GLOBAL SEARCH
+        function handleGlobalSearch() {
+            const activeTab = document.querySelector('.tab-btn.active')?.id.replace('nav-', '');
+            if (activeTab === 'agenda') renderAgendaGrid();
+            else if (activeTab === 'trainer') renderTrainerGrid();
+            else if (activeTab === 'talent') renderTalentGrid();
+        }
+        function triggerSearch() { handleGlobalSearch(); }
+
+        // REGISTRATION MODAL CONTROLS
+        function openRegisterModal() {
+            initLocationDropdowns();
+            setRegisterType('penganjur');
+            document.getElementById('modal-register')?.classList.remove('hidden');
+        }
+        function closeRegisterModal() {
+            document.getElementById('modal-register')?.classList.add('hidden');
+        }
+
         function setRegisterType(type) {
             document.getElementById('reg-type').value = type;
 
             ['penganjur', 'trainer', 'talent'].forEach(t => {
                 const btn = document.getElementById(`btn-reg-${t}`);
-                const fieldGroup = document.getElementById(`fields-${t}`);
-
-                if (t === type) {
-                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs";
-                    fieldGroup.classList.remove('hidden');
-                } else {
-                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand";
-                    fieldGroup.classList.add('hidden');
+                const fields = document.getElementById(`fields-${t}`);
+                if (btn && fields) {
+                    if (t === type) {
+                        btn.className = "py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs";
+                        fields.classList.remove('hidden');
+                    } else {
+                        btn.className = "py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand";
+                        fields.classList.add('hidden');
+                    }
                 }
             });
 
-            // Update Dynamic HTML required Attributes
-            const pTitle = document.getElementById('reg-penganjur-title');
-            const pDate = document.getElementById('reg-penganjur-date');
-            const pState = document.getElementById('reg-penganjur-state');
-            const pSabah = document.getElementById('reg-penganjur-sabah-loc');
-            const pCat = document.getElementById('reg-penganjur-category');
+            handleStateChange(type);
+        }
 
-            const trName = document.getElementById('reg-trainer-name');
-            const trEmail = document.getElementById('reg-trainer-email');
-            const trState = document.getElementById('reg-trainer-state');
-            const trSabah = document.getElementById('reg-trainer-sabah-loc');
-            const trSum = document.getElementById('reg-trainer-summary');
+        // AMENDMENT 1: HANDLE REGISTER SUBMIT WITH HARGA YURAN
+        function handleRegisterSubmit(e) {
+            e.preventDefault();
+            const type = document.getElementById('reg-type').value;
+            const newId = `APP-${Math.floor(1000 + Math.random() * 9000)}`;
 
-            const tlName = document.getElementById('reg-talent-name');
-            const tlEmail = document.getElementById('reg-talent-email');
-            const tlState = document.getElementById('reg-talent-state');
-            const tlSabah = document.getElementById('reg-talent-sabah-loc');
-            const tlNiche = document.getElementById('reg-talent-niche');
-            const tlSum = document.getElementById('reg-talent-summary');
+            let newItem = {
+                id: newId,
+                type: type === 'penganjur' ? 'Agenda' : (type === 'trainer' ? 'Trainer' : 'Talent'),
+                approval: 'Pending',
+                validity: '',
+                tarikhDari: '',
+                tarikhSehingga: '',
+                label: '',
+                remark: '',
+                photo: ''
+            };
 
             if (type === 'penganjur') {
-                pTitle.required = true;
-                pDate.required = true;
-                pState.required = true;
-                pSabah.required = (pState.value === "Sabah");
-                pCat.required = true;
+                const title = document.getElementById('reg-penganjur-title').value;
+                const email = document.getElementById('reg-penganjur-email').value;
+                const dt = document.getElementById('reg-penganjur-date').value;
+                const st = document.getElementById('reg-penganjur-state').value;
+                const sabLoc = document.getElementById('reg-penganjur-sabah-loc').value;
+                const cat = document.getElementById('reg-penganjur-category').value;
+                const picName = document.getElementById('reg-penganjur-pic-name').value;
+                const picTel = document.getElementById('reg-penganjur-pic-tel').value;
+                const md = document.getElementById('reg-penganjur-mode').value;
+                const url = document.getElementById('reg-penganjur-url').value;
 
-                trName.required = false;
-                trEmail.required = false;
-                trState.required = false;
-                trSabah.required = false;
-                trSum.required = false;
+                // Fee logic: Percuma vs Berbayar
+                const feeChoice = document.querySelector('input[name="reg-penganjur-fee-choice"]:checked')?.value || 'Percuma';
+                let feeVal = 'Percuma';
+                if (feeChoice === 'Berbayar') {
+                    const amt = document.getElementById('reg-penganjur-fee-amount')?.value;
+                    feeVal = amt ? `RM${amt}` : 'Percuma';
+                }
 
-                tlName.required = false;
-                tlEmail.required = false;
-                tlState.required = false;
-                tlSabah.required = false;
-                tlNiche.required = false;
-                tlSum.required = false;
+                newItem.title = title;
+                newItem.name = picName || 'Penganjur Acara';
+                newItem.org = picName ? `${picName} (Penganjur)` : 'Penganjur Acara';
+                newItem.email = email;
+                newItem.phone = picTel;
+                newItem.location = st === 'Sabah' ? (sabLoc || 'Sabah') : st;
+                newItem.mode = md;
+                newItem.category = cat;
+                newItem.hargaYuran = feeVal;
+                newItem.date = dt;
+                newItem.url = url || TIKTOK_BAYUONE_URL;
+                newItem.photo = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80";
+
             } else if (type === 'trainer') {
-                pTitle.required = false;
-                pDate.required = false;
-                pState.required = false;
-                pSabah.required = false;
-                pCat.required = false;
+                const name = document.getElementById('reg-trainer-name').value;
+                const email = document.getElementById('reg-trainer-email').value;
+                const st = document.getElementById('reg-trainer-state').value;
+                const sabLoc = document.getElementById('reg-trainer-sabah-loc').value;
+                const summary = document.getElementById('reg-trainer-summary').value;
+                const url = document.getElementById('reg-trainer-url').value;
 
-                trName.required = true;
-                trEmail.required = true;
-                trState.required = true;
-                trSabah.required = (trState.value === "Sabah");
-                trSum.required = true;
+                const exps = Array.from(document.querySelectorAll('input[name="trainer_exp"]:checked')).map(cb => cb.value);
+                const certs = Array.from(document.querySelectorAll('input[name="trainer_cert"]:checked')).map(cb => cb.value);
 
-                tlName.required = false;
-                tlEmail.required = false;
-                tlState.required = false;
-                tlSabah.required = false;
-                tlNiche.required = false;
-                tlSum.required = false;
+                newItem.title = "Trainer Profesional";
+                newItem.name = name;
+                newItem.email = email;
+                newItem.location = st === 'Sabah' ? (sabLoc || 'Sabah') : st;
+                newItem.expertise = exps;
+                newItem.certs = certs;
+                newItem.summary = summary;
+                newItem.url = url || TIKTOK_BAYUONE_URL;
+                newItem.date = TODAY.toISOString().split('T')[0];
+                newItem.photo = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80";
+
             } else if (type === 'talent') {
-                pTitle.required = false;
-                pDate.required = false;
-                pState.required = false;
-                pSabah.required = false;
-                pCat.required = false;
-
-                trName.required = false;
-                trEmail.required = false;
-                trState.required = false;
-                trSabah.required = false;
-                trSum.required = false;
-
-                tlName.required = true;
-                tlEmail.required = true;
-                tlState.required = true;
-                tlSabah.required = (tlState.value === "Sabah");
-                tlNiche.required = true;
-                tlSum.required = true;
-            }
-        }
-
-        // CRITICAL: SINGLE AUTHORITATIVE REGISTRATION SUBMISSION HANDLER
-        function handleRegisterSubmit(event) {
-            event.preventDefault();
-
-            const regType = document.getElementById('reg-type').value;
-            const newId = "APP-" + Date.now();
-            let newApp = null;
-
-            if (regType === 'penganjur') {
-                const title = document.getElementById('reg-penganjur-title').value.trim();
-                const email = document.getElementById('reg-penganjur-email').value.trim();
-                const date = document.getElementById('reg-penganjur-date').value;
-                const state = document.getElementById('reg-penganjur-state').value;
-                const sabahLoc = document.getElementById('reg-penganjur-sabah-loc').value;
-                const category = document.getElementById('reg-penganjur-category').value;
-                const picName = document.getElementById('reg-penganjur-pic-name').value.trim();
-                const picTel = document.getElementById('reg-penganjur-pic-tel').value.trim();
-                const mode = document.getElementById('reg-penganjur-mode').value;
-                const url = document.getElementById('reg-penganjur-url').value.trim();
-
-                const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
-
-                newApp = {
-                    id: newId,
-                    type: "Agenda",
-                    title: title,
-                    name: picName || title,
-                    email: email,
-                    phone: picTel,
-                    location: location,
-                    mode: mode || "Fizikal",
-                    category: category,
-                    date: date,
-                    url: url || TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Pending",
-                    validity: "",
-                    tarikhDari: "",
-                    tarikhSehingga: "",
-                    label: "",
-                    remark: "",
-                    statusPenangguhan: "",
-                    statusPenangguhanSub: "",
-                    photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80"
-                };
-            } else if (regType === 'trainer') {
-                const name = document.getElementById('reg-trainer-name').value.trim();
-                const email = document.getElementById('reg-trainer-email').value.trim();
-                const state = document.getElementById('reg-trainer-state').value;
-                const sabahLoc = document.getElementById('reg-trainer-sabah-loc').value;
-                const summary = document.getElementById('reg-trainer-summary').value.trim();
-                const url = document.getElementById('reg-trainer-url').value.trim();
-
-                const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
-
-                const expBoxes = document.querySelectorAll('input[name="trainer_exp"]:checked');
-                const expertise = Array.from(expBoxes).map(cb => cb.value);
-
-                const certBoxes = document.querySelectorAll('input[name="trainer_cert"]:checked');
-                const certs = Array.from(certBoxes).map(cb => cb.value);
-
-                const todayStr = TODAY.toISOString().split('T')[0];
-
-                newApp = {
-                    id: newId,
-                    type: "Trainer",
-                    title: "Trainer Profesional",
-                    name: name,
-                    email: email,
-                    location: location,
-                    expertise: expertise.length > 0 ? expertise : ["Pengurusan & Kepimpinan"],
-                    summary: summary,
-                    certs: certs,
-                    url: url || TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Pending",
-                    validity: "",
-                    tarikhDari: "",
-                    tarikhSehingga: "",
-                    label: "",
-                    remark: "",
-                    date: todayStr,
-                    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80"
-                };
-            } else if (regType === 'talent') {
-                const name = document.getElementById('reg-talent-name').value.trim();
-                const email = document.getElementById('reg-talent-email').value.trim();
-                const state = document.getElementById('reg-talent-state').value;
-                const sabahLoc = document.getElementById('reg-talent-sabah-loc').value;
+                const name = document.getElementById('reg-talent-name').value;
+                const email = document.getElementById('reg-talent-email').value;
+                const st = document.getElementById('reg-talent-state').value;
+                const sabLoc = document.getElementById('reg-talent-sabah-loc').value;
                 const niche = document.getElementById('reg-talent-niche').value;
-                const summary = document.getElementById('reg-talent-summary').value.trim();
-                const url = document.getElementById('reg-talent-url').value.trim();
+                const summary = document.getElementById('reg-talent-summary').value;
+                const url = document.getElementById('reg-talent-url').value;
 
-                const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
-                const todayStr = TODAY.toISOString().split('T')[0];
-
-                newApp = {
-                    id: newId,
-                    type: "Talent",
-                    title: "Talent Tempatan",
-                    name: name,
-                    email: email,
-                    location: location,
-                    niche: niche,
-                    summary: summary,
-                    url: url || TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Pending",
-                    validity: "",
-                    tarikhDari: "",
-                    tarikhSehingga: "",
-                    label: "",
-                    remark: "",
-                    date: todayStr,
-                    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
-                };
+                newItem.title = niche;
+                newItem.name = name;
+                newItem.email = email;
+                newItem.location = st === 'Sabah' ? (sabLoc || 'Sabah') : st;
+                newItem.niche = niche;
+                newItem.summary = summary;
+                newItem.url = url || TIKTOK_BAYUONE_URL;
+                newItem.date = TODAY.toISOString().split('T')[0];
+                newItem.photo = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80";
             }
 
-            if (newApp) {
-                bayuData.applications.unshift(newApp);
-                saveData();
-
-                closeRegisterModal();
-                document.getElementById('form-register').reset();
-                setRegisterType('penganjur');
-
-                document.getElementById('modal-submission-success').classList.remove('hidden');
-
-                // Refresh views
-                renderAgenda();
-                renderTrainer();
-                renderTalent();
-                renderAdminTable();
-            }
-        }
-
-        // MODAL TOGGLES
-        function openRegisterModal() {
-            document.getElementById('modal-register').classList.remove('hidden');
-            setRegisterType('penganjur');
-        }
-
-        function closeRegisterModal() {
-            document.getElementById('modal-register').classList.add('hidden');
+            bayuData.applications.unshift(newItem);
+            saveData();
+            closeRegisterModal();
+            document.getElementById('modal-submission-success')?.classList.remove('hidden');
         }
 
         function closeSubmissionSuccessModal() {
-            document.getElementById('modal-submission-success').classList.add('hidden');
+            document.getElementById('modal-submission-success')?.classList.add('hidden');
         }
 
-        function openFeedbackModal() {
-            document.getElementById('modal-feedback').classList.remove('hidden');
-        }
-
-        function closeFeedbackModal() {
-            document.getElementById('modal-feedback').classList.add('hidden');
-        }
-
-        function closeFeedbackSuccessModal() {
-            document.getElementById('modal-feedback-success').classList.add('hidden');
-        }
-
-        function handleFeedbackSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('fb-name').value.trim();
-            const email = document.getElementById('fb-email').value.trim();
-            const message = document.getElementById('fb-message').value.trim();
-
-            if (name && email && message) {
-                const now = new Date();
-                const dateStr = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0].substring(0,5);
-
-                bayuData.feedbacks.unshift({
-                    id: "FB-" + Date.now(),
-                    name: name,
-                    email: email,
-                    message: message,
-                    date: dateStr,
-                    status: "In Review"
-                });
-
-                saveData();
-                closeFeedbackModal();
-                document.getElementById('form-feedback').reset();
-                document.getElementById('modal-feedback-success').classList.remove('hidden');
-                renderFeedbackTable();
-            }
-        }
-
-        function openAdminLoginModal() {
-            document.getElementById('modal-admin-login').classList.remove('hidden');
-        }
-
-        function closeAdminLoginModal() {
-            document.getElementById('modal-admin-login').classList.add('hidden');
-        }
+        // ================= ADMIN DASHBOARD LOGIC =================
+        function openAdminLoginModal() { document.getElementById('modal-admin-login')?.classList.remove('hidden'); }
+        function closeAdminLoginModal() { document.getElementById('modal-admin-login')?.classList.add('hidden'); }
 
         function handleAdminLogin(e) {
             e.preventDefault();
             closeAdminLoginModal();
             switchTab('admin');
         }
+        function logoutAdmin() { switchTab('agenda'); }
 
-        function logoutAdmin() {
-            switchTab('agenda');
+        function getItemValidityStatus(item) {
+            if (item.statusPenangguhan === 'Dibatalkan') return { code: 'CANCELLED', label: 'Dibatalkan', class: 'bg-gray-100 text-gray-700' };
+            if (item.approval === 'Pending') return { code: 'PENDING', label: 'Menunggu', class: 'bg-amber-100 text-amber-800' };
+
+            if (!item.tarikhSehingga) return { code: 'ACTIVE', label: 'Aktif', class: 'bg-emerald-100 text-emerald-800' };
+
+            const currentDateStr = TODAY.toISOString().split('T')[0];
+            const expDateStr = item.tarikhSehingga;
+
+            if (currentDateStr > expDateStr) {
+                return { code: 'EXPIRED', label: 'Luput', class: 'bg-red-100 text-red-800' };
+            }
+
+            const expDate = new Date(expDateStr);
+            const daysLeft = Math.ceil((expDate - TODAY) / (1000 * 60 * 60 * 24));
+            if (daysLeft <= 14 && daysLeft >= 0) {
+                return { code: 'EXPIRING', label: 'Akan Tamat', class: 'bg-orange-100 text-orange-800' };
+            }
+
+            return { code: 'ACTIVE', label: 'Aktif', class: 'bg-emerald-100 text-emerald-800' };
         }
 
-        // PUBLIC RENDER FUNCTIONS
-        function renderAgenda() {
-            const upcomingContainer = document.getElementById('grid-agenda-upcoming');
-            const endedContainer = document.getElementById('grid-agenda-ended');
-            if (!upcomingContainer || !endedContainer) return;
-
-            upcomingContainer.innerHTML = '';
-            endedContainer.innerHTML = '';
-
-            const approvedAgenda = bayuData.applications.filter(item => item.type === 'Agenda' && item.approval === 'Approved');
-
-            // Sort by priority then date
-            approvedAgenda.sort((a, b) => {
-                const pA = getPromoPriority(a);
-                const pB = getPromoPriority(b);
-                if (pA !== pB) return pA - pB;
-                return new Date(a.date) - new Date(b.date);
-            });
-
-            let countUpcoming = 0;
-            let countEnded = 0;
-
-            approvedAgenda.forEach(item => {
-                const statusInfo = getAgendaStatusInfo(item);
-                const promoPriority = getPromoPriority(item);
-
-                let badgeHtml = '';
-                if (promoPriority === 1) badgeHtml += `<span class="badge-pill badge-top mr-1">TOP</span>`;
-                else if (promoPriority === 2) badgeHtml += `<span class="badge-pill badge-featured mr-1">FEATURED</span>`;
-                else if (promoPriority === 3) badgeHtml += `<span class="badge-pill badge-promoted mr-1">PROMOTED</span>`;
-
-                statusInfo.badges.forEach(b => {
-                    badgeHtml += `<span class="badge-pill ${b.class} mr-1">${b.text}</span>`;
-                });
-
-                const displayTitle = item.title || item.name;
-
-                const cardHtml = `
-                    <div class="bg-white rounded-2xl border border-brand-border overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                        <div>
-                            <div class="relative h-48 bg-gray-100 overflow-hidden">
-                                <img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'}" alt="${displayTitle}" class="w-full h-full object-cover">
-                                <div class="absolute top-3 left-3 flex flex-wrap gap-1">
-                                    ${badgeHtml}
-                                </div>
-                                <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-2.5 py-1 rounded-lg font-semibold">
-                                    ${item.mode || 'Fizikal'}
-                                </div>
-                            </div>
-                            <div class="p-5 space-y-3">
-                                <div class="text-xs font-bold text-brand uppercase tracking-wider">${item.category || 'Program'}</div>
-                                <h3 class="text-lg font-bold text-brand-dark leading-snug hover:text-brand transition-colors">${displayTitle}</h3>
-                                <div class="text-xs text-brand-muted space-y-1">
-                                    <div class="flex items-center gap-2"><i class="fa-regular fa-calendar text-brand"></i> ${item.date || 'Akan Datang'}</div>
-                                    <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand"></i> ${item.location || 'Sabah'}</div>
-                                    <div class="flex items-center gap-2"><i class="fa-solid fa-user text-brand"></i> ${item.name || item.org || 'Penganjur'}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-5 pt-0">
-                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="w-full bg-brand-bg hover:bg-brand text-brand hover:text-white border border-brand-border font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
-                                <span>Maklumat Lanjut</span>
-                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
-
-                if (statusInfo.code === 'TAMAT' || statusInfo.code === 'DIBATALKAN') {
-                    endedContainer.innerHTML += cardHtml;
-                    countEnded++;
-                } else {
-                    upcomingContainer.innerHTML += cardHtml;
-                    countUpcoming++;
-                }
-            });
-
-            document.getElementById('count-upcoming').textContent = `${countUpcoming} Program`;
-            document.getElementById('count-ended').textContent = `${countEnded} Program`;
-        }
-
-        function filterAgenda() {
-            const loc = document.getElementById('filter-agenda-location').value;
-            const mode = document.getElementById('filter-agenda-mode').value;
-            const cat = document.getElementById('filter-agenda-category').value;
-            const dt = document.getElementById('filter-agenda-date').value;
-
-            // Simple re-render with client filters
-            renderAgenda();
-        }
-
-        function resetAgendaFilters() {
-            document.getElementById('filter-agenda-location').value = "";
-            document.getElementById('filter-agenda-mode').value = "";
-            document.getElementById('filter-agenda-category').value = "";
-            document.getElementById('filter-agenda-date').value = "";
-            renderAgenda();
-        }
-
-        function renderTrainer() {
-            const container = document.getElementById('grid-trainer');
-            if (!container) return;
-            container.innerHTML = '';
-
-            const trainers = bayuData.applications.filter(item => item.type === 'Trainer' && item.approval === 'Approved');
-
-            trainers.forEach(item => {
-                const displayName = item.name || item.title;
-                const expTags = (item.expertise || []).map(exp => `<span class="bg-brand-bg text-brand text-[10px] font-semibold px-2 py-0.5 rounded-md border border-brand-border">${exp}</span>`).join(' ');
-
-                const cardHtml = `
-                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-4">
-                                <img src="${item.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400'}" alt="${displayName}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shrink-0">
-                                <div>
-                                    <h3 class="text-base font-bold text-brand-dark">${displayName}</h3>
-                                    <p class="text-xs text-brand-muted font-medium">${item.title || 'Trainer Profesional'}</p>
-                                    <p class="text-[11px] text-brand font-semibold mt-1"><i class="fa-solid fa-location-dot mr-1"></i>${item.location || 'Sabah'}</p>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap gap-1">
-                                ${expTags}
-                            </div>
-                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
-                        </div>
-                        <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between">
-                            <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">Bertauliah</span>
-                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">
-                                Lihat Profil
-                            </a>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += cardHtml;
-            });
-        }
-
-        function filterTrainer() { renderTrainer(); }
-        function resetTrainerFilters() {
-            document.getElementById('filter-trainer-name').value = "";
-            document.getElementById('filter-trainer-expertise').value = "";
-            document.getElementById('filter-trainer-location').value = "";
-            document.getElementById('filter-trainer-cert').value = "";
-            renderTrainer();
-        }
-
-        function renderTalent() {
-            const container = document.getElementById('grid-talent');
-            if (!container) return;
-            container.innerHTML = '';
-
-            const talents = bayuData.applications.filter(item => item.type === 'Talent' && item.approval === 'Approved');
-
-            talents.forEach(item => {
-                const displayName = item.name || item.title;
-
-                const cardHtml = `
-                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-4">
-                                <img src="${item.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400'}" alt="${displayName}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shrink-0">
-                                <div>
-                                    <h3 class="text-base font-bold text-brand-dark">${displayName}</h3>
-                                    <p class="text-xs text-brand font-semibold">${item.niche || 'Bakat Tempatan'}</p>
-                                    <p class="text-[11px] text-brand-muted mt-0.5"><i class="fa-solid fa-location-dot mr-1"></i>${item.location || 'Sabah'}</p>
-                                </div>
-                            </div>
-                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
-                        </div>
-                        <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-brand-dark bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border">Talent</span>
-                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">
-                                Hubungi Bakat
-                            </a>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += cardHtml;
-            });
-        }
-
-        function filterTalent() { renderTalent(); }
-        function resetTalentFilters() {
-            document.getElementById('filter-talent-name').value = "";
-            document.getElementById('filter-talent-niche').value = "";
-            document.getElementById('filter-talent-location').value = "";
-            renderTalent();
-        }
-
-        // GLOBAL SEARCH HANDLER
-        function handleGlobalSearch() {
-            const query = document.getElementById('global-search').value.toLowerCase().trim();
-            if (!query) return;
-            // Triggers search filtering across current tab
-            renderAgenda();
-            renderTrainer();
-            renderTalent();
-        }
-
-        function triggerSearch() {
-            handleGlobalSearch();
-        }
-
-        // ADMIN TABLE & STATS RENDER
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             if (!tbody) return;
-            tbody.innerHTML = '';
 
-            const searchVal = (document.getElementById('admin-search')?.value || '').toLowerCase().trim();
-            const filterType = document.getElementById('admin-filter-type')?.value || '';
-            const filterApproval = document.getElementById('admin-filter-approval')?.value || '';
+            const q = document.getElementById('admin-search')?.value.toLowerCase().trim() || "";
+            const filterType = document.getElementById('admin-filter-type')?.value || "";
+            const filterApp = document.getElementById('admin-filter-approval')?.value || "";
+            const filterStatus = document.getElementById('admin-filter-status')?.value || "";
 
-            let total = 0, pending = 0, approved = 0, active = 0, expiring = 0, expired = 0, cancelled = 0;
+            let list = [...bayuData.applications];
 
-            bayuData.applications.forEach(item => {
-                total++;
-                if (item.approval === 'Pending') pending++;
-                if (item.approval === 'Approved') approved++;
-                if (item.statusPenangguhan === 'Dibatalkan') cancelled++;
+            if (q) list = list.filter(item => (item.name && item.name.toLowerCase().includes(q)) || (item.title && item.title.toLowerCase().includes(q)) || (item.email && item.email.toLowerCase().includes(q)) || (item.org && item.org.toLowerCase().includes(q)));
+            if (filterType) list = list.filter(item => item.type === filterType);
+            if (filterApp) list = list.filter(item => item.approval === filterApp);
+            if (filterStatus) list = list.filter(item => getItemValidityStatus(item).code === filterStatus);
 
-                // Search & Filter
-                if (filterType && item.type !== filterType) return;
-                if (filterApproval && item.approval !== filterApproval) return;
+            // Update stats
+            let sTotal = bayuData.applications.length;
+            let sPending = bayuData.applications.filter(a => a.approval === 'Pending').length;
+            let sApproved = bayuData.applications.filter(a => a.approval === 'Approved').length;
+            let sActive = 0, sExpiring = 0, sExpired = 0, sCancelled = 0;
 
-                const nameText = (item.name || '').toLowerCase();
-                const titleText = (item.title || '').toLowerCase();
-                const emailText = (item.email || '').toLowerCase();
-                const orgText = (item.org || '').toLowerCase();
-
-                if (searchVal && !nameText.includes(searchVal) && !titleText.includes(searchVal) && !emailText.includes(searchVal) && !orgText.includes(searchVal)) {
-                    return;
-                }
-
-                const displayTitle = (item.type === 'Agenda') ? (item.title || item.name) : (item.name || item.title);
-                const displayDate = item.date || '-';
-
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-brand-bg/50 transition-colors";
-                tr.innerHTML = `
-                    <td class="p-3.5">
-                        <img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=100'}" class="w-10 h-10 rounded-xl object-cover border border-brand-border">
-                    </td>
-                    <td class="p-3.5 font-bold text-brand-dark">
-                        <div>${displayTitle}</div>
-                        <div class="text-[10px] text-brand font-semibold uppercase tracking-wider">${item.type} • ${item.id}</div>
-                    </td>
-                    <td class="p-3.5 text-brand-muted">
-                        <div>${item.name || item.org || '-'}</div>
-                        <div class="text-[11px] text-gray-500">${item.email || '-'}</div>
-                    </td>
-                    <td class="p-3.5 font-semibold text-brand-dark">${displayDate}</td>
-                    <td class="p-3.5">
-                        <span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${item.approval === 'Approved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
-                            ${item.approval === 'Approved' ? 'Diluluskan' : 'Menunggu Semakan'}
-                        </span>
-                    </td>
-                    <td class="p-3.5">${item.validity || '-'}</td>
-                    <td class="p-3.5 text-[11px] text-gray-600">${item.tarikhDari || '-'} s/d ${item.tarikhSehingga || '-'}</td>
-                    <td class="p-3.5 font-bold text-brand">${item.label || '-'}</td>
-                    <td class="p-3.5 text-right space-x-2">
-                        <button onclick="openAdminReviewModal('${item.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
-                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
-                        </button>
-                        <button onclick="confirmDeleteApplication('${item.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
+            bayuData.applications.forEach(a => {
+                const st = getItemValidityStatus(a).code;
+                if (st === 'ACTIVE') sActive++;
+                else if (st === 'EXPIRING') sExpiring++;
+                else if (st === 'EXPIRED') sExpired++;
+                else if (st === 'CANCELLED') sCancelled++;
             });
 
-            document.getElementById('stat-total').textContent = total;
-            document.getElementById('stat-pending').textContent = pending;
-            document.getElementById('stat-approved').textContent = approved;
-            document.getElementById('stat-active').textContent = approved;
-            document.getElementById('stat-expiring').textContent = expiring;
-            document.getElementById('stat-expired').textContent = expired;
-            document.getElementById('stat-cancelled').textContent = cancelled;
+            document.getElementById('stat-total').textContent = sTotal;
+            document.getElementById('stat-pending').textContent = sPending;
+            document.getElementById('stat-approved').textContent = sApproved;
+            document.getElementById('stat-active').textContent = sActive;
+            document.getElementById('stat-expiring').textContent = sExpiring;
+            document.getElementById('stat-expired').textContent = sExpired;
+            document.getElementById('stat-cancelled').textContent = sCancelled;
             document.getElementById('stat-feedback').textContent = bayuData.feedbacks.length;
+
+            if (!list.length) {
+                tbody.innerHTML = `<tr><td colspan="9" class="p-6 text-center text-brand-muted">Tiada permohonan dijumpai.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = list.map(item => {
+                const statusObj = getItemValidityStatus(item);
+                const approvalBadge = item.approval === 'Approved'
+                    ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800">Diluluskan</span>`
+                    : `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Menunggu</span>`;
+
+                const validityBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold ${statusObj.class}">${statusObj.label}</span>`;
+
+                return `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="p-3">
+                            <img src="${item.photo || 'https://via.placeholder.com/40'}" class="w-10 h-10 rounded-lg object-cover border border-brand-border" alt="Thumbnail">
+                        </td>
+                        <td class="p-3">
+                            <div class="font-bold text-brand-dark">${item.title}</div>
+                            <span class="text-[10px] bg-brand-bg text-brand px-1.5 py-0.5 rounded font-semibold">${item.type}</span>
+                        </td>
+                        <td class="p-3">
+                            <div class="font-semibold text-brand-text">${item.name}</div>
+                            <div class="text-[11px] text-brand-muted">${item.org || item.email || '-'}</div>
+                        </td>
+                        <td class="p-3 text-brand-muted">${item.date || '-'}</td>
+                        <td class="p-3">${approvalBadge}</td>
+                        <td class="p-3">${validityBadge}</td>
+                        <td class="p-3 text-brand-muted text-[11px]">${item.tarikhDari || '-'} hingga ${item.tarikhSehingga || '-'}</td>
+                        <td class="p-3 font-semibold text-brand-dark">${item.label || '-'}</td>
+                        <td class="p-3 text-right space-x-1">
+                            <button onclick="openAdminReviewModal('${item.id}')" class="bg-brand text-white hover:bg-brand-dark px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors">
+                                Edit / Semak
+                            </button>
+                            <button onclick="confirmDelete('${item.id}', 'application')" class="bg-red-50 text-red-600 hover:bg-red-100 px-2 py-1 rounded-lg text-[11px] font-bold transition-colors">
+                                Padam
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
         }
 
-        // ADMIN EDIT & REVIEW SYSTEM
+        // ADMIN REVIEW & EDIT MODAL
         function openAdminReviewModal(id) {
             const item = bayuData.applications.find(a => a.id === id);
             if (!item) return;
 
-            const modalBody = document.getElementById('admin-review-body');
-            if (!modalBody) return;
+            const body = document.getElementById('admin-review-body');
+            if (!body) return;
 
-            // Title / Name Field Config according to Requirement 10
-            let titleNameLabel = "Tajuk / Nama";
-            let titleNameValue = "";
+            const isAgenda = item.type === 'Agenda';
 
-            if (item.type === 'Agenda') {
-                titleNameLabel = "Tajuk Agenda";
-                titleNameValue = item.title || item.name || '';
-            } else if (item.type === 'Trainer') {
-                titleNameLabel = "Nama Trainer";
-                titleNameValue = item.name || item.title || '';
-            } else if (item.type === 'Talent') {
-                titleNameLabel = "Nama Talent";
-                titleNameValue = item.name || item.title || '';
-            }
-
-            // Date Field Config according to Requirement 11
-            const dateLabel = (item.type === 'Agenda') ? "Tarikh Agenda" : "Tarikh";
-
-            modalBody.innerHTML = `
-                <form onsubmit="handleSaveAdminEdit(event, '${item.id}')" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            body.innerHTML = `
+                <form onsubmit="saveAdminReview(event, '${item.id}')" class="space-y-4 text-xs">
+                    <div class="grid grid-cols-2 gap-3 bg-brand-bg p-3 rounded-xl border border-brand-border">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jenis Permohonan</label>
-                            <input type="text" value="${item.type}" disabled class="w-full bg-gray-100 border border-brand-border rounded-xl px-3.5 py-2 text-xs font-bold text-brand">
+                            <span class="font-bold text-brand-muted uppercase text-[10px]">ID Permohonan:</span>
+                            <div class="font-bold text-brand-dark">${item.id}</div>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">ID Permohonan</label>
-                            <input type="text" value="${item.id}" disabled class="w-full bg-gray-100 border border-brand-border rounded-xl px-3.5 py-2 text-xs font-bold text-brand-muted">
+                            <span class="font-bold text-brand-muted uppercase text-[10px]">Jenis Permohonan:</span>
+                            <div class="font-bold text-brand-dark">${item.type}</div>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">${titleNameLabel} <span class="text-red-500">*</span></label>
-                        <input type="text" id="admin-edit-title-name" value="${titleNameValue}" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        <label class="block font-bold uppercase text-brand-dark mb-1">Tajuk / Nama Program / Profil</label>
+                        <input type="text" id="edit-title" value="${item.title || ''}" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    ${isAgenda ? `
+                    <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Pemohon / Organisasi</label>
-                            <input type="text" id="admin-edit-name-org" value="${item.name || item.org || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <label class="block font-bold uppercase text-brand-dark mb-1">Harga Yuran (Agenda)</label>
+                            <input type="text" id="edit-harga-yuran" value="${item.hargaYuran || 'Percuma'}" placeholder="Percuma / RM100" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Pemohon</label>
-                            <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <label class="block font-bold uppercase text-brand-dark mb-1">Tarikh Program (Agenda)</label>
+                            <input type="date" id="edit-date" value="${item.date || ''}" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                         </div>
                     </div>
+                    ` : ''}
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">${dateLabel}</label>
-                            <input type="date" id="admin-edit-date" value="${item.date || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Status Kelulusan</label>
-                            <select id="admin-edit-approval" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <label class="block font-bold uppercase text-brand-dark mb-1">Status Kelulusan</label>
+                            <select id="edit-approval" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                                 <option value="Pending" ${item.approval === 'Pending' ? 'selected' : ''}>Menunggu Semakan</option>
                                 <option value="Approved" ${item.approval === 'Approved' ? 'selected' : ''}>Diluluskan</option>
                             </select>
                         </div>
+                        <div>
+                            <label class="block font-bold uppercase text-brand-dark mb-1">Label Promosi</label>
+                            <select id="edit-label" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                <option value="" ${!item.label ? 'selected' : ''}>Tiada (Biasa)</option>
+                                <option value="Top" ${item.label === 'Top' ? 'selected' : ''}>Top</option>
+                                <option value="Featured" ${item.label === 'Featured' ? 'selected' : ''}>Featured</option>
+                                <option value="Promoted" ${item.label === 'Promoted' ? 'selected' : ''}>Promoted</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="grid grid-cols-3 gap-3">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tempoh Sah</label>
-                            <select id="admin-edit-validity" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                                <option value="" ${!item.validity ? 'selected' : ''}>Tiada</option>
+                            <label class="block font-bold uppercase text-brand-dark mb-1">Tempoh Sah</label>
+                            <select id="edit-validity" onchange="autoCalcReviewDates()" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                <option value="" ${!item.validity ? 'selected' : ''}>-- Pilih Tempoh --</option>
                                 <option value="1 Bulan" ${item.validity === '1 Bulan' ? 'selected' : ''}>1 Bulan</option>
                                 <option value="3 Bulan" ${item.validity === '3 Bulan' ? 'selected' : ''}>3 Bulan</option>
                                 <option value="6 Bulan" ${item.validity === '6 Bulan' ? 'selected' : ''}>6 Bulan</option>
@@ -2157,248 +2323,394 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Dari</label>
-                            <input type="date" id="admin-edit-dari" value="${item.tarikhDari || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                            <label class="block font-bold uppercase text-brand-dark mb-1">Tarikh Dari</label>
+                            <input type="date" id="edit-tarikh-dari" value="${item.tarikhDari || ''}" onchange="autoCalcReviewDates()" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Hingga</label>
-                            <input type="date" id="admin-edit-hingga" value="${item.tarikhSehingga || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Label Promosi</label>
-                            <select id="admin-edit-label" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                                <option value="" ${!item.label ? 'selected' : ''}>Tiada Label</option>
-                                <option value="Top" ${item.label === 'Top' ? 'selected' : ''}>Top</option>
-                                <option value="Featured" ${item.label === 'Featured' ? 'selected' : ''}>Featured</option>
-                                <option value="Promoted" ${item.label === 'Promoted' ? 'selected' : ''}>Promoted</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL / Link Pendaftaran</label>
-                            <input type="url" id="admin-edit-url" value="${item.url || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <label class="block font-bold uppercase text-brand-dark mb-1">Tarikh Hingga</label>
+                            <input type="date" id="edit-tarikh-sehingga" value="${item.tarikhSehingga || ''}" class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar / Poster</label>
-                        <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        <label class="block font-bold uppercase text-brand-dark mb-1">URL Gambar Foto</label>
+                        <input type="url" id="edit-photo" value="${item.photo || ''}" placeholder="https://..." class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                     </div>
 
-                    <div class="pt-4 border-t border-brand-border flex gap-3">
-                        <button type="button" onclick="closeAdminReviewModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl text-xs transition-colors">
+                    <div class="flex gap-2 pt-2">
+                        <button type="button" onclick="closeAdminReviewModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl transition-colors">
                             Batal
                         </button>
-                        <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl text-xs transition-colors">
-                            Simpan Perubahan
+                        <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl transition-colors">
+                            Simpan Kelulusan & Perubahan
                         </button>
                     </div>
                 </form>
             `;
 
-            document.getElementById('modal-admin-review').classList.remove('hidden');
+            document.getElementById('modal-admin-review')?.classList.remove('hidden');
         }
 
-        function closeAdminReviewModal() {
-            document.getElementById('modal-admin-review').classList.add('hidden');
+        function autoCalcReviewDates() {
+            const validity = document.getElementById('edit-validity')?.value;
+            const dari = document.getElementById('edit-tarikh-dari')?.value;
+            const sehinggaInput = document.getElementById('edit-tarikh-sehingga');
+            if (validity && dari && sehinggaInput) {
+                sehinggaInput.value = calculateTarikhTamat(dari, validity);
+            }
         }
 
-        function handleSaveAdminEdit(e, id) {
+        function closeAdminReviewModal() { document.getElementById('modal-admin-review')?.classList.add('hidden'); }
+
+        function saveAdminReview(e, id) {
             e.preventDefault();
             const item = bayuData.applications.find(a => a.id === id);
             if (!item) return;
 
-            const titleNameVal = document.getElementById('admin-edit-title-name').value.trim();
-            const nameOrgVal = document.getElementById('admin-edit-name-org').value.trim();
-            const emailVal = document.getElementById('admin-edit-email').value.trim();
-            const dateVal = document.getElementById('admin-edit-date').value;
-            const approvalVal = document.getElementById('admin-edit-approval').value;
-            const validityVal = document.getElementById('admin-edit-validity').value;
-            const dariVal = document.getElementById('admin-edit-dari').value;
-            let hinggaVal = document.getElementById('admin-edit-hingga').value;
-            const labelVal = document.getElementById('admin-edit-label').value;
-            const urlVal = document.getElementById('admin-edit-url').value.trim();
-            const photoVal = document.getElementById('admin-edit-photo').value.trim();
+            item.title = document.getElementById('edit-title').value;
+            item.approval = document.getElementById('edit-approval').value;
+            item.label = document.getElementById('edit-label').value;
+            item.validity = document.getElementById('edit-validity').value;
+            item.tarikhDari = document.getElementById('edit-tarikh-dari').value;
+            item.tarikhSehingga = document.getElementById('edit-tarikh-sehingga').value;
+            item.photo = document.getElementById('edit-photo').value;
 
-            // Auto-calculate Tarikh Hingga if validity is set and dari is available
-            if (dariVal && validityVal && !hinggaVal) {
-                hinggaVal = calculateTarikhTamat(dariVal, validityVal);
-            }
-
-            // Assign edited title or name accurately based on type
             if (item.type === 'Agenda') {
-                item.title = titleNameVal;
-                item.name = nameOrgVal || titleNameVal;
-            } else if (item.type === 'Trainer') {
-                item.name = titleNameVal;
-                if (!item.title) item.title = "Trainer Profesional";
-            } else if (item.type === 'Talent') {
-                item.name = titleNameVal;
-                if (!item.title) item.title = "Talent Tempatan";
+                const hY = document.getElementById('edit-harga-yuran');
+                if (hY) item.hargaYuran = hY.value || 'Percuma';
+                const dt = document.getElementById('edit-date');
+                if (dt) item.date = dt.value;
             }
-
-            item.email = emailVal;
-            item.date = dateVal;
-            item.approval = approvalVal;
-            item.validity = validityVal;
-            item.tarikhDari = dariVal;
-            item.tarikhSehingga = hinggaVal;
-            item.label = labelVal;
-            if (urlVal) item.url = urlVal;
-            if (photoVal) item.photo = photoVal;
 
             saveData();
             closeAdminReviewModal();
-
-            // Refresh Admin & Public Views
             renderAdminTable();
-            renderAgenda();
-            renderTrainer();
-            renderTalent();
         }
 
-        // DELETE CONFIRMATION SYSTEM
-        let applicationToDelete = null;
+        // ================= AMENDMENT 2: ADMIN BANNER MANAGEMENT LOGIC =================
+        function calculateBannerEndDate() {
+            const mula = document.getElementById('banner-tarikh-mula')?.value;
+            const tempoh = document.getElementById('banner-tempoh')?.value;
+            const tamatInput = document.getElementById('banner-tarikh-tamat');
 
-        function confirmDeleteApplication(id) {
-            applicationToDelete = id;
-            document.getElementById('modal-confirm-delete').classList.remove('hidden');
-            document.getElementById('btn-confirm-delete').onclick = executeDeleteApplication;
+            if (mula && tempoh && tamatInput) {
+                tamatInput.value = calculateTarikhTamat(mula, tempoh);
+            }
         }
 
-        function closeDeleteModal() {
-            applicationToDelete = null;
-            document.getElementById('modal-confirm-delete').classList.add('hidden');
+        function openBannerModal(bannerId = null) {
+            const modal = document.getElementById('modal-admin-banner');
+            const titleEl = document.getElementById('banner-modal-title');
+            const form = document.getElementById('form-admin-banner');
+
+            if (!modal || !form) return;
+            form.reset();
+
+            if (bannerId) {
+                const b = (bayuData.banners || []).find(item => item.id === bannerId);
+                if (b) {
+                    titleEl.textContent = "Edit Banner Iklan";
+                    document.getElementById('banner-id').value = b.id;
+                    document.getElementById('banner-url').value = b.url || '';
+                    document.getElementById('banner-nama-iklan').value = b.namaIklan || '';
+                    document.getElementById('banner-syarikat').value = b.syarikat || '';
+                    document.getElementById('banner-tempoh').value = b.tempoh || '1 Bulan';
+                    document.getElementById('banner-tarikh-mula').value = b.tarikhMula || '';
+                    document.getElementById('banner-tarikh-tamat').value = b.tarikhTamat || '';
+                }
+            } else {
+                titleEl.textContent = "Tambah Banner Iklan";
+                document.getElementById('banner-id').value = '';
+                const todayStr = TODAY.toISOString().split('T')[0];
+                document.getElementById('banner-tarikh-mula').value = todayStr;
+                document.getElementById('banner-tempoh').value = '1 Bulan';
+                calculateBannerEndDate();
+            }
+
+            modal.classList.remove('hidden');
         }
 
-        function executeDeleteApplication() {
-            if (!applicationToDelete) return;
-            bayuData.applications = bayuData.applications.filter(a => a.id !== applicationToDelete);
+        function closeBannerModal() {
+            document.getElementById('modal-admin-banner')?.classList.add('hidden');
+        }
+
+        function handleBannerFormSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('banner-id').value;
+            const url = document.getElementById('banner-url').value;
+            const namaIklan = document.getElementById('banner-nama-iklan').value;
+            const syarikat = document.getElementById('banner-syarikat').value;
+            const tempoh = document.getElementById('banner-tempoh').value;
+            const tarikhMula = document.getElementById('banner-tarikh-mula').value;
+            const tarikhTamat = document.getElementById('banner-tarikh-tamat').value;
+
+            if (!bayuData.banners) bayuData.banners = [];
+
+            if (id) {
+                const idx = bayuData.banners.findIndex(b => b.id === id);
+                if (idx !== -1) {
+                    bayuData.banners[idx] = { id, url, namaIklan, syarikat, tempoh, tarikhMula, tarikhTamat };
+                }
+            } else {
+                const newBanner = {
+                    id: `BAN-${Math.floor(1000 + Math.random() * 9000)}`,
+                    url,
+                    namaIklan,
+                    syarikat,
+                    tempoh,
+                    tarikhMula,
+                    tarikhTamat
+                };
+                bayuData.banners.unshift(newBanner);
+            }
+
             saveData();
-            closeDeleteModal();
-            renderAdminTable();
-            renderAgenda();
-            renderTrainer();
-            renderTalent();
+            closeBannerModal();
+            renderBannerTable();
+            renderPublicBanner();
         }
 
-        // SUBSCRIBER & FEEDBACK ADMIN TABLE RENDERS
-        function renderFeedbackTable() {
-            const tbody = document.getElementById('feedback-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
+        function deleteBanner(id) {
+            confirmDelete(id, 'banner');
+        }
 
-            bayuData.feedbacks.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-brand-bg/50 transition-colors";
-                tr.innerHTML = `
-                    <td class="p-3.5 text-gray-500">${item.date}</td>
-                    <td class="p-3.5 font-bold text-brand-dark">${item.name}</td>
-                    <td class="p-3.5 text-brand-muted">${item.email}</td>
-                    <td class="p-3.5 text-brand-text max-w-xs truncate">${item.message}</td>
-                    <td class="p-3.5">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
-                            ${item.status}
-                        </span>
-                    </td>
-                    <td class="p-3.5 text-right space-x-1">
-                        <button onclick="toggleFeedbackStatus('${item.id}')" class="text-brand hover:underline text-[11px] font-bold">
-                            Tukar Status
-                        </button>
-                    </td>
+        function renderBannerTable() {
+            const tbody = document.getElementById('banner-table-body');
+            if (!tbody) return;
+
+            const banners = bayuData.banners || [];
+            if (!banners.length) {
+                tbody.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-brand-muted">Tiada iklan banner berdaftar.</td></tr>`;
+                return;
+            }
+
+            const currentDateStr = TODAY.toISOString().split('T')[0];
+
+            tbody.innerHTML = banners.map(b => {
+                let statusLabel = "";
+                let statusClass = "";
+
+                if (currentDateStr < b.tarikhMula) {
+                    statusLabel = "Akan Datang";
+                    statusClass = "bg-amber-100 text-amber-800 border-amber-200";
+                } else if (currentDateStr >= b.tarikhMula && currentDateStr < b.tarikhTamat) {
+                    statusLabel = "Sedang Aktif";
+                    statusClass = "bg-emerald-100 text-emerald-800 border-emerald-200";
+                } else {
+                    statusLabel = "Telah Tamat";
+                    statusClass = "bg-gray-100 text-gray-600 border-gray-200";
+                }
+
+                return `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="p-3">
+                            <div class="w-24 h-8 bg-gray-100 rounded border border-brand-border overflow-hidden">
+                                <img src="${b.url}" alt="${b.namaIklan}" class="w-full h-full object-cover">
+                            </div>
+                        </td>
+                        <td class="p-3 font-bold text-brand-dark">${b.namaIklan}</td>
+                        <td class="p-3 text-brand-text">${b.syarikat}</td>
+                        <td class="p-3 text-brand-muted font-semibold">${b.tempoh}</td>
+                        <td class="p-3 text-brand-muted">${b.tarikhMula}</td>
+                        <td class="p-3 text-brand-muted">${b.tarikhTamat}</td>
+                        <td class="p-3">
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold border ${statusClass}">
+                                ${statusLabel}
+                            </span>
+                        </td>
+                        <td class="p-3 text-right space-x-1">
+                            <button onclick="openBannerModal('${b.id}')" class="bg-brand text-white hover:bg-brand-dark px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors">
+                                Edit
+                            </button>
+                            <button onclick="deleteBanner('${b.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 px-2 py-1 rounded-lg text-[11px] font-bold transition-colors">
+                                Padam
+                            </button>
+                        </td>
+                    </tr>
                 `;
-                tbody.appendChild(tr);
-            });
+            }).join('');
+        }
+
+
+        // ================= MAKLUM BALAS SECTION & AMENDMENT 3 =================
+        function openFeedbackModal() { document.getElementById('modal-feedback')?.classList.remove('hidden'); }
+        function closeFeedbackModal() { document.getElementById('modal-feedback')?.classList.add('hidden'); }
+        function closeFeedbackSuccessModal() { document.getElementById('modal-feedback-success')?.classList.add('hidden'); }
+
+        function handleFeedbackSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('fb-name').value;
+            const email = document.getElementById('fb-email').value;
+            const message = document.getElementById('fb-message').value;
+
+            const now = new Date();
+            const dateStr = now.toISOString().split('T')[0] + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+
+            const newFb = {
+                id: `FB-${Math.floor(1000 + Math.random() * 9000)}`,
+                name,
+                email,
+                message,
+                date: dateStr,
+                status: 'In Review'
+            };
+
+            bayuData.feedbacks.unshift(newFb);
+            saveData();
+
+            closeFeedbackModal();
+            document.getElementById('modal-feedback-success')?.classList.remove('hidden');
+        }
+
+        // AMENDMENT 3: LIHAT PENUH / PREVIEW MAKLUM BALAS MODAL LOGIC
+        function openFeedbackPreviewModal(id) {
+            const fb = bayuData.feedbacks.find(item => item.id === id);
+            if (!fb) return;
+
+            document.getElementById('fb-preview-name').textContent = fb.name || '-';
+            document.getElementById('fb-preview-email').textContent = fb.email || '-';
+            document.getElementById('fb-preview-date').textContent = `Dihantar pada: ${fb.date || '-'}`;
+            document.getElementById('fb-preview-message').textContent = fb.message || '-';
+
+            const statusBadgeContainer = document.getElementById('fb-preview-status');
+            if (statusBadgeContainer) {
+                if (fb.status === 'Resolved') {
+                    statusBadgeContainer.innerHTML = `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200"><i class="fa-solid fa-check-circle mr-1"></i> Selesai (Resolved)</span>`;
+                } else {
+                    statusBadgeContainer.innerHTML = `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200"><i class="fa-solid fa-clock mr-1"></i> Dalam Semakan (In Review)</span>`;
+                }
+            }
+
+            document.getElementById('modal-feedback-preview')?.classList.remove('hidden');
+        }
+
+        function closeFeedbackPreviewModal() {
+            document.getElementById('modal-feedback-preview')?.classList.add('hidden');
         }
 
         function toggleFeedbackStatus(id) {
-            const fb = bayuData.feedbacks.find(f => f.id === id);
+            const fb = bayuData.feedbacks.find(item => item.id === id);
             if (fb) {
-                fb.status = (fb.status === 'Resolved') ? 'In Review' : 'Resolved';
+                fb.status = fb.status === 'Resolved' ? 'In Review' : 'Resolved';
                 saveData();
                 renderFeedbackTable();
             }
         }
 
-        function handleSubscribeSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('sub-name').value.trim();
-            const email = document.getElementById('sub-email').value.trim();
-            const checkedBoxes = document.querySelectorAll('input[name="sub_interest"]:checked');
-            const errorEl = document.getElementById('sub-error');
+        function renderFeedbackTable() {
+            const tbody = document.getElementById('feedback-table-body');
+            if (!tbody) return;
 
-            if (checkedBoxes.length === 0) {
-                errorEl.classList.remove('hidden');
+            if (!bayuData.feedbacks.length) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-brand-muted">Tiada maklum balas diterima.</td></tr>`;
                 return;
-            } else {
-                errorEl.classList.add('hidden');
             }
 
-            const minatList = Array.from(checkedBoxes).map(cb => cb.value).join(', ');
-            const todayStr = TODAY.toISOString().split('T')[0];
+            tbody.innerHTML = bayuData.feedbacks.map(fb => {
+                const statusBadge = fb.status === 'Resolved'
+                    ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Selesai</span>`
+                    : `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">In Review</span>`;
+
+                return `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="p-3 text-brand-muted">${fb.date}</td>
+                        <td class="p-3 font-bold text-brand-dark">${fb.name}</td>
+                        <td class="p-3 text-brand-muted">${fb.email}</td>
+                        <td class="p-3 text-brand-text truncate max-w-xs">${fb.message}</td>
+                        <td class="p-3">${statusBadge}</td>
+                        <td class="p-3 text-right space-x-1">
+                            <!-- AMENDMENT 3: LIHAT PENUH BUTTON WORKS FOR BOTH REVIEW & RESOLVED -->
+                            <button onclick="openFeedbackPreviewModal('${fb.id}')" class="bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors">
+                                <i class="fa-solid fa-eye mr-1"></i> Lihat Penuh
+                            </button>
+                            <button onclick="toggleFeedbackStatus('${fb.id}')" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors">
+                                ${fb.status === 'Resolved' ? 'Tanda In Review' : 'Tanda Selesai'}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // ================= SUBSCRIBER LOGIC =================
+        function handleSubscribeSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('sub-name').value;
+            const email = document.getElementById('sub-email').value;
+            const checkboxes = document.querySelectorAll('input[name="sub_interest"]:checked');
+            const err = document.getElementById('sub-error');
+
+            if (!checkboxes.length) {
+                if (err) err.classList.remove('hidden');
+                return;
+            }
+            if (err) err.classList.add('hidden');
+
+            const interests = Array.from(checkboxes).map(c => c.value).join(', ');
+            const now = new Date().toISOString().split('T')[0];
 
             bayuData.subscribers.unshift({
-                id: "SUB-" + Date.now(),
-                name: name,
-                email: email,
-                minat: minatList,
-                date: todayStr,
-                status: "NEW"
+                id: `SUB-${Math.floor(100 + Math.random() * 900)}`,
+                name,
+                email,
+                minat: interests,
+                date: now,
+                status: 'NEW'
             });
-
             saveData();
-            document.getElementById('subscribe-form').reset();
-            document.getElementById('sub-success-message').classList.remove('hidden');
-            setTimeout(() => {
-                document.getElementById('sub-success-message').classList.add('hidden');
-            }, 5000);
-            renderSubscriberTable();
+
+            document.getElementById('subscribe-form')?.classList.add('hidden');
+            document.getElementById('sub-success-message')?.classList.remove('hidden');
         }
 
         function renderSubscriberTable() {
             const tbody = document.getElementById('subscriber-table-body');
             if (!tbody) return;
-            tbody.innerHTML = '';
 
-            let total = 0, newSub = 0, existingSub = 0;
-
-            bayuData.subscribers.forEach(sub => {
-                total++;
-                if (sub.status === 'NEW') newSub++;
-                else existingSub++;
-
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-brand-bg/50 transition-colors";
-                tr.innerHTML = `
-                    <td class="p-3.5 font-bold text-brand-dark">${sub.name}</td>
-                    <td class="p-3.5 text-brand-muted">${sub.email}</td>
-                    <td class="p-3.5 text-xs text-gray-600">${sub.minat}</td>
-                    <td class="p-3.5 text-right space-x-1">
-                        <button onclick="openEditSubscriberModal('${sub.id}')" class="text-brand hover:underline text-[11px] font-bold">Edit</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
+            const total = bayuData.subscribers.length;
+            const newCount = bayuData.subscribers.filter(s => s.status === 'NEW').length;
+            const existingCount = bayuData.subscribers.filter(s => s.status === 'EXISTING').length;
 
             document.getElementById('stat-sub-total').textContent = total;
-            document.getElementById('stat-sub-new').textContent = newSub;
-            document.getElementById('stat-sub-existing').textContent = existingSub;
+            document.getElementById('stat-sub-new').textContent = newCount;
+            document.getElementById('stat-sub-existing').textContent = existingCount;
+
+            if (!total) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-brand-muted">Tiada pelanggan berdaftar.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = bayuData.subscribers.map(sub => `
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="p-3 font-bold text-brand-dark">${sub.name}</td>
+                    <td class="p-3 text-brand-muted">${sub.email}</td>
+                    <td class="p-3 text-brand-text max-w-xs truncate">${sub.minat}</td>
+                    <td class="p-3 text-right space-x-1">
+                        <button onclick="openEditSubscriberModal('${sub.id}')" class="bg-brand text-white hover:bg-brand-dark px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors">
+                            Edit
+                        </button>
+                        <button onclick="confirmDelete('${sub.id}', 'subscriber')" class="bg-red-50 text-red-600 hover:bg-red-100 px-2 py-1 rounded-lg text-[11px] font-bold transition-colors">
+                            Padam
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
         }
 
         function openEditSubscriberModal(id) {
             const sub = bayuData.subscribers.find(s => s.id === id);
             if (!sub) return;
+
             document.getElementById('edit-sub-id').value = sub.id;
             document.getElementById('edit-sub-name').value = sub.name;
             document.getElementById('edit-sub-email').value = sub.email;
             document.getElementById('edit-sub-minat').value = sub.minat;
-            document.getElementById('modal-edit-subscriber').classList.remove('hidden');
+
+            document.getElementById('modal-edit-subscriber')?.classList.remove('hidden');
         }
 
         function closeEditSubscriberModal() {
-            document.getElementById('modal-edit-subscriber').classList.add('hidden');
+            document.getElementById('modal-edit-subscriber')?.classList.add('hidden');
         }
 
         function handleSaveSubscriber(e) {
@@ -2406,36 +2718,67 @@
             const id = document.getElementById('edit-sub-id').value;
             const sub = bayuData.subscribers.find(s => s.id === id);
             if (sub) {
-                sub.name = document.getElementById('edit-sub-name').value.trim();
-                sub.email = document.getElementById('edit-sub-email').value.trim();
-                sub.minat = document.getElementById('edit-sub-minat').value.trim();
+                sub.name = document.getElementById('edit-sub-name').value;
+                sub.email = document.getElementById('edit-sub-email').value;
+                sub.minat = document.getElementById('edit-sub-minat').value;
                 saveData();
                 closeEditSubscriberModal();
                 renderSubscriberTable();
             }
         }
 
-        // INITIALIZATION ON DOM READY
-        document.addEventListener('DOMContentLoaded', () => {
+        // CONFIRM DELETE DIALOG LOGIC
+        let deleteTargetId = null;
+        let deleteTargetCategory = null;
+
+        function confirmDelete(id, category) {
+            deleteTargetId = id;
+            deleteTargetCategory = category;
+
+            const msg = document.getElementById('delete-modal-msg');
+            if (msg) {
+                if (category === 'application') msg.textContent = "Adakah anda pasti mahu memadam permohonan ini?";
+                else if (category === 'banner') msg.textContent = "Adakah anda pasti mahu memadam banner iklan ini?";
+                else if (category === 'subscriber') msg.textContent = "Adakah anda pasti mahu memadam pelanggan ini?";
+            }
+
+            const btn = document.getElementById('btn-confirm-delete');
+            if (btn) btn.onclick = executeDelete;
+
+            document.getElementById('modal-confirm-delete')?.classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            deleteTargetId = null;
+            deleteTargetCategory = null;
+            document.getElementById('modal-confirm-delete')?.classList.add('hidden');
+        }
+
+        function executeDelete() {
+            if (!deleteTargetId || !deleteTargetCategory) return;
+
+            if (deleteTargetCategory === 'application') {
+                bayuData.applications = bayuData.applications.filter(a => a.id !== deleteTargetId);
+                renderAdminTable();
+            } else if (deleteTargetCategory === 'banner') {
+                bayuData.banners = bayuData.banners.filter(b => b.id !== deleteTargetId);
+                renderBannerTable();
+                renderPublicBanner();
+            } else if (deleteTargetCategory === 'subscriber') {
+                bayuData.subscribers = bayuData.subscribers.filter(s => s.id !== deleteTargetId);
+                renderSubscriberTable();
+            }
+
+            saveData();
+            closeDeleteModal();
+        }
+
+        // INITIALIZATION ON PAGE LOAD
+        document.addEventListener("DOMContentLoaded", function () {
             initLocationDropdowns();
-            renderAgenda();
-            renderTrainer();
-            renderTalent();
+            renderAgendaGrid();
+            renderPublicBanner();
         });
     </script>
-
-<script>
-function formatHargaYuran(value) {
-    if (value === undefined || value === null || value === '') return '';
-    const amount = Number(value);
-    if (!Number.isFinite(amount)) return '';
-    if (amount === 0) return 'Percuma';
-    return 'RM' + amount.toLocaleString('ms-MY', {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2
-    });
-}
-</script>
-
 </body>
 </html>
