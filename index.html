@@ -97,6 +97,41 @@
         /* Brand Typography Helper */
         .brand-text-b { font-weight: 700; }
         .brand-text-o { font-weight: 400; }
+
+        /* Banner specific */
+        .banner-container {
+            width: 100%;
+            max-width: 970px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .banner-container img {
+            width: 100%;
+            height: auto;
+            max-height: 90px;
+            object-fit: contain;
+            display: block;
+        }
+        @media (min-width: 1024px) {
+            .banner-container {
+                height: 90px;
+            }
+            .banner-container img {
+                width: 970px;
+                height: 90px;
+                object-fit: contain;
+            }
+        }
+
+        /* Feedback preview long text */
+        .feedback-preview-text {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-white text-brand-text">
@@ -269,6 +304,13 @@
                     <div id="grid-agenda-upcoming" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
 
+                <!-- ========== BANNER AD SECTION (BETWEEN AGENDA SECTIONS) ========== -->
+                <div id="banner-ad-section" class="py-2">
+                    <div id="banner-ad-container" class="banner-container">
+                        <!-- Active banner will be injected here by JavaScript -->
+                    </div>
+                </div>
+
                 <div>
                     <div class="flex items-center justify-between mb-6 pb-2 border-b border-brand-border">
                         <div>
@@ -404,7 +446,6 @@
         </div>
 
 
-
         <!-- ================= ADMIN DASHBOARD VIEW ================= -->
         <div id="view-admin" class="tab-content hidden space-y-8">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-brand-bg p-6 rounded-2xl border border-brand-border">
@@ -505,6 +546,40 @@
                             </tr>
                         </thead>
                         <tbody id="admin-table-body" class="divide-y divide-brand-border"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========== ADMIN BANNER SECTION ========== -->
+            <div class="bg-white rounded-2xl border border-brand-border shadow-xs p-6 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-4">
+                    <div>
+                        <h3 class="text-xl font-extrabold text-brand-dark uppercase tracking-wide flex items-center gap-2">
+                            <i class="fa-solid fa-image text-brand"></i>
+                            BANNER
+                        </h3>
+                        <p class="text-xs text-brand-muted">Urus banner iklan yang dipaparkan di halaman Agenda awam.</p>
+                    </div>
+                    <button onclick="openBannerModal()" class="bg-brand hover:bg-brand-dark text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Tambah Banner
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto border border-brand-border rounded-xl">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-brand-border text-brand-muted uppercase font-bold tracking-wider">
+                                <th class="p-3.5">Gambar</th>
+                                <th class="p-3.5">Nama Iklan</th>
+                                <th class="p-3.5">Syarikat / Individu</th>
+                                <th class="p-3.5">Tempoh</th>
+                                <th class="p-3.5">Tarikh Mula</th>
+                                <th class="p-3.5">Tarikh Tamat</th>
+                                <th class="p-3.5">Status</th>
+                                <th class="p-3.5 text-right">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="banner-table-body" class="divide-y divide-brand-border"></tbody>
                     </table>
                 </div>
             </div>
@@ -787,6 +862,20 @@
                             <option value="Lain-lain">Lain-lain</option>
                         </select>
                     </div>
+                    <!-- HARGA YURAN FIELDS (AMENDMENT 1) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="sm:col-span-1">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Yuran <span class="text-gray-400 font-normal">(Optional)</span></label>
+                            <select id="reg-penganjur-fee-type" onchange="togglePenganjurFee()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                <option value="Percuma">Percuma</option>
+                                <option value="Berbayar">Berbayar</option>
+                            </select>
+                        </div>
+                        <div id="reg-penganjur-fee-amount-wrapper" class="sm:col-span-2 hidden">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jumlah Yuran (RM)</label>
+                            <input type="number" id="reg-penganjur-fee-amount" placeholder="Contoh: 50" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                    </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama PIC (Optional)</label>
@@ -933,6 +1022,78 @@
                     <p class="text-[11px] text-brand-muted text-center mt-2">Permohonan akan disemak oleh pasukan Admin sebelum diterbitkan secara awam.</p>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- BANNER MODAL (ADMIN) -->
+    <div id="modal-banner" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8 border border-brand-border">
+            <button onclick="closeBannerModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 id="banner-modal-title" class="text-lg font-bold text-brand-dark mb-1">Tambah Banner</h3>
+            <p class="text-xs text-brand-muted mb-4">Isi maklumat iklan banner.</p>
+
+            <form id="form-banner" onsubmit="handleSaveBanner(event)" class="space-y-4">
+                <input type="hidden" id="banner-edit-id" value="">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Foto Banner <span class="text-red-500">*</span></label>
+                    <input type="url" id="banner-photo" required placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                    <p class="text-[10px] text-brand-muted mt-1">Saiz disyorkan: 970 × 90 px</p>
+                    <div id="banner-photo-preview" class="mt-2 hidden">
+                        <img src="" alt="Preview" class="max-h-20 rounded border border-brand-border">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Iklan <span class="text-red-500">*</span></label>
+                    <input type="text" id="banner-name" required placeholder="Contoh: Promosi Kursus AI" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Syarikat / Individu <span class="text-red-500">*</span></label>
+                    <input type="text" id="banner-company" required placeholder="Contoh: ABC Training Sdn. Bhd." class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tempoh Iklan <span class="text-red-500">*</span></label>
+                        <select id="banner-validity" onchange="calculateBannerEndDate()" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                            <option value="">Pilih Tempoh</option>
+                            <option value="1 Bulan">1 Bulan</option>
+                            <option value="3 Bulan">3 Bulan</option>
+                            <option value="6 Bulan">6 Bulan</option>
+                            <option value="1 Tahun">1 Tahun</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Mula <span class="text-red-500">*</span></label>
+                        <input type="date" id="banner-start-date" required onchange="calculateBannerEndDate()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Tamat (Auto)</label>
+                    <input type="date" id="banner-end-date" readonly disabled class="w-full bg-gray-100 border border-brand-border rounded-xl px-3 py-2 text-sm text-brand-muted">
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeBannerModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs transition-colors">Batal</button>
+                    <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-xs transition-colors">Simpan Banner</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FEEDBACK FULL PREVIEW MODAL (AMENDMENT 3) -->
+    <div id="modal-feedback-preview" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8 border border-brand-border">
+            <button onclick="closeFeedbackPreviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-lg font-bold text-brand-dark mb-1">Maklum Balas Penuh</h3>
+            <p class="text-xs text-brand-muted mb-4">Maklumat lengkap yang dihantar oleh pengguna.</p>
+            <div id="feedback-preview-body" class="space-y-3 text-sm max-h-[60vh] overflow-y-auto pr-2">
+                <!-- Injected dynamically -->
+            </div>
+            <div class="pt-4 mt-4 border-t border-brand-border">
+                <button onclick="closeFeedbackPreviewModal()" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-sm transition-colors">Tutup</button>
+            </div>
         </div>
     </div>
 
@@ -1182,7 +1343,9 @@
                     remark: "",
                     statusPenangguhan: "",
                     statusPenangguhanSub: "",
-                    photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80"
+                    photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80",
+                    hargaYuran: "RM50",
+                    feeType: "Berbayar"
                 },
                 {
                     id: "APP-1002",
@@ -1206,7 +1369,9 @@
                     remark: "",
                     statusPenangguhan: "",
                     statusPenangguhanSub: "",
-                    photo: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80"
+                    photo: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80",
+                    hargaYuran: "Percuma",
+                    feeType: "Percuma"
                 },
                 {
                     id: "APP-1003",
@@ -1230,7 +1395,9 @@
                     remark: "",
                     statusPenangguhan: "",
                     statusPenangguhanSub: "",
-                    photo: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80"
+                    photo: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80",
+                    hargaYuran: "RM250",
+                    feeType: "Berbayar"
                 },
                 {
                     id: "APP-2001",
@@ -1336,7 +1503,9 @@
                     remark: "",
                     statusPenangguhan: "",
                     statusPenangguhanSub: "",
-                    photo: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80"
+                    photo: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80",
+                    hargaYuran: "Percuma",
+                    feeType: "Percuma"
                 }
             ],
             subscribers: [
@@ -1348,6 +1517,26 @@
             feedbacks: [
                 { id: "FB-201", name: "Hasnol Bahrin", email: "hasnol@gmail.com", message: "Sangat mudah mencari trainer tempatan Sabah melalui platform BayuOne ini. Tahniah!", date: "2026-09-10 14:30", status: "In Review" },
                 { id: "FB-202", name: "Grace Lim", email: "grace.lim@yahoo.com", message: "Mohon tambah fungsi tapis mengikut daerah di Kota Kinabalu secara khusus.", date: "2026-09-05 09:15", status: "Resolved" }
+            ],
+            banners: [
+                {
+                    id: "BAN-001",
+                    photo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=970&h=90&fit=crop",
+                    name: "Promosi Kursus AI 2026",
+                    company: "TechMaju Sdn. Bhd.",
+                    validity: "3 Bulan",
+                    startDate: "2026-08-01",
+                    endDate: "2026-11-01"
+                },
+                {
+                    id: "BAN-002",
+                    photo: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=970&h=90&fit=crop",
+                    name: "Pameran Kerjaya Sabah",
+                    company: "JobStreet Sabah",
+                    validity: "1 Bulan",
+                    startDate: "2026-07-15",
+                    endDate: "2026-08-15"
+                }
             ]
         };
 
@@ -1357,6 +1546,7 @@
                 if (stored.applications) bayuData.applications = stored.applications;
                 if (stored.subscribers) bayuData.subscribers = stored.subscribers;
                 if (stored.feedbacks) bayuData.feedbacks = stored.feedbacks;
+                if (stored.banners) bayuData.banners = stored.banners;
             } catch (e) {
                 console.error("Gagal membaca data dari LocalStorage", e);
             }
@@ -1399,6 +1589,46 @@
             return `${rY}-${rM}-${rD}`;
         }
 
+        // BANNER STATUS CALCULATION
+        function getBannerStatus(banner) {
+            const today = new Date(TODAY.toISOString().split('T')[0]);
+            const start = new Date(banner.startDate);
+            const end = new Date(banner.endDate);
+
+            if (today < start) return { code: 'AKAN_DATANG', label: 'Akan Datang', class: 'bg-amber-100 text-amber-800 border-amber-200' };
+            if (today >= start && today < end) return { code: 'SEDANG_AKTIF', label: 'Sedang Aktif', class: 'bg-emerald-100 text-emerald-800 border-emerald-200' };
+            return { code: 'TELAH_TAMAT', label: 'Telah Tamat', class: 'bg-gray-100 text-gray-600 border-gray-200' };
+        }
+
+        // GET ACTIVE BANNER (only one)
+        function getActiveBanner() {
+            const today = new Date(TODAY.toISOString().split('T')[0]);
+            return bayuData.banners.find(b => {
+                const start = new Date(b.startDate);
+                const end = new Date(b.endDate);
+                return today >= start && today < end;
+            });
+        }
+
+        function renderBanner() {
+            const container = document.getElementById('banner-ad-container');
+            if (!container) return;
+
+            const activeBanner = getActiveBanner();
+            if (!activeBanner) {
+                container.innerHTML = '';
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'flex';
+            container.innerHTML = `
+                <img src="${activeBanner.photo}" alt="${activeBanner.name}" 
+                     style="width: 100%; height: auto; max-height: 90px; object-fit: contain; display: block;"
+                     onerror="this.style.display='none'">
+            `;
+        }
+
         function getPromoPriority(item) {
             if (!item.label || item.label === "" || item.label === "None") return 4;
             if (item.tarikhDari && item.tarikhSehingga) {
@@ -1418,9 +1648,10 @@
             return 4;
         }
 
+        // PUBLIC AGENDA STATUS INFO (status labels hidden from public view per CHANGE 3)
         function getAgendaStatusInfo(item) {
             if (item.statusPenangguhan === 'Dibatalkan') {
-                return { code: 'DIBATALKAN', label: 'Dibatalkan', badges: [{ text: 'Dibatalkan', class: 'bg-red-100 text-red-800 border-red-200' }] };
+                return { code: 'DIBATALKAN', label: 'Dibatalkan', badges: [] };
             }
 
             if (item.statusPenangguhan === 'Telah Ditunda') {
@@ -1428,19 +1659,16 @@
                 return {
                     code: 'TELAH_DITUNDA',
                     label: 'Telah Ditunda',
-                    badges: [
-                        { text: 'Telah Ditunda', class: 'bg-amber-100 text-amber-800 border-amber-200' },
-                        { text: subText, class: 'bg-blue-100 text-blue-800 border-blue-200' }
-                    ]
+                    badges: []
                 };
             }
 
             const eventDate = new Date(item.date);
             if (TODAY > eventDate) {
-                return { code: 'TAMAT', label: 'Telah Tamat', badges: [{ text: 'Telah Tamat', class: 'bg-gray-100 text-gray-600 border-gray-200' }] };
+                return { code: 'TAMAT', label: 'Telah Tamat', badges: [] };
             }
 
-            return { code: 'AKAN_DATANG', label: 'Akan Datang', badges: [{ text: 'Aktif', class: 'bg-emerald-100 text-emerald-800 border-emerald-200' }] };
+            return { code: 'AKAN_DATANG', label: 'Akan Datang', badges: [] };
         }
 
         // NAVIGATION & TAB SWITCHING
@@ -1461,6 +1689,7 @@
                 heroTitle.textContent = "Program & Aktiviti Terkini";
                 heroSubtitle.textContent = "Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.";
                 renderAgenda();
+                renderBanner();
             } else if (tabName === 'trainer') {
                 heroTitle.textContent = "Trainer & Jurulatih Profesional";
                 heroSubtitle.textContent = "Cari penceramah, jurulatih dan pakar bidang untuk menjayakan program latihan anda.";
@@ -1473,6 +1702,7 @@
                 renderAdminTable();
                 renderFeedbackTable();
                 renderSubscriberTable();
+                renderBannerTable();
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -1579,6 +1809,18 @@
             }
         }
 
+        // TOGGLE PENGANJUR FEE AMOUNT FIELD
+        function togglePenganjurFee() {
+            const feeType = document.getElementById('reg-penganjur-fee-type').value;
+            const amountWrapper = document.getElementById('reg-penganjur-fee-amount-wrapper');
+            if (feeType === 'Berbayar') {
+                amountWrapper.classList.remove('hidden');
+            } else {
+                amountWrapper.classList.add('hidden');
+                document.getElementById('reg-penganjur-fee-amount').value = '';
+            }
+        }
+
         // CRITICAL: SINGLE AUTHORITATIVE REGISTRATION SUBMISSION HANDLER
         function handleRegisterSubmit(event) {
             event.preventDefault();
@@ -1598,6 +1840,13 @@
                 const picTel = document.getElementById('reg-penganjur-pic-tel').value.trim();
                 const mode = document.getElementById('reg-penganjur-mode').value;
                 const url = document.getElementById('reg-penganjur-url').value.trim();
+
+                const feeType = document.getElementById('reg-penganjur-fee-type').value;
+                const feeAmount = document.getElementById('reg-penganjur-fee-amount').value.trim();
+                let hargaYuran = 'Percuma';
+                if (feeType === 'Berbayar' && feeAmount) {
+                    hargaYuran = 'RM' + parseFloat(feeAmount).toFixed(2).replace(/\.00$/, '');
+                }
 
                 const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
 
@@ -1622,7 +1871,9 @@
                     remark: "",
                     statusPenangguhan: "",
                     statusPenangguhanSub: "",
-                    photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80"
+                    photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80",
+                    hargaYuran: hargaYuran,
+                    feeType: feeType
                 };
             } else if (regType === 'trainer') {
                 const name = document.getElementById('reg-trainer-name').value.trim();
@@ -1704,6 +1955,7 @@
                 closeRegisterModal();
                 document.getElementById('form-register').reset();
                 setRegisterType('penganjur');
+                document.getElementById('reg-penganjur-fee-amount-wrapper').classList.add('hidden');
 
                 document.getElementById('modal-submission-success').classList.remove('hidden');
 
@@ -1768,6 +2020,44 @@
             }
         }
 
+        // FEEDBACK FULL PREVIEW
+        function openFeedbackPreview(id) {
+            const fb = bayuData.feedbacks.find(f => f.id === id);
+            if (!fb) return;
+
+            const container = document.getElementById('feedback-preview-body');
+            container.innerHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div class="bg-brand-bg p-3 rounded-lg">
+                        <span class="font-bold text-brand-dark block mb-0.5">Tarikh</span>
+                        <span class="text-brand-muted">${fb.date}</span>
+                    </div>
+                    <div class="bg-brand-bg p-3 rounded-lg">
+                        <span class="font-bold text-brand-dark block mb-0.5">Status</span>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${fb.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${fb.status}</span>
+                    </div>
+                </div>
+                <div class="bg-brand-bg p-3 rounded-lg">
+                    <span class="font-bold text-brand-dark block mb-0.5">Nama</span>
+                    <span class="text-brand-text">${fb.name}</span>
+                </div>
+                <div class="bg-brand-bg p-3 rounded-lg">
+                    <span class="font-bold text-brand-dark block mb-0.5">Emel</span>
+                    <span class="text-brand-text">${fb.email}</span>
+                </div>
+                <div class="bg-brand-bg p-3 rounded-lg">
+                    <span class="font-bold text-brand-dark block mb-1">Maklum Balas Penuh</span>
+                    <div class="feedback-preview-text text-brand-text text-xs leading-relaxed">${fb.message}</div>
+                </div>
+            `;
+
+            document.getElementById('modal-feedback-preview').classList.remove('hidden');
+        }
+
+        function closeFeedbackPreviewModal() {
+            document.getElementById('modal-feedback-preview').classList.add('hidden');
+        }
+
         function openAdminLoginModal() {
             document.getElementById('modal-admin-login').classList.remove('hidden');
         }
@@ -1784,6 +2074,139 @@
 
         function logoutAdmin() {
             switchTab('agenda');
+        }
+
+        // BANNER ADMIN FUNCTIONS
+        function openBannerModal(id) {
+            const modal = document.getElementById('modal-banner');
+            const title = document.getElementById('banner-modal-title');
+            const form = document.getElementById('form-banner');
+
+            if (id) {
+                const banner = bayuData.banners.find(b => b.id === id);
+                if (!banner) return;
+                title.textContent = 'Edit Banner';
+                document.getElementById('banner-edit-id').value = banner.id;
+                document.getElementById('banner-photo').value = banner.photo;
+                document.getElementById('banner-name').value = banner.name;
+                document.getElementById('banner-company').value = banner.company;
+                document.getElementById('banner-validity').value = banner.validity;
+                document.getElementById('banner-start-date').value = banner.startDate;
+                document.getElementById('banner-end-date').value = banner.endDate;
+                document.getElementById('banner-photo-preview').classList.remove('hidden');
+                document.getElementById('banner-photo-preview').querySelector('img').src = banner.photo;
+            } else {
+                title.textContent = 'Tambah Banner';
+                document.getElementById('banner-edit-id').value = '';
+                form.reset();
+                document.getElementById('banner-end-date').value = '';
+                document.getElementById('banner-photo-preview').classList.add('hidden');
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeBannerModal() {
+            document.getElementById('modal-banner').classList.add('hidden');
+        }
+
+        function calculateBannerEndDate() {
+            const startDate = document.getElementById('banner-start-date').value;
+            const validity = document.getElementById('banner-validity').value;
+            const endDateInput = document.getElementById('banner-end-date');
+
+            if (startDate && validity) {
+                const endDate = calculateTarikhTamat(startDate, validity);
+                endDateInput.value = endDate;
+            } else {
+                endDateInput.value = '';
+            }
+        }
+
+        function handleSaveBanner(e) {
+            e.preventDefault();
+            const editId = document.getElementById('banner-edit-id').value;
+            const photo = document.getElementById('banner-photo').value.trim();
+            const name = document.getElementById('banner-name').value.trim();
+            const company = document.getElementById('banner-company').value.trim();
+            const validity = document.getElementById('banner-validity').value;
+            const startDate = document.getElementById('banner-start-date').value;
+            const endDate = document.getElementById('banner-end-date').value;
+
+            if (!photo || !name || !company || !validity || !startDate || !endDate) {
+                alert('Sila isi semua maklumat banner.');
+                return;
+            }
+
+            if (editId) {
+                const banner = bayuData.banners.find(b => b.id === editId);
+                if (banner) {
+                    banner.photo = photo;
+                    banner.name = name;
+                    banner.company = company;
+                    banner.validity = validity;
+                    banner.startDate = startDate;
+                    banner.endDate = endDate;
+                }
+            } else {
+                bayuData.banners.unshift({
+                    id: "BAN-" + Date.now(),
+                    photo: photo,
+                    name: name,
+                    company: company,
+                    validity: validity,
+                    startDate: startDate,
+                    endDate: endDate
+                });
+            }
+
+            saveData();
+            closeBannerModal();
+            renderBannerTable();
+            renderBanner();
+        }
+
+        function renderBannerTable() {
+            const tbody = document.getElementById('banner-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            bayuData.banners.forEach(banner => {
+                const statusInfo = getBannerStatus(banner);
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5">
+                        <img src="${banner.photo}" class="w-16 h-8 rounded object-cover border border-brand-border" onerror="this.style.display='none'">
+                    </td>
+                    <td class="p-3.5 font-bold text-brand-dark">${banner.name}</td>
+                    <td class="p-3.5 text-brand-muted">${banner.company}</td>
+                    <td class="p-3.5">${banner.validity}</td>
+                    <td class="p-3.5 font-semibold text-brand-dark">${banner.startDate}</td>
+                    <td class="p-3.5 font-semibold text-brand-dark">${banner.endDate}</td>
+                    <td class="p-3.5">
+                        <span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${statusInfo.class}">${statusInfo.label}</span>
+                    </td>
+                    <td class="p-3.5 text-right space-x-2">
+                        <button onclick="openBannerModal('${banner.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
+                        </button>
+                        <button onclick="confirmDeleteBanner('${banner.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function confirmDeleteBanner(id) {
+            if (confirm('Adakah anda pasti mahu memadam banner ini?')) {
+                bayuData.banners = bayuData.banners.filter(b => b.id !== id);
+                saveData();
+                renderBannerTable();
+                renderBanner();
+            }
         }
 
         // PUBLIC RENDER FUNCTIONS
@@ -1817,11 +2240,11 @@
                 else if (promoPriority === 2) badgeHtml += `<span class="badge-pill badge-featured mr-1">FEATURED</span>`;
                 else if (promoPriority === 3) badgeHtml += `<span class="badge-pill badge-promoted mr-1">PROMOTED</span>`;
 
-                statusInfo.badges.forEach(b => {
-                    badgeHtml += `<span class="badge-pill ${b.class} mr-1">${b.text}</span>`;
-                });
+                // Public view: status badges hidden per CHANGE 3
+                // statusInfo.badges.forEach(b => { ... }) intentionally omitted
 
                 const displayTitle = item.title || item.name;
+                const hargaYuranDisplay = item.hargaYuran || 'Percuma';
 
                 const cardHtml = `
                     <div class="bg-white rounded-2xl border border-brand-border overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
@@ -1842,6 +2265,7 @@
                                     <div class="flex items-center gap-2"><i class="fa-regular fa-calendar text-brand"></i> ${item.date || 'Akan Datang'}</div>
                                     <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand"></i> ${item.location || 'Sabah'}</div>
                                     <div class="flex items-center gap-2"><i class="fa-solid fa-user text-brand"></i> ${item.name || item.org || 'Penganjur'}</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-tag text-brand"></i> Harga Yuran: <span class="font-bold text-brand-dark">${hargaYuranDisplay}</span></div>
                                 </div>
                             </div>
                         </div>
@@ -1896,6 +2320,13 @@
                 const displayName = item.name || item.title;
                 const expTags = (item.expertise || []).map(exp => `<span class="bg-brand-bg text-brand text-[10px] font-semibold px-2 py-0.5 rounded-md border border-brand-border">${exp}</span>`).join(' ');
 
+                // CHANGE 1: Replace "Bertauliah" with actual certification(s)
+                const certs = item.certs && item.certs.length > 0 ? item.certs : [];
+                const certTags = certs.map(cert => `<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">${cert}</span>`).join(' ');
+                const certDisplay = certs.length > 0
+                    ? `<div class="flex flex-wrap gap-1">${certTags}</div>`
+                    : '';
+
                 const cardHtml = `
                     <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-4">
@@ -1913,7 +2344,7 @@
                             <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
                         </div>
                         <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between">
-                            <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">Bertauliah</span>
+                            ${certDisplay}
                             <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">
                                 Lihat Profil
                             </a>
@@ -1943,6 +2374,7 @@
             talents.forEach(item => {
                 const displayName = item.name || item.title;
 
+                // CHANGE 2: Remove "Talent" label + make "Hubungi Bakat" button full width
                 const cardHtml = `
                     <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-4">
@@ -1956,9 +2388,8 @@
                             </div>
                             <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
                         </div>
-                        <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-brand-dark bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border">Talent</span>
-                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">
+                        <div class="pt-4 mt-4 border-t border-brand-border">
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="w-full bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors block text-center">
                                 Hubungi Bakat
                             </a>
                         </div>
@@ -2077,7 +2508,6 @@
             const modalBody = document.getElementById('admin-review-body');
             if (!modalBody) return;
 
-            // Title / Name Field Config according to Requirement 10
             let titleNameLabel = "Tajuk / Nama";
             let titleNameValue = "";
 
@@ -2092,7 +2522,6 @@
                 titleNameValue = item.name || item.title || '';
             }
 
-            // Date Field Config according to Requirement 11
             const dateLabel = (item.type === 'Agenda') ? "Tarikh Agenda" : "Tarikh";
 
             modalBody.innerHTML = `
@@ -2215,12 +2644,10 @@
             const urlVal = document.getElementById('admin-edit-url').value.trim();
             const photoVal = document.getElementById('admin-edit-photo').value.trim();
 
-            // Auto-calculate Tarikh Hingga if validity is set and dari is available
             if (dariVal && validityVal && !hinggaVal) {
                 hinggaVal = calculateTarikhTamat(dariVal, validityVal);
             }
 
-            // Assign edited title or name accurately based on type
             if (item.type === 'Agenda') {
                 item.title = titleNameVal;
                 item.name = nameOrgVal || titleNameVal;
@@ -2245,7 +2672,6 @@
             saveData();
             closeAdminReviewModal();
 
-            // Refresh Admin & Public Views
             renderAdminTable();
             renderAgenda();
             renderTrainer();
@@ -2297,6 +2723,9 @@
                         </span>
                     </td>
                     <td class="p-3.5 text-right space-x-1">
+                        <button onclick="openFeedbackPreview('${item.id}')" class="text-brand hover:underline text-[11px] font-bold mr-2">
+                            Lihat Penuh
+                        </button>
                         <button onclick="toggleFeedbackStatus('${item.id}')" class="text-brand hover:underline text-[11px] font-bold">
                             Tukar Status
                         </button>
@@ -2408,12 +2837,28 @@
             }
         }
 
+        // BANNER PHOTO PREVIEW
+        document.getElementById('banner-photo')?.addEventListener('input', function() {
+            const url = this.value.trim();
+            const preview = document.getElementById('banner-photo-preview');
+            if (url) {
+                preview.classList.remove('hidden');
+                preview.querySelector('img').src = url;
+            } else {
+                preview.classList.add('hidden');
+            }
+        });
+
         // INITIALIZATION ON DOM READY
         document.addEventListener('DOMContentLoaded', () => {
             initLocationDropdowns();
             renderAgenda();
             renderTrainer();
             renderTalent();
+            renderBanner();
+
+            // Set up toggle for penganjur fee type
+            document.getElementById('reg-penganjur-fee-type')?.addEventListener('change', togglePenganjurFee);
         });
     </script>
 </body>
