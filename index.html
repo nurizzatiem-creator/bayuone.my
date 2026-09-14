@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BayuOne - Komuniti Kemahiran, Bakat & Peluang</title>
 
-    <!-- Google Fonts: DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -53,21 +50,10 @@
             background-color: rgba(255, 255, 255, 0.92);
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F4F8F5;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #C2D4C9;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #126B4C;
-        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #F4F8F5; }
+        ::-webkit-scrollbar-thumb { background: #C2D4C9; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #126B4C; }
 
         .tab-btn.active {
             color: #126B4C;
@@ -88,49 +74,119 @@
         .badge-promoted { background-color: #E0E7FF; color: #3730A3; border: 1px solid #C7D2FE; }
         .badge-top { background-color: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
 
-        /* Modal Animation */
         .modal-backdrop {
             background-color: rgba(11, 25, 19, 0.6);
             backdrop-filter: blur(4px);
         }
 
-        /* Brand Typography Helper */
         .brand-text-b { font-weight: 700; }
         .brand-text-o { font-weight: 400; }
 
-        /* Banner specific */
         .banner-container {
             width: 100%;
-            max-width: 970px;
+            max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
-            min-height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         .banner-container img {
             width: 100%;
-            height: auto;
-            max-height: 90px;
-            object-fit: contain;
+            height: 150px;
+            object-fit: cover;
             display: block;
+            border-radius: 0.75rem;
         }
-        @media (min-width: 1024px) {
-            .banner-container {
-                height: 90px;
-            }
+        @media (min-width: 1280px) {
+            .banner-container { height: 150px; }
             .banner-container img {
-                width: 970px;
-                height: 90px;
-                object-fit: contain;
+                width: 1600px;
+                height: 150px;
+                object-fit: cover;
             }
         }
 
-        /* Feedback preview long text */
         .feedback-preview-text {
             white-space: pre-wrap;
             word-break: break-word;
+        }
+
+        #admin-review-body {
+            max-height: 65vh;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .brand-logo-tile {
+            aspect-ratio: 1 / 1;
+            background-color: #FFFFFF;
+            border: 1px solid #DCE6DF;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0.75rem;
+            transition: box-shadow 0.2s ease;
+        }
+        .brand-logo-tile:hover {
+            box-shadow: 0 4px 12px rgba(18, 107, 76, 0.08);
+        }
+        .brand-logo-tile img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .interest-checkbox-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.55rem;
+            font-size: 0.72rem;
+            line-height: 1.1;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.15s ease, border-color 0.15s ease;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .interest-checkbox-label:hover {
+            background-color: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.22);
+        }
+        .interest-checkbox-label input[type="checkbox"] {
+            width: 0.85rem;
+            height: 0.85rem;
+            margin: 0;
+            accent-color: #1CB07E;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .social-icon-btn {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #D1FAE5;
+            font-size: 15px;
+            transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+            text-decoration: none;
+        }
+        .social-icon-btn:hover {
+            background-color: #126B4C;
+            color: #FFFFFF;
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -139,7 +195,6 @@
     <!-- HEADER -->
     <header class="sticky top-0 z-40 border-b border-brand-border sticky-nav transition-all duration-200">
         <div class="max-w-[1200px] mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('agenda')">
                 <div class="w-11 h-11 bg-white border border-brand-border rounded-xl shadow-sm flex items-center justify-center overflow-hidden p-1">
                     <img src="https://lh3.googleusercontent.com/d/1gXBWckPatTAQwgfXpmLn5gu3DY7YkWQO" onerror="this.src='https://drive.google.com/thumbnail?id=1gXBWckPatTAQwgfXpmLn5gu3DY7YkWQO&sz=w1000'" alt="BayuOne Logo" class="w-full h-full object-contain">
@@ -153,7 +208,6 @@
                 </div>
             </div>
 
-            <!-- Desktop Navigation Tabs -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
                 <button onclick="switchTab('agenda')" id="nav-agenda" class="tab-btn py-7 transition-colors active">
                     <i class="fa-regular fa-calendar-check mr-2"></i>Agenda
@@ -166,7 +220,6 @@
                 </button>
             </nav>
 
-            <!-- CTA Actions -->
             <div class="hidden md:flex items-center space-x-3">
                 <button onclick="openRegisterModal()" class="bg-brand hover:bg-brand-dark text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow-sm hover:shadow transition-all flex items-center gap-2">
                     <i class="fa-solid fa-plus text-xs"></i>
@@ -174,13 +227,11 @@
                 </button>
             </div>
 
-            <!-- Mobile Hamburger Button -->
             <button onclick="toggleMobileMenu()" class="md:hidden text-brand-dark text-xl p-2 rounded-lg hover:bg-brand-bg focus:outline-none">
                 <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
             </button>
         </div>
 
-        <!-- Mobile Menu Drawer -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-brand-border bg-white px-4 pt-3 pb-5 space-y-3">
             <button onclick="switchTab('agenda'); toggleMobileMenu()" class="w-full text-left py-2.5 px-3 rounded-lg text-sm font-semibold text-brand-text hover:bg-brand-bg flex items-center gap-3">
                 <i class="fa-regular fa-calendar-check text-brand"></i> Agenda Program
@@ -304,11 +355,8 @@
                     <div id="grid-agenda-upcoming" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
 
-                <!-- ========== BANNER AD SECTION (BETWEEN AGENDA SECTIONS) ========== -->
                 <div id="banner-ad-section" class="py-2">
-                    <div id="banner-ad-container" class="banner-container">
-                        <!-- Active banner will be injected here by JavaScript -->
-                    </div>
+                    <div id="banner-ad-container" class="banner-container"></div>
                 </div>
 
                 <div>
@@ -445,6 +493,88 @@
             <div id="grid-talent" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
 
+        <!-- ================= TAB 4: PRIVACY POLICY VIEW ================= -->
+        <div id="view-privacy" class="tab-content hidden">
+            <div class="bg-white rounded-2xl border border-brand-border shadow-sm">
+                <div class="bg-brand-dark rounded-t-2xl p-6 sm:p-8 text-white">
+                    <button onclick="switchTab('agenda')" class="inline-flex items-center gap-2 text-xs font-bold text-emerald-200 hover:text-white transition-colors mb-4">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Laman Utama
+                    </button>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
+                        DASAR PRIVASI & POLISI <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>
+                    </h1>
+                    <p class="mt-2 text-xs sm:text-sm text-emerald-100/80 font-semibold uppercase tracking-wider">Berkuat kuasa: September 2026</p>
+                </div>
+
+                <div class="p-6 sm:p-8 md:p-10 space-y-6 text-sm sm:text-base text-brand-text leading-relaxed">
+                    <p>
+                        <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> ialah platform yang menghubungkan <strong>Penganjur, Trainer dan Talent</strong> untuk perkongsian program, kemahiran, peluang dan jaringan profesional.
+                    </p>
+
+                    <div class="space-y-4">
+                        <h2 class="text-lg sm:text-xl font-extrabold text-brand-dark pt-2 border-t border-brand-border">1. Privasi & Maklumat Pengguna</h2>
+                        <p>
+                            <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> mengumpul maklumat yang diberikan oleh pengguna seperti nama, organisasi, nombor telefon, e-mel, lokasi, profil profesional, kemahiran, pengalaman, gambar, logo dan maklumat program. Maklumat ini digunakan untuk memproses permohonan, mengurus profil, menerbitkan kandungan yang diluluskan, memudahkan hubungan antara pengguna serta mengurus dan menambah baik platform.
+                        </p>
+                        <p>
+                            <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> tidak menjual maklumat peribadi pengguna. Maklumat yang dipilih untuk dipaparkan secara awam boleh dilihat oleh orang lain. Pengguna bertanggungjawab memastikan maklumat yang diberikan adalah benar dan mempunyai kebenaran untuk berkongsi sebarang maklumat, gambar, logo atau kandungan pihak lain.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-lg sm:text-xl font-extrabold text-brand-dark pt-2 border-t border-brand-border">2. Penggunaan <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></h2>
+                        <p>
+                            <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> hendaklah digunakan secara <strong>sah, jujur, profesional dan bertanggungjawab</strong>. Pengguna tidak dibenarkan memberikan maklumat palsu, menyamar, melakukan penipuan atau spam, mengganggu pengguna lain, melanggar hak pihak ketiga, memuat naik kandungan yang menyalahi undang-undang atau menyalahgunakan platform.
+                        </p>
+                        <p>
+                            <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> berhak menyemak, menolak, menyunting, menyembunyikan atau memadam mana-mana kandungan, profil atau permohonan yang melanggar polisi platform.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-lg sm:text-xl font-extrabold text-brand-dark pt-2 border-t border-brand-border">3. Semakan & Kandungan</h2>
+                        <p>
+                            Penerbitan sesuatu profil atau program selepas semakan Admin <strong>tidak bermaksud <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> menjamin atau mengesahkan</strong> kelayakan, kualiti, ketepatan maklumat, harga, tuntutan, program atau perkhidmatan pihak tersebut. Pengguna bertanggungjawab membuat semakan sendiri sebelum berurusan dengan mana-mana pihak.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-lg sm:text-xl font-extrabold text-brand-dark pt-2 border-t border-brand-border">4. Had Liabiliti</h2>
+                        <p>
+                            <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> bertindak sebagai <strong>platform penghubung</strong> dan bukan pihak kepada sebarang urusan, transaksi, perjanjian atau perkhidmatan antara pengguna.
+                        </p>
+                        <p>
+                            Setakat yang dibenarkan oleh undang-undang, <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> dan pihak yang mengendalikan platform <strong>tidak bertanggungjawab atau menanggung sebarang kerugian, kerosakan, tuntutan, kos atau perbelanjaan</strong> yang timbul daripada penggunaan <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> atau sebarang urusan dengan Penganjur, Trainer, Talent atau pihak ketiga, termasuk berkaitan program yang dibatalkan, ditunda, berubah, tidak memenuhi jangkaan, maklumat yang tidak tepat, tindakan pengguna/pihak ketiga, gangguan teknikal atau perkara di luar kawalan munasabah <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>.
+                        </p>
+                        <p>
+                            Sebarang urusan dengan pihak yang disenaraikan di <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> dibuat <strong>atas risiko dan tanggungjawab pengguna sendiri</strong>.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-lg sm:text-xl font-extrabold text-brand-dark pt-2 border-t border-brand-border">5. Data & Perubahan Polisi</h2>
+                        <p>
+                            Pengguna boleh meminta pembetulan atau kemas kini maklumat mereka melalui saluran rasmi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>, tertakluk kepada undang-undang yang terpakai. <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> boleh mengemas kini polisi ini dari semasa ke semasa dan versi terkini akan dipaparkan di platform.
+                        </p>
+                        <p>
+                            Dengan menggunakan <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>, pengguna mengakui telah membaca, memahami dan bersetuju dengan <strong>Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></strong>.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 border-t border-brand-border text-center space-y-1.5">
+                        <p class="font-bold text-brand-dark"><span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> - Komuniti Kemahiran, Bakat & Peluang</p>
+                        <p class="text-xs text-brand-muted italic">Connect · Create · Grow</p>
+                        <p class="text-xs text-brand-muted font-semibold">Powered by NMZ Kreatif Enterprise (199736-T)</p>
+                    </div>
+
+                    <div class="pt-4 text-center">
+                        <button onclick="switchTab('agenda')" class="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white text-sm font-bold px-6 py-3 rounded-xl shadow-sm transition-colors">
+                            <i class="fa-solid fa-arrow-left text-xs"></i> Kembali ke Laman Utama
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- ================= ADMIN DASHBOARD VIEW ================= -->
         <div id="view-admin" class="tab-content hidden space-y-8">
@@ -464,7 +594,6 @@
                 </div>
             </div>
 
-            <!-- Summary Statistic Cards for Applications -->
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
                 <div class="bg-white p-4 rounded-xl border border-brand-border shadow-2xs">
                     <span class="text-[11px] font-bold text-brand-muted uppercase">Jumlah</span>
@@ -500,7 +629,6 @@
                 </div>
             </div>
 
-            <!-- Admin Filters & Table Area -->
             <div class="bg-white rounded-2xl border border-brand-border shadow-xs overflow-hidden">
                 <div class="p-4 bg-brand-bg border-b border-brand-border flex flex-wrap items-center justify-between gap-3">
                     <div class="flex items-center gap-2 flex-grow max-w-md">
@@ -539,9 +667,10 @@
                                 <th class="p-3.5">Pemohon / Organisasi / Email</th>
                                 <th class="p-3.5">Tarikh</th>
                                 <th class="p-3.5">Kelulusan</th>
-                                <th class="p-3.5">Tempoh Sah</th>
-                                <th class="p-3.5">Tarikh Dari - Hingga</th>
                                 <th class="p-3.5">Label</th>
+                                <th class="p-3.5">Tempoh Sah</th>
+                                <th class="p-3.5">Tarikh Dari</th>
+                                <th class="p-3.5">Hingga</th>
                                 <th class="p-3.5 text-right">Tindakan</th>
                             </tr>
                         </thead>
@@ -550,7 +679,6 @@
                 </div>
             </div>
 
-            <!-- ========== ADMIN BANNER SECTION ========== -->
             <div class="bg-white rounded-2xl border border-brand-border shadow-xs p-6 space-y-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-4">
                     <div>
@@ -558,7 +686,7 @@
                             <i class="fa-solid fa-image text-brand"></i>
                             BANNER
                         </h3>
-                        <p class="text-xs text-brand-muted">Urus banner iklan yang dipaparkan di halaman Agenda awam.</p>
+                        <p class="text-xs text-brand-muted">Urus banner iklan yang dipaparkan di halaman Agenda awam (1600 × 150 px).</p>
                     </div>
                     <button onclick="openBannerModal()" class="bg-brand hover:bg-brand-dark text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors flex items-center gap-2">
                         <i class="fa-solid fa-plus"></i> Tambah Banner
@@ -584,7 +712,6 @@
                 </div>
             </div>
 
-            <!-- MAKLUM BALAS ADMIN DASHBOARD SECTION -->
             <div class="bg-white rounded-2xl border border-brand-border shadow-xs p-6 space-y-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-4">
                     <div>
@@ -613,7 +740,6 @@
                 </div>
             </div>
 
-            <!-- SUBSCRIBER DASHBOARD -->
             <div class="bg-white rounded-2xl border border-brand-border shadow-xs p-6 space-y-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-4">
                     <div>
@@ -655,89 +781,144 @@
                 </div>
             </div>
 
+            <div class="bg-white rounded-2xl border border-brand-border shadow-xs p-6 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-4">
+                    <div>
+                        <h3 class="text-xl font-extrabold text-brand-dark uppercase tracking-wide flex items-center gap-2">
+                            <i class="fa-solid fa-handshake text-brand"></i>
+                            Partnerships/Collaborations
+                        </h3>
+                        <p class="text-xs text-brand-muted">Urus sehingga 10 rakan kongsi/brand yang dipaparkan di seksyen "Brands Who Support Us" di laman awam.</p>
+                    </div>
+                    <button onclick="openPartnerModal()" class="bg-brand hover:bg-brand-dark text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Tambah Partner
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto border border-brand-border rounded-xl">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-brand-border text-brand-muted uppercase font-bold tracking-wider">
+                                <th class="p-3.5">Posisi</th>
+                                <th class="p-3.5">Gambar</th>
+                                <th class="p-3.5">Nama</th>
+                                <th class="p-3.5">Image URL</th>
+                                <th class="p-3.5">Status</th>
+                                <th class="p-3.5 text-right">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="partner-table-body" class="divide-y divide-brand-border"></tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
-        <!-- SUBSCRIBE / NEWSLETTER SECTION -->
-        <section id="subscription-section" class="mt-16 bg-brand-dark rounded-2xl p-8 sm:p-12 text-white relative overflow-hidden shadow-lg">
-            <div class="max-w-3xl mx-auto text-center space-y-4">
-                <span class="inline-block px-3 py-1 bg-brand rounded-full text-xs font-bold uppercase tracking-widest text-emerald-200">Hebahan Percuma</span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Dapatkan Update Program & Acara Terkini</h2>
-                <p class="text-brand-bg text-sm sm:text-base font-normal max-w-xl mx-auto">
+        <!-- ============ BRANDS WHO SUPPORT US (public) ============ -->
+        <section id="brands-support-section" class="mt-16 bg-white border-t border-brand-border pt-12 pb-4">
+            <div class="max-w-[1200px] mx-auto px-2 sm:px-4">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">Brands Who Support Us</h2>
+                    <p class="mt-2 text-sm text-brand-muted">Rakan kongsi dan jenama yang menyokong komuniti BayuOne.</p>
+                </div>
+                <div id="brands-support-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"></div>
+                <div id="brands-support-empty" class="hidden text-center py-8 text-sm text-brand-muted">
+                    Tiada rakan kongsi dipaparkan buat masa ini.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SUBSCRIBE / NEWSLETTER SECTION (Maklumbalas) ============ -->
+        <section id="subscription-section" class="mt-12 bg-brand-dark rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden shadow-lg">
+            <div class="max-w-2xl mx-auto text-center space-y-2">
+                <span class="inline-block px-2.5 py-0.5 bg-brand rounded-full text-[10px] font-bold uppercase tracking-widest text-emerald-200">Hebahan Percuma</span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-white">Dapatkan Update Program & Acara Terkini</h2>
+                <p class="text-brand-bg text-xs sm:text-sm font-normal max-w-lg mx-auto">
                     Percuma. Masukkan emel anda untuk menerima hebahan program dan acara yang menarik.
                 </p>
 
-                <form id="subscribe-form" onsubmit="handleSubscribeSubmit(event)" class="mt-8 text-left bg-white/5 border border-white/10 p-6 sm:p-8 rounded-2xl backdrop-blur-sm space-y-5">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form id="subscribe-form" onsubmit="handleSubscribeSubmit(event)" class="mt-5 text-left bg-white/5 border border-white/10 p-4 sm:p-5 rounded-xl backdrop-blur-sm space-y-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-emerald-200 mb-1">Nama <span class="text-red-400">*</span></label>
-                            <input type="text" id="sub-name" required placeholder="Nama penuh anda" class="w-full bg-white text-brand-text rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                            <label class="block text-[10px] font-bold uppercase text-emerald-200 mb-0.5">Nama <span class="text-red-400">*</span></label>
+                            <input type="text" id="sub-name" required placeholder="Nama penuh anda" class="w-full bg-white text-brand-text rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-400">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-emerald-200 mb-1">Emel <span class="text-red-400">*</span></label>
-                            <input type="email" id="sub-email" required placeholder="alamat@emel.com" class="w-full bg-white text-brand-text rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                            <label class="block text-[10px] font-bold uppercase text-emerald-200 mb-0.5">Emel <span class="text-red-400">*</span></label>
+                            <input type="email" id="sub-email" required placeholder="alamat@emel.com" class="w-full bg-white text-brand-text rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-400">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-emerald-200 mb-2">
+                        <label class="block text-[10px] font-bold uppercase text-emerald-200 mb-1.5">
                             Pilih Minat Anda (Boleh pilih lebih dari 1) <span class="text-red-400">*</span>
                         </label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-white">
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Peningkatan Kemahiran & Kerjaya" class="accent-brand rounded">
+                        <div class="flex flex-wrap gap-1.5 text-xs text-white">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Peningkatan Kemahiran & Kerjaya">
                                 <span>Peningkatan Kemahiran & Kerjaya</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Perniagaan & Keusahawanan" class="accent-brand rounded">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Perniagaan & Keusahawanan">
                                 <span>Perniagaan & Keusahawanan</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Kewangan & Pelaburan" class="accent-brand rounded">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Kewangan & Pelaburan">
                                 <span>Kewangan & Pelaburan</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Kesihatan & Kesejahteraan" class="accent-brand rounded">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Kesihatan & Kesejahteraan">
                                 <span>Kesihatan & Kesejahteraan</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Teknologi & Digital" class="accent-brand rounded">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Teknologi & Digital">
                                 <span>Teknologi & Digital</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Pendidikan & Pembelajaran" class="accent-brand rounded">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Pendidikan & Pembelajaran">
                                 <span>Pendidikan & Pembelajaran</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Kreativiti & Media" class="accent-brand rounded">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Kreativiti & Media">
                                 <span>Kreativiti & Media</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Komuniti & Networking" class="accent-brand rounded">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Komuniti & Networking">
                                 <span>Komuniti & Networking</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Gaya Hidup & Minat" class="accent-brand rounded">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Gaya Hidup & Minat">
                                 <span>Gaya Hidup & Minat</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer bg-white/10 p-2.5 rounded-lg hover:bg-white/20 transition-all">
-                                <input type="checkbox" name="sub_interest" value="Agama & Kerohanian" class="accent-brand rounded">
+                            <label class="interest-checkbox-label">
+                                <input type="checkbox" name="sub_interest" value="Agama & Kerohanian">
                                 <span>Agama & Kerohanian</span>
                             </label>
                         </div>
-                        <div id="sub-error" class="hidden mt-2 p-2 bg-red-500/20 border border-red-400 text-red-200 text-xs rounded-lg font-medium">
+                        <div id="sub-error" class="hidden mt-1.5 p-1.5 bg-red-500/20 border border-red-400 text-red-200 text-[11px] rounded-md font-medium">
                             Sila pilih sekurang-kurangnya satu minat.
                         </div>
                     </div>
 
-                    <div class="pt-2">
-                        <button type="submit" class="w-full bg-white hover:bg-brand-bg text-brand-dark text-sm font-extrabold py-3.5 rounded-xl shadow transition-colors">
+                    <div class="pt-1">
+                        <label class="flex items-start gap-2 cursor-pointer text-[11px] text-emerald-100 leading-snug">
+                            <input type="checkbox" id="sub-privacy-agree" required class="mt-0.5 accent-brand rounded">
+                            <span>
+                                Saya faham dan setuju dengan
+                                <a href="javascript:void(0)" onclick="openPrivacyPage(event)" class="text-emerald-300 hover:text-white underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="pt-1">
+                        <button type="submit" class="w-full bg-white hover:bg-brand-bg text-brand-dark text-xs font-extrabold py-2.5 rounded-lg shadow transition-colors">
                             Saya Nak Dapatkan Update Program & Acara Terkini
                         </button>
                     </div>
                 </form>
 
-                <div id="sub-success-message" class="hidden p-6 bg-emerald-900/80 border border-emerald-500/30 rounded-2xl text-emerald-100 font-semibold text-center animate-fade-in">
-                    <i class="fa-solid fa-circle-check text-3xl text-emerald-400 mb-2 block"></i>
+                <div id="sub-success-message" class="hidden p-4 bg-emerald-900/80 border border-emerald-500/30 rounded-xl text-emerald-100 font-semibold text-center text-xs animate-fade-in">
+                    <i class="fa-solid fa-circle-check text-2xl text-emerald-400 mb-1 block"></i>
                     Terima kasih! Anda kini dalam senarai hebahan <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>.
                 </div>
             </div>
@@ -759,6 +940,24 @@
                     <p class="text-xs sm:text-sm text-emerald-100/80 leading-relaxed max-w-lg">
                         <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> ialah platform yang menghubungkan individu, profesional dan organisasi untuk berkongsi ilmu, membina jaringan serta membuka peluang kolaborasi dan perkembangan bakat.
                     </p>
+
+                    <div class="pt-2 space-y-2">
+                        <h3 class="text-xs uppercase font-bold text-emerald-400 tracking-wider">Saluran Rasmi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></h3>
+                        <div class="flex items-center gap-2.5">
+                            <a href="https://www.tiktok.com/@bayuone.my" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne TikTok">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </a>
+                            <a href="https://www.threads.net/@bayuone.my" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne Threads">
+                                <i class="fa-brands fa-threads"></i>
+                            </a>
+                            <a href="https://www.facebook.com/KomunitiBayuOne" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne Facebook">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="https://www.instagram.com/bayuone.my" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="space-y-3">
@@ -766,7 +965,11 @@
                     <p class="text-xs sm:text-sm text-emerald-100/80 leading-relaxed">
                         Kandungan, profil, program dan tawaran yang dipaparkan mungkin disediakan oleh pihak ketiga. Pengguna bertanggungjawab membuat semakan dan pengesahan sendiri sebelum membuat sebarang keputusan, bayaran atau kerjasama.
                     </p>
-                    <div class="pt-2 flex items-center gap-4 text-xs font-semibold">
+                    <div class="pt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold">
+                        <button onclick="switchTab('privacy')" class="text-emerald-300 hover:text-white underline underline-offset-4 transition-colors">
+                            Dasar Privasi & Polisi
+                        </button>
+                        <span class="text-emerald-800">•</span>
                         <button onclick="openFeedbackModal()" class="text-emerald-300 hover:text-white underline underline-offset-4 transition-colors">
                             Maklum Balas
                         </button>
@@ -784,7 +987,7 @@
         </div>
     </footer>
 
-    <!-- REGISTRATION MODAL ("Sertai BayuOne") -->
+    <!-- REGISTRATION MODAL -->
     <div id="modal-register" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-brand-border">
             <button onclick="closeRegisterModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-2">
@@ -816,7 +1019,6 @@
             <form id="form-register" onsubmit="handleRegisterSubmit(event)">
                 <input type="hidden" id="reg-type" value="penganjur">
 
-                <!-- 1. PENGANJUR FIELDS -->
                 <div id="fields-penganjur" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tajuk Program <span class="text-red-500">*</span></label>
@@ -838,7 +1040,6 @@
                             </select>
                         </div>
                     </div>
-                    <!-- Sabah Sub-Dropdown for Penganjur -->
                     <div id="reg-penganjur-sabah-wrapper" class="hidden">
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi Sabah (Bahagian / Daerah) <span class="text-red-500">*</span></label>
                         <select id="reg-penganjur-sabah-loc" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
@@ -862,7 +1063,6 @@
                             <option value="Lain-lain">Lain-lain</option>
                         </select>
                     </div>
-                    <!-- HARGA YURAN FIELDS (AMENDMENT 1) -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div class="sm:col-span-1">
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Yuran <span class="text-gray-400 font-normal">(Optional)</span></label>
@@ -898,9 +1098,17 @@
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Hebahan / Pendaftaran</label>
                         <input type="url" id="reg-penganjur-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                     </div>
+                    <div>
+                        <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
+                            <input type="checkbox" id="reg-penganjur-privacy" required class="mt-0.5 accent-brand rounded">
+                            <span>
+                                Saya faham dan setuju dengan
+                                <a href="javascript:void(0)" onclick="openPrivacyPage(event)" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
+                            </span>
+                        </label>
+                    </div>
                 </div>
 
-                <!-- 2. TRAINER FIELDS -->
                 <div id="fields-trainer" class="space-y-4 hidden">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -920,7 +1128,6 @@
                             </select>
                         </div>
                     </div>
-                    <!-- Sabah Sub-Dropdown for Trainer -->
                     <div id="reg-trainer-sabah-wrapper" class="hidden">
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi Sabah (Bahagian / Daerah) <span class="text-red-500">*</span></label>
                         <select id="reg-trainer-sabah-loc" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
@@ -953,16 +1160,30 @@
                             <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="HRD Corp Accredited Trainer"> HRD Corp Accredited Trainer</label>
                             <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="Sijil NCS-TTT"> Sijil NCS-TTT</label>
                             <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="SKM3, DKM, atau DLKM"> SKM3, DKM, atau DLKM</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="Lain-Lain"> Lain-Lain</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" id="trainer_cert_lain" name="trainer_cert" value="Lain-Lain" onchange="toggleTrainerCertCustom()"> Lain-Lain</label>
                         </div>
+                    </div>
+                    <div id="reg-trainer-cert-custom-wrapper" class="hidden">
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Sila Nyatakan Pentauliahan Lain-lain <span class="text-red-500">*</span></label>
+                        <input type="text" id="reg-trainer-cert-custom" maxlength="150" placeholder="Contoh: Certified HR Trainer, Digital Marketing Specialist" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        <p class="text-[10px] text-brand-muted mt-1">Asingkan setiap pentauliahan dengan koma (,)</p>
+                        <p id="reg-trainer-cert-custom-counter" class="text-[10px] text-brand-muted mt-0.5 text-right">0 / 150 aksara</p>
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
                         <input type="url" id="reg-trainer-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                     </div>
+                    <div>
+                        <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
+                            <input type="checkbox" id="reg-trainer-privacy" required class="mt-0.5 accent-brand rounded">
+                            <span>
+                                Saya faham dan setuju dengan
+                                <a href="javascript:void(0)" onclick="openPrivacyPage(event)" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
+                            </span>
+                        </label>
+                    </div>
                 </div>
 
-                <!-- 3. TALENT FIELDS -->
                 <div id="fields-talent" class="space-y-4 hidden">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -982,7 +1203,6 @@
                             </select>
                         </div>
                     </div>
-                    <!-- Sabah Sub-Dropdown for Talent -->
                     <div id="reg-talent-sabah-wrapper" class="hidden">
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi Sabah (Bahagian / Daerah) <span class="text-red-500">*</span></label>
                         <select id="reg-talent-sabah-loc" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
@@ -1013,6 +1233,15 @@
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
                         <input type="url" id="reg-talent-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                     </div>
+                    <div>
+                        <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
+                            <input type="checkbox" id="reg-talent-privacy" required class="mt-0.5 accent-brand rounded">
+                            <span>
+                                Saya faham dan setuju dengan
+                                <a href="javascript:void(0)" onclick="openPrivacyPage(event)" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
+                            </span>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="mt-6">
@@ -1025,7 +1254,7 @@
         </div>
     </div>
 
-    <!-- BANNER MODAL (ADMIN) -->
+    <!-- BANNER MODAL -->
     <div id="modal-banner" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8 border border-brand-border">
             <button onclick="closeBannerModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
@@ -1039,9 +1268,9 @@
                 <div>
                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Foto Banner <span class="text-red-500">*</span></label>
                     <input type="url" id="banner-photo" required placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
-                    <p class="text-[10px] text-brand-muted mt-1">Saiz disyorkan: 970 × 90 px</p>
+                    <p class="text-[10px] text-brand-muted mt-1">Saiz disyorkan: 1600 × 150 px</p>
                     <div id="banner-photo-preview" class="mt-2 hidden">
-                        <img src="" alt="Preview" class="max-h-20 rounded border border-brand-border">
+                        <img src="" alt="Preview" class="max-h-24 rounded border border-brand-border">
                     </div>
                 </div>
                 <div>
@@ -1080,7 +1309,43 @@
         </div>
     </div>
 
-    <!-- FEEDBACK FULL PREVIEW MODAL (AMENDMENT 3) -->
+    <!-- PARTNER MODAL (ADMIN) -->
+    <div id="modal-partner" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8 border border-brand-border">
+            <button onclick="closePartnerModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 id="partner-modal-title" class="text-lg font-bold text-brand-dark mb-1">Tambah Partner</h3>
+            <p class="text-xs text-brand-muted mb-4">Isi maklumat rakan kongsi / brand.</p>
+
+            <form id="form-partner" onsubmit="handleSavePartner(event)" class="space-y-4">
+                <input type="hidden" id="partner-edit-id" value="">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Syarikat / Individu <span class="text-red-500">*</span></label>
+                    <input type="text" id="partner-name" required placeholder="Contoh: TechMaju Sdn. Bhd." class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Image URL <span class="text-red-500">*</span></label>
+                    <input type="url" id="partner-image" required placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                    <p class="text-[10px] text-brand-muted mt-1">Saiz disyorkan: 500 × 500 px</p>
+                    <div id="partner-image-preview" class="mt-2 hidden">
+                        <img src="" alt="Preview" class="max-h-20 rounded border border-brand-border">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Posisi Paparan (1 - 10) <span class="text-red-500">*</span></label>
+                    <input type="number" id="partner-position" min="1" max="10" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                    <p class="text-[10px] text-brand-muted mt-1">Posisi 1 dipaparkan dahulu. Jika posisi telah digunakan, ia akan digantikan.</p>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closePartnerModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs transition-colors">Batal</button>
+                    <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-xs transition-colors">Simpan Partner</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FEEDBACK PREVIEW MODAL -->
     <div id="modal-feedback-preview" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8 border border-brand-border">
             <button onclick="closeFeedbackPreviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
@@ -1088,9 +1353,7 @@
             </button>
             <h3 class="text-lg font-bold text-brand-dark mb-1">Maklum Balas Penuh</h3>
             <p class="text-xs text-brand-muted mb-4">Maklumat lengkap yang dihantar oleh pengguna.</p>
-            <div id="feedback-preview-body" class="space-y-3 text-sm max-h-[60vh] overflow-y-auto pr-2">
-                <!-- Injected dynamically -->
-            </div>
+            <div id="feedback-preview-body" class="space-y-3 text-sm max-h-[60vh] overflow-y-auto pr-2"></div>
             <div class="pt-4 mt-4 border-t border-brand-border">
                 <button onclick="closeFeedbackPreviewModal()" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-sm transition-colors">Tutup</button>
             </div>
@@ -1134,6 +1397,15 @@
                 <div>
                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Maklum Balas <span class="text-red-500">*</span></label>
                     <textarea id="fb-message" rows="4" required class="w-full bg-white border border-brand-border rounded-xl p-3 text-sm focus:border-brand focus:outline-none"></textarea>
+                </div>
+                <div>
+                    <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
+                        <input type="checkbox" id="fb-privacy" required class="mt-0.5 accent-brand rounded">
+                        <span>
+                            Saya faham dan setuju dengan
+                            <a href="javascript:void(0)" onclick="openPrivacyPage(event)" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
+                        </span>
+                    </label>
                 </div>
                 <button type="submit" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-sm transition-colors">
                     Hantar Maklum Balas
@@ -1195,7 +1467,7 @@
             </button>
 
             <h3 class="text-lg font-bold text-brand-dark mb-1">Semakan & Edit Permohonan</h3>
-            <p class="text-xs text-brand-muted mb-4">Kemaskini kelulusan, tarikh agenda, tempoh sah, muat naik gambar dan label.</p>
+            <p class="text-xs text-brand-muted mb-4">Kemaskini semua maklumat permohonan, kelulusan, tempoh sah dan label promosi.</p>
 
             <div id="admin-review-body" class="space-y-4"></div>
         </div>
@@ -1257,13 +1529,16 @@
 
     <!-- APPLICATION JAVASCRIPT LOGIC -->
     <script>
-        // Official TikTok BayuOne URL Reference
         const TIKTOK_BAYUONE_URL = "https://www.tiktok.com/@bayuone.my";
-
-        // Current Reference Date: September 12, 2026
         const TODAY = new Date("2026-09-12");
 
-        // MALAYSIAN STATES & SABAH DIVISIONS DATA
+        function getTodayStr() {
+            const y = TODAY.getFullYear();
+            const m = String(TODAY.getMonth() + 1).padStart(2, '0');
+            const d = String(TODAY.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
         const MALAYSIAN_STATES = [
             "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Perak", "Perlis",
             "Pulau Pinang", "Sabah", "Sarawak", "Selangor", "Terengganu", "Wilayah Persekutuan Kuala Lumpur",
@@ -1277,6 +1552,39 @@
             "Bahagian Sandakan": ["Sandakan", "Kinabatangan", "Beluran", "Telupid", "Tongod"],
             "Bahagian Tawau": ["Tawau", "Lahad Datu", "Semporna", "Kunak", "Kalabakan"]
         };
+
+        const TRAINER_EXPERTISE_OPTIONS = [
+            "Pengurusan & Kepimpinan", "Sumber Manusia & Organisasi", "Pentadbiran & Profesional",
+            "Perniagaan & Keusahawanan", "Pemasaran & Jualan", "Teknologi, AI & Digital",
+            "Kreatif, Media & Komunikasi", "Kewangan, Akaun & Percukaian", "Pendidikan & Akademik",
+            "Kesihatan, Keselamatan & Kesejahteraan", "Industri & Teknikal", "Kerajaan & Perkhidmatan Awam",
+            "Bahasa & Kemahiran Komunikasi", "Pelancongan, Hospitaliti & F&B", "Kualiti, Risiko & Pematuhan",
+            "Kemahiran Insaniah & Pembangunan Diri", "Alam Sekitar & Kelestarian", "Kemahiran Khusus / Lain-lain"
+        ];
+
+        const TRAINER_CERT_OPTIONS = [
+            "HRD Corp TTT", "HRD Corp Accredited Trainer", "Sijil NCS-TTT",
+            "SKM3, DKM, atau DLKM", "Lain-Lain"
+        ];
+
+        const TALENT_NICHE_OPTIONS = [
+            "Makanan, Minuman & Gaya Hidup", "Pelancongan, Percutian & Hospitaliti",
+            "Kecantikan, Fesyen & Penjagaan Diri Kesihatan", "Kecergasan & Kesejahteraan",
+            "Perniagaan, Kewangan & Keusahawanan", "Pendidikan, Kerjaya & Pembangunan Diri",
+            "Teknologi, Digital & Media Sosial", "Automotif, Hartanah & Pelaburan",
+            "Keluarga, Komuniti, Budaya & Gaya Hidup", "Pengacaraan & Emcee", "Hiburan & Seni"
+        ];
+
+        const AGENDA_CATEGORY_OPTIONS = [
+            "Kursus & Latihan", "Seminar & Forum", "Bengkel", "Persidangan & Konvensyen",
+            "Networking & Professional", "Komuniti & Sosial", "Sukan & Rekreasi",
+            "Festival & Hiburan", "Keusahawanan & Perniagaan", "Pendidikan",
+            "Agama & Kerohanian", "Lain-lain"
+        ];
+
+        const AGENDA_MODE_OPTIONS = ["Fizikal", "Online", "Hybrid"];
+        const PROMO_LABEL_OPTIONS = ["", "Top", "Featured", "Promoted"];
+        const VALIDITY_OPTIONS = ["", "1 Bulan", "3 Bulan", "6 Bulan", "1 Tahun"];
 
         function initLocationDropdowns() {
             ['penganjur', 'trainer', 'talent'].forEach(prefix => {
@@ -1318,194 +1626,110 @@
             }
         }
 
-        // Central Application Data Store
         let bayuData = {
             applications: [
                 {
-                    id: "APP-1001",
-                    type: "Agenda",
+                    id: "APP-1001", type: "Agenda",
                     title: "Bengkel Pemasaran Digital & AI Sabah 2026",
-                    name: "Azman Kassim",
-                    org: "NMZ Kreatif",
-                    email: "azman@nmzkreatif.my",
-                    phone: "019-8812345",
-                    location: "Kota Kinabalu",
-                    mode: "Fizikal",
-                    category: "Bengkel",
-                    date: "2026-09-25",
-                    url: TIKTOK_BAYUONE_URL,
-                    urlButton: "https://t.me/bayuone_bengkel",
-                    approval: "Approved",
-                    validity: "1 Bulan",
-                    tarikhDari: "2026-09-01",
-                    tarikhSehingga: "2026-10-01",
-                    label: "Featured",
-                    remark: "",
-                    statusPenangguhan: "",
-                    statusPenangguhanSub: "",
+                    name: "Azman Kassim", org: "NMZ Kreatif",
+                    email: "azman@nmzkreatif.my", phone: "019-8812345",
+                    location: "Kota Kinabalu", mode: "Fizikal", category: "Bengkel",
+                    date: "2026-09-25", url: TIKTOK_BAYUONE_URL, urlButton: "https://t.me/bayuone_bengkel",
+                    approval: "Approved", validity: "1 Bulan",
+                    tarikhDari: "2026-09-01", tarikhSehingga: "2026-10-01",
+                    label: "Featured", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
                     photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80",
-                    hargaYuran: "RM50",
-                    feeType: "Berbayar"
+                    hargaYuran: "RM50", feeType: "Berbayar"
                 },
                 {
-                    id: "APP-1002",
-                    type: "Agenda",
+                    id: "APP-1002", type: "Agenda",
                     title: "Persidangan Pembangunan Bakat Tempatan",
-                    name: "Dr. Dayang Suhana",
-                    org: "Institut Kepimpinan Sabah",
-                    email: "suhana@iks.sabah.gov.my",
-                    phone: "088-234567",
-                    location: "Kota Kinabalu",
-                    mode: "Hybrid",
-                    category: "Persidangan & Konvensyen",
-                    date: "2026-10-12",
-                    url: TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Approved",
-                    validity: "6 Bulan",
-                    tarikhDari: "2026-09-01",
-                    tarikhSehingga: "2027-03-01",
-                    label: "Top",
-                    remark: "",
-                    statusPenangguhan: "",
-                    statusPenangguhanSub: "",
+                    name: "Dr. Dayang Suhana", org: "Institut Kepimpinan Sabah",
+                    email: "suhana@iks.sabah.gov.my", phone: "088-234567",
+                    location: "Kota Kinabalu", mode: "Hybrid", category: "Persidangan & Konvensyen",
+                    date: "2026-10-12", url: TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Approved", validity: "6 Bulan",
+                    tarikhDari: "2026-09-01", tarikhSehingga: "2027-03-01",
+                    label: "Top", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
                     photo: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80",
-                    hargaYuran: "Percuma",
-                    feeType: "Percuma"
+                    hargaYuran: "Percuma", feeType: "Percuma"
                 },
                 {
-                    id: "APP-1003",
-                    type: "Agenda",
+                    id: "APP-1003", type: "Agenda",
                     title: "Forum Keusahawanan Belia Tawau",
-                    name: "Roslan Jumaat",
-                    org: "Kelab Belia Tawau",
-                    email: "roslan@tawaubelia.org",
-                    phone: "013-8119988",
-                    location: "Tawau",
-                    mode: "Fizikal",
-                    category: "Seminar & Forum",
-                    date: "2026-08-15",
-                    url: TIKTOK_BAYUONE_URL,
-                    urlButton: "https://wa.me/60138119988",
-                    approval: "Approved",
-                    validity: "1 Bulan",
-                    tarikhDari: "2026-08-01",
-                    tarikhSehingga: "2026-09-01",
-                    label: "",
-                    remark: "",
-                    statusPenangguhan: "",
-                    statusPenangguhanSub: "",
+                    name: "Roslan Jumaat", org: "Kelab Belia Tawau",
+                    email: "roslan@tawaubelia.org", phone: "013-8119988",
+                    location: "Tawau", mode: "Fizikal", category: "Seminar & Forum",
+                    date: "2026-08-15", url: TIKTOK_BAYUONE_URL, urlButton: "https://wa.me/60138119988",
+                    approval: "Approved", validity: "1 Bulan",
+                    tarikhDari: "2026-08-01", tarikhSehingga: "2026-09-01",
+                    label: "", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
                     photo: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80",
-                    hargaYuran: "RM250",
-                    feeType: "Berbayar"
+                    hargaYuran: "RM250", feeType: "Berbayar"
                 },
                 {
-                    id: "APP-2001",
-                    type: "Trainer",
-                    title: "Trainer Profesional",
-                    name: "Ir. Ts. Hj. Aliman Basri",
-                    email: "aliman@aliman.my",
+                    id: "APP-2001", type: "Trainer", title: "Trainer Profesional",
+                    name: "Ir. Ts. Hj. Aliman Basri", email: "aliman@aliman.my",
                     location: "Kota Kinabalu",
                     expertise: ["Pengurusan & Kepimpinan", "Teknologi, AI & Digital"],
                     certs: ["HRD Corp Accredited Trainer", "Sijil NCS-TTT"],
+                    certCustom: "",
                     summary: "Pakar runding pengurusan industri dengan 15 tahun pengalaman bertauliah dalam pelaksanaan sistem digital & keselamatan borneo.",
-                    url: TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Approved",
-                    validity: "1 Tahun",
-                    tarikhDari: "2026-01-01",
-                    tarikhSehingga: "2027-01-01",
-                    label: "Top",
-                    remark: "",
-                    date: "2026-01-01",
+                    url: TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Approved", validity: "1 Tahun",
+                    tarikhDari: "2026-01-01", tarikhSehingga: "2027-01-01",
+                    label: "Top", remark: "", date: "2026-01-01",
                     photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80"
                 },
                 {
-                    id: "APP-2002",
-                    type: "Trainer",
-                    title: "Trainer Keusahawanan",
-                    name: "Pn. Noraini Mansor",
-                    email: "noraini@pks-sabah.my",
+                    id: "APP-2002", type: "Trainer", title: "Trainer Keusahawanan",
+                    name: "Pn. Noraini Mansor", email: "noraini@pks-sabah.my",
                     location: "Penampang",
                     expertise: ["Perniagaan & Keusahawanan", "Kewangan, Akaun & Percukaian"],
                     certs: ["HRD Corp TTT", "Lain-Lain"],
+                    certCustom: "Certified Business Coach",
                     summary: "Jurulatih keusahawanan PKS Sabah dengan fokus strategik pengurusan aliran tunai dan pemasaran mikro.",
-                    url: TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Approved",
-                    validity: "6 Bulan",
-                    tarikhDari: "2026-06-01",
-                    tarikhSehingga: "2026-12-01",
-                    label: "Promoted",
-                    remark: "",
-                    date: "2026-06-01",
+                    url: TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Approved", validity: "6 Bulan",
+                    tarikhDari: "2026-06-01", tarikhSehingga: "2026-12-01",
+                    label: "Promoted", remark: "", date: "2026-06-01",
                     photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80"
                 },
                 {
-                    id: "APP-3001",
-                    type: "Talent",
-                    title: "Content Creator & Emcee",
+                    id: "APP-3001", type: "Talent", title: "Content Creator & Emcee",
                     name: "Felixia Wong (Sabah Content Creator)",
-                    email: "felixia@wongmedia.com",
-                    location: "Kota Kinabalu",
+                    email: "felixia@wongmedia.com", location: "Kota Kinabalu",
                     niche: "Pelancongan, Percutian & Hospitaliti",
                     summary: "Pencipta kandungan pelancongan Sabah & pengacara majlis korporat berdwibahasa berpengalaman.",
-                    url: TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Approved",
-                    validity: "1 Tahun",
-                    tarikhDari: "2026-03-01",
-                    tarikhSehingga: "2027-03-01",
-                    label: "Featured",
-                    remark: "",
-                    date: "2026-03-01",
+                    url: TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Approved", validity: "1 Tahun",
+                    tarikhDari: "2026-03-01", tarikhSehingga: "2027-03-01",
+                    label: "Featured", remark: "", date: "2026-03-01",
                     photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
                 },
                 {
-                    id: "APP-3002",
-                    type: "Talent",
-                    title: "Emcee & Media Personality",
-                    name: "Mohd Rizwan",
-                    email: "rizwan@emceesabah.com",
-                    location: "Sandakan",
-                    niche: "Pengacaraan & Emcee",
+                    id: "APP-3002", type: "Talent", title: "Emcee & Media Personality",
+                    name: "Mohd Rizwan", email: "rizwan@emceesabah.com",
+                    location: "Sandakan", niche: "Pengacaraan & Emcee",
                     summary: "Pengacara majlis rasmi kerajaan dan pelancaran jenama tempatan dengan gaya mesra dan bertenaga.",
-                    url: TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Approved",
-                    validity: "6 Bulan",
-                    tarikhDari: "2026-07-01",
-                    tarikhSehingga: "2027-01-01",
-                    label: "",
-                    remark: "",
-                    date: "2026-07-01",
+                    url: TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Approved", validity: "6 Bulan",
+                    tarikhDari: "2026-07-01", tarikhSehingga: "2027-01-01",
+                    label: "", remark: "", date: "2026-07-01",
                     photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
                 },
                 {
-                    id: "APP-1004",
-                    type: "Agenda",
+                    id: "APP-1004", type: "Agenda",
                     title: "Bengkel Seni & Komuniti Kundasang",
-                    name: "Siti Rahmah",
-                    org: "Persatuan Seniman Kundasang",
-                    email: "rahmah@kundasang.org",
-                    phone: "016-8001122",
-                    location: "Tuaran",
-                    mode: "Fizikal",
-                    category: "Komuniti & Sosial",
-                    date: "2026-11-05",
-                    url: TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Pending",
-                    validity: "",
-                    tarikhDari: "",
-                    tarikhSehingga: "",
-                    label: "",
-                    remark: "",
-                    statusPenangguhan: "",
-                    statusPenangguhanSub: "",
+                    name: "Siti Rahmah", org: "Persatuan Seniman Kundasang",
+                    email: "rahmah@kundasang.org", phone: "016-8001122",
+                    location: "Tuaran", mode: "Fizikal", category: "Komuniti & Sosial",
+                    date: "2026-11-05", url: TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Pending", validity: "",
+                    tarikhDari: "", tarikhSehingga: "",
+                    label: "", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
                     photo: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80",
-                    hargaYuran: "Percuma",
-                    feeType: "Percuma"
+                    hargaYuran: "Percuma", feeType: "Percuma"
                 }
             ],
             subscribers: [
@@ -1521,22 +1745,21 @@
             banners: [
                 {
                     id: "BAN-001",
-                    photo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=970&h=90&fit=crop",
-                    name: "Promosi Kursus AI 2026",
-                    company: "TechMaju Sdn. Bhd.",
-                    validity: "3 Bulan",
-                    startDate: "2026-08-01",
-                    endDate: "2026-11-01"
+                    photo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600&h=150&fit=crop",
+                    name: "Promosi Kursus AI 2026", company: "TechMaju Sdn. Bhd.",
+                    validity: "3 Bulan", startDate: "2026-08-01", endDate: "2026-11-01"
                 },
                 {
                     id: "BAN-002",
-                    photo: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=970&h=90&fit=crop",
-                    name: "Pameran Kerjaya Sabah",
-                    company: "JobStreet Sabah",
-                    validity: "1 Bulan",
-                    startDate: "2026-07-15",
-                    endDate: "2026-08-15"
+                    photo: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1600&h=150&fit=crop",
+                    name: "Pameran Kerjaya Sabah", company: "JobStreet Sabah",
+                    validity: "1 Bulan", startDate: "2026-07-15", endDate: "2026-08-15"
                 }
+            ],
+            partnerships: [
+                { id: "PTN-001", name: "TechMaju Sdn. Bhd.", image: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=500&h=500&fit=crop", position: 1 },
+                { id: "PTN-002", name: "Sabah Digital Hub", image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=500&h=500&fit=crop", position: 2 },
+                { id: "PTN-003", name: "Borneo Creative Studio", image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=500&h=500&fit=crop", position: 3 }
             ]
         };
 
@@ -1547,6 +1770,7 @@
                 if (stored.subscribers) bayuData.subscribers = stored.subscribers;
                 if (stored.feedbacks) bayuData.feedbacks = stored.feedbacks;
                 if (stored.banners) bayuData.banners = stored.banners;
+                if (stored.partnerships) bayuData.partnerships = stored.partnerships;
             } catch (e) {
                 console.error("Gagal membaca data dari LocalStorage", e);
             }
@@ -1589,89 +1813,78 @@
             return `${rY}-${rM}-${rD}`;
         }
 
-        // BANNER STATUS CALCULATION
-        function getBannerStatus(banner) {
-            const today = new Date(TODAY.toISOString().split('T')[0]);
-            const start = new Date(banner.startDate);
-            const end = new Date(banner.endDate);
-
-            if (today < start) return { code: 'AKAN_DATANG', label: 'Akan Datang', class: 'bg-amber-100 text-amber-800 border-amber-200' };
-            if (today >= start && today < end) return { code: 'SEDANG_AKTIF', label: 'Sedang Aktif', class: 'bg-emerald-100 text-emerald-800 border-emerald-200' };
-            return { code: 'TELAH_TAMAT', label: 'Telah Tamat', class: 'bg-gray-100 text-gray-600 border-gray-200' };
-        }
-
-        // GET ACTIVE BANNER (only one)
-        function getActiveBanner() {
-            const today = new Date(TODAY.toISOString().split('T')[0]);
-            return bayuData.banners.find(b => {
-                const start = new Date(b.startDate);
-                const end = new Date(b.endDate);
-                return today >= start && today < end;
-            });
-        }
-
-        function renderBanner() {
-            const container = document.getElementById('banner-ad-container');
-            if (!container) return;
-
-            const activeBanner = getActiveBanner();
-            if (!activeBanner) {
-                container.innerHTML = '';
-                container.style.display = 'none';
-                return;
-            }
-
-            container.style.display = 'flex';
-            container.innerHTML = `
-                <img src="${activeBanner.photo}" alt="${activeBanner.name}" 
-                     style="width: 100%; height: auto; max-height: 90px; object-fit: contain; display: block;"
-                     onerror="this.style.display='none'">
-            `;
+        function isPromotionActive(item) {
+            if (!item || !item.label || item.label.trim() === "") return false;
+            if (!item.tarikhDari || !item.tarikhSehingga) return false;
+            const todayStr = getTodayStr();
+            return todayStr >= item.tarikhDari && todayStr <= item.tarikhSehingga;
         }
 
         function getPromoPriority(item) {
-            if (!item.label || item.label === "" || item.label === "None") return 4;
-            if (item.tarikhDari && item.tarikhSehingga) {
-                const fromDate = new Date(item.tarikhDari);
-                const toDate = new Date(item.tarikhSehingga);
-                if (TODAY < fromDate || TODAY > toDate) {
-                    return 4;
-                }
-            } else if (!item.tarikhDari || !item.tarikhSehingga) {
-                return 4;
-            }
-
-            const lbl = item.label.toUpperCase();
+            if (!isPromotionActive(item)) return 4;
+            const lbl = (item.label || "").toUpperCase();
             if (lbl === 'TOP') return 1;
             if (lbl === 'FEATURED') return 2;
             if (lbl === 'PROMOTED') return 3;
             return 4;
         }
 
-        // PUBLIC AGENDA STATUS INFO (status labels hidden from public view per CHANGE 3)
+        function sortByPromotion(items) {
+            return items
+                .map((item, idx) => ({ item, idx }))
+                .sort((a, b) => {
+                    const pA = getPromoPriority(a.item);
+                    const pB = getPromoPriority(b.item);
+                    if (pA !== pB) return pA - pB;
+                    return a.idx - b.idx;
+                })
+                .map(entry => entry.item);
+        }
+
+        function getPromotionalBadgeHtml(item) {
+            if (!isPromotionActive(item)) return '';
+            const lbl = (item.label || "").toUpperCase();
+            if (lbl === 'TOP') return `<span class="badge-pill badge-top mr-1">TOP</span>`;
+            if (lbl === 'FEATURED') return `<span class="badge-pill badge-featured mr-1">FEATURED</span>`;
+            if (lbl === 'PROMOTED') return `<span class="badge-pill badge-promoted mr-1">PROMOTED</span>`;
+            return '';
+        }
+
         function getAgendaStatusInfo(item) {
             if (item.statusPenangguhan === 'Dibatalkan') {
                 return { code: 'DIBATALKAN', label: 'Dibatalkan', badges: [] };
             }
-
             if (item.statusPenangguhan === 'Telah Ditunda') {
-                const subText = item.statusPenangguhanSub || 'Akan Dikemaskini';
-                return {
-                    code: 'TELAH_DITUNDA',
-                    label: 'Telah Ditunda',
-                    badges: []
-                };
+                return { code: 'TELAH_DITUNDA', label: 'Telah Ditunda', badges: [] };
             }
-
             const eventDate = new Date(item.date);
             if (TODAY > eventDate) {
                 return { code: 'TAMAT', label: 'Telah Tamat', badges: [] };
             }
-
             return { code: 'AKAN_DATANG', label: 'Akan Datang', badges: [] };
         }
 
-        // NAVIGATION & TAB SWITCHING
+        function getTrainerCertDisplayList(item) {
+            const rawCerts = item.certs || [];
+            const custom = item.certCustom || '';
+            const result = [];
+            rawCerts.forEach(c => {
+                if (c === 'Lain-Lain') {
+                    if (custom && custom.trim() !== '') {
+                        result.push(custom.trim());
+                    }
+                } else {
+                    result.push(c);
+                }
+            });
+            return result;
+        }
+
+        function openPrivacyPage(e) {
+            if (e) e.preventDefault();
+            switchTab('privacy');
+        }
+
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -1698,11 +1911,15 @@
                 heroTitle.textContent = "Bakat & Influencer Tempatan";
                 heroSubtitle.textContent = "Hubungi pengacara, content creator dan pelbagai bakat tempatan untuk kolaborasi.";
                 renderTalent();
+            } else if (tabName === 'privacy') {
+                heroTitle.textContent = "Dasar Privasi & Polisi";
+                heroSubtitle.textContent = "Sila baca dan fahami polisi penggunaan platform BayuOne.";
             } else if (tabName === 'admin') {
                 renderAdminTable();
                 renderFeedbackTable();
                 renderSubscriberTable();
                 renderBannerTable();
+                renderPartnerTable();
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -1712,13 +1929,18 @@
             menu.classList.toggle('hidden');
         }
 
-        // REGISTRATION FORM SWITCHING & FIELD VALIDATION MANAGEMENT
+        // ============================================================
+        // FIX 1: setRegisterType is now defensive against missing DOM
+        // elements — it never throws mid-way, so reg-type is always set.
+        // ============================================================
         function setRegisterType(type) {
-            document.getElementById('reg-type').value = type;
+            const regTypeInput = document.getElementById('reg-type');
+            if (regTypeInput) regTypeInput.value = type;
 
             ['penganjur', 'trainer', 'talent'].forEach(t => {
                 const btn = document.getElementById(`btn-reg-${t}`);
                 const fieldGroup = document.getElementById(`fields-${t}`);
+                if (!btn || !fieldGroup) return;
 
                 if (t === type) {
                     btn.className = "py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs";
@@ -1729,269 +1951,271 @@
                 }
             });
 
-            // Update Dynamic HTML required Attributes
-            const pTitle = document.getElementById('reg-penganjur-title');
-            const pDate = document.getElementById('reg-penganjur-date');
+            // Defensively reset every active required flag FIRST
+            const allIds = [
+                'reg-penganjur-title','reg-penganjur-date','reg-penganjur-state',
+                'reg-penganjur-sabah-loc','reg-penganjur-category','reg-penganjur-privacy',
+                'reg-trainer-name','reg-trainer-email','reg-trainer-state',
+                'reg-trainer-sabah-loc','reg-trainer-summary','reg-trainer-privacy',
+                'reg-talent-name','reg-talent-email','reg-talent-state',
+                'reg-talent-sabah-loc','reg-talent-niche','reg-talent-summary','reg-talent-privacy'
+            ];
+            allIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.required = false;
+            });
+
             const pState = document.getElementById('reg-penganjur-state');
-            const pSabah = document.getElementById('reg-penganjur-sabah-loc');
-            const pCat = document.getElementById('reg-penganjur-category');
-
-            const trName = document.getElementById('reg-trainer-name');
-            const trEmail = document.getElementById('reg-trainer-email');
             const trState = document.getElementById('reg-trainer-state');
-            const trSabah = document.getElementById('reg-trainer-sabah-loc');
-            const trSum = document.getElementById('reg-trainer-summary');
-
-            const tlName = document.getElementById('reg-talent-name');
-            const tlEmail = document.getElementById('reg-talent-email');
             const tlState = document.getElementById('reg-talent-state');
-            const tlSabah = document.getElementById('reg-talent-sabah-loc');
-            const tlNiche = document.getElementById('reg-talent-niche');
-            const tlSum = document.getElementById('reg-talent-summary');
 
             if (type === 'penganjur') {
-                pTitle.required = true;
-                pDate.required = true;
-                pState.required = true;
-                pSabah.required = (pState.value === "Sabah");
-                pCat.required = true;
-
-                trName.required = false;
-                trEmail.required = false;
-                trState.required = false;
-                trSabah.required = false;
-                trSum.required = false;
-
-                tlName.required = false;
-                tlEmail.required = false;
-                tlState.required = false;
-                tlSabah.required = false;
-                tlNiche.required = false;
-                tlSum.required = false;
+                const pTitle = document.getElementById('reg-penganjur-title');
+                const pDate = document.getElementById('reg-penganjur-date');
+                const pSabah = document.getElementById('reg-penganjur-sabah-loc');
+                const pCat = document.getElementById('reg-penganjur-category');
+                const pPrivacy = document.getElementById('reg-penganjur-privacy');
+                if (pTitle) pTitle.required = true;
+                if (pDate) pDate.required = true;
+                if (pState) pState.required = true;
+                if (pSabah && pState && pState.value === "Sabah") pSabah.required = true;
+                if (pCat) pCat.required = true;
+                if (pPrivacy) pPrivacy.required = true;
             } else if (type === 'trainer') {
-                pTitle.required = false;
-                pDate.required = false;
-                pState.required = false;
-                pSabah.required = false;
-                pCat.required = false;
-
-                trName.required = true;
-                trEmail.required = true;
-                trState.required = true;
-                trSabah.required = (trState.value === "Sabah");
-                trSum.required = true;
-
-                tlName.required = false;
-                tlEmail.required = false;
-                tlState.required = false;
-                tlSabah.required = false;
-                tlNiche.required = false;
-                tlSum.required = false;
+                const trName = document.getElementById('reg-trainer-name');
+                const trEmail = document.getElementById('reg-trainer-email');
+                const trSabah = document.getElementById('reg-trainer-sabah-loc');
+                const trSum = document.getElementById('reg-trainer-summary');
+                const trPrivacy = document.getElementById('reg-trainer-privacy');
+                if (trName) trName.required = true;
+                if (trEmail) trEmail.required = true;
+                if (trState) trState.required = true;
+                if (trSabah && trState && trState.value === "Sabah") trSabah.required = true;
+                if (trSum) trSum.required = true;
+                if (trPrivacy) trPrivacy.required = true;
             } else if (type === 'talent') {
-                pTitle.required = false;
-                pDate.required = false;
-                pState.required = false;
-                pSabah.required = false;
-                pCat.required = false;
-
-                trName.required = false;
-                trEmail.required = false;
-                trState.required = false;
-                trSabah.required = false;
-                trSum.required = false;
-
-                tlName.required = true;
-                tlEmail.required = true;
-                tlState.required = true;
-                tlSabah.required = (tlState.value === "Sabah");
-                tlNiche.required = true;
-                tlSum.required = true;
+                const tlName = document.getElementById('reg-talent-name');
+                const tlEmail = document.getElementById('reg-talent-email');
+                const tlSabah = document.getElementById('reg-talent-sabah-loc');
+                const tlNiche = document.getElementById('reg-talent-niche');
+                const tlSum = document.getElementById('reg-talent-summary');
+                const tlPrivacy = document.getElementById('reg-talent-privacy');
+                if (tlName) tlName.required = true;
+                if (tlEmail) tlEmail.required = true;
+                if (tlState) tlState.required = true;
+                if (tlSabah && tlState && tlState.value === "Sabah") tlSabah.required = true;
+                if (tlNiche) tlNiche.required = true;
+                if (tlSum) tlSum.required = true;
+                if (tlPrivacy) tlPrivacy.required = true;
             }
         }
 
-        // TOGGLE PENGANJUR FEE AMOUNT FIELD
         function togglePenganjurFee() {
-            const feeType = document.getElementById('reg-penganjur-fee-type').value;
+            const feeType = document.getElementById('reg-penganjur-fee-type')?.value;
             const amountWrapper = document.getElementById('reg-penganjur-fee-amount-wrapper');
+            if (!amountWrapper) return;
             if (feeType === 'Berbayar') {
                 amountWrapper.classList.remove('hidden');
             } else {
                 amountWrapper.classList.add('hidden');
-                document.getElementById('reg-penganjur-fee-amount').value = '';
+                const amt = document.getElementById('reg-penganjur-fee-amount');
+                if (amt) amt.value = '';
             }
         }
 
-        // CRITICAL: SINGLE AUTHORITATIVE REGISTRATION SUBMISSION HANDLER
-        function handleRegisterSubmit(event) {
-            event.preventDefault();
+        function toggleTrainerCertCustom() {
+            const cb = document.getElementById('trainer_cert_lain');
+            const wrapper = document.getElementById('reg-trainer-cert-custom-wrapper');
+            const input = document.getElementById('reg-trainer-cert-custom');
+            if (!cb || !wrapper || !input) return;
 
-            const regType = document.getElementById('reg-type').value;
+            if (cb.checked) {
+                wrapper.classList.remove('hidden');
+                input.required = true;
+                updateTrainerCertCustomCounter();
+            } else {
+                wrapper.classList.add('hidden');
+                input.required = false;
+                input.value = '';
+                updateTrainerCertCustomCounter();
+            }
+        }
+
+        function updateTrainerCertCustomCounter() {
+            const input = document.getElementById('reg-trainer-cert-custom');
+            const counter = document.getElementById('reg-trainer-cert-custom-counter');
+            if (!input || !counter) return;
+            const len = input.value.length;
+            counter.textContent = `${len} / 150 aksara`;
+        }
+
+        // ============================================================
+        // FIX 2: handleRegisterSubmit is now fully defensive.
+        // - Validates regType explicitly (loud failure if unknown)
+        // - Guards every getElementById with null-safe read
+        // - Only hides the modal + shows success AFTER saveData() succeeds
+        // ============================================================
+        function handleRegisterSubmit(event) {
+            if (event) event.preventDefault();
+
+            const regTypeEl = document.getElementById('reg-type');
+            const regType = regTypeEl ? regTypeEl.value : '';
+
+            // Defensive pre-flight: drop required on any hidden Sabah sub-select
+            ['penganjur', 'trainer', 'talent'].forEach(prefix => {
+                const sabahSel = document.getElementById(`reg-${prefix}-sabah-loc`);
+                const sabahWrapper = document.getElementById(`reg-${prefix}-sabah-wrapper`);
+                if (sabahSel && sabahWrapper && sabahWrapper.classList.contains('hidden')) {
+                    sabahSel.required = false;
+                }
+            });
+
+            if (regType !== 'penganjur' && regType !== 'trainer' && regType !== 'talent') {
+                console.error('Unknown registration type:', regType);
+                alert('Ralat: Jenis permohonan tidak dikenali. Sila pilih semula tab (Penganjur / Trainer / Talent).');
+                return;
+            }
+
             const newId = "APP-" + Date.now();
             let newApp = null;
 
-            if (regType === 'penganjur') {
-                const title = document.getElementById('reg-penganjur-title').value.trim();
-                const email = document.getElementById('reg-penganjur-email').value.trim();
-                const date = document.getElementById('reg-penganjur-date').value;
-                const state = document.getElementById('reg-penganjur-state').value;
-                const sabahLoc = document.getElementById('reg-penganjur-sabah-loc').value;
-                const category = document.getElementById('reg-penganjur-category').value;
-                const picName = document.getElementById('reg-penganjur-pic-name').value.trim();
-                const picTel = document.getElementById('reg-penganjur-pic-tel').value.trim();
-                const mode = document.getElementById('reg-penganjur-mode').value;
-                const url = document.getElementById('reg-penganjur-url').value.trim();
+            const val = (id) => {
+                const el = document.getElementById(id);
+                return el ? (el.value || '').trim() : '';
+            };
 
-                const feeType = document.getElementById('reg-penganjur-fee-type').value;
-                const feeAmount = document.getElementById('reg-penganjur-fee-amount').value.trim();
+            if (regType === 'penganjur') {
+                const title = val('reg-penganjur-title');
+                const email = val('reg-penganjur-email');
+                const date = val('reg-penganjur-date');
+                const state = val('reg-penganjur-state');
+                const sabahLoc = val('reg-penganjur-sabah-loc');
+                const category = val('reg-penganjur-category');
+                const picName = val('reg-penganjur-pic-name');
+                const picTel = val('reg-penganjur-pic-tel');
+                const mode = val('reg-penganjur-mode') || 'Fizikal';
+                const url = val('reg-penganjur-url');
+                const feeType = val('reg-penganjur-fee-type') || 'Percuma';
+                const feeAmount = val('reg-penganjur-fee-amount');
+
                 let hargaYuran = 'Percuma';
                 if (feeType === 'Berbayar' && feeAmount) {
-                    hargaYuran = 'RM' + parseFloat(feeAmount).toFixed(2).replace(/\.00$/, '');
+                    const num = parseFloat(feeAmount);
+                    if (!isNaN(num)) {
+                        hargaYuran = 'RM' + num.toFixed(2).replace(/\.00$/, '');
+                    }
                 }
 
                 const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
 
                 newApp = {
-                    id: newId,
-                    type: "Agenda",
-                    title: title,
-                    name: picName || title,
-                    email: email,
-                    phone: picTel,
-                    location: location,
-                    mode: mode || "Fizikal",
-                    category: category,
-                    date: date,
-                    url: url || TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Pending",
-                    validity: "",
-                    tarikhDari: "",
-                    tarikhSehingga: "",
-                    label: "",
-                    remark: "",
-                    statusPenangguhan: "",
-                    statusPenangguhanSub: "",
+                    id: newId, type: "Agenda", title: title,
+                    name: picName || title, email: email, phone: picTel,
+                    location: location, mode: mode, category: category,
+                    date: date, url: url || TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Pending", validity: "", tarikhDari: "", tarikhSehingga: "",
+                    label: "", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
                     photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80",
-                    hargaYuran: hargaYuran,
-                    feeType: feeType
+                    hargaYuran: hargaYuran, feeType: feeType
                 };
             } else if (regType === 'trainer') {
-                const name = document.getElementById('reg-trainer-name').value.trim();
-                const email = document.getElementById('reg-trainer-email').value.trim();
-                const state = document.getElementById('reg-trainer-state').value;
-                const sabahLoc = document.getElementById('reg-trainer-sabah-loc').value;
-                const summary = document.getElementById('reg-trainer-summary').value.trim();
-                const url = document.getElementById('reg-trainer-url').value.trim();
-
+                const name = val('reg-trainer-name');
+                const email = val('reg-trainer-email');
+                const state = val('reg-trainer-state');
+                const sabahLoc = val('reg-trainer-sabah-loc');
+                const summary = val('reg-trainer-summary');
+                const url = val('reg-trainer-url');
                 const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
 
                 const expBoxes = document.querySelectorAll('input[name="trainer_exp"]:checked');
                 const expertise = Array.from(expBoxes).map(cb => cb.value);
-
                 const certBoxes = document.querySelectorAll('input[name="trainer_cert"]:checked');
                 const certs = Array.from(certBoxes).map(cb => cb.value);
+                const todayStr = getTodayStr();
 
-                const todayStr = TODAY.toISOString().split('T')[0];
+                const certCustom = val('reg-trainer-cert-custom');
 
                 newApp = {
-                    id: newId,
-                    type: "Trainer",
-                    title: "Trainer Profesional",
-                    name: name,
-                    email: email,
-                    location: location,
+                    id: newId, type: "Trainer", title: "Trainer Profesional",
+                    name: name, email: email, location: location,
                     expertise: expertise.length > 0 ? expertise : ["Pengurusan & Kepimpinan"],
-                    summary: summary,
-                    certs: certs,
-                    url: url || TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Pending",
-                    validity: "",
-                    tarikhDari: "",
-                    tarikhSehingga: "",
-                    label: "",
-                    remark: "",
-                    date: todayStr,
+                    summary: summary, certs: certs,
+                    certCustom: certCustom,
+                    url: url || TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Pending", validity: "", tarikhDari: "", tarikhSehingga: "",
+                    label: "", remark: "", date: todayStr,
                     photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80"
                 };
             } else if (regType === 'talent') {
-                const name = document.getElementById('reg-talent-name').value.trim();
-                const email = document.getElementById('reg-talent-email').value.trim();
-                const state = document.getElementById('reg-talent-state').value;
-                const sabahLoc = document.getElementById('reg-talent-sabah-loc').value;
-                const niche = document.getElementById('reg-talent-niche').value;
-                const summary = document.getElementById('reg-talent-summary').value.trim();
-                const url = document.getElementById('reg-talent-url').value.trim();
-
+                const name = val('reg-talent-name');
+                const email = val('reg-talent-email');
+                const state = val('reg-talent-state');
+                const sabahLoc = val('reg-talent-sabah-loc');
+                const niche = val('reg-talent-niche');
+                const summary = val('reg-talent-summary');
+                const url = val('reg-talent-url');
                 const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
-                const todayStr = TODAY.toISOString().split('T')[0];
+                const todayStr = getTodayStr();
 
                 newApp = {
-                    id: newId,
-                    type: "Talent",
-                    title: "Talent Tempatan",
-                    name: name,
-                    email: email,
-                    location: location,
-                    niche: niche,
-                    summary: summary,
-                    url: url || TIKTOK_BAYUONE_URL,
-                    urlButton: "",
-                    approval: "Pending",
-                    validity: "",
-                    tarikhDari: "",
-                    tarikhSehingga: "",
-                    label: "",
-                    remark: "",
-                    date: todayStr,
+                    id: newId, type: "Talent", title: "Talent Tempatan",
+                    name: name, email: email, location: location,
+                    niche: niche, summary: summary,
+                    url: url || TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Pending", validity: "", tarikhDari: "", tarikhSehingga: "",
+                    label: "", remark: "", date: todayStr,
                     photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
                 };
             }
 
-            if (newApp) {
+            if (!newApp) {
+                console.error('Submission failed: newApp is null.');
+                return;
+            }
+
+            // Save FIRST, then act
+            try {
                 bayuData.applications.unshift(newApp);
                 saveData();
-
-                closeRegisterModal();
-                document.getElementById('form-register').reset();
-                setRegisterType('penganjur');
-                document.getElementById('reg-penganjur-fee-amount-wrapper').classList.add('hidden');
-
-                document.getElementById('modal-submission-success').classList.remove('hidden');
-
-                // Refresh views
-                renderAgenda();
-                renderTrainer();
-                renderTalent();
-                renderAdminTable();
+            } catch (err) {
+                console.error('Save failed:', err);
+                alert('Ralat semasa menyimpan permohonan. Sila cuba lagi.');
+                return;
             }
+
+            // Only after successful save:
+            const formEl = document.getElementById('form-register');
+            if (formEl) formEl.reset();
+
+            setRegisterType('penganjur');
+
+            const feeWrapper = document.getElementById('reg-penganjur-fee-amount-wrapper');
+            if (feeWrapper) feeWrapper.classList.add('hidden');
+            const certWrapper = document.getElementById('reg-trainer-cert-custom-wrapper');
+            if (certWrapper) certWrapper.classList.add('hidden');
+            updateTrainerCertCustomCounter();
+
+            closeRegisterModal();
+
+            const successModal = document.getElementById('modal-submission-success');
+            if (successModal) successModal.classList.remove('hidden');
+
+            renderAgenda();
+            renderTrainer();
+            renderTalent();
+            renderAdminTable();
         }
 
-        // MODAL TOGGLES
         function openRegisterModal() {
             document.getElementById('modal-register').classList.remove('hidden');
             setRegisterType('penganjur');
         }
+        function closeRegisterModal() { document.getElementById('modal-register').classList.add('hidden'); }
+        function closeSubmissionSuccessModal() { document.getElementById('modal-submission-success').classList.add('hidden'); }
 
-        function closeRegisterModal() {
-            document.getElementById('modal-register').classList.add('hidden');
-        }
-
-        function closeSubmissionSuccessModal() {
-            document.getElementById('modal-submission-success').classList.add('hidden');
-        }
-
-        function openFeedbackModal() {
-            document.getElementById('modal-feedback').classList.remove('hidden');
-        }
-
-        function closeFeedbackModal() {
-            document.getElementById('modal-feedback').classList.add('hidden');
-        }
-
-        function closeFeedbackSuccessModal() {
-            document.getElementById('modal-feedback-success').classList.add('hidden');
-        }
+        function openFeedbackModal() { document.getElementById('modal-feedback').classList.remove('hidden'); }
+        function closeFeedbackModal() { document.getElementById('modal-feedback').classList.add('hidden'); }
+        function closeFeedbackSuccessModal() { document.getElementById('modal-feedback-success').classList.add('hidden'); }
 
         function handleFeedbackSubmit(e) {
             e.preventDefault();
@@ -2004,12 +2228,8 @@
                 const dateStr = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0].substring(0,5);
 
                 bayuData.feedbacks.unshift({
-                    id: "FB-" + Date.now(),
-                    name: name,
-                    email: email,
-                    message: message,
-                    date: dateStr,
-                    status: "In Review"
+                    id: "FB-" + Date.now(), name: name, email: email,
+                    message: message, date: dateStr, status: "In Review"
                 });
 
                 saveData();
@@ -2020,7 +2240,6 @@
             }
         }
 
-        // FEEDBACK FULL PREVIEW
         function openFeedbackPreview(id) {
             const fb = bayuData.feedbacks.find(f => f.id === id);
             if (!fb) return;
@@ -2050,33 +2269,16 @@
                     <div class="feedback-preview-text text-brand-text text-xs leading-relaxed">${fb.message}</div>
                 </div>
             `;
-
             document.getElementById('modal-feedback-preview').classList.remove('hidden');
         }
+        function closeFeedbackPreviewModal() { document.getElementById('modal-feedback-preview').classList.add('hidden'); }
 
-        function closeFeedbackPreviewModal() {
-            document.getElementById('modal-feedback-preview').classList.add('hidden');
-        }
+        function openAdminLoginModal() { document.getElementById('modal-admin-login').classList.remove('hidden'); }
+        function closeAdminLoginModal() { document.getElementById('modal-admin-login').classList.add('hidden'); }
+        function handleAdminLogin(e) { e.preventDefault(); closeAdminLoginModal(); switchTab('admin'); }
+        function logoutAdmin() { switchTab('agenda'); }
 
-        function openAdminLoginModal() {
-            document.getElementById('modal-admin-login').classList.remove('hidden');
-        }
-
-        function closeAdminLoginModal() {
-            document.getElementById('modal-admin-login').classList.add('hidden');
-        }
-
-        function handleAdminLogin(e) {
-            e.preventDefault();
-            closeAdminLoginModal();
-            switchTab('admin');
-        }
-
-        function logoutAdmin() {
-            switchTab('agenda');
-        }
-
-        // BANNER ADMIN FUNCTIONS
+        // ===================== BANNER ADMIN =====================
         function openBannerModal(id) {
             const modal = document.getElementById('modal-banner');
             const title = document.getElementById('banner-modal-title');
@@ -2105,19 +2307,14 @@
 
             modal.classList.remove('hidden');
         }
-
-        function closeBannerModal() {
-            document.getElementById('modal-banner').classList.add('hidden');
-        }
+        function closeBannerModal() { document.getElementById('modal-banner').classList.add('hidden'); }
 
         function calculateBannerEndDate() {
             const startDate = document.getElementById('banner-start-date').value;
             const validity = document.getElementById('banner-validity').value;
             const endDateInput = document.getElementById('banner-end-date');
-
             if (startDate && validity) {
-                const endDate = calculateTarikhTamat(startDate, validity);
-                endDateInput.value = endDate;
+                endDateInput.value = calculateTarikhTamat(startDate, validity);
             } else {
                 endDateInput.value = '';
             }
@@ -2141,22 +2338,13 @@
             if (editId) {
                 const banner = bayuData.banners.find(b => b.id === editId);
                 if (banner) {
-                    banner.photo = photo;
-                    banner.name = name;
-                    banner.company = company;
-                    banner.validity = validity;
-                    banner.startDate = startDate;
-                    banner.endDate = endDate;
+                    banner.photo = photo; banner.name = name; banner.company = company;
+                    banner.validity = validity; banner.startDate = startDate; banner.endDate = endDate;
                 }
             } else {
                 bayuData.banners.unshift({
-                    id: "BAN-" + Date.now(),
-                    photo: photo,
-                    name: name,
-                    company: company,
-                    validity: validity,
-                    startDate: startDate,
-                    endDate: endDate
+                    id: "BAN-" + Date.now(), photo: photo, name: name,
+                    company: company, validity: validity, startDate: startDate, endDate: endDate
                 });
             }
 
@@ -2209,7 +2397,204 @@
             }
         }
 
-        // PUBLIC RENDER FUNCTIONS
+        function getBannerStatus(banner) {
+            const todayStr = getTodayStr();
+            if (todayStr < banner.startDate) return { code: 'AKAN_DATANG', label: 'Akan Datang', class: 'bg-amber-100 text-amber-800 border-amber-200' };
+            if (todayStr >= banner.startDate && todayStr < banner.endDate) return { code: 'SEDANG_AKTIF', label: 'Sedang Aktif', class: 'bg-emerald-100 text-emerald-800 border-emerald-200' };
+            return { code: 'TELAH_TAMAT', label: 'Telah Tamat', class: 'bg-gray-100 text-gray-600 border-gray-200' };
+        }
+
+        function getActiveBanner() {
+            const todayStr = getTodayStr();
+            return bayuData.banners.find(b => todayStr >= b.startDate && todayStr < b.endDate);
+        }
+
+        function renderBanner() {
+            const container = document.getElementById('banner-ad-container');
+            if (!container) return;
+
+            const activeBanner = getActiveBanner();
+            if (!activeBanner || !activeBanner.photo) {
+                container.innerHTML = '';
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'flex';
+            container.innerHTML = `
+                <img src="${activeBanner.photo}" alt="${activeBanner.name}" onerror="this.style.display='none'">
+            `;
+        }
+
+        function openPartnerModal(id) {
+            const modal = document.getElementById('modal-partner');
+            const title = document.getElementById('partner-modal-title');
+            const form = document.getElementById('form-partner');
+
+            if (id) {
+                const p = bayuData.partnerships.find(x => x.id === id);
+                if (!p) return;
+                title.textContent = 'Edit Partner';
+                document.getElementById('partner-edit-id').value = p.id;
+                document.getElementById('partner-name').value = p.name;
+                document.getElementById('partner-image').value = p.image;
+                document.getElementById('partner-position').value = p.position;
+                document.getElementById('partner-image-preview').classList.remove('hidden');
+                document.getElementById('partner-image-preview').querySelector('img').src = p.image;
+            } else {
+                title.textContent = 'Tambah Partner';
+                document.getElementById('partner-edit-id').value = '';
+                form.reset();
+                const used = bayuData.partnerships.map(p => p.position);
+                let next = 1;
+                while (used.includes(next) && next <= 10) next++;
+                document.getElementById('partner-position').value = next <= 10 ? next : 10;
+                document.getElementById('partner-image-preview').classList.add('hidden');
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closePartnerModal() { document.getElementById('modal-partner').classList.add('hidden'); }
+
+        function handleSavePartner(e) {
+            e.preventDefault();
+            const editId = document.getElementById('partner-edit-id').value;
+            const name = document.getElementById('partner-name').value.trim();
+            const image = document.getElementById('partner-image').value.trim();
+            const position = parseInt(document.getElementById('partner-position').value, 10);
+
+            if (!name || !image || !position || position < 1 || position > 10) {
+                alert('Sila isi semua maklumat dengan posisi 1 - 10.');
+                return;
+            }
+
+            const others = bayuData.partnerships.filter(p => p.id !== editId);
+            const conflicting = others.find(p => p.position === position);
+            if (conflicting) {
+                bayuData.partnerships = bayuData.partnerships.filter(p => p.id !== conflicting.id);
+            }
+
+            if (editId) {
+                const p = bayuData.partnerships.find(x => x.id === editId);
+                if (p) {
+                    p.name = name;
+                    p.image = image;
+                    p.position = position;
+                }
+            } else {
+                bayuData.partnerships.push({
+                    id: "PTN-" + Date.now(),
+                    name: name,
+                    image: image,
+                    position: position
+                });
+            }
+
+            saveData();
+            closePartnerModal();
+            renderPartnerTable();
+            renderBrandsSupport();
+        }
+
+        function confirmDeletePartner(id) {
+            if (confirm('Adakah anda pasti mahu memadam partner ini?')) {
+                bayuData.partnerships = bayuData.partnerships.filter(p => p.id !== id);
+                saveData();
+                renderPartnerTable();
+                renderBrandsSupport();
+            }
+        }
+
+        function renderPartnerTable() {
+            const tbody = document.getElementById('partner-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const sorted = [...bayuData.partnerships].sort((a, b) => a.position - b.position);
+
+            sorted.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5 font-bold text-brand-dark">${p.position}</td>
+                    <td class="p-3.5">
+                        <img src="${p.image}" class="w-10 h-10 rounded-lg object-contain border border-brand-border bg-white p-1" onerror="this.style.display='none'">
+                    </td>
+                    <td class="p-3.5 font-bold text-brand-dark">${p.name}</td>
+                    <td class="p-3.5 text-brand-muted text-[11px] break-all max-w-xs">${p.image}</td>
+                    <td class="p-3.5">
+                        <span class="px-2.5 py-1 rounded-full font-bold text-[10px] bg-emerald-100 text-emerald-800">Aktif</span>
+                    </td>
+                    <td class="p-3.5 text-right space-x-2">
+                        <button onclick="openPartnerModal('${p.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
+                        </button>
+                        <button onclick="confirmDeletePartner('${p.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderBrandsSupport() {
+            const grid = document.getElementById('brands-support-grid');
+            const empty = document.getElementById('brands-support-empty');
+            if (!grid || !empty) return;
+
+            const valid = bayuData.partnerships
+                .filter(p => p && p.image && p.image.trim() !== '')
+                .sort((a, b) => a.position - b.position);
+
+            grid.innerHTML = '';
+
+            if (valid.length === 0) {
+                grid.classList.add('hidden');
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            empty.classList.add('hidden');
+
+            valid.forEach(p => {
+                const tile = document.createElement('div');
+                tile.className = "flex flex-col items-center";
+                tile.innerHTML = `
+                    <div class="brand-logo-tile w-full">
+                        <img src="${p.image}" alt="${p.name || 'Partner'}" onerror="this.closest('.brand-logo-tile').style.display='none'">
+                    </div>
+                    ${p.name ? `<p class="mt-2 text-[11px] sm:text-xs font-semibold text-brand-dark text-center truncate w-full">${p.name}</p>` : ''}
+                `;
+                grid.appendChild(tile);
+            });
+        }
+
+        function getAgendaFiltered() {
+            const loc = (document.getElementById('filter-agenda-location')?.value || '').trim();
+            const mode = (document.getElementById('filter-agenda-mode')?.value || '').trim();
+            const cat = (document.getElementById('filter-agenda-category')?.value || '').trim();
+            const dt = (document.getElementById('filter-agenda-date')?.value || '').trim();
+            const q = (document.getElementById('global-search')?.value || '').toLowerCase().trim();
+
+            return bayuData.applications.filter(item => {
+                if (item.type !== 'Agenda') return false;
+                if (item.approval !== 'Approved') return false;
+                if (loc && (item.location || '') !== loc) return false;
+                if (mode && (item.mode || '') !== mode) return false;
+                if (cat && (item.category || '') !== cat) return false;
+                if (dt && (item.date || '') !== dt) return false;
+                if (q) {
+                    const hay = ((item.title || '') + ' ' + (item.name || '') + ' ' + (item.org || '') + ' ' +
+                                 (item.location || '') + ' ' + (item.category || '') + ' ' + (item.summary || '')).toLowerCase();
+                    if (!hay.includes(q)) return false;
+                }
+                return true;
+            });
+        }
+
         function renderAgenda() {
             const upcomingContainer = document.getElementById('grid-agenda-upcoming');
             const endedContainer = document.getElementById('grid-agenda-ended');
@@ -2218,31 +2603,15 @@
             upcomingContainer.innerHTML = '';
             endedContainer.innerHTML = '';
 
-            const approvedAgenda = bayuData.applications.filter(item => item.type === 'Agenda' && item.approval === 'Approved');
-
-            // Sort by priority then date
-            approvedAgenda.sort((a, b) => {
-                const pA = getPromoPriority(a);
-                const pB = getPromoPriority(b);
-                if (pA !== pB) return pA - pB;
-                return new Date(a.date) - new Date(b.date);
-            });
+            const approvedAgenda = getAgendaFiltered();
+            const sortedAgenda = sortByPromotion(approvedAgenda);
 
             let countUpcoming = 0;
             let countEnded = 0;
 
-            approvedAgenda.forEach(item => {
+            sortedAgenda.forEach(item => {
                 const statusInfo = getAgendaStatusInfo(item);
-                const promoPriority = getPromoPriority(item);
-
-                let badgeHtml = '';
-                if (promoPriority === 1) badgeHtml += `<span class="badge-pill badge-top mr-1">TOP</span>`;
-                else if (promoPriority === 2) badgeHtml += `<span class="badge-pill badge-featured mr-1">FEATURED</span>`;
-                else if (promoPriority === 3) badgeHtml += `<span class="badge-pill badge-promoted mr-1">PROMOTED</span>`;
-
-                // Public view: status badges hidden per CHANGE 3
-                // statusInfo.badges.forEach(b => { ... }) intentionally omitted
-
+                const badgeHtml = getPromotionalBadgeHtml(item);
                 const displayTitle = item.title || item.name;
                 const hargaYuranDisplay = item.hargaYuran || 'Percuma';
 
@@ -2291,22 +2660,54 @@
             document.getElementById('count-ended').textContent = `${countEnded} Program`;
         }
 
-        function filterAgenda() {
-            const loc = document.getElementById('filter-agenda-location').value;
-            const mode = document.getElementById('filter-agenda-mode').value;
-            const cat = document.getElementById('filter-agenda-category').value;
-            const dt = document.getElementById('filter-agenda-date').value;
-
-            // Simple re-render with client filters
-            renderAgenda();
-        }
+        function filterAgenda() { renderAgenda(); }
 
         function resetAgendaFilters() {
             document.getElementById('filter-agenda-location').value = "";
             document.getElementById('filter-agenda-mode').value = "";
             document.getElementById('filter-agenda-category').value = "";
             document.getElementById('filter-agenda-date').value = "";
+            const gs = document.getElementById('global-search');
+            if (gs) gs.value = '';
             renderAgenda();
+        }
+
+        function getTrainerFiltered() {
+            const name = (document.getElementById('filter-trainer-name')?.value || '').toLowerCase().trim();
+            const exp = (document.getElementById('filter-trainer-expertise')?.value || '').trim();
+            const loc = (document.getElementById('filter-trainer-location')?.value || '').trim();
+            const cert = (document.getElementById('filter-trainer-cert')?.value || '').trim();
+            const q = (document.getElementById('global-search')?.value || '').toLowerCase().trim();
+
+            return bayuData.applications.filter(item => {
+                if (item.type !== 'Trainer') return false;
+                if (item.approval !== 'Approved') return false;
+                if (name && !(item.name || '').toLowerCase().includes(name)) return false;
+                if (exp && !(item.expertise || []).includes(exp)) return false;
+                if (loc && (item.location || '') !== loc) return false;
+
+                if (cert) {
+                    const rawCerts = item.certs || [];
+                    const custom = (item.certCustom || '').trim();
+
+                    if (cert === 'Lain-Lain') {
+                        const hasLainLain = rawCerts.includes('Lain-Lain');
+                        const hasCustomText = custom !== '';
+                        if (!(hasLainLain && hasCustomText)) return false;
+                    } else {
+                        if (!rawCerts.includes(cert)) return false;
+                    }
+                }
+
+                if (q) {
+                    const certList = getTrainerCertDisplayList(item);
+                    const hay = ((item.name || '') + ' ' + (item.title || '') + ' ' + (item.location || '') + ' ' +
+                                 (item.summary || '') + ' ' + (item.expertise || []).join(' ') + ' ' +
+                                 certList.join(' ')).toLowerCase();
+                    if (!hay.includes(q)) return false;
+                }
+                return true;
+            });
         }
 
         function renderTrainer() {
@@ -2314,22 +2715,23 @@
             if (!container) return;
             container.innerHTML = '';
 
-            const trainers = bayuData.applications.filter(item => item.type === 'Trainer' && item.approval === 'Approved');
+            const sortedTrainers = sortByPromotion(getTrainerFiltered());
 
-            trainers.forEach(item => {
+            sortedTrainers.forEach(item => {
                 const displayName = item.name || item.title;
                 const expTags = (item.expertise || []).map(exp => `<span class="bg-brand-bg text-brand text-[10px] font-semibold px-2 py-0.5 rounded-md border border-brand-border">${exp}</span>`).join(' ');
 
-                // CHANGE 1: Replace "Bertauliah" with actual certification(s)
-                const certs = item.certs && item.certs.length > 0 ? item.certs : [];
-                const certTags = certs.map(cert => `<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">${cert}</span>`).join(' ');
-                const certDisplay = certs.length > 0
-                    ? `<div class="flex flex-wrap gap-1">${certTags}</div>`
-                    : '';
+                const certList = getTrainerCertDisplayList(item);
+                const certTags = certList.map(cert => `<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">${cert}</span>`).join(' ');
+                const certDisplay = certList.length > 0 ? `<div class="flex flex-wrap gap-1">${certTags}</div>` : '';
+
+                const badgeHtml = getPromotionalBadgeHtml(item);
+                const promoBadgeBlock = badgeHtml ? `<div class="flex flex-wrap gap-1">${badgeHtml}</div>` : '';
 
                 const cardHtml = `
                     <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-4">
+                            ${promoBadgeBlock}
                             <div class="flex items-center gap-4">
                                 <img src="${item.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400'}" alt="${displayName}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shrink-0">
                                 <div>
@@ -2356,12 +2758,36 @@
         }
 
         function filterTrainer() { renderTrainer(); }
+
         function resetTrainerFilters() {
             document.getElementById('filter-trainer-name').value = "";
             document.getElementById('filter-trainer-expertise').value = "";
             document.getElementById('filter-trainer-location').value = "";
             document.getElementById('filter-trainer-cert').value = "";
+            const gs = document.getElementById('global-search');
+            if (gs) gs.value = '';
             renderTrainer();
+        }
+
+        function getTalentFiltered() {
+            const name = (document.getElementById('filter-talent-name')?.value || '').toLowerCase().trim();
+            const niche = (document.getElementById('filter-talent-niche')?.value || '').trim();
+            const loc = (document.getElementById('filter-talent-location')?.value || '').trim();
+            const q = (document.getElementById('global-search')?.value || '').toLowerCase().trim();
+
+            return bayuData.applications.filter(item => {
+                if (item.type !== 'Talent') return false;
+                if (item.approval !== 'Approved') return false;
+                if (name && !(item.name || '').toLowerCase().includes(name)) return false;
+                if (niche && (item.niche || '') !== niche) return false;
+                if (loc && (item.location || '') !== loc) return false;
+                if (q) {
+                    const hay = ((item.name || '') + ' ' + (item.title || '') + ' ' + (item.niche || '') + ' ' +
+                                 (item.location || '') + ' ' + (item.summary || '')).toLowerCase();
+                    if (!hay.includes(q)) return false;
+                }
+                return true;
+            });
         }
 
         function renderTalent() {
@@ -2369,15 +2795,17 @@
             if (!container) return;
             container.innerHTML = '';
 
-            const talents = bayuData.applications.filter(item => item.type === 'Talent' && item.approval === 'Approved');
+            const sortedTalents = sortByPromotion(getTalentFiltered());
 
-            talents.forEach(item => {
+            sortedTalents.forEach(item => {
                 const displayName = item.name || item.title;
+                const badgeHtml = getPromotionalBadgeHtml(item);
+                const promoBadgeBlock = badgeHtml ? `<div class="flex flex-wrap gap-1">${badgeHtml}</div>` : '';
 
-                // CHANGE 2: Remove "Talent" label + make "Hubungi Bakat" button full width
                 const cardHtml = `
                     <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-4">
+                            ${promoBadgeBlock}
                             <div class="flex items-center gap-4">
                                 <img src="${item.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400'}" alt="${displayName}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shrink-0">
                                 <div>
@@ -2400,18 +2828,17 @@
         }
 
         function filterTalent() { renderTalent(); }
+
         function resetTalentFilters() {
             document.getElementById('filter-talent-name').value = "";
             document.getElementById('filter-talent-niche').value = "";
             document.getElementById('filter-talent-location').value = "";
+            const gs = document.getElementById('global-search');
+            if (gs) gs.value = '';
             renderTalent();
         }
 
-        // GLOBAL SEARCH HANDLER
         function handleGlobalSearch() {
-            const query = document.getElementById('global-search').value.toLowerCase().trim();
-            if (!query) return;
-            // Triggers search filtering across current tab
             renderAgenda();
             renderTrainer();
             renderTalent();
@@ -2421,7 +2848,6 @@
             handleGlobalSearch();
         }
 
-        // ADMIN TABLE & STATS RENDER
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             if (!tbody) return;
@@ -2439,7 +2865,6 @@
                 if (item.approval === 'Approved') approved++;
                 if (item.statusPenangguhan === 'Dibatalkan') cancelled++;
 
-                // Search & Filter
                 if (filterType && item.type !== filterType) return;
                 if (filterApproval && item.approval !== filterApproval) return;
 
@@ -2454,6 +2879,17 @@
 
                 const displayTitle = (item.type === 'Agenda') ? (item.title || item.name) : (item.name || item.title);
                 const displayDate = item.date || '-';
+
+                const hasLabel = item.label && item.label.trim() !== '';
+                const labelDisplay = hasLabel ? item.label : '-';
+                const validityDisplay = hasLabel ? (item.validity || '-') : '-';
+                const dariDisplay = hasLabel ? (item.tarikhDari || '-') : '-';
+                const hinggaDisplay = hasLabel ? (item.tarikhSehingga || '-') : '-';
+
+                let labelBadgeClass = 'bg-gray-100 text-gray-600';
+                if (item.label === 'Top') labelBadgeClass = 'bg-emerald-100 text-emerald-800';
+                else if (item.label === 'Featured') labelBadgeClass = 'bg-amber-100 text-amber-800';
+                else if (item.label === 'Promoted') labelBadgeClass = 'bg-indigo-100 text-indigo-800';
 
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-brand-bg/50 transition-colors";
@@ -2475,9 +2911,12 @@
                             ${item.approval === 'Approved' ? 'Diluluskan' : 'Menunggu Semakan'}
                         </span>
                     </td>
-                    <td class="p-3.5">${item.validity || '-'}</td>
-                    <td class="p-3.5 text-[11px] text-gray-600">${item.tarikhDari || '-'} s/d ${item.tarikhSehingga || '-'}</td>
-                    <td class="p-3.5 font-bold text-brand">${item.label || '-'}</td>
+                    <td class="p-3.5">
+                        <span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${labelBadgeClass}">${labelDisplay}</span>
+                    </td>
+                    <td class="p-3.5 font-semibold ${hasLabel ? 'text-brand-dark' : 'text-gray-300'}">${validityDisplay}</td>
+                    <td class="p-3.5 ${hasLabel ? 'text-gray-600' : 'text-gray-300'}">${dariDisplay}</td>
+                    <td class="p-3.5 ${hasLabel ? 'text-gray-600' : 'text-gray-300'}">${hinggaDisplay}</td>
                     <td class="p-3.5 text-right space-x-2">
                         <button onclick="openAdminReviewModal('${item.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
                             <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
@@ -2500,7 +2939,24 @@
             document.getElementById('stat-feedback').textContent = bayuData.feedbacks.length;
         }
 
-        // ADMIN EDIT & REVIEW SYSTEM
+        function buildMultiCheckboxGroup(name, options, selectedValues) {
+            const selected = selectedValues || [];
+            return options.map(opt => `
+                <label class="flex items-center gap-2 text-xs">
+                    <input type="checkbox" name="${name}" value="${opt}" ${selected.includes(opt) ? 'checked' : ''}>
+                    <span>${opt}</span>
+                </label>
+            `).join('');
+        }
+
+        function buildSelectOptions(options, selectedValue) {
+            return options.map(opt => {
+                const val = opt === "" ? "" : opt;
+                const label = opt === "" ? "Tiada" : opt;
+                return `<option value="${val}" ${selectedValue === val ? 'selected' : ''}>${label}</option>`;
+            }).join('');
+        }
+
         function openAdminReviewModal(id) {
             const item = bayuData.applications.find(a => a.id === id);
             if (!item) return;
@@ -2508,105 +2964,248 @@
             const modalBody = document.getElementById('admin-review-body');
             if (!modalBody) return;
 
-            let titleNameLabel = "Tajuk / Nama";
-            let titleNameValue = "";
+            let typeSpecificFields = '';
 
             if (item.type === 'Agenda') {
-                titleNameLabel = "Tajuk Agenda";
-                titleNameValue = item.title || item.name || '';
+                const feeType = item.feeType || 'Percuma';
+                let feeAmount = '';
+                if (feeType === 'Berbayar' && item.hargaYuran) {
+                    feeAmount = String(item.hargaYuran).replace(/^RM/i, '');
+                }
+                typeSpecificFields = `
+                    <div class="bg-brand-bg p-3 rounded-xl border border-brand-border">
+                        <div class="text-[11px] font-bold text-brand uppercase tracking-wider mb-3">Maklumat Agenda</div>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tajuk Program</label>
+                                <input type="text" id="admin-edit-title" value="${item.title || ''}" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Penganjur / PIC</label>
+                                    <input type="text" id="admin-edit-name" value="${item.name || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Organisasi</label>
+                                    <input type="text" id="admin-edit-org" value="${item.org || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel</label>
+                                    <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon</label>
+                                    <input type="tel" id="admin-edit-phone" value="${item.phone || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh</label>
+                                    <input type="date" id="admin-edit-date" value="${item.date || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Mod</label>
+                                    <select id="admin-edit-mode" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                        ${buildSelectOptions(AGENDA_MODE_OPTIONS, item.mode || 'Fizikal')}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Kategori</label>
+                                    <select id="admin-edit-category" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                        ${buildSelectOptions(AGENDA_CATEGORY_OPTIONS, item.category || '')}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
+                                <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jenis Yuran</label>
+                                    <select id="admin-edit-feetype" onchange="toggleAdminFeeAmount()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                        <option value="Percuma" ${feeType === 'Percuma' ? 'selected' : ''}>Percuma</option>
+                                        <option value="Berbayar" ${feeType === 'Berbayar' ? 'selected' : ''}>Berbayar</option>
+                                    </select>
+                                </div>
+                                <div id="admin-fee-amount-wrapper" class="${feeType === 'Berbayar' ? '' : 'hidden'}">
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jumlah Yuran (RM)</label>
+                                    <input type="number" id="admin-edit-feeamount" value="${feeAmount}" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL / Link Pendaftaran</label>
+                                <input type="url" id="admin-edit-url" value="${item.url || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar / Poster</label>
+                                <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                `;
             } else if (item.type === 'Trainer') {
-                titleNameLabel = "Nama Trainer";
-                titleNameValue = item.name || item.title || '';
+                typeSpecificFields = `
+                    <div class="bg-brand-bg p-3 rounded-xl border border-brand-border">
+                        <div class="text-[11px] font-bold text-brand uppercase tracking-wider mb-3">Maklumat Trainer</div>
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Trainer</label>
+                                    <input type="text" id="admin-edit-name" value="${item.name || ''}" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel</label>
+                                    <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
+                                <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Bidang Kepakaran</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto p-2 border border-brand-border rounded-xl bg-white">
+                                    ${buildMultiCheckboxGroup('admin_trainer_exp', TRAINER_EXPERTISE_OPTIONS, item.expertise || [])}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Pentauliahan / Sijil</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 p-2 border border-brand-border rounded-xl bg-white">
+                                    ${buildMultiCheckboxGroup('admin_trainer_cert', TRAINER_CERT_OPTIONS, item.certs || [])}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Pentauliahan Lain-lain (Custom)</label>
+                                <input type="text" id="admin-edit-cert-custom" maxlength="150" value="${item.certCustom || ''}" placeholder="Asingkan dengan koma (,)" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                <p class="text-[10px] text-brand-muted mt-1">Maksimum 150 aksara. Kosongkan jika tiada.</p>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil</label>
+                                <textarea id="admin-edit-summary" rows="3" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none">${item.summary || ''}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
+                                <input type="url" id="admin-edit-url" value="${item.url || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar Profil</label>
+                                <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                `;
             } else if (item.type === 'Talent') {
-                titleNameLabel = "Nama Talent";
-                titleNameValue = item.name || item.title || '';
+                typeSpecificFields = `
+                    <div class="bg-brand-bg p-3 rounded-xl border border-brand-border">
+                        <div class="text-[11px] font-bold text-brand uppercase tracking-wider mb-3">Maklumat Talent</div>
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Talent</label>
+                                    <input type="text" id="admin-edit-name" value="${item.name || ''}" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel</label>
+                                    <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
+                                    <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Bidang / Niche</label>
+                                    <select id="admin-edit-niche" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                        ${buildSelectOptions(TALENT_NICHE_OPTIONS, item.niche || '')}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil</label>
+                                <textarea id="admin-edit-summary" rows="3" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none">${item.summary || ''}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
+                                <input type="url" id="admin-edit-url" value="${item.url || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar Profil</label>
+                                <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
 
-            const dateLabel = (item.type === 'Agenda') ? "Tarikh Agenda" : "Tarikh";
+            const hasLabel = item.label && item.label.trim() !== '';
+            const labelOptionsHtml = PROMO_LABEL_OPTIONS.map(opt => {
+                const val = opt;
+                const label = opt === "" ? "Tiada Label" : opt;
+                return `<option value="${val}" ${item.label === val ? 'selected' : ''}>${label}</option>`;
+            }).join('');
 
             modalBody.innerHTML = `
                 <form onsubmit="handleSaveAdminEdit(event, '${item.id}')" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jenis Permohonan</label>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jenis</label>
                             <input type="text" value="${item.type}" disabled class="w-full bg-gray-100 border border-brand-border rounded-xl px-3.5 py-2 text-xs font-bold text-brand">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">ID Permohonan</label>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">ID</label>
                             <input type="text" value="${item.id}" disabled class="w-full bg-gray-100 border border-brand-border rounded-xl px-3.5 py-2 text-xs font-bold text-brand-muted">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">${titleNameLabel} <span class="text-red-500">*</span></label>
-                        <input type="text" id="admin-edit-title-name" value="${titleNameValue}" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Pemohon / Organisasi</label>
-                            <input type="text" id="admin-edit-name-org" value="${item.name || item.org || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Pemohon</label>
-                            <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">${dateLabel}</label>
-                            <input type="date" id="admin-edit-date" value="${item.date || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Status Kelulusan</label>
-                            <select id="admin-edit-approval" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <select id="admin-edit-approval" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                                 <option value="Pending" ${item.approval === 'Pending' ? 'selected' : ''}>Menunggu Semakan</option>
                                 <option value="Approved" ${item.approval === 'Approved' ? 'selected' : ''}>Diluluskan</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tempoh Sah</label>
-                            <select id="admin-edit-validity" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                                <option value="" ${!item.validity ? 'selected' : ''}>Tiada</option>
-                                <option value="1 Bulan" ${item.validity === '1 Bulan' ? 'selected' : ''}>1 Bulan</option>
-                                <option value="3 Bulan" ${item.validity === '3 Bulan' ? 'selected' : ''}>3 Bulan</option>
-                                <option value="6 Bulan" ${item.validity === '6 Bulan' ? 'selected' : ''}>6 Bulan</option>
-                                <option value="1 Tahun" ${item.validity === '1 Tahun' ? 'selected' : ''}>1 Tahun</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Dari</label>
-                            <input type="date" id="admin-edit-dari" value="${item.tarikhDari || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Hingga</label>
-                            <input type="date" id="admin-edit-hingga" value="${item.tarikhSehingga || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                        </div>
-                    </div>
+                    ${typeSpecificFields}
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Label Promosi</label>
-                            <select id="admin-edit-label" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                                <option value="" ${!item.label ? 'selected' : ''}>Tiada Label</option>
-                                <option value="Top" ${item.label === 'Top' ? 'selected' : ''}>Top</option>
-                                <option value="Featured" ${item.label === 'Featured' ? 'selected' : ''}>Featured</option>
-                                <option value="Promoted" ${item.label === 'Promoted' ? 'selected' : ''}>Promoted</option>
-                            </select>
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                        <div class="text-[11px] font-bold text-amber-800 uppercase tracking-wider mb-3">
+                            <i class="fa-solid fa-star mr-1"></i> Label Promosi & Tempoh Sah
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL / Link Pendaftaran</label>
-                            <input type="url" id="admin-edit-url" value="${item.url || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        </div>
-                    </div>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Label Promosi</label>
+                                <select id="admin-edit-label" onchange="toggleAdminLabelFields()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                    ${labelOptionsHtml}
+                                </select>
+                                <p class="text-[10px] text-brand-muted mt-1">Label ini adalah label promosi paparan (bukan sijil/pentauliahan).</p>
+                            </div>
 
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar / Poster</label>
-                        <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <div id="admin-label-fields-wrapper" class="${hasLabel ? '' : 'hidden'} space-y-3">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tempoh Sah</label>
+                                        <select id="admin-edit-validity" onchange="onAdminValidityChange()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                            ${buildSelectOptions(VALIDITY_OPTIONS, item.validity || '')}
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Dari</label>
+                                        <input type="date" id="admin-edit-dari" value="${item.tarikhDari || ''}" onchange="onAdminDariChange()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Hingga</label>
+                                        <input type="date" id="admin-edit-hingga" value="${item.tarikhSehingga || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                    </div>
+                                </div>
+                                <button type="button" onclick="resetAdminLabelDates()" class="bg-white border border-amber-300 text-amber-800 hover:bg-amber-100 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-colors">
+                                    <i class="fa-solid fa-rotate-left mr-1"></i> Reset Tarikh
+                                </button>
+                                <p class="text-[10px] text-amber-700">Reset Tarikh akan mengosongkan Tarikh Dari & Hingga sahaja. Label promosi dikekalkan.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="pt-4 border-t border-brand-border flex gap-3">
@@ -2623,51 +3222,125 @@
             document.getElementById('modal-admin-review').classList.remove('hidden');
         }
 
-        function closeAdminReviewModal() {
-            document.getElementById('modal-admin-review').classList.add('hidden');
+        function toggleAdminLabelFields() {
+            const labelVal = document.getElementById('admin-edit-label').value;
+            const wrapper = document.getElementById('admin-label-fields-wrapper');
+            if (!wrapper) return;
+            if (labelVal && labelVal.trim() !== '') {
+                wrapper.classList.remove('hidden');
+            } else {
+                wrapper.classList.add('hidden');
+            }
         }
+
+        function onAdminValidityChange() {
+            const dari = document.getElementById('admin-edit-dari').value;
+            const validity = document.getElementById('admin-edit-validity').value;
+            const hinggaEl = document.getElementById('admin-edit-hingga');
+            if (!hinggaEl) return;
+            if (dari && validity) {
+                const calc = calculateTarikhTamat(dari, validity);
+                if (calc) hinggaEl.value = calc;
+            }
+        }
+        function onAdminDariChange() { onAdminValidityChange(); }
+
+        function resetAdminLabelDates() {
+            const dariEl = document.getElementById('admin-edit-dari');
+            const hinggaEl = document.getElementById('admin-edit-hingga');
+            const validityEl = document.getElementById('admin-edit-validity');
+            if (dariEl) dariEl.value = '';
+            if (hinggaEl) hinggaEl.value = '';
+            if (validityEl) validityEl.value = '';
+        }
+
+        function toggleAdminFeeAmount() {
+            const feeType = document.getElementById('admin-edit-feetype')?.value;
+            const wrapper = document.getElementById('admin-fee-amount-wrapper');
+            if (!wrapper) return;
+            if (feeType === 'Berbayar') {
+                wrapper.classList.remove('hidden');
+            } else {
+                wrapper.classList.add('hidden');
+            }
+        }
+
+        function closeAdminReviewModal() { document.getElementById('modal-admin-review').classList.add('hidden'); }
 
         function handleSaveAdminEdit(e, id) {
             e.preventDefault();
             const item = bayuData.applications.find(a => a.id === id);
             if (!item) return;
 
-            const titleNameVal = document.getElementById('admin-edit-title-name').value.trim();
-            const nameOrgVal = document.getElementById('admin-edit-name-org').value.trim();
-            const emailVal = document.getElementById('admin-edit-email').value.trim();
-            const dateVal = document.getElementById('admin-edit-date').value;
             const approvalVal = document.getElementById('admin-edit-approval').value;
-            const validityVal = document.getElementById('admin-edit-validity').value;
-            const dariVal = document.getElementById('admin-edit-dari').value;
-            let hinggaVal = document.getElementById('admin-edit-hingga').value;
             const labelVal = document.getElementById('admin-edit-label').value;
-            const urlVal = document.getElementById('admin-edit-url').value.trim();
-            const photoVal = document.getElementById('admin-edit-photo').value.trim();
+            const validityVal = document.getElementById('admin-edit-validity')?.value || '';
+            let dariVal = document.getElementById('admin-edit-dari')?.value || '';
+            let hinggaVal = document.getElementById('admin-edit-hingga')?.value || '';
 
-            if (dariVal && validityVal && !hinggaVal) {
-                hinggaVal = calculateTarikhTamat(dariVal, validityVal);
+            item.approval = approvalVal;
+            item.label = labelVal;
+
+            if (labelVal && labelVal.trim() !== '') {
+                item.validity = validityVal;
+                item.tarikhDari = dariVal;
+                if (dariVal && validityVal && !hinggaVal) {
+                    hinggaVal = calculateTarikhTamat(dariVal, validityVal);
+                }
+                item.tarikhSehingga = hinggaVal;
+            } else {
+                item.validity = '';
+                item.tarikhDari = '';
+                item.tarikhSehingga = '';
             }
 
             if (item.type === 'Agenda') {
-                item.title = titleNameVal;
-                item.name = nameOrgVal || titleNameVal;
-            } else if (item.type === 'Trainer') {
-                item.name = titleNameVal;
-                if (!item.title) item.title = "Trainer Profesional";
-            } else if (item.type === 'Talent') {
-                item.name = titleNameVal;
-                if (!item.title) item.title = "Talent Tempatan";
-            }
+                item.title = document.getElementById('admin-edit-title').value.trim();
+                item.name = document.getElementById('admin-edit-name').value.trim() || item.title;
+                item.org = document.getElementById('admin-edit-org').value.trim();
+                item.email = document.getElementById('admin-edit-email').value.trim();
+                item.phone = document.getElementById('admin-edit-phone').value.trim();
+                item.date = document.getElementById('admin-edit-date').value;
+                item.mode = document.getElementById('admin-edit-mode').value;
+                item.category = document.getElementById('admin-edit-category').value;
+                item.location = document.getElementById('admin-edit-location').value.trim();
+                item.url = document.getElementById('admin-edit-url').value.trim();
+                item.photo = document.getElementById('admin-edit-photo').value.trim();
 
-            item.email = emailVal;
-            item.date = dateVal;
-            item.approval = approvalVal;
-            item.validity = validityVal;
-            item.tarikhDari = dariVal;
-            item.tarikhSehingga = hinggaVal;
-            item.label = labelVal;
-            if (urlVal) item.url = urlVal;
-            if (photoVal) item.photo = photoVal;
+                const feeType = document.getElementById('admin-edit-feetype').value;
+                const feeAmount = document.getElementById('admin-edit-feeamount')?.value.trim() || '';
+                item.feeType = feeType;
+                if (feeType === 'Berbayar' && feeAmount) {
+                    item.hargaYuran = 'RM' + parseFloat(feeAmount).toFixed(2).replace(/\.00$/, '');
+                } else {
+                    item.hargaYuran = 'Percuma';
+                }
+            } else if (item.type === 'Trainer') {
+                item.name = document.getElementById('admin-edit-name').value.trim();
+                item.email = document.getElementById('admin-edit-email').value.trim();
+                item.location = document.getElementById('admin-edit-location').value.trim();
+                item.summary = document.getElementById('admin-edit-summary').value.trim();
+                item.url = document.getElementById('admin-edit-url').value.trim();
+                item.photo = document.getElementById('admin-edit-photo').value.trim();
+
+                const expBoxes = document.querySelectorAll('input[name="admin_trainer_exp"]:checked');
+                item.expertise = Array.from(expBoxes).map(cb => cb.value);
+                if (item.expertise.length === 0) item.expertise = ["Pengurusan & Kepimpinan"];
+
+                const certBoxes = document.querySelectorAll('input[name="admin_trainer_cert"]:checked');
+                item.certs = Array.from(certBoxes).map(cb => cb.value);
+
+                const customCertInput = document.getElementById('admin-edit-cert-custom');
+                item.certCustom = (customCertInput && customCertInput.value) ? customCertInput.value.trim().slice(0, 150) : '';
+            } else if (item.type === 'Talent') {
+                item.name = document.getElementById('admin-edit-name').value.trim();
+                item.email = document.getElementById('admin-edit-email').value.trim();
+                item.location = document.getElementById('admin-edit-location').value.trim();
+                item.niche = document.getElementById('admin-edit-niche').value;
+                item.summary = document.getElementById('admin-edit-summary').value.trim();
+                item.url = document.getElementById('admin-edit-url').value.trim();
+                item.photo = document.getElementById('admin-edit-photo').value.trim();
+            }
 
             saveData();
             closeAdminReviewModal();
@@ -2678,20 +3351,16 @@
             renderTalent();
         }
 
-        // DELETE CONFIRMATION SYSTEM
         let applicationToDelete = null;
-
         function confirmDeleteApplication(id) {
             applicationToDelete = id;
             document.getElementById('modal-confirm-delete').classList.remove('hidden');
             document.getElementById('btn-confirm-delete').onclick = executeDeleteApplication;
         }
-
         function closeDeleteModal() {
             applicationToDelete = null;
             document.getElementById('modal-confirm-delete').classList.add('hidden');
         }
-
         function executeDeleteApplication() {
             if (!applicationToDelete) return;
             bayuData.applications = bayuData.applications.filter(a => a.id !== applicationToDelete);
@@ -2703,7 +3372,6 @@
             renderTalent();
         }
 
-        // SUBSCRIBER & FEEDBACK ADMIN TABLE RENDERS
         function renderFeedbackTable() {
             const tbody = document.getElementById('feedback-table-body');
             if (!tbody) return;
@@ -2759,15 +3427,11 @@
             }
 
             const minatList = Array.from(checkedBoxes).map(cb => cb.value).join(', ');
-            const todayStr = TODAY.toISOString().split('T')[0];
+            const todayStr = getTodayStr();
 
             bayuData.subscribers.unshift({
-                id: "SUB-" + Date.now(),
-                name: name,
-                email: email,
-                minat: minatList,
-                date: todayStr,
-                status: "NEW"
+                id: "SUB-" + Date.now(), name: name, email: email,
+                minat: minatList, date: todayStr, status: "NEW"
             });
 
             saveData();
@@ -2818,10 +3482,7 @@
             document.getElementById('edit-sub-minat').value = sub.minat;
             document.getElementById('modal-edit-subscriber').classList.remove('hidden');
         }
-
-        function closeEditSubscriberModal() {
-            document.getElementById('modal-edit-subscriber').classList.add('hidden');
-        }
+        function closeEditSubscriberModal() { document.getElementById('modal-edit-subscriber').classList.add('hidden'); }
 
         function handleSaveSubscriber(e) {
             e.preventDefault();
@@ -2837,7 +3498,6 @@
             }
         }
 
-        // BANNER PHOTO PREVIEW
         document.getElementById('banner-photo')?.addEventListener('input', function() {
             const url = this.value.trim();
             const preview = document.getElementById('banner-photo-preview');
@@ -2849,17 +3509,44 @@
             }
         });
 
-        // INITIALIZATION ON DOM READY
+        document.getElementById('partner-image')?.addEventListener('input', function() {
+            const url = this.value.trim();
+            const preview = document.getElementById('partner-image-preview');
+            if (url) {
+                preview.classList.remove('hidden');
+                preview.querySelector('img').src = url;
+            } else {
+                preview.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('reg-trainer-cert-custom')?.addEventListener('input', updateTrainerCertCustomCounter);
+
         document.addEventListener('DOMContentLoaded', () => {
             initLocationDropdowns();
             renderAgenda();
             renderTrainer();
             renderTalent();
             renderBanner();
+            renderBrandsSupport();
 
-            // Set up toggle for penganjur fee type
             document.getElementById('reg-penganjur-fee-type')?.addEventListener('change', togglePenganjurFee);
+
+            // Bind the register form submit explicitly (in addition to the inline onsubmit for redundancy)
+            const regForm = document.getElementById('form-register');
+            if (regForm) {
+                regForm.addEventListener('submit', handleRegisterSubmit);
+            }
         });
+    </script>
+
+    <!-- DISABLE RIGHT CLICK -->
+    <script>
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert('Right Click is Disabled.');
+            return false;
+        }, false);
     </script>
 </body>
 </html>
