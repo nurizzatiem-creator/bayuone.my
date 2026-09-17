@@ -248,7 +248,6 @@ Object.assign(window, {
     // Admin
     renderAdminTable,
     renderBannerTable,
-    renderPartnerTable,
     openAdminReviewModal,
     openBannerModal,
     calculateBannerEndDate,
