@@ -5,9 +5,9 @@
 // It imports every module, wires up event listeners, and
 // exposes global functions used by inline onclick="..." attributes.
 //
-// Cache-busting: every import uses ?v=6b so browsers fetch fresh
-// copies after a deployment. Bump the version number on every
-// significant deploy (6c, 6d, etc.).
+// IMPORTANT: supabase-client.js is imported WITHOUT a version
+// suffix. This ensures a single Supabase instance across the
+// entire app (avoids "Multiple GoTrueClient instances" warning).
 // ============================================================
 
 import { db } from './supabase-client.js';
