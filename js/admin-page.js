@@ -6,6 +6,7 @@
 //   - Showing the login gate if not authenticated
 //   - Rendering the admin dashboard if authenticated
 //   - Logout (with confirmation + redirect to public site)
+//   - Showing logged-in admin email in the header
 // ============================================================
 
 import { db } from './supabase-client.js';
@@ -489,15 +490,29 @@ function renderAdminDashboard() {
         resetAdminLabelDates
     });
 
-    // Show admin email in header (Improvement 1)
+    // Show admin email — try sessionStorage first, then fall back to getUser
     (async () => {
+        const el = document.getElementById('admin-email-display');
+        if (!el) return;
+
+        let email = '';
         try {
-            const { data: { user } } = await db.auth.getUser();
-            const el = document.getElementById('admin-email-display');
-            if (el && user?.email) el.textContent = '· ' + user.email;
-        } catch (err) {
-            console.warn('Could not load admin email:', err);
+            email = sessionStorage.getItem('bayuone_admin_email') || '';
+        } catch (e) { /* ignore */ }
+
+        if (!email) {
+            try {
+                const { data: { user } } = await db.auth.getUser();
+                if (user?.email) {
+                    email = user.email;
+                    try { sessionStorage.setItem('bayuone_admin_email', email); } catch (e) {}
+                }
+            } catch (err) {
+                console.warn('Could not load admin email:', err);
+            }
         }
+
+        if (email) el.textContent = '· ' + email;
     })();
 
     // Render all tables
@@ -529,7 +544,7 @@ async function handleLogin(event) {
     errorEl.classList.add('hidden');
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Log Masuk...'; }
 
-    const { error } = await db.auth.signInWithPassword({ email, password });
+    const { data, error } = await db.auth.signInWithPassword({ email, password });
 
     if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Log Masuk'; }
 
@@ -539,13 +554,19 @@ async function handleLogin(event) {
         return;
     }
 
+    // Save the email immediately after successful login
+    const userEmail = data?.user?.email || email;
+    try {
+        sessionStorage.setItem('bayuone_admin_email', userEmail);
+    } catch (e) { /* ignore */ }
+
     await showAdminUI();
 }
 
-// Improvement 2 + 3: Confirm logout + redirect to public site
 async function handleLogout() {
     if (!confirm('Adakah anda pasti mahu log keluar dari panel admin?')) return;
     try { await db.auth.signOut(); } catch (err) { console.warn(err); }
+    try { sessionStorage.removeItem('bayuone_admin_email'); } catch (e) {}
     window.location.href = '../';
 }
 
@@ -590,6 +611,10 @@ async function showAdminUI() {
 
     if (user) {
         // Already logged in — show dashboard
+        // Also pre-store the email from session for the header
+        try {
+            if (user.email) sessionStorage.setItem('bayuone_admin_email', user.email);
+        } catch (e) { /* ignore */ }
         await showAdminUI();
     } else {
         // Not logged in — show login gate
