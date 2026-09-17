@@ -67,3 +67,18 @@ export function escapeHtml(str) {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
 }
+// Generate a URL-safe slug from a string.
+// Example: "Ahmad Rahman" → "ahmad-rahman"
+// Appends a short timestamp to guarantee uniqueness.
+export function slugify(str) {
+    if (!str) return '';
+    const base = String(str)
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, '')   // remove anything not letter/number/space/hyphen
+        .replace(/\s+/g, '-')            // spaces → hyphens
+        .replace(/-+/g, '-')             // collapse multiple hyphens
+        .replace(/^-|-$/g, '');          // trim leading/trailing hyphens
+    const suffix = Date.now().toString().slice(-6);
+    return base ? `${base}-${suffix}` : `record-${suffix}`;
+}
