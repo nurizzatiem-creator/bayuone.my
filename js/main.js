@@ -4,10 +4,15 @@
 // This file is the only script tag index.html needs.
 // It imports every module, wires up event listeners, and
 // exposes global functions used by inline onclick="..." attributes.
+//
+// Cache-busting: every import uses ?v=6b so browsers fetch fresh
+// copies after a deployment. Bump the version number on every
+// significant deploy (6c, 6d, etc.).
 // ============================================================
 
-import { db } from './supabase-client.js';
-import { loadAllData, bayuData } from './data-loader.js';
+import { db } from './supabase-client.js?v=6b';
+import { loadAllData, bayuData } from './data-loader.js?v=6b';
+import { getTodayStr, countWords } from './utils.js?v=6b';
 
 // Registration + form helpers
 import {
@@ -20,13 +25,34 @@ import {
     togglePenganjurFee,
     toggleTrainerCertCustom,
     updateTrainerCertCustomCounter
-} from './register.js';
+} from './register.js?v=6b';
 
 // Public renderers
-import { renderAgenda, filterAgenda, resetAgendaFilters, setQuickFilter, resetCurrentAgendaPage, isAgendaActiveOn } from './agenda.js';
-import { renderTrainer, filterTrainer, resetTrainerFilters } from './trainer.js';
-import { renderTalent, filterTalent, resetTalentFilters } from './talent.js';
-import { renderBanner, renderBrandsSupport } from './banner.js';
+import {
+    renderAgenda,
+    filterAgenda,
+    resetAgendaFilters,
+    setQuickFilter,
+    resetCurrentAgendaPage,
+    isAgendaActiveOn
+} from './agenda.js?v=6b';
+
+import {
+    renderTrainer,
+    filterTrainer,
+    resetTrainerFilters
+} from './trainer.js?v=6b';
+
+import {
+    renderTalent,
+    filterTalent,
+    resetTalentFilters
+} from './talent.js?v=6b';
+
+import {
+    renderBanner,
+    renderBrandsSupport
+} from './banner.js?v=6b';
 
 // Admin renderers
 import {
@@ -46,7 +72,7 @@ import {
     onAdminDariChange,
     resetAdminLabelDates,
     handleSaveAdminEdit
-} from './admin.js';
+} from './admin.js?v=6b';
 
 // Feedback / subscribers / partners
 import {
@@ -54,19 +80,21 @@ import {
     handleFeedbackSubmit,
     openFeedbackPreview,
     toggleFeedbackStatus
-} from './feedback.js';
+} from './feedback.js?v=6b';
+
 import {
     renderSubscriberTable,
     handleSubscribeSubmit,
     openEditSubscriberModal,
     handleSaveSubscriber
-} from './subscriber.js';
+} from './subscriber.js?v=6b';
+
 import {
     openPartnerModal,
     handleSavePartner,
     confirmDeletePartner,
     renderPartnerTable
-} from './partner.js';
+} from './partner.js?v=6b';
 
 // Modals
 import {
@@ -84,7 +112,7 @@ import {
     closePartnerModal,
     closeEditSubscriberModal,
     closeDeleteModal
-} from './modals.js';
+} from './modals.js?v=6b';
 
 // Tabs / search
 import {
@@ -93,13 +121,11 @@ import {
     openPrivacyPage,
     handleGlobalSearch,
     triggerSearch
-} from './tabs.js';
+} from './tabs.js?v=6b';
 
 // ------------------------------------------------------------
-// Utility used by HTML: word counter for trainer/talent summary
+// Utility: word counter for trainer/talent summary fields
 // ------------------------------------------------------------
-
-import { countWords } from './utils.js';
 
 function updateWordCounter(inputId, counterId) {
     const input = document.getElementById(inputId);
@@ -117,7 +143,7 @@ function updateWordCounter(inputId, counterId) {
 }
 
 // ------------------------------------------------------------
-// Populate the year/day selects on the Agenda filter
+// Populate year/day selects on Agenda filter
 // ------------------------------------------------------------
 
 function populateYearDaySelects() {
@@ -304,7 +330,6 @@ function wireFormSubmits() {
     wireFormSubmits();
     wireImagePreviews();
 
-    // Check existing auth session
     try {
         await db.auth.getSession();
     } catch (err) {
@@ -314,7 +339,6 @@ function wireFormSubmits() {
     await loadAllData();
     refreshAllViews();
 
-    // Hide loading overlay
     const overlay = document.getElementById('app-loading');
     if (overlay) overlay.style.display = 'none';
 })();
