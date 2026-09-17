@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,187 +27,47 @@
                             accent: '#1CB07E'
                         }
                     },
-                    fontFamily: {
-                        sans: ['DM Sans', 'sans-serif'],
-                    }
+                    fontFamily: { sans: ['DM Sans', 'sans-serif'] }
                 }
             }
         }
     </script>
 
     <style>
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: #FFFFFF;
-            color: #17231E;
-            overflow-x: hidden;
-        }
-
-        .sticky-nav {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            background-color: rgba(255, 255, 255, 0.92);
-        }
-
+        body { font-family: 'DM Sans', sans-serif; background-color: #FFFFFF; color: #17231E; overflow-x: hidden; }
+        .sticky-nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background-color: rgba(255, 255, 255, 0.92); }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #F4F8F5; }
         ::-webkit-scrollbar-thumb { background: #C2D4C9; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #126B4C; }
 
-        .tab-btn.active {
-            color: #126B4C;
-            border-bottom: 2px solid #126B4C;
-            font-weight: 700;
-        }
-
-        .badge-pill {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.65rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
+        .tab-btn.active { color: #126B4C; border-bottom: 2px solid #126B4C; font-weight: 700; }
+        .badge-pill { display: inline-flex; align-items: center; padding: 0.25rem 0.65rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
         .badge-featured { background-color: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
         .badge-promoted { background-color: #E0E7FF; color: #3730A3; border: 1px solid #C7D2FE; }
         .badge-top { background-color: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
-
-        .modal-backdrop {
-            background-color: rgba(11, 25, 19, 0.6);
-            backdrop-filter: blur(4px);
-        }
-
+        .modal-backdrop { background-color: rgba(11, 25, 19, 0.6); backdrop-filter: blur(4px); }
         .brand-text-b { font-weight: 700; }
         .brand-text-o { font-weight: 400; }
-
-        .banner-container {
-            width: 100%;
-            max-width: 1600px;
-            margin-left: auto;
-            margin-right: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .banner-container img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            display: block;
-            border-radius: 0.75rem;
-        }
-        @media (min-width: 1280px) {
-            .banner-container { height: 150px; }
-            .banner-container img {
-                width: 1600px;
-                height: 150px;
-                object-fit: cover;
-            }
-        }
-
-        .feedback-preview-text {
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
-
-        #admin-review-body {
-            max-height: 65vh;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        .brand-logo-tile {
-            aspect-ratio: 1 / 1;
-            background-color: #FFFFFF;
-            border: 1px solid #DCE6DF;
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            padding: 0.75rem;
-            transition: box-shadow 0.2s ease;
-        }
-        .brand-logo-tile:hover {
-            box-shadow: 0 4px 12px rgba(18, 107, 76, 0.08);
-        }
-        .brand-logo-tile img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .interest-checkbox-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.3rem 0.55rem;
-            font-size: 0.72rem;
-            line-height: 1.1;
-            background-color: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.15s ease, border-color 0.15s ease;
-            color: #ffffff;
-            font-weight: 500;
-        }
-        .interest-checkbox-label:hover {
-            background-color: rgba(255, 255, 255, 0.16);
-            border-color: rgba(255, 255, 255, 0.22);
-        }
-        .interest-checkbox-label input[type="checkbox"] {
-            width: 0.85rem;
-            height: 0.85rem;
-            margin: 0;
-            accent-color: #1CB07E;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .social-icon-btn {
-            width: 36px;
-            height: 36px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #D1FAE5;
-            font-size: 15px;
-            transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
-            text-decoration: none;
-        }
-        .social-icon-btn:hover {
-            background-color: #126B4C;
-            color: #FFFFFF;
-            transform: translateY(-1px);
-        }
-
-        #app-loading {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: #FFFFFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        #app-loading .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid #DCE6DF;
-            border-top-color: #126B4C;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
+        .banner-container { width: 100%; max-width: 1600px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; }
+        .banner-container img { width: 100%; height: 150px; object-fit: cover; display: block; border-radius: 0.75rem; }
+        @media (min-width: 1280px) { .banner-container { height: 150px; } .banner-container img { width: 1600px; height: 150px; object-fit: cover; } }
+        .feedback-preview-text { white-space: pre-wrap; word-break: break-word; }
+        #admin-review-body { max-height: 65vh; overflow-y: auto; padding-right: 4px; }
+        .brand-logo-tile { aspect-ratio: 1 / 1; background-color: #FFFFFF; border: 1px solid #DCE6DF; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.75rem; transition: box-shadow 0.2s ease; }
+        .brand-logo-tile:hover { box-shadow: 0 4px 12px rgba(18, 107, 76, 0.08); }
+        .brand-logo-tile img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+        .interest-checkbox-label { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.55rem; font-size: 0.72rem; line-height: 1.1; background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 0.5rem; cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease; color: #ffffff; font-weight: 500; }
+        .interest-checkbox-label:hover { background-color: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.22); }
+        .interest-checkbox-label input[type="checkbox"] { width: 0.85rem; height: 0.85rem; margin: 0; accent-color: #1CB07E; cursor: pointer; flex-shrink: 0; }
+        .social-icon-btn { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12); color: #D1FAE5; font-size: 15px; transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease; text-decoration: none; }
+        .social-icon-btn:hover { background-color: #126B4C; color: #FFFFFF; transform: translateY(-1px); }
+        #app-loading { position: fixed; inset: 0; z-index: 9999; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; }
+        #app-loading .spinner { width: 40px; height: 40px; border: 3px solid #DCE6DF; border-top-color: #126B4C; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* NEW: Quick filter active state */
+        .quick-filter-btn.active { background-color: #126B4C !important; color: #FFFFFF !important; border-color: #126B4C !important; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-white text-brand-text">
@@ -309,6 +168,14 @@
 
         <!-- ================= TAB 1: AGENDA VIEW ================= -->
         <div id="view-agenda" class="tab-content">
+            <!-- QUICK FILTER BUTTONS (NEW) -->
+            <div class="mb-4 flex flex-wrap gap-2">
+                <button type="button" onclick="setQuickFilter('week')" id="qf-week" class="quick-filter-btn px-4 py-2 rounded-xl border border-brand-border bg-white text-xs font-bold text-brand-muted hover:text-brand hover:border-brand transition-colors">Minggu Ini</button>
+                <button type="button" onclick="setQuickFilter('month')" id="qf-month" class="quick-filter-btn px-4 py-2 rounded-xl border border-brand-border bg-white text-xs font-bold text-brand-muted hover:text-brand hover:border-brand transition-colors">Bulan Ini</button>
+                <button type="button" onclick="setQuickFilter('year')" id="qf-year" class="quick-filter-btn px-4 py-2 rounded-xl border border-brand-border bg-white text-xs font-bold text-brand-muted hover:text-brand hover:border-brand transition-colors">Tahun Ini</button>
+                <button type="button" onclick="setQuickFilter('course')" id="qf-course" class="quick-filter-btn px-4 py-2 rounded-xl border border-brand-border bg-white text-xs font-bold text-brand-muted hover:text-brand hover:border-brand transition-colors">Kursus, Latihan &amp; Bengkel</button>
+            </div>
+
             <div class="bg-brand-bg border border-brand-border rounded-2xl p-5 mb-8 shadow-xs">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
@@ -322,6 +189,7 @@
                             <option value="Tuaran">Tuaran</option>
                             <option value="Keningau">Keningau</option>
                             <option value="Online">Online / Webinar</option>
+                            <option value="Atas Talian/Webinar">Atas Talian/Webinar</option>
                         </select>
                     </div>
 
@@ -349,19 +217,43 @@
                             <option value="Festival & Hiburan">Festival & Hiburan</option>
                             <option value="Keusahawanan & Perniagaan">Keusahawanan & Perniagaan</option>
                             <option value="Pendidikan">Pendidikan</option>
+                            <option value="Pelancongan">Pelancongan</option>
+                            <option value="Sukan & Kesihatan">Sukan & Kesihatan</option>
+                            <option value="Rekreasi & Hobi">Rekreasi & Hobi</option>
                             <option value="Agama & Kerohanian">Agama & Kerohanian</option>
                             <option value="Lain-lain">Lain-lain</option>
                         </select>
                     </div>
 
-                    <div class="flex items-end gap-2">
-                        <div class="w-full">
-                            <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Tarikh</label>
-                            <input type="date" id="filter-agenda-date" onchange="filterAgenda()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-brand">
+                    <!-- REPLACED: Day/Month/Year filters -->
+                    <div class="sm:col-span-2 lg:col-span-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Hari</label>
+                            <select id="filter-agenda-day" onchange="filterAgenda()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-brand">
+                                <option value="">Semua Hari</option>
+                            </select>
                         </div>
-                        <button onclick="resetAgendaFilters()" class="bg-white border border-brand-border text-brand-muted hover:text-brand-dark hover:border-brand px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors shrink-0">
-                            Reset
-                        </button>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Bulan</label>
+                            <select id="filter-agenda-month" onchange="filterAgenda()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-brand">
+                                <option value="">Semua Bulan</option>
+                                <option value="01">Januari</option><option value="02">Februari</option>
+                                <option value="03">Mac</option><option value="04">April</option>
+                                <option value="05">Mei</option><option value="06">Jun</option>
+                                <option value="07">Julai</option><option value="08">Ogos</option>
+                                <option value="09">September</option><option value="10">Oktober</option>
+                                <option value="11">November</option><option value="12">Disember</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Tahun</label>
+                            <select id="filter-agenda-year" onchange="filterAgenda()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-brand">
+                                <option value="">Semua Tahun</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="resetAgendaFilters()" class="w-full bg-white border border-brand-border text-brand-muted hover:text-brand-dark hover:border-brand px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors">Reset</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -380,6 +272,7 @@
                     </div>
 
                     <div id="grid-agenda-upcoming" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                    <div id="agenda-pagination" class="flex flex-wrap items-center justify-center gap-2 mt-10"></div>
                 </div>
 
                 <div id="banner-ad-section" class="py-2">
@@ -433,6 +326,13 @@
                             <option value="Kualiti, Risiko & Pematuhan">Kualiti, Risiko & Pematuhan</option>
                             <option value="Kemahiran Insaniah & Pembangunan Diri">Kemahiran Insaniah & Pembangunan Diri</option>
                             <option value="Alam Sekitar & Kelestarian">Alam Sekitar & Kelestarian</option>
+                            <option value="Kecantikan & Gaya">Kecantikan & Gaya</option>
+                            <option value="Makanan & Masakan">Makanan & Masakan</option>
+                            <option value="Pelancongan & Hospitaliti">Pelancongan & Hospitaliti</option>
+                            <option value="Kesihatan">Kesihatan</option>
+                            <option value="Kemahiran Teknikal & Vokasional">Kemahiran Teknikal & Vokasional</option>
+                            <option value="Pertanian & Agro">Pertanian & Agro</option>
+                            <option value="Bahasa">Bahasa</option>
                             <option value="Kemahiran Khusus / Lain-lain">Kemahiran Khusus / Lain-lain</option>
                         </select>
                     </div>
@@ -446,6 +346,7 @@
                             <option value="Tawau">Tawau</option>
                             <option value="Penampang">Penampang</option>
                             <option value="Kuala Lumpur">Kuala Lumpur / Selangor</option>
+                            <option value="Atas Talian/Webinar">Atas Talian/Webinar</option>
                         </select>
                     </div>
 
@@ -461,9 +362,7 @@
                                 <option value="Lain-Lain">Lain-Lain</option>
                             </select>
                         </div>
-                        <button onclick="resetTrainerFilters()" class="bg-white border border-brand-border text-brand-muted hover:text-brand-dark hover:border-brand px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors shrink-0">
-                            Reset
-                        </button>
+                        <button onclick="resetTrainerFilters()" class="bg-white border border-brand-border text-brand-muted hover:text-brand-dark hover:border-brand px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors shrink-0">Reset</button>
                     </div>
                 </div>
             </div>
@@ -495,6 +394,8 @@
                             <option value="Keluarga, Komuniti, Budaya & Gaya Hidup">Keluarga, Komuniti, Budaya & Gaya Hidup</option>
                             <option value="Pengacaraan & Emcee">Pengacaraan & Emcee</option>
                             <option value="Hiburan & Seni">Hiburan & Seni</option>
+                            <option value="Fotografi & Videografi">Fotografi & Videografi</option>
+                            <option value="Content Creator">Content Creator</option>
                         </select>
                     </div>
 
@@ -508,11 +409,10 @@
                                 <option value="Tawau">Tawau</option>
                                 <option value="Keningau">Keningau</option>
                                 <option value="Kuala Lumpur">Kuala Lumpur</option>
+                                <option value="Atas Talian/Webinar">Atas Talian/Webinar</option>
                             </select>
                         </div>
-                        <button onclick="resetTalentFilters()" class="bg-white border border-brand-border text-brand-muted hover:text-brand-dark hover:border-brand px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors shrink-0">
-                            Reset
-                        </button>
+                        <button onclick="resetTalentFilters()" class="bg-white border border-brand-border text-brand-muted hover:text-brand-dark hover:border-brand px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors shrink-0">Reset</button>
                     </div>
                 </div>
             </div>
@@ -838,20 +738,16 @@
                     </table>
                 </div>
             </div>
-
         </div>
 
         <!-- ============ BRANDS WHO SUPPORT US (public) ============ -->
-        <section id="brands-support-section" class="mt-16 bg-white border-t border-brand-border pt-12 pb-4">
+        <section id="brands-support-section" class="mt-16 bg-white border-t border-brand-border pt-12 pb-4 hidden">
             <div class="max-w-[1200px] mx-auto px-2 sm:px-4">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">Rakan Sokongan BayuOne</h2>
                     <p class="mt-2 text-sm text-brand-muted">Rakan kongsi dan jenama yang menyokong komuniti BayuOne.</p>
                 </div>
                 <div id="brands-support-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"></div>
-                <div id="brands-support-empty" class="hidden text-center py-8 text-sm text-brand-muted">
-                    Tiada rakan kongsi dipaparkan buat masa ini.
-                </div>
             </div>
         </section>
 
@@ -881,46 +777,16 @@
                             Pilih Minat Anda (Boleh pilih lebih dari 1) <span class="text-red-400">*</span>
                         </label>
                         <div class="flex flex-wrap gap-1.5 text-xs text-white">
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Peningkatan Kemahiran & Kerjaya">
-                                <span>Peningkatan Kemahiran & Kerjaya</span>
-                            </label>
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Perniagaan & Keusahawanan">
-                                <span>Perniagaan & Keusahawanan</span>
-                            </label>
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Kewangan & Pelaburan">
-                                <span>Kewangan & Pelaburan</span>
-                            </label>
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Kesihatan & Kesejahteraan">
-                                <span>Kesihatan & Kesejahteraan</span>
-                            </label>
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Teknologi & Digital">
-                                <span>Teknologi & Digital</span>
-                            </label>
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Pendidikan & Pembelajaran">
-                                <span>Pendidikan & Pembelajaran</span>
-                            </label>
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Kreativiti & Media">
-                                <span>Kreativiti & Media</span>
-                            </label>
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Komuniti & Networking">
-                                <span>Komuniti & Networking</span>
-                            </label>
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Gaya Hidup & Minat">
-                                <span>Gaya Hidup & Minat</span>
-                            </label>
-                            <label class="interest-checkbox-label">
-                                <input type="checkbox" name="sub_interest" value="Agama & Kerohanian">
-                                <span>Agama & Kerohanian</span>
-                            </label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Peningkatan Kemahiran & Kerjaya"><span>Peningkatan Kemahiran & Kerjaya</span></label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Perniagaan & Keusahawanan"><span>Perniagaan & Keusahawanan</span></label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Kewangan & Pelaburan"><span>Kewangan & Pelaburan</span></label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Kesihatan & Kesejahteraan"><span>Kesihatan & Kesejahteraan</span></label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Teknologi & Digital"><span>Teknologi & Digital</span></label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Pendidikan & Pembelajaran"><span>Pendidikan & Pembelajaran</span></label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Kreativiti & Media"><span>Kreativiti & Media</span></label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Komuniti & Networking"><span>Komuniti & Networking</span></label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Gaya Hidup & Minat"><span>Gaya Hidup & Minat</span></label>
+                            <label class="interest-checkbox-label"><input type="checkbox" name="sub_interest" value="Agama & Kerohanian"><span>Agama & Kerohanian</span></label>
                         </div>
                         <div id="sub-error" class="hidden mt-1.5 p-1.5 bg-red-500/20 border border-red-400 text-red-200 text-[11px] rounded-md font-medium">
                             Sila pilih sekurang-kurangnya satu minat.
@@ -971,18 +837,10 @@
                     <div class="pt-2 space-y-2">
                         <h3 class="text-xs uppercase font-bold text-emerald-400 tracking-wider">Saluran Rasmi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></h3>
                         <div class="flex items-center gap-2.5">
-                            <a href="https://www.tiktok.com/@bayuone.my" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne TikTok">
-                                <i class="fa-brands fa-tiktok"></i>
-                            </a>
-                            <a href="https://www.threads.net/@bayuone.my" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne Threads">
-                                <i class="fa-brands fa-threads"></i>
-                            </a>
-                            <a href="https://www.facebook.com/KomunitiBayuOne" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne Facebook">
-                                <i class="fa-brands fa-facebook-f"></i>
-                            </a>
-                            <a href="https://www.instagram.com/bayuone.my" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne Instagram">
-                                <i class="fa-brands fa-instagram"></i>
-                            </a>
+                            <a href="https://www.tiktok.com/@bayuone.my" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                            <a href="https://www.threads.net/@bayuone.my" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne Threads"><i class="fa-brands fa-threads"></i></a>
+                            <a href="https://www.facebook.com/KomunitiBayuOne" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/bayuone.my" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="BayuOne Instagram"><i class="fa-brands fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -993,17 +851,11 @@
                         Kandungan, profil, program dan tawaran yang dipaparkan mungkin disediakan oleh pihak ketiga. Pengguna bertanggungjawab membuat semakan dan pengesahan sendiri sebelum membuat sebarang keputusan, bayaran atau kerjasama.
                     </p>
                     <div class="pt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold">
-                        <button onclick="switchTab('privacy')" class="text-emerald-300 hover:text-white underline underline-offset-4 transition-colors">
-                            Dasar Privasi & Polisi
-                        </button>
+                        <button onclick="switchTab('privacy')" class="text-emerald-300 hover:text-white underline underline-offset-4 transition-colors">Dasar Privasi & Polisi</button>
                         <span class="text-emerald-800">•</span>
-                        <button onclick="openFeedbackModal()" class="text-emerald-300 hover:text-white underline underline-offset-4 transition-colors">
-                            Maklum Balas
-                        </button>
+                        <button onclick="openFeedbackModal()" class="text-emerald-300 hover:text-white underline underline-offset-4 transition-colors">Maklum Balas</button>
                         <span class="text-emerald-800">•</span>
-                        <button onclick="openAdminLoginModal()" class="text-emerald-400/60 hover:text-emerald-300 transition-colors">
-                            Login
-                        </button>
+                        <button onclick="openAdminLoginModal()" class="text-emerald-400/60 hover:text-emerald-300 transition-colors">Login</button>
                     </div>
                 </div>
             </div>
@@ -1014,12 +866,14 @@
         </div>
     </footer>
 
+    <!-- ============================================================= -->
+    <!-- ============ MODALS ========================================== -->
+    <!-- ============================================================= -->
+
     <!-- REGISTRATION MODAL -->
     <div id="modal-register" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-brand-border">
-            <button onclick="closeRegisterModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-2">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+            <button onclick="closeRegisterModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
 
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-xl bg-brand-bg border border-brand-border flex items-center justify-center text-brand font-bold text-lg">
@@ -1032,24 +886,23 @@
             </div>
 
             <div class="grid grid-cols-3 gap-2 bg-brand-bg p-1.5 rounded-xl border border-brand-border mb-6">
-                <button type="button" onclick="setRegisterType('penganjur')" id="btn-reg-penganjur" class="py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs">
-                    1. Penganjur
-                </button>
-                <button type="button" onclick="setRegisterType('trainer')" id="btn-reg-trainer" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">
-                    2. Trainer
-                </button>
-                <button type="button" onclick="setRegisterType('talent')" id="btn-reg-talent" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">
-                    3. Talent
-                </button>
+                <button type="button" onclick="setRegisterType('penganjur')" id="btn-reg-penganjur" class="py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs">1. Penganjur</button>
+                <button type="button" onclick="setRegisterType('trainer')" id="btn-reg-trainer" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">2. Trainer</button>
+                <button type="button" onclick="setRegisterType('talent')" id="btn-reg-talent" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">3. Talent</button>
             </div>
 
             <form id="form-register" onsubmit="handleRegisterSubmit(event)">
                 <input type="hidden" id="reg-type" value="penganjur">
 
+                <!-- PENGANJUR FIELDS -->
                 <div id="fields-penganjur" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tajuk Program <span class="text-red-500">*</span></label>
                         <input type="text" id="reg-penganjur-title" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Penganjur <span class="text-red-500">*</span></label>
+                        <input type="text" id="reg-penganjur-org" required placeholder="Contoh: Jabatan Pelancongan Sabah" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Penganjur / Organisasi <span class="text-gray-400 font-normal">(Optional)</span></label>
@@ -1058,14 +911,22 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Program <span class="text-red-500">*</span></label>
-                            <input type="date" id="reg-penganjur-date" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <input type="date" id="reg-penganjur-date" required onchange="syncPenganjurEndDate()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <label class="mt-2 flex items-center gap-2 cursor-pointer text-xs font-semibold text-brand-dark">
+                                <input type="checkbox" id="reg-penganjur-oneday" onchange="togglePenganjurOneDay()" class="accent-brand rounded">
+                                <span>Tick jika ini program 1 hari</span>
+                            </label>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
-                            <select id="reg-penganjur-state" onchange="handleStateChange('penganjur')" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                                <option value="">Sila Pilih Negeri / Wilayah</option>
-                            </select>
+                        <div id="reg-penganjur-enddate-wrapper">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Akhir Program <span class="text-red-500">*</span></label>
+                            <input type="date" id="reg-penganjur-date-end" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                         </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
+                        <select id="reg-penganjur-state" onchange="handleStateChange('penganjur')" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <option value="">Sila Pilih Negeri / Wilayah</option>
+                        </select>
                     </div>
                     <div id="reg-penganjur-sabah-wrapper" class="hidden">
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi Sabah (Bahagian / Daerah) <span class="text-red-500">*</span></label>
@@ -1086,6 +947,9 @@
                             <option value="Festival & Hiburan">Festival & Hiburan</option>
                             <option value="Keusahawanan & Perniagaan">Keusahawanan & Perniagaan</option>
                             <option value="Pendidikan">Pendidikan</option>
+                            <option value="Pelancongan">Pelancongan</option>
+                            <option value="Sukan & Kesihatan">Sukan & Kesihatan</option>
+                            <option value="Rekreasi & Hobi">Rekreasi & Hobi</option>
                             <option value="Agama & Kerohanian">Agama & Kerohanian</option>
                             <option value="Lain-lain">Lain-lain</option>
                         </select>
@@ -1099,8 +963,16 @@
                             </select>
                         </div>
                         <div id="reg-penganjur-fee-amount-wrapper" class="sm:col-span-2 hidden">
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jumlah Yuran (RM)</label>
-                            <input type="number" id="reg-penganjur-fee-amount" placeholder="Contoh: 50" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Min (RM) <span class="text-red-500">*</span></label>
+                                    <input type="number" id="reg-penganjur-fee-min" placeholder="50" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Maks (RM) <span class="text-gray-400 font-normal">(Optional)</span></label>
+                                    <input type="number" id="reg-penganjur-fee-max" placeholder="150" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -1113,8 +985,9 @@
                             <input type="tel" id="reg-penganjur-pic-tel" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Mod (Optional)</label>
-                            <select id="reg-penganjur-mode" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Mod <span class="text-red-500">*</span></label>
+                            <select id="reg-penganjur-mode" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                <option value="">Pilih Mod</option>
                                 <option value="Fizikal">Fizikal</option>
                                 <option value="Online">Online</option>
                                 <option value="Hybrid">Hybrid</option>
@@ -1136,6 +1009,7 @@
                     </div>
                 </div>
 
+                <!-- TRAINER FIELDS -->
                 <div id="fields-trainer" class="space-y-4 hidden">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -1148,6 +1022,10 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon <span class="text-red-500">*</span></label>
+                            <input type="tel" id="reg-trainer-phone" required placeholder="0123456789" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
                         <div>
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
                             <select id="reg-trainer-state" onchange="handleStateChange('trainer')" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
@@ -1174,11 +1052,19 @@
                             <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kewangan, Akaun & Percukaian"> Kewangan, Akaun & Percukaian</label>
                             <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pendidikan & Akademik"> Pendidikan & Akademik</label>
                             <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kesihatan, Keselamatan & Kesejahteraan"> Kesihatan & Keselamatan</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kecantikan & Gaya"> Kecantikan & Gaya</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Makanan & Masakan"> Makanan & Masakan</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pelancongan & Hospitaliti"> Pelancongan & Hospitaliti</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kesihatan"> Kesihatan</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kemahiran Teknikal & Vokasional"> Kemahiran Teknikal & Vokasional</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pertanian & Agro"> Pertanian & Agro</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Bahasa"> Bahasa</label>
                         </div>
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil <span class="text-red-500">*</span></label>
-                        <textarea id="reg-trainer-summary" rows="3" placeholder="Penerangan ringkas pengalaman & kepakaran anda..." class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
+                        <textarea id="reg-trainer-summary" rows="3" placeholder="Penerangan ringkas pengalaman & kepakaran anda..." oninput="updateWordCounter('reg-trainer-summary','reg-trainer-summary-counter')" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
+                        <p id="reg-trainer-summary-counter" class="text-[10px] text-brand-muted mt-1 text-right">0 / 120 patah perkataan</p>
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Pentauliahan / Sijil</label>
@@ -1211,6 +1097,7 @@
                     </div>
                 </div>
 
+                <!-- TALENT FIELDS -->
                 <div id="fields-talent" class="space-y-4 hidden">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -1223,6 +1110,10 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon <span class="text-red-500">*</span></label>
+                            <input type="tel" id="reg-talent-phone" required placeholder="0123456789" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
                         <div>
                             <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
                             <select id="reg-talent-state" onchange="handleStateChange('talent')" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
@@ -1250,11 +1141,14 @@
                             <option value="Keluarga, Komuniti, Budaya & Gaya Hidup">Keluarga, Komuniti, Budaya & Gaya Hidup</option>
                             <option value="Pengacaraan & Emcee">Pengacaraan & Emcee</option>
                             <option value="Hiburan & Seni">Hiburan & Seni</option>
+                            <option value="Fotografi & Videografi">Fotografi & Videografi</option>
+                            <option value="Content Creator">Content Creator</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil <span class="text-red-500">*</span></label>
-                        <textarea id="reg-talent-summary" rows="3" placeholder="Penerangan pencapaian & aktiviti anda..." class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
+                        <textarea id="reg-talent-summary" rows="3" placeholder="Penerangan pencapaian & aktiviti anda..." oninput="updateWordCounter('reg-talent-summary','reg-talent-summary-counter')" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
+                        <p id="reg-talent-summary-counter" class="text-[10px] text-brand-muted mt-1 text-right">0 / 120 patah perkataan</p>
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
@@ -1271,9 +1165,12 @@
                     </div>
                 </div>
 
-                <div class="mt-6">
+                <div class="mt-6 space-y-2">
                     <button type="submit" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl shadow transition-colors text-sm">
                         Hantar Permohonan
+                    </button>
+                    <button type="button" onclick="closeRegisterModal()" class="w-full md:hidden bg-white text-black border border-brand-border hover:bg-gray-50 font-bold py-3 rounded-xl shadow-sm transition-colors text-sm">
+                        Tutup
                     </button>
                     <p class="text-[11px] text-brand-muted text-center mt-2">Permohonan akan disemak oleh pasukan Admin sebelum diterbitkan secara awam.</p>
                 </div>
@@ -1284,9 +1181,7 @@
     <!-- BANNER MODAL -->
     <div id="modal-banner" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8 border border-brand-border">
-            <button onclick="closeBannerModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+            <button onclick="closeBannerModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 id="banner-modal-title" class="text-lg font-bold text-brand-dark mb-1">Tambah Banner</h3>
             <p class="text-xs text-brand-muted mb-4">Isi maklumat iklan banner.</p>
 
@@ -1296,9 +1191,7 @@
                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Foto Banner <span class="text-red-500">*</span></label>
                     <input type="url" id="banner-photo" required placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
                     <p class="text-[10px] text-brand-muted mt-1">Saiz disyorkan: 1600 × 150 px</p>
-                    <div id="banner-photo-preview" class="mt-2 hidden">
-                        <img src="" alt="Preview" class="max-h-24 rounded border border-brand-border">
-                    </div>
+                    <div id="banner-photo-preview" class="mt-2 hidden"><img src="" alt="Preview" class="max-h-24 rounded border border-brand-border"></div>
                 </div>
                 <div>
                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Iklan <span class="text-red-500">*</span></label>
@@ -1336,12 +1229,10 @@
         </div>
     </div>
 
-    <!-- PARTNER MODAL (ADMIN) -->
+    <!-- PARTNER MODAL -->
     <div id="modal-partner" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8 border border-brand-border">
-            <button onclick="closePartnerModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+            <button onclick="closePartnerModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 id="partner-modal-title" class="text-lg font-bold text-brand-dark mb-1">Tambah Partner</h3>
             <p class="text-xs text-brand-muted mb-4">Isi maklumat rakan kongsi / brand.</p>
 
@@ -1355,9 +1246,7 @@
                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Image URL <span class="text-red-500">*</span></label>
                     <input type="url" id="partner-image" required placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
                     <p class="text-[10px] text-brand-muted mt-1">Saiz disyorkan: 500 × 500 px</p>
-                    <div id="partner-image-preview" class="mt-2 hidden">
-                        <img src="" alt="Preview" class="max-h-20 rounded border border-brand-border">
-                    </div>
+                    <div id="partner-image-preview" class="mt-2 hidden"><img src="" alt="Preview" class="max-h-20 rounded border border-brand-border"></div>
                 </div>
                 <div>
                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Posisi Paparan (1 - 10) <span class="text-red-500">*</span></label>
@@ -1375,9 +1264,7 @@
     <!-- FEEDBACK PREVIEW MODAL -->
     <div id="modal-feedback-preview" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8 border border-brand-border">
-            <button onclick="closeFeedbackPreviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+            <button onclick="closeFeedbackPreviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-lg font-bold text-brand-dark mb-1">Maklum Balas Penuh</h3>
             <p class="text-xs text-brand-muted mb-4">Maklumat lengkap yang dihantar oleh pengguna.</p>
             <div id="feedback-preview-body" class="space-y-3 text-sm max-h-[60vh] overflow-y-auto pr-2"></div>
@@ -1387,7 +1274,7 @@
         </div>
     </div>
 
-    <!-- SUBMISSION SUCCESS POPUP MODAL -->
+    <!-- SUBMISSION SUCCESS MODAL -->
     <div id="modal-submission-success" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl text-center border border-brand-border space-y-4">
             <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
@@ -1406,9 +1293,7 @@
     <!-- FEEDBACK MODAL -->
     <div id="modal-feedback" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-brand-border">
-            <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+            <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-lg font-bold text-brand-dark mb-1">Maklum Balas</h3>
             <p class="text-xs text-brand-muted mb-4">Kongsi maklum balas atau cadangan penambahbaikan anda bersama pasukan <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>.</p>
 
@@ -1460,9 +1345,7 @@
     <!-- ADMIN LOGIN MODAL -->
     <div id="modal-admin-login" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative border border-brand-border">
-            <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+            <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-bg rounded-xl mx-auto flex items-center justify-center text-brand text-xl font-bold mb-2">
                     <i class="fa-solid fa-user-shield"></i>
@@ -1489,13 +1372,9 @@
     <!-- ADMIN EDIT / REVIEW MODAL -->
     <div id="modal-admin-review" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative my-8 border border-brand-border">
-            <button onclick="closeAdminReviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
+            <button onclick="closeAdminReviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-lg font-bold text-brand-dark mb-1">Semakan & Edit Permohonan</h3>
             <p class="text-xs text-brand-muted mb-4">Kemaskini semua maklumat permohonan, kelulusan, tempoh sah dan label promosi.</p>
-
             <div id="admin-review-body" class="space-y-4"></div>
         </div>
     </div>
@@ -1503,12 +1382,9 @@
     <!-- EDIT SUBSCRIBER MODAL -->
     <div id="modal-edit-subscriber" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-brand-border">
-            <button onclick="closeEditSubscriberModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+            <button onclick="closeEditSubscriberModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-lg font-bold text-brand-dark mb-1">Edit Subscriber</h3>
             <p class="text-xs text-brand-muted mb-4">Kemaskini maklumat pelanggan hebahan.</p>
-
             <form id="form-edit-subscriber" onsubmit="handleSaveSubscriber(event)" class="space-y-4">
                 <input type="hidden" id="edit-sub-id">
                 <div>
@@ -1524,12 +1400,8 @@
                     <textarea id="edit-sub-minat" rows="3" required class="w-full bg-white border border-brand-border rounded-xl p-3 text-sm focus:border-brand focus:outline-none"></textarea>
                 </div>
                 <div class="flex gap-2 pt-2">
-                    <button type="button" onclick="closeEditSubscriberModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs transition-colors">
-                        Batal
-                    </button>
-                    <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
-                        Simpan Perubahan
-                    </button>
+                    <button type="button" onclick="closeEditSubscriberModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs transition-colors">Batal</button>
+                    <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-xs transition-colors">Simpan Perubahan</button>
                 </div>
             </form>
         </div>
@@ -1544,12 +1416,8 @@
             <h3 class="text-base font-bold text-brand-dark" id="delete-modal-title">Pengesahan Padam</h3>
             <p class="text-xs text-brand-muted" id="delete-modal-msg">Adakah anda pasti mahu memadam permohonan ini?</p>
             <div class="flex gap-3 pt-2">
-                <button type="button" onclick="closeDeleteModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs font-semibold transition-colors">
-                    Batal
-                </button>
-                <button type="button" id="btn-confirm-delete" class="w-1/2 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
-                    Padam
-                </button>
+                <button type="button" onclick="closeDeleteModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs font-semibold transition-colors">Batal</button>
+                <button type="button" id="btn-confirm-delete" class="w-1/2 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">Padam</button>
             </div>
         </div>
     </div>
@@ -1562,8 +1430,8 @@
         // ============================================================
         // ⚠️ REPLACE THESE TWO VALUES ⚠️
         // ============================================================
-        const SUPABASE_URL = 'https://voxnrgoitktdiyvsvfac.supabase.co';       // e.g. https://abcdefgh.supabase.co
-        const SUPABASE_ANON_KEY = 'sb_publishable_vjUIAoqsAJRadmN3DM-04w_jh1oNkl9'; // starts with sb_publishable_ or eyJ...
+        const SUPABASE_URL = 'https://voxnrgoitktdiyvsvfac.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_vjUIAoqsAJRadmN3DM-04w_jh1oNkl9;
         // ============================================================
         const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -1577,10 +1445,118 @@
             return `${y}-${m}-${d}`;
         }
 
+        // ============ NEW HELPERS ============
+        function formatDateDisplay(iso) {
+            if (!iso) return '';
+            const s = String(iso).split('T')[0];
+            const parts = s.split('-');
+            if (parts.length !== 3) return iso;
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+        function countWords(str) {
+            const t = (str || '').trim();
+            if (!t) return 0;
+            return t.split(/\s+/).length;
+        }
+        function getPriceDisplay(item) {
+            const feeType = item.feeType || 'Percuma';
+            if (feeType !== 'Berbayar') return 'Percuma';
+            const min = item.hargaMin ? Number(item.hargaMin) : null;
+            const max = item.hargaMax ? Number(item.hargaMax) : null;
+            if (min && max && max > min) return `RM${min} - RM${max}`;
+            if (min) return `RM${min}`;
+            if (max) return `RM${max}`;
+            if (item.hargaYuran) return item.hargaYuran;
+            return 'Percuma';
+        }
+        function getAgendaDateRange(item) {
+            const start = item.date || '';
+            const end = item.isOneDay ? start : (item.dateEnd || start);
+            return { start, end };
+        }
+        function isAgendaActiveOn(item, isoDate) {
+            const { start, end } = getAgendaDateRange(item);
+            if (!start) return false;
+            const e = end || start;
+            return isoDate >= start && isoDate <= e;
+        }
+        function populateYearDaySelects() {
+            const yearSel = document.getElementById('filter-agenda-year');
+            const daySel = document.getElementById('filter-agenda-day');
+            const thisYear = TODAY.getFullYear();
+            if (yearSel && yearSel.options.length <= 1) {
+                for (let y = thisYear - 2; y <= thisYear + 5; y++) {
+                    const o = document.createElement('option');
+                    o.value = String(y); o.textContent = String(y);
+                    yearSel.appendChild(o);
+                }
+            }
+            if (daySel && daySel.options.length <= 1) {
+                for (let d = 1; d <= 31; d++) {
+                    const o = document.createElement('option');
+                    const v = String(d).padStart(2, '0');
+                    o.value = v; o.textContent = v;
+                    daySel.appendChild(o);
+                }
+            }
+        }
+
+        let activeQuickFilter = '';
+        let currentAgendaPage = 1;
+        const AGENDA_PER_PAGE = 12;
+
+        function setQuickFilter(type) {
+            activeQuickFilter = (activeQuickFilter === type) ? '' : type;
+            document.querySelectorAll('.quick-filter-btn').forEach(b => b.classList.remove('active'));
+            if (activeQuickFilter) {
+                const btn = document.getElementById('qf-' + type);
+                if (btn) btn.classList.add('active');
+            }
+            currentAgendaPage = 1;
+            renderAgenda();
+        }
+
+        function togglePenganjurOneDay() {
+            const cb = document.getElementById('reg-penganjur-oneday');
+            const wrapper = document.getElementById('reg-penganjur-enddate-wrapper');
+            const endInput = document.getElementById('reg-penganjur-date-end');
+            const startInput = document.getElementById('reg-penganjur-date');
+            if (!cb || !wrapper || !endInput) return;
+            if (cb.checked) {
+                wrapper.classList.add('hidden');
+                endInput.required = false;
+                endInput.value = startInput?.value || '';
+            } else {
+                wrapper.classList.remove('hidden');
+                endInput.required = true;
+            }
+        }
+        function syncPenganjurEndDate() {
+            const cb = document.getElementById('reg-penganjur-oneday');
+            const startInput = document.getElementById('reg-penganjur-date');
+            const endInput = document.getElementById('reg-penganjur-date-end');
+            if (cb?.checked && endInput) endInput.value = startInput?.value || '';
+        }
+        function updateWordCounter(inputId, counterId) {
+            const input = document.getElementById(inputId);
+            const counter = document.getElementById(counterId);
+            if (!input || !counter) return;
+            const words = countWords(input.value);
+            counter.textContent = `${words} / 120 patah perkataan`;
+            if (words > 120) {
+                counter.classList.add('text-red-600', 'font-bold');
+                counter.classList.remove('text-brand-muted');
+            } else {
+                counter.classList.remove('text-red-600', 'font-bold');
+                counter.classList.add('text-brand-muted');
+            }
+        }
+
+        // ============ CONSTANTS ============
         const MALAYSIAN_STATES = [
             "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Perak", "Perlis",
             "Pulau Pinang", "Sabah", "Sarawak", "Selangor", "Terengganu", "Wilayah Persekutuan Kuala Lumpur",
-            "Wilayah Persekutuan Labuan", "Wilayah Persekutuan Putrajaya"
+            "Wilayah Persekutuan Labuan", "Wilayah Persekutuan Putrajaya", "Atas Talian/Webinar"
         ];
 
         const SABAH_DIVISIONS = {
@@ -1597,7 +1573,10 @@
             "Kreatif, Media & Komunikasi", "Kewangan, Akaun & Percukaian", "Pendidikan & Akademik",
             "Kesihatan, Keselamatan & Kesejahteraan", "Industri & Teknikal", "Kerajaan & Perkhidmatan Awam",
             "Bahasa & Kemahiran Komunikasi", "Pelancongan, Hospitaliti & F&B", "Kualiti, Risiko & Pematuhan",
-            "Kemahiran Insaniah & Pembangunan Diri", "Alam Sekitar & Kelestarian", "Kemahiran Khusus / Lain-lain"
+            "Kemahiran Insaniah & Pembangunan Diri", "Alam Sekitar & Kelestarian",
+            "Kecantikan & Gaya", "Makanan & Masakan", "Pelancongan & Hospitaliti",
+            "Kesihatan", "Kemahiran Teknikal & Vokasional", "Pertanian & Agro", "Bahasa",
+            "Kemahiran Khusus / Lain-lain"
         ];
 
         const TRAINER_CERT_OPTIONS = [
@@ -1610,13 +1589,15 @@
             "Kecantikan, Fesyen & Penjagaan Diri Kesihatan", "Kecergasan & Kesejahteraan",
             "Perniagaan, Kewangan & Keusahawanan", "Pendidikan, Kerjaya & Pembangunan Diri",
             "Teknologi, Digital & Media Sosial", "Automotif, Hartanah & Pelaburan",
-            "Keluarga, Komuniti, Budaya & Gaya Hidup", "Pengacaraan & Emcee", "Hiburan & Seni"
+            "Keluarga, Komuniti, Budaya & Gaya Hidup", "Pengacaraan & Emcee", "Hiburan & Seni",
+            "Fotografi & Videografi", "Content Creator"
         ];
 
         const AGENDA_CATEGORY_OPTIONS = [
             "Kursus & Latihan", "Seminar & Forum", "Bengkel", "Persidangan & Konvensyen",
             "Networking & Professional", "Komuniti & Sosial", "Sukan & Rekreasi",
             "Festival & Hiburan", "Keusahawanan & Perniagaan", "Pendidikan",
+            "Pelancongan", "Sukan & Kesihatan", "Rekreasi & Hobi",
             "Agama & Kerohanian", "Lain-lain"
         ];
 
@@ -1624,9 +1605,7 @@
         const PROMO_LABEL_OPTIONS = ["", "Top", "Featured", "Promoted"];
         const VALIDITY_OPTIONS = ["", "1 Bulan", "3 Bulan", "6 Bulan", "1 Tahun"];
 
-        // ============================================================
-        // IN-MEMORY DATA CACHE (populated from Supabase)
-        // ============================================================
+        // ============ DATA CACHE ============
         let bayuData = {
             applications: [],
             subscribers: [],
@@ -1634,83 +1613,48 @@
             banners: [],
             partnerships: []
         };
-
         let currentUser = null;
 
-        // ============================================================
-        // 🔄 CONVERTERS: DB row <-> app object
-        // ============================================================
+        // ============ CONVERTERS ============
         function appFromRow(r) {
             return {
-                id: r.id,
-                type: r.type,
-                title: r.title,
-                name: r.name,
-                org: r.org,
-                email: r.email,
-                phone: r.phone,
-                location: r.location,
-                mode: r.mode,
-                category: r.category,
-                date: r.date,
-                url: r.url,
-                urlButton: r.url_button,
-                approval: r.approval,
-                validity: r.validity,
-                tarikhDari: r.tarikh_dari,
-                tarikhSehingga: r.tarikh_sehingga,
-                label: r.label,
-                remark: r.remark,
-                statusPenangguhan: r.status_penangguhan,
-                statusPenangguhanSub: r.status_penangguhan_sub,
-                photo: r.photo,
-                hargaYuran: r.harga_yuran,
-                feeType: r.fee_type,
-                expertise: r.expertise || [],
-                certs: r.certs || [],
-                certCustom: r.cert_custom,
-                niche: r.niche,
-                summary: r.summary
+                id: r.id, type: r.type, title: r.title, name: r.name, org: r.org,
+                email: r.email, phone: r.phone, location: r.location, mode: r.mode,
+                category: r.category, date: r.date, url: r.url, urlButton: r.url_button,
+                approval: r.approval, validity: r.validity,
+                tarikhDari: r.tarikh_dari, tarikhSehingga: r.tarikh_sehingga,
+                label: r.label, remark: r.remark,
+                statusPenangguhan: r.status_penangguhan, statusPenangguhanSub: r.status_penangguhan_sub,
+                photo: r.photo, hargaYuran: r.harga_yuran, feeType: r.fee_type,
+                expertise: r.expertise || [], certs: r.certs || [], certCustom: r.cert_custom,
+                niche: r.niche, summary: r.summary,
+                // NEW:
+                dateEnd: r.date_end, isOneDay: r.is_one_day || false,
+                hargaMin: r.harga_min, hargaMax: r.harga_max,
+                penganjur: r.penganjur
             };
         }
 
         function rowFromApp(a) {
             return {
-                id: a.id,
-                type: a.type,
-                title: a.title,
-                name: a.name,
-                org: a.org,
-                email: a.email,
-                phone: a.phone,
-                location: a.location,
-                mode: a.mode,
-                category: a.category,
-                date: a.date,
-                url: a.url,
-                url_button: a.urlButton,
-                approval: a.approval,
-                validity: a.validity,
-                tarikh_dari: a.tarikhDari,
-                tarikh_sehingga: a.tarikhSehingga,
-                label: a.label,
-                remark: a.remark,
-                status_penangguhan: a.statusPenangguhan,
-                status_penangguhan_sub: a.statusPenangguhanSub,
-                photo: a.photo,
-                harga_yuran: a.hargaYuran,
-                fee_type: a.feeType,
-                expertise: a.expertise || [],
-                certs: a.certs || [],
-                cert_custom: a.certCustom,
-                niche: a.niche,
-                summary: a.summary
+                id: a.id, type: a.type, title: a.title, name: a.name, org: a.org,
+                email: a.email, phone: a.phone, location: a.location, mode: a.mode,
+                category: a.category, date: a.date,
+                url: a.url, url_button: a.urlButton, approval: a.approval,
+                validity: a.validity, tarikh_dari: a.tarikhDari, tarikh_sehingga: a.tarikhSehingga,
+                label: a.label, remark: a.remark,
+                status_penangguhan: a.statusPenangguhan, status_penangguhan_sub: a.statusPenangguhanSub,
+                photo: a.photo, harga_yuran: a.hargaYuran, fee_type: a.feeType,
+                expertise: a.expertise || [], certs: a.certs || [], cert_custom: a.certCustom,
+                niche: a.niche, summary: a.summary,
+                // NEW:
+                date_end: a.dateEnd, is_one_day: a.isOneDay || false,
+                harga_min: a.hargaMin, harga_max: a.hargaMax,
+                penganjur: a.penganjur
             };
         }
 
-        // ============================================================
-        // 📥 LOAD ALL DATA FROM SUPABASE
-        // ============================================================
+        // ============ LOAD DATA ============
         async function loadAllData() {
             try {
                 const [appsRes, subsRes, fbRes, banRes, partRes] = await Promise.all([
@@ -1720,7 +1664,6 @@
                     db.from('banners').select('*').order('created_at', { ascending: false }),
                     db.from('partnerships').select('*').order('position', { ascending: true })
                 ]);
-
                 if (appsRes.error) console.warn('applications load:', appsRes.error.message);
                 if (subsRes.error) console.warn('subscribers load:', subsRes.error.message);
                 if (fbRes.error) console.warn('feedbacks load:', fbRes.error.message);
@@ -1729,12 +1672,10 @@
 
                 bayuData.applications = (appsRes.data || []).map(appFromRow);
                 bayuData.subscribers = (subsRes.data || []).map(r => ({
-                    id: r.id, name: r.name, email: r.email, minat: r.minat,
-                    date: r.date, status: r.status
+                    id: r.id, name: r.name, email: r.email, minat: r.minat, date: r.date, status: r.status
                 }));
                 bayuData.feedbacks = (fbRes.data || []).map(r => ({
-                    id: r.id, name: r.name, email: r.email, message: r.message,
-                    date: r.date, status: r.status
+                    id: r.id, name: r.name, email: r.email, message: r.message, date: r.date, status: r.status
                 }));
                 bayuData.banners = (banRes.data || []).map(r => ({
                     id: r.id, photo: r.photo, name: r.name, company: r.company,
@@ -1761,9 +1702,7 @@
             renderPartnerTable();
         }
 
-        // ============================================================
-        // HELPERS
-        // ============================================================
+        // ============ HELPERS ============
         function initLocationDropdowns() {
             ['penganjur', 'trainer', 'talent'].forEach(prefix => {
                 const stateSelect = document.getElementById(`reg-${prefix}-state`);
@@ -1780,9 +1719,7 @@
             const sabahWrapper = document.getElementById(`reg-${prefix}-sabah-wrapper`);
             const sabahSelect = document.getElementById(`reg-${prefix}-sabah-loc`);
             if (!stateSelect || !sabahWrapper || !sabahSelect) return;
-
             const currentRegType = document.getElementById('reg-type').value;
-
             if (stateSelect.value === "Sabah") {
                 sabahWrapper.classList.remove('hidden');
                 if (currentRegType === prefix) sabahSelect.required = true;
@@ -1805,27 +1742,17 @@
         function calculateTarikhTamat(startDateStr, validityPeriod) {
             if (!startDateStr || !validityPeriod) return "";
             const [y, m, d] = startDateStr.split('-').map(Number);
-            let targetYear = y;
-            let targetMonth = m - 1;
-            let targetDay = d;
-
+            let targetYear = y, targetMonth = m - 1, targetDay = d;
             let addMonths = 0;
             if (validityPeriod === "1 Bulan") addMonths = 1;
             else if (validityPeriod === "3 Bulan") addMonths = 3;
             else if (validityPeriod === "6 Bulan") addMonths = 6;
             else if (validityPeriod === "1 Tahun") addMonths = 12;
-
             if (addMonths === 0) return "";
-
             targetMonth += addMonths;
-            while (targetMonth > 11) {
-                targetMonth -= 12;
-                targetYear += 1;
-            }
-
+            while (targetMonth > 11) { targetMonth -= 12; targetYear += 1; }
             const lastDayOfTargetMonth = new Date(targetYear, targetMonth + 1, 0).getDate();
             if (targetDay > lastDayOfTargetMonth) targetDay = lastDayOfTargetMonth;
-
             const resultDate = new Date(targetYear, targetMonth, targetDay);
             const rY = resultDate.getFullYear();
             const rM = String(resultDate.getMonth() + 1).padStart(2, '0');
@@ -1850,8 +1777,7 @@
         }
 
         function sortByPromotion(items) {
-            return items
-                .map((item, idx) => ({ item, idx }))
+            return items.map((item, idx) => ({ item, idx }))
                 .sort((a, b) => {
                     const pA = getPromoPriority(a.item);
                     const pB = getPromoPriority(b.item);
@@ -1871,11 +1797,12 @@
         }
 
         function getAgendaStatusInfo(item) {
-            if (item.statusPenangguhan === 'Dibatalkan') return { code: 'DIBATALKAN', label: 'Dibatalkan', badges: [] };
-            if (item.statusPenangguhan === 'Telah Ditunda') return { code: 'TELAH_DITUNDA', label: 'Telah Ditunda', badges: [] };
-            const eventDate = new Date(item.date);
-            if (TODAY > eventDate) return { code: 'TAMAT', label: 'Telah Tamat', badges: [] };
-            return { code: 'AKAN_DATANG', label: 'Akan Datang', badges: [] };
+            if (item.statusPenangguhan === 'Dibatalkan') return { code: 'DIBATALKAN', label: 'Dibatalkan' };
+            if (item.statusPenangguhan === 'Telah Ditunda') return { code: 'TELAH_DITUNDA', label: 'Telah Ditunda' };
+            const { end } = getAgendaDateRange(item);
+            const endDate = new Date(end || item.date);
+            if (TODAY > endDate) return { code: 'TAMAT', label: 'Telah Tamat' };
+            return { code: 'AKAN_DATANG', label: 'Akan Datang' };
         }
 
         function getTrainerCertDisplayList(item) {
@@ -1900,10 +1827,8 @@
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
             const targetView = document.getElementById(`view-${tabName}`);
             if (targetView) targetView.classList.remove('hidden');
-
             const targetNav = document.getElementById(`nav-${tabName}`);
             if (targetNav) targetNav.classList.add('active');
 
@@ -1913,8 +1838,7 @@
             if (tabName === 'agenda') {
                 heroTitle.textContent = "Program & Aktiviti Terkini";
                 heroSubtitle.textContent = "Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.";
-                renderAgenda();
-                renderBanner();
+                renderAgenda(); renderBanner();
             } else if (tabName === 'trainer') {
                 heroTitle.textContent = "Trainer & Jurulatih Profesional";
                 heroSubtitle.textContent = "Cari penceramah, jurulatih dan pakar bidang untuk menjayakan program latihan anda.";
@@ -1927,18 +1851,14 @@
                 heroTitle.textContent = "Dasar Privasi & Polisi";
                 heroSubtitle.textContent = "Sila baca dan fahami polisi penggunaan platform BayuOne.";
             } else if (tabName === 'admin') {
-                renderAdminTable();
-                renderFeedbackTable();
-                renderSubscriberTable();
-                renderBannerTable();
-                renderPartnerTable();
+                renderAdminTable(); renderFeedbackTable(); renderSubscriberTable();
+                renderBannerTable(); renderPartnerTable();
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
         function setRegisterType(type) {
@@ -1949,7 +1869,6 @@
                 const btn = document.getElementById(`btn-reg-${t}`);
                 const fieldGroup = document.getElementById(`fields-${t}`);
                 if (!btn || !fieldGroup) return;
-
                 if (t === type) {
                     btn.className = "py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs";
                     fieldGroup.classList.remove('hidden');
@@ -1960,11 +1879,11 @@
             });
 
             const allIds = [
-                'reg-penganjur-title','reg-penganjur-date','reg-penganjur-state',
-                'reg-penganjur-sabah-loc','reg-penganjur-category','reg-penganjur-privacy',
-                'reg-trainer-name','reg-trainer-email','reg-trainer-state',
+                'reg-penganjur-title','reg-penganjur-org','reg-penganjur-date','reg-penganjur-state',
+                'reg-penganjur-sabah-loc','reg-penganjur-category','reg-penganjur-privacy','reg-penganjur-mode',
+                'reg-trainer-name','reg-trainer-email','reg-trainer-phone','reg-trainer-state',
                 'reg-trainer-sabah-loc','reg-trainer-summary','reg-trainer-privacy',
-                'reg-talent-name','reg-talent-email','reg-talent-state',
+                'reg-talent-name','reg-talent-email','reg-talent-phone','reg-talent-state',
                 'reg-talent-sabah-loc','reg-talent-niche','reg-talent-summary','reg-talent-privacy'
             ];
             allIds.forEach(id => {
@@ -1978,24 +1897,30 @@
 
             if (type === 'penganjur') {
                 const pTitle = document.getElementById('reg-penganjur-title');
+                const pOrg = document.getElementById('reg-penganjur-org');
                 const pDate = document.getElementById('reg-penganjur-date');
                 const pSabah = document.getElementById('reg-penganjur-sabah-loc');
                 const pCat = document.getElementById('reg-penganjur-category');
                 const pPrivacy = document.getElementById('reg-penganjur-privacy');
+                const pMode = document.getElementById('reg-penganjur-mode');
                 if (pTitle) pTitle.required = true;
+                if (pOrg) pOrg.required = true;
                 if (pDate) pDate.required = true;
                 if (pState) pState.required = true;
                 if (pSabah && pState && pState.value === "Sabah") pSabah.required = true;
                 if (pCat) pCat.required = true;
                 if (pPrivacy) pPrivacy.required = true;
+                if (pMode) pMode.required = true;
             } else if (type === 'trainer') {
                 const trName = document.getElementById('reg-trainer-name');
                 const trEmail = document.getElementById('reg-trainer-email');
+                const trPhone = document.getElementById('reg-trainer-phone');
                 const trSabah = document.getElementById('reg-trainer-sabah-loc');
                 const trSum = document.getElementById('reg-trainer-summary');
                 const trPrivacy = document.getElementById('reg-trainer-privacy');
                 if (trName) trName.required = true;
                 if (trEmail) trEmail.required = true;
+                if (trPhone) trPhone.required = true;
                 if (trState) trState.required = true;
                 if (trSabah && trState && trState.value === "Sabah") trSabah.required = true;
                 if (trSum) trSum.required = true;
@@ -2003,12 +1928,14 @@
             } else if (type === 'talent') {
                 const tlName = document.getElementById('reg-talent-name');
                 const tlEmail = document.getElementById('reg-talent-email');
+                const tlPhone = document.getElementById('reg-talent-phone');
                 const tlSabah = document.getElementById('reg-talent-sabah-loc');
                 const tlNiche = document.getElementById('reg-talent-niche');
                 const tlSum = document.getElementById('reg-talent-summary');
                 const tlPrivacy = document.getElementById('reg-talent-privacy');
                 if (tlName) tlName.required = true;
                 if (tlEmail) tlEmail.required = true;
+                if (tlPhone) tlPhone.required = true;
                 if (tlState) tlState.required = true;
                 if (tlSabah && tlState && tlState.value === "Sabah") tlSabah.required = true;
                 if (tlNiche) tlNiche.required = true;
@@ -2025,8 +1952,10 @@
                 amountWrapper.classList.remove('hidden');
             } else {
                 amountWrapper.classList.add('hidden');
-                const amt = document.getElementById('reg-penganjur-fee-amount');
-                if (amt) amt.value = '';
+                const min = document.getElementById('reg-penganjur-fee-min');
+                const max = document.getElementById('reg-penganjur-fee-max');
+                if (min) min.value = '';
+                if (max) max.value = '';
             }
         }
 
@@ -2035,7 +1964,6 @@
             const wrapper = document.getElementById('reg-trainer-cert-custom-wrapper');
             const input = document.getElementById('reg-trainer-cert-custom');
             if (!cb || !wrapper || !input) return;
-
             if (cb.checked) {
                 wrapper.classList.remove('hidden');
                 input.required = true;
@@ -2055,14 +1983,10 @@
             counter.textContent = `${input.value.length} / 150 aksara`;
         }
 
-        // ============================================================
-        // 📤 SUBMIT NEW APPLICATION → Supabase
-        // ============================================================
+        // ============ SUBMIT APPLICATION ============
         async function handleRegisterSubmit(event) {
             if (event) event.preventDefault();
-
-            const regTypeEl = document.getElementById('reg-type');
-            const regType = regTypeEl ? regTypeEl.value : '';
+            const regType = document.getElementById('reg-type').value;
 
             ['penganjur', 'trainer', 'talent'].forEach(prefix => {
                 const sabahSel = document.getElementById(`reg-${prefix}-sabah-loc`);
@@ -2072,23 +1996,41 @@
                 }
             });
 
-            if (regType !== 'penganjur' && regType !== 'trainer' && regType !== 'talent') {
-                alert('Ralat: Jenis permohonan tidak dikenali.');
-                return;
+            if (!['penganjur', 'trainer', 'talent'].includes(regType)) {
+                alert('Ralat: Jenis permohonan tidak dikenali.'); return;
             }
-
-            const newId = "APP-" + Date.now();
-            let newApp = null;
 
             const val = (id) => {
                 const el = document.getElementById(id);
                 return el ? (el.value || '').trim() : '';
             };
 
+            // Word limit check for Trainer/Talent
+            if (regType === 'trainer') {
+                const summary = val('reg-trainer-summary');
+                if (countWords(summary) > 120) {
+                    alert('Ringkasan Profil Trainer tidak boleh melebihi 120 patah perkataan.');
+                    return;
+                }
+            }
+            if (regType === 'talent') {
+                const summary = val('reg-talent-summary');
+                if (countWords(summary) > 120) {
+                    alert('Ringkasan Profil Talent tidak boleh melebihi 120 patah perkataan.');
+                    return;
+                }
+            }
+
+            const newId = "APP-" + Date.now();
+            let newApp = null;
+
             if (regType === 'penganjur') {
                 const title = val('reg-penganjur-title');
+                const org = val('reg-penganjur-org');
                 const email = val('reg-penganjur-email');
                 const date = val('reg-penganjur-date');
+                const dateEnd = val('reg-penganjur-date-end');
+                const oneDay = document.getElementById('reg-penganjur-oneday')?.checked || false;
                 const state = val('reg-penganjur-state');
                 const sabahLoc = val('reg-penganjur-sabah-loc');
                 const category = val('reg-penganjur-category');
@@ -2097,35 +2039,55 @@
                 const mode = val('reg-penganjur-mode') || 'Fizikal';
                 const url = val('reg-penganjur-url');
                 const feeType = val('reg-penganjur-fee-type') || 'Percuma';
-                const feeAmount = val('reg-penganjur-fee-amount');
+                const feeMin = val('reg-penganjur-fee-min');
+                const feeMax = val('reg-penganjur-fee-max');
 
-                let hargaYuran = 'Percuma';
-                if (feeType === 'Berbayar' && feeAmount) {
-                    const num = parseFloat(feeAmount);
-                    if (!isNaN(num)) hargaYuran = 'RM' + num.toFixed(2).replace(/\.00$/, '');
+                if (!org) { alert('Sila masukkan nama Penganjur.'); return; }
+                if (!mode) { alert('Sila pilih Mod.'); return; }
+
+                // Price validation
+                let hargaMin = null, hargaMax = null, hargaYuran = 'Percuma';
+                if (feeType === 'Berbayar') {
+                    if (!feeMin) { alert('Sila masukkan Harga Minimum.'); return; }
+                    hargaMin = parseFloat(feeMin);
+                    if (feeMax) {
+                        hargaMax = parseFloat(feeMax);
+                        if (hargaMax < hargaMin) {
+                            alert('Harga Maksimum tidak boleh lebih rendah daripada Harga Minimum.');
+                            return;
+                        }
+                    }
+                    if (hargaMax && hargaMax > hargaMin) hargaYuran = `RM${hargaMin} - RM${hargaMax}`;
+                    else hargaYuran = `RM${hargaMin}`;
                 }
 
                 const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
 
                 newApp = {
-                    id: newId, type: "Agenda", title: title,
-                    name: picName || title, org: '', email: email, phone: picTel,
+                    id: newId, type: "Agenda", title: title, name: picName || org, org: org,
+                    penganjur: org,
+                    email: email, phone: picTel,
                     location: location, mode: mode, category: category,
-                    date: date, url: url || TIKTOK_BAYUONE_URL, urlButton: "",
+                    date: date, dateEnd: oneDay ? date : dateEnd, isOneDay: oneDay,
+                    url: url || TIKTOK_BAYUONE_URL, urlButton: "",
                     approval: "Pending", validity: "", tarikhDari: "", tarikhSehingga: "",
                     label: "", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
                     photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80",
                     hargaYuran: hargaYuran, feeType: feeType,
+                    hargaMin: hargaMin, hargaMax: hargaMax,
                     expertise: [], certs: [], certCustom: "", niche: "", summary: ""
                 };
             } else if (regType === 'trainer') {
                 const name = val('reg-trainer-name');
                 const email = val('reg-trainer-email');
+                const phone = val('reg-trainer-phone');
                 const state = val('reg-trainer-state');
                 const sabahLoc = val('reg-trainer-sabah-loc');
                 const summary = val('reg-trainer-summary');
                 const url = val('reg-trainer-url');
                 const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
+
+                if (!phone) { alert('Sila masukkan No. Telefon.'); return; }
 
                 const expBoxes = document.querySelectorAll('input[name="trainer_exp"]:checked');
                 const expertise = Array.from(expBoxes).map(cb => cb.value);
@@ -2135,20 +2097,21 @@
 
                 newApp = {
                     id: newId, type: "Trainer", title: "Trainer Profesional",
-                    name: name, org: '', email: email, phone: '',
+                    name: name, org: '', email: email, phone: phone,
                     location: location, mode: '', category: '',
-                    date: getTodayStr(), url: url || TIKTOK_BAYUONE_URL, urlButton: "",
+                    date: getTodayStr(), dateEnd: null, isOneDay: false,
+                    url: url || TIKTOK_BAYUONE_URL, urlButton: "",
                     approval: "Pending", validity: "", tarikhDari: "", tarikhSehingga: "",
                     label: "", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
                     photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80",
-                    hargaYuran: "", feeType: "",
+                    hargaYuran: "", feeType: "", hargaMin: null, hargaMax: null,
                     expertise: expertise.length > 0 ? expertise : ["Pengurusan & Kepimpinan"],
-                    certs: certs, certCustom: certCustom,
-                    niche: "", summary: summary
+                    certs: certs, certCustom: certCustom, niche: "", summary: summary
                 };
             } else if (regType === 'talent') {
                 const name = val('reg-talent-name');
                 const email = val('reg-talent-email');
+                const phone = val('reg-talent-phone');
                 const state = val('reg-talent-state');
                 const sabahLoc = val('reg-talent-sabah-loc');
                 const niche = val('reg-talent-niche');
@@ -2156,37 +2119,39 @@
                 const url = val('reg-talent-url');
                 const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
 
+                if (!phone) { alert('Sila masukkan No. Telefon.'); return; }
+
                 newApp = {
                     id: newId, type: "Talent", title: "Talent Tempatan",
-                    name: name, org: '', email: email, phone: '',
+                    name: name, org: '', email: email, phone: phone,
                     location: location, mode: '', category: '',
-                    date: getTodayStr(), url: url || TIKTOK_BAYUONE_URL, urlButton: "",
+                    date: getTodayStr(), dateEnd: null, isOneDay: false,
+                    url: url || TIKTOK_BAYUONE_URL, urlButton: "",
                     approval: "Pending", validity: "", tarikhDari: "", tarikhSehingga: "",
                     label: "", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
                     photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80",
-                    hargaYuran: "", feeType: "",
-                    expertise: [], certs: [], certCustom: "",
-                    niche: niche, summary: summary
+                    hargaYuran: "", feeType: "", hargaMin: null, hargaMax: null,
+                    expertise: [], certs: [], certCustom: "", niche: niche, summary: summary
                 };
             }
 
             if (!newApp) return;
 
             const { error } = await db.from('applications').insert([rowFromApp(newApp)]);
-
             if (error) {
                 console.error('Insert failed:', error);
                 alert('Ralat semasa menghantar permohonan: ' + error.message);
                 return;
             }
 
-            const formEl = document.getElementById('form-register');
-            if (formEl) formEl.reset();
-
+            document.getElementById('form-register').reset();
             setRegisterType('penganjur');
             document.getElementById('reg-penganjur-fee-amount-wrapper')?.classList.add('hidden');
             document.getElementById('reg-trainer-cert-custom-wrapper')?.classList.add('hidden');
             updateTrainerCertCustomCounter();
+            document.getElementById('reg-penganjur-enddate-wrapper')?.classList.remove('hidden');
+            updateWordCounter('reg-trainer-summary', 'reg-trainer-summary-counter');
+            updateWordCounter('reg-talent-summary', 'reg-talent-summary-counter');
 
             closeRegisterModal();
             document.getElementById('modal-submission-success').classList.remove('hidden');
@@ -2195,9 +2160,7 @@
             refreshAllViews();
         }
 
-        // ============================================================
-        // MODAL TOGGLES
-        // ============================================================
+        // ============ MODAL TOGGLES ============
         function openRegisterModal() {
             document.getElementById('modal-register').classList.remove('hidden');
             setRegisterType('penganjur');
@@ -2219,69 +2182,38 @@
             document.getElementById('modal-confirm-delete').classList.add('hidden');
         }
 
-        // ============================================================
-        // 📤 FEEDBACK SUBMIT → Supabase
-        // ============================================================
+        // ============ FEEDBACK SUBMIT ============
         async function handleFeedbackSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('fb-name').value.trim();
             const email = document.getElementById('fb-email').value.trim();
             const message = document.getElementById('fb-message').value.trim();
-
             if (!name || !email || !message) return;
-
             const now = new Date();
             const dateStr = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0].substring(0,5);
-
             const { error } = await db.from('feedbacks').insert([{
-                id: "FB-" + Date.now(),
-                name: name, email: email, message: message,
-                date: dateStr, status: "In Review"
+                id: "FB-" + Date.now(), name, email, message, date: dateStr, status: "In Review"
             }]);
-
-            if (error) {
-                alert('Ralat menghantar maklum balas: ' + error.message);
-                return;
-            }
-
+            if (error) { alert('Ralat menghantar maklum balas: ' + error.message); return; }
             closeFeedbackModal();
             document.getElementById('form-feedback').reset();
             document.getElementById('modal-feedback-success').classList.remove('hidden');
-
             await loadAllData();
             renderFeedbackTable();
         }
 
-        // ============================================================
-        // 🔐 ADMIN LOGIN (Supabase Auth)
-        // ============================================================
+        // ============ ADMIN LOGIN ============
         async function handleAdminLogin(e) {
             e.preventDefault();
-
             const email = document.getElementById('admin-login-email').value;
             const password = document.getElementById('admin-login-pass').value;
             const submitBtn = e.target.querySelector('button[type="submit"]');
-
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Log Masuk...';
-            }
-
+            if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Log Masuk...'; }
             const { data, error } = await db.auth.signInWithPassword({ email, password });
-
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Log Masuk';
-            }
-
-            if (error) {
-                alert('Log masuk gagal: ' + error.message);
-                return;
-            }
-
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Log Masuk'; }
+            if (error) { alert('Log masuk gagal: ' + error.message); return; }
             currentUser = data.user;
             closeAdminLoginModal();
-
             await loadAllData();
             switchTab('admin');
         }
@@ -2292,14 +2224,11 @@
             switchTab('agenda');
         }
 
-        // ============================================================
-        // 📤 BANNER SAVE/DELETE → Supabase
-        // ============================================================
+        // ============ BANNER ============
         function openBannerModal(id) {
             const modal = document.getElementById('modal-banner');
             const title = document.getElementById('banner-modal-title');
             const form = document.getElementById('form-banner');
-
             if (id) {
                 const banner = bayuData.banners.find(b => b.id === id);
                 if (!banner) return;
@@ -2320,7 +2249,6 @@
                 document.getElementById('banner-end-date').value = '';
                 document.getElementById('banner-photo-preview').classList.add('hidden');
             }
-
             modal.classList.remove('hidden');
         }
 
@@ -2328,11 +2256,8 @@
             const startDate = document.getElementById('banner-start-date').value;
             const validity = document.getElementById('banner-validity').value;
             const endDateInput = document.getElementById('banner-end-date');
-            if (startDate && validity) {
-                endDateInput.value = calculateTarikhTamat(startDate, validity);
-            } else {
-                endDateInput.value = '';
-            }
+            if (startDate && validity) endDateInput.value = calculateTarikhTamat(startDate, validity);
+            else endDateInput.value = '';
         }
 
         async function handleSaveBanner(e) {
@@ -2344,17 +2269,10 @@
             const validity = document.getElementById('banner-validity').value;
             const startDate = document.getElementById('banner-start-date').value;
             const endDate = document.getElementById('banner-end-date').value;
-
             if (!photo || !name || !company || !validity || !startDate || !endDate) {
-                alert('Sila isi semua maklumat banner.');
-                return;
+                alert('Sila isi semua maklumat banner.'); return;
             }
-
-            const payload = {
-                photo, name, company, validity,
-                start_date: startDate, end_date: endDate
-            };
-
+            const payload = { photo, name, company, validity, start_date: startDate, end_date: endDate };
             if (editId) {
                 const { error } = await db.from('banners').update(payload).eq('id', editId);
                 if (error) { alert('Ralat: ' + error.message); return; }
@@ -2362,11 +2280,9 @@
                 const { error } = await db.from('banners').insert([{ id: "BAN-" + Date.now(), ...payload }]);
                 if (error) { alert('Ralat: ' + error.message); return; }
             }
-
             closeBannerModal();
             await loadAllData();
-            renderBannerTable();
-            renderBanner();
+            renderBannerTable(); renderBanner();
         }
 
         async function confirmDeleteBanner(id) {
@@ -2374,18 +2290,14 @@
             const { error } = await db.from('banners').delete().eq('id', id);
             if (error) { alert('Ralat: ' + error.message); return; }
             await loadAllData();
-            renderBannerTable();
-            renderBanner();
+            renderBannerTable(); renderBanner();
         }
 
-        // ============================================================
-        // 📤 PARTNER SAVE/DELETE → Supabase
-        // ============================================================
+        // ============ PARTNER ============
         function openPartnerModal(id) {
             const modal = document.getElementById('modal-partner');
             const title = document.getElementById('partner-modal-title');
             const form = document.getElementById('form-partner');
-
             if (id) {
                 const p = bayuData.partnerships.find(x => x.id === id);
                 if (!p) return;
@@ -2406,7 +2318,6 @@
                 document.getElementById('partner-position').value = next <= 10 ? next : 10;
                 document.getElementById('partner-image-preview').classList.add('hidden');
             }
-
             modal.classList.remove('hidden');
         }
 
@@ -2416,20 +2327,12 @@
             const name = document.getElementById('partner-name').value.trim();
             const image = document.getElementById('partner-image').value.trim();
             const position = parseInt(document.getElementById('partner-position').value, 10);
-
             if (!name || !image || !position || position < 1 || position > 10) {
-                alert('Sila isi semua maklumat dengan posisi 1 - 10.');
-                return;
+                alert('Sila isi semua maklumat dengan posisi 1 - 10.'); return;
             }
-
-            // Remove any conflicting position holder
             const conflicting = bayuData.partnerships.find(p => p.position === position && p.id !== editId);
-            if (conflicting) {
-                await db.from('partnerships').delete().eq('id', conflicting.id);
-            }
-
+            if (conflicting) await db.from('partnerships').delete().eq('id', conflicting.id);
             const payload = { name, image, position };
-
             if (editId) {
                 const { error } = await db.from('partnerships').update(payload).eq('id', editId);
                 if (error) { alert('Ralat: ' + error.message); return; }
@@ -2437,11 +2340,9 @@
                 const { error } = await db.from('partnerships').insert([{ id: "PTN-" + Date.now(), ...payload }]);
                 if (error) { alert('Ralat: ' + error.message); return; }
             }
-
             closePartnerModal();
             await loadAllData();
-            renderPartnerTable();
-            renderBrandsSupport();
+            renderPartnerTable(); renderBrandsSupport();
         }
 
         async function confirmDeletePartner(id) {
@@ -2449,18 +2350,17 @@
             const { error } = await db.from('partnerships').delete().eq('id', id);
             if (error) { alert('Ralat: ' + error.message); return; }
             await loadAllData();
-            renderPartnerTable();
-            renderBrandsSupport();
+            renderPartnerTable(); renderBrandsSupport();
         }
 
-        // ============================================================
-        // 🎨 RENDER: PUBLIC VIEWS
-        // ============================================================
+        // ============ AGENDA FILTERING ============
         function getAgendaFiltered() {
             const loc = (document.getElementById('filter-agenda-location')?.value || '').trim();
             const mode = (document.getElementById('filter-agenda-mode')?.value || '').trim();
             const cat = (document.getElementById('filter-agenda-category')?.value || '').trim();
-            const dt = (document.getElementById('filter-agenda-date')?.value || '').trim();
+            const day = (document.getElementById('filter-agenda-day')?.value || '').trim();
+            const month = (document.getElementById('filter-agenda-month')?.value || '').trim();
+            const year = (document.getElementById('filter-agenda-year')?.value || '').trim();
             const q = (document.getElementById('global-search')?.value || '').toLowerCase().trim();
 
             return bayuData.applications.filter(item => {
@@ -2469,34 +2369,130 @@
                 if (loc && (item.location || '') !== loc) return false;
                 if (mode && (item.mode || '') !== mode) return false;
                 if (cat && (item.category || '') !== cat) return false;
-                if (dt && (item.date || '') !== dt) return false;
+
+                // Day/Month/Year filter
+                const { start, end } = getAgendaDateRange(item);
+                if (year || month || day) {
+                    let matches = false;
+                    if (year && !month && !day) {
+                        const ys = start.slice(0, 4);
+                        const ye = (end || start).slice(0, 4);
+                        matches = (year >= ys && year <= ye) || ys === year || ye === year;
+                        // Simple: check if program range overlaps any date in year
+                        matches = (ys <= year && ye >= year);
+                    } else if (year && month && !day) {
+                        const startD = new Date(start);
+                        const endD = new Date(end || start);
+                        const monthStart = new Date(`${year}-${month}-01`);
+                        const monthEnd = new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 0);
+                        matches = (startD <= monthEnd && endD >= monthStart);
+                    } else if (year && month && day) {
+                        const target = `${year}-${month}-${day}`;
+                        matches = isAgendaActiveOn(item, target);
+                    } else if (month && !year && !day) {
+                        // month only without year: match any year with that month
+                        const sm = start.slice(5, 7);
+                        const em = (end || start).slice(5, 7);
+                        matches = (sm === month || em === month || (sm <= month && em >= month));
+                    } else if (day && !month && !year) {
+                        const sd = start.slice(8, 10);
+                        const ed = (end || start).slice(8, 10);
+                        matches = (sd === day || ed === day || (sd <= day && ed >= day));
+                    } else if (day && month && !year) {
+                        const sd = start.slice(5, 10);
+                        const ed = (end || start).slice(5, 10);
+                        const target = `${month}-${day}`;
+                        matches = (sd <= target && ed >= target) || sd === target || ed === target;
+                    }
+                    if (!matches) return false;
+                }
+
+                // Quick filter
+                if (activeQuickFilter) {
+                    const today = new Date();
+                    const startD = new Date(start);
+                    const endD = new Date(end || start);
+                    if (activeQuickFilter === 'week') {
+                        const dayOfWeek = today.getDay();
+                        const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+                        const weekStart = new Date(today.setDate(diff));
+                        weekStart.setHours(0,0,0,0);
+                        const weekEnd = new Date(weekStart);
+                        weekEnd.setDate(weekStart.getDate() + 6);
+                        weekEnd.setHours(23,59,59,999);
+                        if (!(startD <= weekEnd && endD >= weekStart)) return false;
+                    } else if (activeQuickFilter === 'month') {
+                        const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+                        const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+                        monthEnd.setHours(23,59,59,999);
+                        if (!(startD <= monthEnd && endD >= monthStart)) return false;
+                    } else if (activeQuickFilter === 'year') {
+                        const yearStart = new Date(today.getFullYear(), 0, 1);
+                        const yearEnd = new Date(today.getFullYear(), 11, 31);
+                        yearEnd.setHours(23,59,59,999);
+                        if (!(startD <= yearEnd && endD >= yearStart)) return false;
+                    } else if (activeQuickFilter === 'course') {
+                        const courseCategories = ['Kursus & Latihan', 'Bengkel', 'Seminar & Forum'];
+                        if (!courseCategories.includes(item.category)) return false;
+                    }
+                }
+
                 if (q) {
                     const hay = ((item.title || '') + ' ' + (item.name || '') + ' ' + (item.org || '') + ' ' +
-                                 (item.location || '') + ' ' + (item.category || '') + ' ' + (item.summary || '')).toLowerCase();
+                        (item.penganjur || '') + ' ' +
+                        (item.location || '') + ' ' + (item.category || '') + ' ' + (item.summary || '')).toLowerCase();
                     if (!hay.includes(q)) return false;
                 }
                 return true;
             });
         }
 
+        // ============ RENDER AGENDA ============
         function renderAgenda() {
             const upcomingContainer = document.getElementById('grid-agenda-upcoming');
             const endedContainer = document.getElementById('grid-agenda-ended');
+            const paginationEl = document.getElementById('agenda-pagination');
             if (!upcomingContainer || !endedContainer) return;
 
             upcomingContainer.innerHTML = '';
             endedContainer.innerHTML = '';
+            if (paginationEl) paginationEl.innerHTML = '';
 
-            const sortedAgenda = sortByPromotion(getAgendaFiltered());
-            let countUpcoming = 0, countEnded = 0;
+            const filtered = getAgendaFiltered();
+            const promoted = filtered.filter(x => isPromotionActive(x));
+            const normal = filtered.filter(x => !isPromotionActive(x));
+            const sortedPromoted = sortByPromotion(promoted);
+            normal.sort((a, b) => {
+                const da = a.date || '9999-12-31';
+                const db = b.date || '9999-12-31';
+                return da.localeCompare(db);
+            });
+            const sortedAgenda = [...sortedPromoted, ...normal];
 
+            const upcoming = [];
+            const ended = [];
             sortedAgenda.forEach(item => {
-                const statusInfo = getAgendaStatusInfo(item);
+                const s = getAgendaStatusInfo(item);
+                if (s.code === 'TAMAT' || s.code === 'DIBATALKAN') ended.push(item);
+                else upcoming.push(item);
+            });
+
+            const totalPages = Math.max(1, Math.ceil(upcoming.length / AGENDA_PER_PAGE));
+            if (currentAgendaPage > totalPages) currentAgendaPage = totalPages;
+            const startIdx = (currentAgendaPage - 1) * AGENDA_PER_PAGE;
+            const pageItems = upcoming.slice(startIdx, startIdx + AGENDA_PER_PAGE);
+
+            const buildCard = (item) => {
                 const badgeHtml = getPromotionalBadgeHtml(item);
                 const displayTitle = item.title || item.name;
-                const hargaYuranDisplay = item.hargaYuran || 'Percuma';
+                const priceDisplay = getPriceDisplay(item);
+                const { start, end } = getAgendaDateRange(item);
+                const dateDisplay = item.isOneDay
+                    ? formatDateDisplay(start)
+                    : `${formatDateDisplay(start)} - ${formatDateDisplay(end)}`;
+                const penganjurDisplay = item.org || item.penganjur || item.name || 'Penganjur';
 
-                const cardHtml = `
+                return `
                     <div class="bg-white rounded-2xl border border-brand-border overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div>
                             <div class="relative h-48 bg-gray-100 overflow-hidden">
@@ -2508,10 +2504,10 @@
                                 <div class="text-xs font-bold text-brand uppercase tracking-wider">${item.category || 'Program'}</div>
                                 <h3 class="text-lg font-bold text-brand-dark leading-snug hover:text-brand transition-colors">${displayTitle}</h3>
                                 <div class="text-xs text-brand-muted space-y-1">
-                                    <div class="flex items-center gap-2"><i class="fa-regular fa-calendar text-brand"></i> ${item.date || 'Akan Datang'}</div>
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-calendar text-brand"></i> ${dateDisplay || 'Akan Datang'}</div>
                                     <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand"></i> ${item.location || 'Sabah'}</div>
-                                    <div class="flex items-center gap-2"><i class="fa-solid fa-user text-brand"></i> ${item.name || item.org || 'Penganjur'}</div>
-                                    <div class="flex items-center gap-2"><i class="fa-solid fa-tag text-brand"></i> Harga Yuran: <span class="font-bold text-brand-dark">${hargaYuranDisplay}</span></div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-user text-brand"></i> Penganjur: <span class="font-semibold text-brand-dark">${penganjurDisplay}</span></div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-tag text-brand"></i> Harga Yuran: <span class="font-bold text-brand-dark">${priceDisplay}</span></div>
                                 </div>
                             </div>
                         </div>
@@ -2521,34 +2517,53 @@
                                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </a>
                         </div>
-                    </div>
-                `;
+                    </div>`;
+            };
 
-                if (statusInfo.code === 'TAMAT' || statusInfo.code === 'DIBATALKAN') {
-                    endedContainer.innerHTML += cardHtml;
-                    countEnded++;
-                } else {
-                    upcomingContainer.innerHTML += cardHtml;
-                    countUpcoming++;
+            pageItems.forEach(item => { upcomingContainer.innerHTML += buildCard(item); });
+            ended.forEach(item => { endedContainer.innerHTML += buildCard(item); });
+
+            document.getElementById('count-upcoming').textContent = `${upcoming.length} Program`;
+            document.getElementById('count-ended').textContent = `${ended.length} Program`;
+
+            if (paginationEl && totalPages > 1) {
+                const makeBtn = (label, page, disabled, active) => {
+                    const b = document.createElement('button');
+                    b.textContent = label;
+                    b.className = `px-3.5 py-2 rounded-lg text-xs font-bold border transition-colors ${
+                        active ? 'bg-brand text-white border-brand' :
+                        disabled ? 'bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed' :
+                        'bg-white text-brand-dark border-brand-border hover:border-brand hover:text-brand'
+                    }`;
+                    if (!disabled && !active) b.onclick = () => { currentAgendaPage = page; renderAgenda(); window.scrollTo({ top: 200, behavior: 'smooth' }); };
+                    return b;
+                };
+                paginationEl.appendChild(makeBtn('«', Math.max(1, currentAgendaPage - 1), currentAgendaPage === 1, false));
+                for (let p = 1; p <= totalPages; p++) {
+                    paginationEl.appendChild(makeBtn(String(p), p, false, p === currentAgendaPage));
                 }
-            });
-
-            document.getElementById('count-upcoming').textContent = `${countUpcoming} Program`;
-            document.getElementById('count-ended').textContent = `${countEnded} Program`;
+                paginationEl.appendChild(makeBtn('»', Math.min(totalPages, currentAgendaPage + 1), currentAgendaPage === totalPages, false));
+            }
         }
 
-        function filterAgenda() { renderAgenda(); }
+        function filterAgenda() { currentAgendaPage = 1; renderAgenda(); }
 
         function resetAgendaFilters() {
             document.getElementById('filter-agenda-location').value = "";
             document.getElementById('filter-agenda-mode').value = "";
             document.getElementById('filter-agenda-category').value = "";
-            document.getElementById('filter-agenda-date').value = "";
+            document.getElementById('filter-agenda-day').value = "";
+            document.getElementById('filter-agenda-month').value = "";
+            document.getElementById('filter-agenda-year').value = "";
             const gs = document.getElementById('global-search');
             if (gs) gs.value = '';
+            activeQuickFilter = '';
+            document.querySelectorAll('.quick-filter-btn').forEach(b => b.classList.remove('active'));
+            currentAgendaPage = 1;
             renderAgenda();
         }
 
+        // ============ TRAINER ============
         function getTrainerFiltered() {
             const name = (document.getElementById('filter-trainer-name')?.value || '').toLowerCase().trim();
             const exp = (document.getElementById('filter-trainer-expertise')?.value || '').trim();
@@ -2562,7 +2577,6 @@
                 if (name && !(item.name || '').toLowerCase().includes(name)) return false;
                 if (exp && !(item.expertise || []).includes(exp)) return false;
                 if (loc && (item.location || '') !== loc) return false;
-
                 if (cert) {
                     const rawCerts = item.certs || [];
                     const custom = (item.certCustom || '').trim();
@@ -2572,12 +2586,11 @@
                         if (!rawCerts.includes(cert)) return false;
                     }
                 }
-
                 if (q) {
                     const certList = getTrainerCertDisplayList(item);
                     const hay = ((item.name || '') + ' ' + (item.title || '') + ' ' + (item.location || '') + ' ' +
-                                 (item.summary || '') + ' ' + (item.expertise || []).join(' ') + ' ' +
-                                 certList.join(' ')).toLowerCase();
+                        (item.summary || '') + ' ' + (item.expertise || []).join(' ') + ' ' +
+                        certList.join(' ')).toLowerCase();
                     if (!hay.includes(q)) return false;
                 }
                 return true;
@@ -2588,21 +2601,18 @@
             const container = document.getElementById('grid-trainer');
             if (!container) return;
             container.innerHTML = '';
-
             const sortedTrainers = sortByPromotion(getTrainerFiltered());
 
             sortedTrainers.forEach(item => {
                 const displayName = item.name || item.title;
                 const expTags = (item.expertise || []).map(exp => `<span class="bg-brand-bg text-brand text-[10px] font-semibold px-2 py-0.5 rounded-md border border-brand-border">${exp}</span>`).join(' ');
-
                 const certList = getTrainerCertDisplayList(item);
                 const certTags = certList.map(cert => `<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">${cert}</span>`).join(' ');
                 const certDisplay = certList.length > 0 ? `<div class="flex flex-wrap gap-1">${certTags}</div>` : '';
-
                 const badgeHtml = getPromotionalBadgeHtml(item);
                 const promoBadgeBlock = badgeHtml ? `<div class="flex flex-wrap gap-1">${badgeHtml}</div>` : '';
 
-                const cardHtml = `
+                container.innerHTML += `
                     <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-4">
                             ${promoBadgeBlock}
@@ -2619,18 +2629,13 @@
                         </div>
                         <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between">
                             ${certDisplay}
-                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">
-                                Lihat Profil
-                            </a>
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">Lihat Profil</a>
                         </div>
-                    </div>
-                `;
-                container.innerHTML += cardHtml;
+                    </div>`;
             });
         }
 
         function filterTrainer() { renderTrainer(); }
-
         function resetTrainerFilters() {
             document.getElementById('filter-trainer-name').value = "";
             document.getElementById('filter-trainer-expertise').value = "";
@@ -2641,6 +2646,7 @@
             renderTrainer();
         }
 
+        // ============ TALENT ============
         function getTalentFiltered() {
             const name = (document.getElementById('filter-talent-name')?.value || '').toLowerCase().trim();
             const niche = (document.getElementById('filter-talent-niche')?.value || '').trim();
@@ -2655,7 +2661,7 @@
                 if (loc && (item.location || '') !== loc) return false;
                 if (q) {
                     const hay = ((item.name || '') + ' ' + (item.title || '') + ' ' + (item.niche || '') + ' ' +
-                                 (item.location || '') + ' ' + (item.summary || '')).toLowerCase();
+                        (item.location || '') + ' ' + (item.summary || '')).toLowerCase();
                     if (!hay.includes(q)) return false;
                 }
                 return true;
@@ -2666,7 +2672,6 @@
             const container = document.getElementById('grid-talent');
             if (!container) return;
             container.innerHTML = '';
-
             const sortedTalents = sortByPromotion(getTalentFiltered());
 
             sortedTalents.forEach(item => {
@@ -2674,7 +2679,7 @@
                 const badgeHtml = getPromotionalBadgeHtml(item);
                 const promoBadgeBlock = badgeHtml ? `<div class="flex flex-wrap gap-1">${badgeHtml}</div>` : '';
 
-                const cardHtml = `
+                container.innerHTML += `
                     <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-4">
                             ${promoBadgeBlock}
@@ -2689,18 +2694,13 @@
                             <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
                         </div>
                         <div class="pt-4 mt-4 border-t border-brand-border">
-                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="w-full bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors block text-center">
-                                Lihat Profil
-                            </a>
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="w-full bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors block text-center">Lihat Profil</a>
                         </div>
-                    </div>
-                `;
-                container.innerHTML += cardHtml;
+                    </div>`;
             });
         }
 
         function filterTalent() { renderTalent(); }
-
         function resetTalentFilters() {
             document.getElementById('filter-talent-name').value = "";
             document.getElementById('filter-talent-niche').value = "";
@@ -2710,12 +2710,10 @@
             renderTalent();
         }
 
-        function handleGlobalSearch() { renderAgenda(); renderTrainer(); renderTalent(); }
+        function handleGlobalSearch() { currentAgendaPage = 1; renderAgenda(); renderTrainer(); renderTalent(); }
         function triggerSearch() { handleGlobalSearch(); }
 
-        // ============================================================
-        // 🎨 RENDER: BANNER (public)
-        // ============================================================
+        // ============ BANNER (public) ============
         function getBannerStatus(banner) {
             const todayStr = getTodayStr();
             if (todayStr < banner.startDate) return { code: 'AKAN_DATANG', label: 'Akan Datang', class: 'bg-amber-100 text-amber-800 border-amber-200' };
@@ -2731,43 +2729,35 @@
         function renderBanner() {
             const container = document.getElementById('banner-ad-container');
             if (!container) return;
-
             const activeBanner = getActiveBanner();
             if (!activeBanner || !activeBanner.photo) {
                 container.innerHTML = '';
                 container.style.display = 'none';
                 return;
             }
-
             container.style.display = 'flex';
-            container.innerHTML = `
-                <img src="${activeBanner.photo}" alt="${activeBanner.name}" onerror="this.style.display='none'">
-            `;
+            container.innerHTML = `<img src="${activeBanner.photo}" alt="${activeBanner.name}" onerror="this.style.display='none'">`;
         }
 
-        // ============================================================
-        // 🎨 RENDER: BRANDS SUPPORT
-        // ============================================================
+        // ============ BRANDS SUPPORT (conditional) ============
         function renderBrandsSupport() {
+            const section = document.getElementById('brands-support-section');
             const grid = document.getElementById('brands-support-grid');
-            const empty = document.getElementById('brands-support-empty');
-            if (!grid || !empty) return;
+            if (!section || !grid) return;
 
             const valid = bayuData.partnerships
                 .filter(p => p && p.image && p.image.trim() !== '')
                 .sort((a, b) => a.position - b.position);
 
-            grid.innerHTML = '';
-
+            // Hide entire section if no valid records
             if (valid.length === 0) {
-                grid.classList.add('hidden');
-                empty.classList.remove('hidden');
+                section.classList.add('hidden');
+                grid.innerHTML = '';
                 return;
             }
 
-            grid.classList.remove('hidden');
-            empty.classList.add('hidden');
-
+            section.classList.remove('hidden');
+            grid.innerHTML = '';
             valid.forEach(p => {
                 const tile = document.createElement('div');
                 tile.className = "flex flex-col items-center";
@@ -2781,9 +2771,7 @@
             });
         }
 
-        // ============================================================
-        // 🎨 RENDER: ADMIN
-        // ============================================================
+        // ============ ADMIN TABLE ============
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             if (!tbody) return;
@@ -2808,19 +2796,15 @@
                 const titleText = (item.title || '').toLowerCase();
                 const emailText = (item.email || '').toLowerCase();
                 const orgText = (item.org || '').toLowerCase();
-
-                if (searchVal && !nameText.includes(searchVal) && !titleText.includes(searchVal) && !emailText.includes(searchVal) && !orgText.includes(searchVal)) {
-                    return;
-                }
+                if (searchVal && !nameText.includes(searchVal) && !titleText.includes(searchVal) && !emailText.includes(searchVal) && !orgText.includes(searchVal)) return;
 
                 const displayTitle = (item.type === 'Agenda') ? (item.title || item.name) : (item.name || item.title);
-                const displayDate = item.date || '-';
-
+                const displayDate = formatDateDisplay(item.date) || '-';
                 const hasLabel = item.label && item.label.trim() !== '';
                 const labelDisplay = hasLabel ? item.label : '-';
                 const validityDisplay = hasLabel ? (item.validity || '-') : '-';
-                const dariDisplay = hasLabel ? (item.tarikhDari || '-') : '-';
-                const hinggaDisplay = hasLabel ? (item.tarikhSehingga || '-') : '-';
+                const dariDisplay = hasLabel ? (formatDateDisplay(item.tarikhDari) || '-') : '-';
+                const hinggaDisplay = hasLabel ? (formatDateDisplay(item.tarikhSehingga) || '-') : '-';
 
                 let labelBadgeClass = 'bg-gray-100 text-gray-600';
                 if (item.label === 'Top') labelBadgeClass = 'bg-emerald-100 text-emerald-800';
@@ -2830,9 +2814,7 @@
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-brand-bg/50 transition-colors";
                 tr.innerHTML = `
-                    <td class="p-3.5">
-                        <img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=100'}" class="w-10 h-10 rounded-xl object-cover border border-brand-border">
-                    </td>
+                    <td class="p-3.5"><img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=100'}" class="w-10 h-10 rounded-xl object-cover border border-brand-border"></td>
                     <td class="p-3.5 font-bold text-brand-dark">
                         <div>${displayTitle}</div>
                         <div class="text-[10px] text-brand font-semibold uppercase tracking-wider">${item.type} • ${item.id}</div>
@@ -2847,9 +2829,7 @@
                             ${item.approval === 'Approved' ? 'Diluluskan' : 'Menunggu Semakan'}
                         </span>
                     </td>
-                    <td class="p-3.5">
-                        <span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${labelBadgeClass}">${labelDisplay}</span>
-                    </td>
+                    <td class="p-3.5"><span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${labelBadgeClass}">${labelDisplay}</span></td>
                     <td class="p-3.5 font-semibold ${hasLabel ? 'text-brand-dark' : 'text-gray-300'}">${validityDisplay}</td>
                     <td class="p-3.5 ${hasLabel ? 'text-gray-600' : 'text-gray-300'}">${dariDisplay}</td>
                     <td class="p-3.5 ${hasLabel ? 'text-gray-600' : 'text-gray-300'}">${hinggaDisplay}</td>
@@ -2860,8 +2840,7 @@
                         <button onclick="confirmDeleteApplication('${item.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
             });
 
@@ -2879,23 +2858,18 @@
             const tbody = document.getElementById('banner-table-body');
             if (!tbody) return;
             tbody.innerHTML = '';
-
             bayuData.banners.forEach(banner => {
                 const statusInfo = getBannerStatus(banner);
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-brand-bg/50 transition-colors";
                 tr.innerHTML = `
-                    <td class="p-3.5">
-                        <img src="${banner.photo}" class="w-16 h-8 rounded object-cover border border-brand-border" onerror="this.style.display='none'">
-                    </td>
+                    <td class="p-3.5"><img src="${banner.photo}" class="w-16 h-8 rounded object-cover border border-brand-border" onerror="this.style.display='none'"></td>
                     <td class="p-3.5 font-bold text-brand-dark">${banner.name}</td>
                     <td class="p-3.5 text-brand-muted">${banner.company}</td>
                     <td class="p-3.5">${banner.validity}</td>
-                    <td class="p-3.5 font-semibold text-brand-dark">${banner.startDate}</td>
-                    <td class="p-3.5 font-semibold text-brand-dark">${banner.endDate}</td>
-                    <td class="p-3.5">
-                        <span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${statusInfo.class}">${statusInfo.label}</span>
-                    </td>
+                    <td class="p-3.5 font-semibold text-brand-dark">${formatDateDisplay(banner.startDate)}</td>
+                    <td class="p-3.5 font-semibold text-brand-dark">${formatDateDisplay(banner.endDate)}</td>
+                    <td class="p-3.5"><span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${statusInfo.class}">${statusInfo.label}</span></td>
                     <td class="p-3.5 text-right space-x-2">
                         <button onclick="openBannerModal('${banner.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
                             <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
@@ -2903,8 +2877,7 @@
                         <button onclick="confirmDeleteBanner('${banner.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
             });
         }
@@ -2913,22 +2886,16 @@
             const tbody = document.getElementById('partner-table-body');
             if (!tbody) return;
             tbody.innerHTML = '';
-
             const sorted = [...bayuData.partnerships].sort((a, b) => a.position - b.position);
-
             sorted.forEach(p => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-brand-bg/50 transition-colors";
                 tr.innerHTML = `
                     <td class="p-3.5 font-bold text-brand-dark">${p.position}</td>
-                    <td class="p-3.5">
-                        <img src="${p.image}" class="w-10 h-10 rounded-lg object-contain border border-brand-border bg-white p-1" onerror="this.style.display='none'">
-                    </td>
+                    <td class="p-3.5"><img src="${p.image}" class="w-10 h-10 rounded-lg object-contain border border-brand-border bg-white p-1" onerror="this.style.display='none'"></td>
                     <td class="p-3.5 font-bold text-brand-dark">${p.name}</td>
                     <td class="p-3.5 text-brand-muted text-[11px] break-all max-w-xs">${p.image}</td>
-                    <td class="p-3.5">
-                        <span class="px-2.5 py-1 rounded-full font-bold text-[10px] bg-emerald-100 text-emerald-800">Aktif</span>
-                    </td>
+                    <td class="p-3.5"><span class="px-2.5 py-1 rounded-full font-bold text-[10px] bg-emerald-100 text-emerald-800">Aktif</span></td>
                     <td class="p-3.5 text-right space-x-2">
                         <button onclick="openPartnerModal('${p.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
                             <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
@@ -2936,8 +2903,7 @@
                         <button onclick="confirmDeletePartner('${p.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
             });
         }
@@ -2946,7 +2912,6 @@
             const tbody = document.getElementById('feedback-table-body');
             if (!tbody) return;
             tbody.innerHTML = '';
-
             bayuData.feedbacks.forEach(item => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-brand-bg/50 transition-colors";
@@ -2955,16 +2920,11 @@
                     <td class="p-3.5 font-bold text-brand-dark">${item.name}</td>
                     <td class="p-3.5 text-brand-muted">${item.email}</td>
                     <td class="p-3.5 text-brand-text max-w-xs truncate">${item.message}</td>
-                    <td class="p-3.5">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
-                            ${item.status}
-                        </span>
-                    </td>
+                    <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${item.status}</span></td>
                     <td class="p-3.5 text-right space-x-1">
                         <button onclick="openFeedbackPreview('${item.id}')" class="text-brand hover:underline text-[11px] font-bold mr-2">Lihat Penuh</button>
                         <button onclick="toggleFeedbackStatus('${item.id}')" class="text-brand hover:underline text-[11px] font-bold">Tukar Status</button>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
             });
         }
@@ -2972,32 +2932,15 @@
         function openFeedbackPreview(id) {
             const fb = bayuData.feedbacks.find(f => f.id === id);
             if (!fb) return;
-
             const container = document.getElementById('feedback-preview-body');
             container.innerHTML = `
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    <div class="bg-brand-bg p-3 rounded-lg">
-                        <span class="font-bold text-brand-dark block mb-0.5">Tarikh</span>
-                        <span class="text-brand-muted">${fb.date}</span>
-                    </div>
-                    <div class="bg-brand-bg p-3 rounded-lg">
-                        <span class="font-bold text-brand-dark block mb-0.5">Status</span>
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${fb.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${fb.status}</span>
-                    </div>
+                    <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-0.5">Tarikh</span><span class="text-brand-muted">${fb.date}</span></div>
+                    <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-0.5">Status</span><span class="px-2 py-0.5 rounded text-[10px] font-bold ${fb.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${fb.status}</span></div>
                 </div>
-                <div class="bg-brand-bg p-3 rounded-lg">
-                    <span class="font-bold text-brand-dark block mb-0.5">Nama</span>
-                    <span class="text-brand-text">${fb.name}</span>
-                </div>
-                <div class="bg-brand-bg p-3 rounded-lg">
-                    <span class="font-bold text-brand-dark block mb-0.5">Emel</span>
-                    <span class="text-brand-text">${fb.email}</span>
-                </div>
-                <div class="bg-brand-bg p-3 rounded-lg">
-                    <span class="font-bold text-brand-dark block mb-1">Maklum Balas Penuh</span>
-                    <div class="feedback-preview-text text-brand-text text-xs leading-relaxed">${fb.message}</div>
-                </div>
-            `;
+                <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-0.5">Nama</span><span class="text-brand-text">${fb.name}</span></div>
+                <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-0.5">Emel</span><span class="text-brand-text">${fb.email}</span></div>
+                <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-1">Maklum Balas Penuh</span><div class="feedback-preview-text text-brand-text text-xs leading-relaxed">${fb.message}</div></div>`;
             document.getElementById('modal-feedback-preview').classList.remove('hidden');
         }
 
@@ -3015,14 +2958,10 @@
             const tbody = document.getElementById('subscriber-table-body');
             if (!tbody) return;
             tbody.innerHTML = '';
-
             let total = 0, newSub = 0, existingSub = 0;
-
             bayuData.subscribers.forEach(sub => {
                 total++;
-                if (sub.status === 'NEW') newSub++;
-                else existingSub++;
-
+                if (sub.status === 'NEW') newSub++; else existingSub++;
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-brand-bg/50 transition-colors";
                 tr.innerHTML = `
@@ -3031,52 +2970,31 @@
                     <td class="p-3.5 text-xs text-gray-600">${sub.minat}</td>
                     <td class="p-3.5 text-right space-x-1">
                         <button onclick="openEditSubscriberModal('${sub.id}')" class="text-brand hover:underline text-[11px] font-bold">Edit</button>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
             });
-
             document.getElementById('stat-sub-total').textContent = total;
             document.getElementById('stat-sub-new').textContent = newSub;
             document.getElementById('stat-sub-existing').textContent = existingSub;
         }
 
-        // ============================================================
-        // 📤 SUBSCRIBER SUBMIT → Supabase
-        // ============================================================
         async function handleSubscribeSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('sub-name').value.trim();
             const email = document.getElementById('sub-email').value.trim();
             const checkedBoxes = document.querySelectorAll('input[name="sub_interest"]:checked');
             const errorEl = document.getElementById('sub-error');
-
-            if (checkedBoxes.length === 0) {
-                errorEl.classList.remove('hidden');
-                return;
-            } else {
-                errorEl.classList.add('hidden');
-            }
-
+            if (checkedBoxes.length === 0) { errorEl.classList.remove('hidden'); return; }
+            else errorEl.classList.add('hidden');
             const minatList = Array.from(checkedBoxes).map(cb => cb.value).join(', ');
-
             const { error } = await db.from('subscribers').insert([{
-                id: "SUB-" + Date.now(),
-                name, email,
-                minat: minatList,
-                date: getTodayStr(),
-                status: "NEW"
+                id: "SUB-" + Date.now(), name, email, minat: minatList,
+                date: getTodayStr(), status: "NEW"
             }]);
-
-            if (error) {
-                alert('Ralat: ' + error.message);
-                return;
-            }
-
+            if (error) { alert('Ralat: ' + error.message); return; }
             document.getElementById('subscribe-form').reset();
             document.getElementById('sub-success-message').classList.remove('hidden');
             setTimeout(() => document.getElementById('sub-success-message').classList.add('hidden'), 5000);
-
             await loadAllData();
             renderSubscriberTable();
         }
@@ -3099,26 +3017,21 @@
                 email: document.getElementById('edit-sub-email').value.trim(),
                 minat: document.getElementById('edit-sub-minat').value.trim()
             };
-
             const { error } = await db.from('subscribers').update(payload).eq('id', id);
             if (error) { alert('Ralat: ' + error.message); return; }
-
             closeEditSubscriberModal();
             await loadAllData();
             renderSubscriberTable();
         }
 
-        // ============================================================
-        // ADMIN REVIEW MODAL
-        // ============================================================
+        // ============ ADMIN REVIEW MODAL ============
         function buildMultiCheckboxGroup(name, options, selectedValues) {
             const selected = selectedValues || [];
             return options.map(opt => `
                 <label class="flex items-center gap-2 text-xs">
                     <input type="checkbox" name="${name}" value="${opt}" ${selected.includes(opt) ? 'checked' : ''}>
                     <span>${opt}</span>
-                </label>
-            `).join('');
+                </label>`).join('');
         }
 
         function buildSelectOptions(options, selectedValue) {
@@ -3132,7 +3045,6 @@
         function openAdminReviewModal(id) {
             const item = bayuData.applications.find(a => a.id === id);
             if (!item) return;
-
             const modalBody = document.getElementById('admin-review-body');
             if (!modalBody) return;
 
@@ -3140,10 +3052,8 @@
 
             if (item.type === 'Agenda') {
                 const feeType = item.feeType || 'Percuma';
-                let feeAmount = '';
-                if (feeType === 'Berbayar' && item.hargaYuran) {
-                    feeAmount = String(item.hargaYuran).replace(/^RM/i, '');
-                }
+                const feeMin = item.hargaMin || '';
+                const feeMax = item.hargaMax || '';
                 typeSpecificFields = `
                     <div class="bg-brand-bg p-3 rounded-xl border border-brand-border">
                         <div class="text-[11px] font-bold text-brand uppercase tracking-wider mb-3">Maklumat Agenda</div>
@@ -3154,12 +3064,12 @@
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Penganjur / PIC</label>
-                                    <input type="text" id="admin-edit-name" value="${item.name || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Penganjur</label>
+                                    <input type="text" id="admin-edit-org" value="${item.org || item.penganjur || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Organisasi</label>
-                                    <input type="text" id="admin-edit-org" value="${item.org || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama PIC</label>
+                                    <input type="text" id="admin-edit-name" value="${item.name || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                                 </div>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -3174,8 +3084,12 @@
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh</label>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Mula</label>
                                     <input type="date" id="admin-edit-date" value="${item.date || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Akhir</label>
+                                    <input type="date" id="admin-edit-date-end" value="${item.dateEnd || item.date || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Mod</label>
@@ -3183,28 +3097,34 @@
                                         ${buildSelectOptions(AGENDA_MODE_OPTIONS, item.mode || 'Fizikal')}
                                     </select>
                                 </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
                                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Kategori</label>
                                     <select id="admin-edit-category" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
                                         ${buildSelectOptions(AGENDA_CATEGORY_OPTIONS, item.category || '')}
                                     </select>
                                 </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
+                                    <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
-                                <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <div>
                                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jenis Yuran</label>
-                                    <select id="admin-edit-feetype" onchange="toggleAdminFeeAmount()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                    <select id="admin-edit-feetype" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
                                         <option value="Percuma" ${feeType === 'Percuma' ? 'selected' : ''}>Percuma</option>
                                         <option value="Berbayar" ${feeType === 'Berbayar' ? 'selected' : ''}>Berbayar</option>
                                     </select>
                                 </div>
-                                <div id="admin-fee-amount-wrapper" class="${feeType === 'Berbayar' ? '' : 'hidden'}">
-                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jumlah Yuran (RM)</label>
-                                    <input type="number" id="admin-edit-feeamount" value="${feeAmount}" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Min (RM)</label>
+                                    <input type="number" id="admin-edit-feemin" value="${feeMin}" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Maks (RM)</label>
+                                    <input type="number" id="admin-edit-feemax" value="${feeMax}" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
                                 </div>
                             </div>
                             <div>
@@ -3216,8 +3136,7 @@
                                 <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             } else if (item.type === 'Trainer') {
                 typeSpecificFields = `
                     <div class="bg-brand-bg p-3 rounded-xl border border-brand-border">
@@ -3233,9 +3152,15 @@
                                     <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                                 </div>
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
-                                <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon</label>
+                                    <input type="tel" id="admin-edit-phone" value="${item.phone || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
+                                    <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Bidang Kepakaran</label>
@@ -3255,7 +3180,8 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil</label>
-                                <textarea id="admin-edit-summary" rows="3" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none">${item.summary || ''}</textarea>
+                                <textarea id="admin-edit-summary" rows="3" oninput="updateWordCounter('admin-edit-summary','admin-edit-summary-counter')" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none">${item.summary || ''}</textarea>
+                                <p id="admin-edit-summary-counter" class="text-[10px] text-brand-muted mt-1 text-right">${countWords(item.summary || '')} / 120 patah perkataan</p>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
@@ -3266,8 +3192,7 @@
                                 <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             } else if (item.type === 'Talent') {
                 typeSpecificFields = `
                     <div class="bg-brand-bg p-3 rounded-xl border border-brand-border">
@@ -3285,19 +3210,24 @@
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon</label>
+                                    <input type="tel" id="admin-edit-phone" value="${item.phone || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
                                     <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
                                     <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                                 </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Bidang / Niche</label>
-                                    <select id="admin-edit-niche" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
-                                        ${buildSelectOptions(TALENT_NICHE_OPTIONS, item.niche || '')}
-                                    </select>
-                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Bidang / Niche</label>
+                                <select id="admin-edit-niche" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                    ${buildSelectOptions(TALENT_NICHE_OPTIONS, item.niche || '')}
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil</label>
-                                <textarea id="admin-edit-summary" rows="3" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none">${item.summary || ''}</textarea>
+                                <textarea id="admin-edit-summary" rows="3" oninput="updateWordCounter('admin-edit-summary','admin-edit-summary-counter')" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none">${item.summary || ''}</textarea>
+                                <p id="admin-edit-summary-counter" class="text-[10px] text-brand-muted mt-1 text-right">${countWords(item.summary || '')} / 120 patah perkataan</p>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
@@ -3308,8 +3238,7 @@
                                 <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }
 
             const hasLabel = item.label && item.label.trim() !== '';
@@ -3378,15 +3307,10 @@
                     </div>
 
                     <div class="pt-4 border-t border-brand-border flex gap-3">
-                        <button type="button" onclick="closeAdminReviewModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl text-xs transition-colors">
-                            Batal
-                        </button>
-                        <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl text-xs transition-colors">
-                            Simpan Perubahan
-                        </button>
+                        <button type="button" onclick="closeAdminReviewModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl text-xs transition-colors">Batal</button>
+                        <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl text-xs transition-colors">Simpan Perubahan</button>
                     </div>
-                </form>
-            `;
+                </form>`;
 
             document.getElementById('modal-admin-review').classList.remove('hidden');
         }
@@ -3395,11 +3319,8 @@
             const labelVal = document.getElementById('admin-edit-label').value;
             const wrapper = document.getElementById('admin-label-fields-wrapper');
             if (!wrapper) return;
-            if (labelVal && labelVal.trim() !== '') {
-                wrapper.classList.remove('hidden');
-            } else {
-                wrapper.classList.add('hidden');
-            }
+            if (labelVal && labelVal.trim() !== '') wrapper.classList.remove('hidden');
+            else wrapper.classList.add('hidden');
         }
 
         function onAdminValidityChange() {
@@ -3423,14 +3344,6 @@
             if (validityEl) validityEl.value = '';
         }
 
-        function toggleAdminFeeAmount() {
-            const feeType = document.getElementById('admin-edit-feetype')?.value;
-            const wrapper = document.getElementById('admin-fee-amount-wrapper');
-            if (!wrapper) return;
-            if (feeType === 'Berbayar') wrapper.classList.remove('hidden');
-            else wrapper.classList.add('hidden');
-        }
-
         async function handleSaveAdminEdit(e, id) {
             e.preventDefault();
             const item = bayuData.applications.find(a => a.id === id);
@@ -3449,9 +3362,7 @@
             if (labelVal && labelVal.trim() !== '') {
                 updated.validity = validityVal;
                 updated.tarikhDari = dariVal;
-                if (dariVal && validityVal && !hinggaVal) {
-                    hinggaVal = calculateTarikhTamat(dariVal, validityVal);
-                }
+                if (dariVal && validityVal && !hinggaVal) hinggaVal = calculateTarikhTamat(dariVal, validityVal);
                 updated.tarikhSehingga = hinggaVal;
             } else {
                 updated.validity = '';
@@ -3461,63 +3372,72 @@
 
             if (item.type === 'Agenda') {
                 updated.title = document.getElementById('admin-edit-title').value.trim();
-                updated.name = document.getElementById('admin-edit-name').value.trim() || updated.title;
                 updated.org = document.getElementById('admin-edit-org').value.trim();
+                updated.penganjur = updated.org;
+                updated.name = document.getElementById('admin-edit-name').value.trim() || updated.org;
                 updated.email = document.getElementById('admin-edit-email').value.trim();
                 updated.phone = document.getElementById('admin-edit-phone').value.trim();
                 updated.date = document.getElementById('admin-edit-date').value;
+                updated.dateEnd = document.getElementById('admin-edit-date-end').value;
                 updated.mode = document.getElementById('admin-edit-mode').value;
                 updated.category = document.getElementById('admin-edit-category').value;
                 updated.location = document.getElementById('admin-edit-location').value.trim();
                 updated.url = document.getElementById('admin-edit-url').value.trim();
                 updated.photo = document.getElementById('admin-edit-photo').value.trim();
-
-                const feeType = document.getElementById('admin-edit-feetype').value;
-                const feeAmount = document.getElementById('admin-edit-feeamount')?.value.trim() || '';
-                updated.feeType = feeType;
-                if (feeType === 'Berbayar' && feeAmount) {
-                    updated.hargaYuran = 'RM' + parseFloat(feeAmount).toFixed(2).replace(/\.00$/, '');
+                updated.feeType = document.getElementById('admin-edit-feetype').value;
+                const feeMin = document.getElementById('admin-edit-feemin')?.value;
+                const feeMax = document.getElementById('admin-edit-feemax')?.value;
+                updated.hargaMin = feeMin ? parseFloat(feeMin) : null;
+                updated.hargaMax = feeMax ? parseFloat(feeMax) : null;
+                if (updated.feeType === 'Berbayar' && updated.hargaMin) {
+                    updated.hargaYuran = (updated.hargaMax && updated.hargaMax > updated.hargaMin)
+                        ? `RM${updated.hargaMin} - RM${updated.hargaMax}`
+                        : `RM${updated.hargaMin}`;
                 } else {
                     updated.hargaYuran = 'Percuma';
                 }
             } else if (item.type === 'Trainer') {
                 updated.name = document.getElementById('admin-edit-name').value.trim();
                 updated.email = document.getElementById('admin-edit-email').value.trim();
+                updated.phone = document.getElementById('admin-edit-phone').value.trim();
                 updated.location = document.getElementById('admin-edit-location').value.trim();
                 updated.summary = document.getElementById('admin-edit-summary').value.trim();
+                if (countWords(updated.summary) > 120) {
+                    alert('Ringkasan Profil Trainer tidak boleh melebihi 120 patah perkataan.');
+                    return;
+                }
                 updated.url = document.getElementById('admin-edit-url').value.trim();
                 updated.photo = document.getElementById('admin-edit-photo').value.trim();
-
                 const expBoxes = document.querySelectorAll('input[name="admin_trainer_exp"]:checked');
                 updated.expertise = Array.from(expBoxes).map(cb => cb.value);
                 if (updated.expertise.length === 0) updated.expertise = ["Pengurusan & Kepimpinan"];
-
                 const certBoxes = document.querySelectorAll('input[name="admin_trainer_cert"]:checked');
                 updated.certs = Array.from(certBoxes).map(cb => cb.value);
-
                 const customCertInput = document.getElementById('admin-edit-cert-custom');
                 updated.certCustom = (customCertInput && customCertInput.value) ? customCertInput.value.trim().slice(0, 150) : '';
             } else if (item.type === 'Talent') {
                 updated.name = document.getElementById('admin-edit-name').value.trim();
                 updated.email = document.getElementById('admin-edit-email').value.trim();
+                updated.phone = document.getElementById('admin-edit-phone').value.trim();
                 updated.location = document.getElementById('admin-edit-location').value.trim();
                 updated.niche = document.getElementById('admin-edit-niche').value;
                 updated.summary = document.getElementById('admin-edit-summary').value.trim();
+                if (countWords(updated.summary) > 120) {
+                    alert('Ringkasan Profil Talent tidak boleh melebihi 120 patah perkataan.');
+                    return;
+                }
                 updated.url = document.getElementById('admin-edit-url').value.trim();
                 updated.photo = document.getElementById('admin-edit-photo').value.trim();
             }
 
             const { error } = await db.from('applications').update(rowFromApp(updated)).eq('id', id);
             if (error) { alert('Ralat menyimpan: ' + error.message); return; }
-
             closeAdminReviewModal();
             await loadAllData();
             refreshAllViews();
         }
 
-        // ============================================================
-        // DELETE APPLICATION
-        // ============================================================
+        // ============ DELETE APPLICATION ============
         function confirmDeleteApplication(id) {
             window.__applicationToDelete = id;
             document.getElementById('modal-confirm-delete').classList.remove('hidden');
@@ -3527,69 +3447,46 @@
         async function executeDeleteApplication() {
             const id = window.__applicationToDelete;
             if (!id) return;
-
             const { error } = await db.from('applications').delete().eq('id', id);
             if (error) { alert('Ralat memadam: ' + error.message); return; }
-
             closeDeleteModal();
             await loadAllData();
             refreshAllViews();
         }
 
-        // ============================================================
-        // PHOTO PREVIEWS
-        // ============================================================
+        // ============ PHOTO PREVIEWS ============
         document.getElementById('banner-photo')?.addEventListener('input', function() {
             const url = this.value.trim();
             const preview = document.getElementById('banner-photo-preview');
-            if (url) {
-                preview.classList.remove('hidden');
-                preview.querySelector('img').src = url;
-            } else {
-                preview.classList.add('hidden');
-            }
+            if (url) { preview.classList.remove('hidden'); preview.querySelector('img').src = url; }
+            else preview.classList.add('hidden');
         });
-
         document.getElementById('partner-image')?.addEventListener('input', function() {
             const url = this.value.trim();
             const preview = document.getElementById('partner-image-preview');
-            if (url) {
-                preview.classList.remove('hidden');
-                preview.querySelector('img').src = url;
-            } else {
-                preview.classList.add('hidden');
-            }
+            if (url) { preview.classList.remove('hidden'); preview.querySelector('img').src = url; }
+            else preview.classList.add('hidden');
         });
-
         document.getElementById('reg-trainer-cert-custom')?.addEventListener('input', updateTrainerCertCustomCounter);
 
-        // ============================================================
-        // 🚀 INITIALIZATION
-        // ============================================================
+        // ============ INIT ============
         (async function init() {
             initLocationDropdowns();
+            populateYearDaySelects();
 
-            // Check auth state
             try {
                 const { data: { session } } = await db.auth.getSession();
                 currentUser = session?.user || null;
-            } catch (err) {
-                console.warn('Session check skipped:', err.message);
-            }
+            } catch (err) { console.warn('Session check skipped:', err.message); }
 
-            // Initial data load
             await loadAllData();
             refreshAllViews();
 
-            // Bind register form
             const regForm = document.getElementById('form-register');
-            if (regForm) {
-                regForm.addEventListener('submit', handleRegisterSubmit);
-            }
+            if (regForm) regForm.addEventListener('submit', handleRegisterSubmit);
 
             document.getElementById('reg-penganjur-fee-type')?.addEventListener('change', togglePenganjurFee);
 
-            // Hide loading overlay
             const overlay = document.getElementById('app-loading');
             if (overlay) overlay.style.display = 'none';
         })();
