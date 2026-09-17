@@ -8,7 +8,6 @@
 
 import { db } from './supabase-client.js';
 import { loadAllData, bayuData } from './data-loader.js';
-import { getTodayStr, updateWordCounter as _unusedUpdateWordCounter } from './utils.js';
 
 // Registration + form helpers
 import {
