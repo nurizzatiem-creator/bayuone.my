@@ -88,7 +88,7 @@ export function setRegisterType(type) {
     });
 
     const allIds = [
-        'reg-penganjur-title', 'reg-penganjur-org', 'reg-penganjur-date', 'reg-penganjur-state',
+        'reg-penganjur-title', 'reg-penganjur-org', 'reg-penganjur-date', 'reg-penganjur-date-end', 'reg-penganjur-state',
         'reg-penganjur-sabah-loc', 'reg-penganjur-category', 'reg-penganjur-privacy', 'reg-penganjur-mode',
         'reg-trainer-name', 'reg-trainer-email', 'reg-trainer-phone', 'reg-trainer-state',
         'reg-trainer-sabah-loc', 'reg-trainer-summary', 'reg-trainer-privacy',
