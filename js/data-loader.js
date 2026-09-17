@@ -6,8 +6,8 @@
 // update or delete, call loadAllData() to refresh it.
 // ============================================================
 
-import { db } from './supabase-client.js';
-import { appFromRow } from './converters.js';
+import { db } from './supabase-client.js?v=6b';
+import { appFromRow } from './converters.js?v=6b';
 
 // The single source of truth used by the whole frontend.
 export const bayuData = {
