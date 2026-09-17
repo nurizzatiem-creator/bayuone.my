@@ -133,7 +133,6 @@
 
         <!-- ================= TAB 1: AGENDA VIEW ================= -->
         <div id="view-agenda" class="tab-content">
-            <!-- QUICK FILTER BUTTONS (NEW) -->
             <div class="mb-4 flex flex-wrap gap-2">
                 <button type="button" onclick="setQuickFilter('week')" id="qf-week" class="quick-filter-btn px-4 py-2 rounded-xl border border-brand-border bg-white text-xs font-bold text-brand-muted hover:text-brand hover:border-brand transition-colors">Minggu Ini</button>
                 <button type="button" onclick="setQuickFilter('month')" id="qf-month" class="quick-filter-btn px-4 py-2 rounded-xl border border-brand-border bg-white text-xs font-bold text-brand-muted hover:text-brand hover:border-brand transition-colors">Bulan Ini</button>
@@ -190,7 +189,6 @@
                         </select>
                     </div>
 
-                    <!-- REPLACED: Day/Month/Year filters -->
                     <div class="sm:col-span-2 lg:col-span-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-brand-dark uppercase tracking-wider mb-1.5">Hari</label>
@@ -859,7 +857,6 @@
             <form id="form-register" onsubmit="handleRegisterSubmit(event)">
                 <input type="hidden" id="reg-type" value="penganjur">
 
-                <!-- PENGANJUR FIELDS -->
                 <div id="fields-penganjur" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tajuk Program <span class="text-red-500">*</span></label>
@@ -974,7 +971,6 @@
                     </div>
                 </div>
 
-                <!-- TRAINER FIELDS -->
                 <div id="fields-trainer" class="space-y-4 hidden">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -1062,7 +1058,6 @@
                     </div>
                 </div>
 
-                <!-- TALENT FIELDS -->
                 <div id="fields-talent" class="space-y-4 hidden">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -1387,8 +1382,1868 @@
         </div>
     </div>
 
+    <!-- SUPABASE LIBRARY -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- APPLICATION JAVASCRIPT LOGIC -->
-    <script type="module" src="js/main.js"></script>
+    <script>
+        // ============================================================
+        // BayuOne — Main application script
+        // (Restored after Phase 3C rollback)
+        // ============================================================
+        const SUPABASE_URL = 'https://voxnrgoitktdiyvsvfac.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_vjUIAoqsAJRadmN3DM-04w_jh1oNkl9';
+        const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const TIKTOK_BAYUONE_URL = "https://www.tiktok.com/@bayuone.my";
+        const TODAY = new Date();
+
+        function getTodayStr() {
+            const y = TODAY.getFullYear();
+            const m = String(TODAY.getMonth() + 1).padStart(2, '0');
+            const d = String(TODAY.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+        function formatDateDisplay(iso) {
+            if (!iso) return '';
+            const s = String(iso).split('T')[0];
+            const parts = s.split('-');
+            if (parts.length !== 3) return iso;
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+        function countWords(str) {
+            const t = (str || '').trim();
+            if (!t) return 0;
+            return t.split(/\s+/).length;
+        }
+        function getPriceDisplay(item) {
+            const feeType = item.feeType || 'Percuma';
+            if (feeType !== 'Berbayar') return 'Percuma';
+            const min = item.hargaMin ? Number(item.hargaMin) : null;
+            const max = item.hargaMax ? Number(item.hargaMax) : null;
+            if (min && max && max > min) return `RM${min} - RM${max}`;
+            if (min) return `RM${min}`;
+            if (max) return `RM${max}`;
+            if (item.hargaYuran) return item.hargaYuran;
+            return 'Percuma';
+        }
+        function getAgendaDateRange(item) {
+            const start = item.date || '';
+            const end = item.isOneDay ? start : (item.dateEnd || start);
+            return { start, end };
+        }
+        function isAgendaActiveOn(item, isoDate) {
+            const { start, end } = getAgendaDateRange(item);
+            if (!start) return false;
+            const e = end || start;
+            return isoDate >= start && isoDate <= e;
+        }
+        function populateYearDaySelects() {
+            const yearSel = document.getElementById('filter-agenda-year');
+            const daySel = document.getElementById('filter-agenda-day');
+            const thisYear = TODAY.getFullYear();
+            if (yearSel && yearSel.options.length <= 1) {
+                for (let y = thisYear - 2; y <= thisYear + 5; y++) {
+                    const o = document.createElement('option');
+                    o.value = String(y); o.textContent = String(y);
+                    yearSel.appendChild(o);
+                }
+            }
+            if (daySel && daySel.options.length <= 1) {
+                for (let d = 1; d <= 31; d++) {
+                    const o = document.createElement('option');
+                    const v = String(d).padStart(2, '0');
+                    o.value = v; o.textContent = v;
+                    daySel.appendChild(o);
+                }
+            }
+        }
+
+        let activeQuickFilter = '';
+        let currentAgendaPage = 1;
+        const AGENDA_PER_PAGE = 12;
+
+        function setQuickFilter(type) {
+            activeQuickFilter = (activeQuickFilter === type) ? '' : type;
+            document.querySelectorAll('.quick-filter-btn').forEach(b => b.classList.remove('active'));
+            if (activeQuickFilter) {
+                const btn = document.getElementById('qf-' + type);
+                if (btn) btn.classList.add('active');
+            }
+            currentAgendaPage = 1;
+            renderAgenda();
+        }
+
+        function togglePenganjurOneDay() {
+            const cb = document.getElementById('reg-penganjur-oneday');
+            const wrapper = document.getElementById('reg-penganjur-enddate-wrapper');
+            const endInput = document.getElementById('reg-penganjur-date-end');
+            const startInput = document.getElementById('reg-penganjur-date');
+            if (!cb || !wrapper || !endInput) return;
+            if (cb.checked) {
+                wrapper.classList.add('hidden');
+                endInput.required = false;
+                endInput.value = startInput?.value || '';
+            } else {
+                wrapper.classList.remove('hidden');
+                endInput.required = true;
+            }
+        }
+        function syncPenganjurEndDate() {
+            const cb = document.getElementById('reg-penganjur-oneday');
+            const startInput = document.getElementById('reg-penganjur-date');
+            const endInput = document.getElementById('reg-penganjur-date-end');
+            if (cb?.checked && endInput) endInput.value = startInput?.value || '';
+        }
+        function updateWordCounter(inputId, counterId) {
+            const input = document.getElementById(inputId);
+            const counter = document.getElementById(counterId);
+            if (!input || !counter) return;
+            const words = countWords(input.value);
+            counter.textContent = `${words} / 120 patah perkataan`;
+            if (words > 120) {
+                counter.classList.add('text-red-600', 'font-bold');
+                counter.classList.remove('text-brand-muted');
+            } else {
+                counter.classList.remove('text-red-600', 'font-bold');
+                counter.classList.add('text-brand-muted');
+            }
+        }
+
+        const MALAYSIAN_STATES = [
+            "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Perak", "Perlis",
+            "Pulau Pinang", "Sabah", "Sarawak", "Selangor", "Terengganu", "Wilayah Persekutuan Kuala Lumpur",
+            "Wilayah Persekutuan Labuan", "Wilayah Persekutuan Putrajaya", "Atas Talian/Webinar"
+        ];
+        const SABAH_DIVISIONS = {
+            "Bahagian Pantai Barat": ["Kota Kinabalu", "Penampang", "Putatan", "Papar", "Tuaran", "Kota Belud", "Ranau"],
+            "Bahagian Pedalaman": ["Keningau", "Beaufort", "Sipitang", "Tambunan", "Nabawan", "Tenom", "Kuala Penyu", "Sook", "Membakut"],
+            "Bahagian Kudat": ["Kudat", "Kota Marudu", "Pitas"],
+            "Bahagian Sandakan": ["Sandakan", "Kinabatangan", "Beluran", "Telupid", "Tongod"],
+            "Bahagian Tawau": ["Tawau", "Lahad Datu", "Semporna", "Kunak", "Kalabakan"]
+        };
+
+        let bayuData = { applications: [], subscribers: [], feedbacks: [], banners: [], partnerships: [] };
+        let currentUser = null;
+
+        function appFromRow(r) {
+            return {
+                id: r.id, type: r.type, title: r.title, name: r.name, org: r.org,
+                email: r.email, phone: r.phone, location: r.location, mode: r.mode,
+                category: r.category, date: r.date, url: r.url, urlButton: r.url_button,
+                approval: r.approval, validity: r.validity,
+                tarikhDari: r.tarikh_dari, tarikhSehingga: r.tarikh_sehingga,
+                label: r.label, remark: r.remark,
+                statusPenangguhan: r.status_penangguhan, statusPenangguhanSub: r.status_penangguhan_sub,
+                photo: r.photo, hargaYuran: r.harga_yuran, feeType: r.fee_type,
+                expertise: r.expertise || [], certs: r.certs || [], certCustom: r.cert_custom,
+                niche: r.niche, summary: r.summary,
+                dateEnd: r.date_end, isOneDay: r.is_one_day || false,
+                hargaMin: r.harga_min, hargaMax: r.harga_max,
+                penganjur: r.penganjur
+            };
+        }
+        function rowFromApp(a) {
+            return {
+                id: a.id, type: a.type, title: a.title, name: a.name, org: a.org,
+                email: a.email, phone: a.phone, location: a.location, mode: a.mode,
+                category: a.category, date: a.date,
+                url: a.url, url_button: a.urlButton, approval: a.approval,
+                validity: a.validity, tarikh_dari: a.tarikhDari, tarikh_sehingga: a.tarikhSehingga,
+                label: a.label, remark: a.remark,
+                status_penangguhan: a.statusPenangguhan, status_penangguhan_sub: a.statusPenangguhanSub,
+                photo: a.photo, harga_yuran: a.hargaYuran, fee_type: a.feeType,
+                expertise: a.expertise || [], certs: a.certs || [], cert_custom: a.certCustom,
+                niche: a.niche, summary: a.summary,
+                date_end: a.dateEnd, is_one_day: a.isOneDay || false,
+                harga_min: a.hargaMin, harga_max: a.hargaMax,
+                penganjur: a.penganjur
+            };
+        }
+
+        async function loadAllData() {
+            try {
+                const [appsRes, subsRes, fbRes, banRes, partRes] = await Promise.all([
+                    db.from('applications').select('*').order('created_at', { ascending: false }),
+                    db.from('subscribers').select('*').order('created_at', { ascending: false }),
+                    db.from('feedbacks').select('*').order('created_at', { ascending: false }),
+                    db.from('banners').select('*').order('created_at', { ascending: false }),
+                    db.from('partnerships').select('*').order('position', { ascending: true })
+                ]);
+                if (appsRes.error) console.warn('applications load:', appsRes.error.message);
+                if (subsRes.error) console.warn('subscribers load:', subsRes.error.message);
+                if (fbRes.error) console.warn('feedbacks load:', fbRes.error.message);
+                if (banRes.error) console.warn('banners load:', banRes.error.message);
+                if (partRes.error) console.warn('partnerships load:', partRes.error.message);
+
+                bayuData.applications = (appsRes.data || []).map(appFromRow);
+                bayuData.subscribers = (subsRes.data || []).map(r => ({
+                    id: r.id, name: r.name, email: r.email, minat: r.minat, date: r.date, status: r.status
+                }));
+                bayuData.feedbacks = (fbRes.data || []).map(r => ({
+                    id: r.id, name: r.name, email: r.email, message: r.message, date: r.date, status: r.status
+                }));
+                bayuData.banners = (banRes.data || []).map(r => ({
+                    id: r.id, photo: r.photo, name: r.name, company: r.company,
+                    validity: r.validity, startDate: r.start_date, endDate: r.end_date
+                }));
+                bayuData.partnerships = (partRes.data || []).map(r => ({
+                    id: r.id, name: r.name, image: r.image, position: r.position
+                }));
+            } catch (err) {
+                console.error('Load failed:', err);
+            }
+        }
+
+        function refreshAllViews() {
+            renderAgenda(); renderTrainer(); renderTalent(); renderBanner(); renderBrandsSupport();
+            renderAdminTable(); renderFeedbackTable(); renderSubscriberTable();
+            renderBannerTable(); renderPartnerTable();
+        }
+
+        function initLocationDropdowns() {
+            ['penganjur', 'trainer', 'talent'].forEach(prefix => {
+                const stateSelect = document.getElementById(`reg-${prefix}-state`);
+                if (!stateSelect) return;
+                stateSelect.innerHTML = `<option value="">Sila Pilih Negeri / Wilayah</option>`;
+                MALAYSIAN_STATES.forEach(st => {
+                    stateSelect.innerHTML += `<option value="${st}">${st}</option>`;
+                });
+            });
+        }
+
+        function handleStateChange(prefix) {
+            const stateSelect = document.getElementById(`reg-${prefix}-state`);
+            const sabahWrapper = document.getElementById(`reg-${prefix}-sabah-wrapper`);
+            const sabahSelect = document.getElementById(`reg-${prefix}-sabah-loc`);
+            if (!stateSelect || !sabahWrapper || !sabahSelect) return;
+            const currentRegType = document.getElementById('reg-type').value;
+            if (stateSelect.value === "Sabah") {
+                sabahWrapper.classList.remove('hidden');
+                if (currentRegType === prefix) sabahSelect.required = true;
+                sabahSelect.innerHTML = `<option value="">Sila Pilih Daerah Sabah</option>`;
+                for (const [division, districts] of Object.entries(SABAH_DIVISIONS)) {
+                    let groupOpt = `<optgroup label="${division}">`;
+                    districts.forEach(dist => {
+                        groupOpt += `<option value="${dist}, Sabah">${dist}</option>`;
+                    });
+                    groupOpt += `</optgroup>`;
+                    sabahSelect.innerHTML += groupOpt;
+                }
+            } else {
+                sabahWrapper.classList.add('hidden');
+                sabahSelect.required = false;
+                sabahSelect.value = "";
+            }
+        }
+
+        function calculateTarikhTamat(startDateStr, validityPeriod) {
+            if (!startDateStr || !validityPeriod) return "";
+            const [y, m, d] = startDateStr.split('-').map(Number);
+            let targetYear = y, targetMonth = m - 1, targetDay = d;
+            let addMonths = 0;
+            if (validityPeriod === "1 Bulan") addMonths = 1;
+            else if (validityPeriod === "3 Bulan") addMonths = 3;
+            else if (validityPeriod === "6 Bulan") addMonths = 6;
+            else if (validityPeriod === "1 Tahun") addMonths = 12;
+            if (addMonths === 0) return "";
+            targetMonth += addMonths;
+            while (targetMonth > 11) { targetMonth -= 12; targetYear += 1; }
+            const lastDayOfTargetMonth = new Date(targetYear, targetMonth + 1, 0).getDate();
+            if (targetDay > lastDayOfTargetMonth) targetDay = lastDayOfTargetMonth;
+            const resultDate = new Date(targetYear, targetMonth, targetDay);
+            const rY = resultDate.getFullYear();
+            const rM = String(resultDate.getMonth() + 1).padStart(2, '0');
+            const rD = String(resultDate.getDate()).padStart(2, '0');
+            return `${rY}-${rM}-${rD}`;
+        }
+
+        function isPromotionActive(item) {
+            if (!item || !item.label || item.label.trim() === "") return false;
+            if (!item.tarikhDari || !item.tarikhSehingga) return false;
+            const todayStr = getTodayStr();
+            return todayStr >= item.tarikhDari && todayStr <= item.tarikhSehingga;
+        }
+        function getPromoPriority(item) {
+            if (!isPromotionActive(item)) return 4;
+            const lbl = (item.label || "").toUpperCase();
+            if (lbl === 'TOP') return 1;
+            if (lbl === 'FEATURED') return 2;
+            if (lbl === 'PROMOTED') return 3;
+            return 4;
+        }
+        function sortByPromotion(items) {
+            return items.map((item, idx) => ({ item, idx }))
+                .sort((a, b) => {
+                    const pA = getPromoPriority(a.item);
+                    const pB = getPromoPriority(b.item);
+                    if (pA !== pB) return pA - pB;
+                    return a.idx - b.idx;
+                })
+                .map(entry => entry.item);
+        }
+        function getPromotionalBadgeHtml(item) {
+            if (!isPromotionActive(item)) return '';
+            const lbl = (item.label || "").toUpperCase();
+            if (lbl === 'TOP') return `<span class="badge-pill badge-top mr-1">TOP</span>`;
+            if (lbl === 'FEATURED') return `<span class="badge-pill badge-featured mr-1">FEATURED</span>`;
+            if (lbl === 'PROMOTED') return `<span class="badge-pill badge-promoted mr-1">PROMOTED</span>`;
+            return '';
+        }
+        function getAgendaStatusInfo(item) {
+            if (item.statusPenangguhan === 'Dibatalkan') return { code: 'DIBATALKAN', label: 'Dibatalkan' };
+            if (item.statusPenangguhan === 'Telah Ditunda') return { code: 'TELAH_DITUNDA', label: 'Telah Ditunda' };
+            const { end } = getAgendaDateRange(item);
+            const endDate = new Date(end || item.date);
+            if (TODAY > endDate) return { code: 'TAMAT', label: 'Telah Tamat' };
+            return { code: 'AKAN_DATANG', label: 'Akan Datang' };
+        }
+        function getTrainerCertDisplayList(item) {
+            const rawCerts = item.certs || [];
+            const custom = item.certCustom || '';
+            const result = [];
+            rawCerts.forEach(c => {
+                if (c === 'Lain-Lain') {
+                    if (custom && custom.trim() !== '') result.push(custom.trim());
+                } else {
+                    result.push(c);
+                }
+            });
+            return result;
+        }
+        function openPrivacyPage(e) {
+            if (e) e.preventDefault();
+            switchTab('privacy');
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const targetView = document.getElementById(`view-${tabName}`);
+            if (targetView) targetView.classList.remove('hidden');
+            const targetNav = document.getElementById(`nav-${tabName}`);
+            if (targetNav) targetNav.classList.add('active');
+
+            const heroTitle = document.getElementById('hero-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+
+            if (tabName === 'agenda') {
+                heroTitle.textContent = "Program & Aktiviti Terkini";
+                heroSubtitle.textContent = "Terokai pelbagai program, acara dan aktiviti menarik yang berlangsung di sekitar anda.";
+                renderAgenda(); renderBanner();
+            } else if (tabName === 'trainer') {
+                heroTitle.textContent = "Trainer & Jurulatih Profesional";
+                heroSubtitle.textContent = "Cari penceramah, jurulatih dan pakar bidang untuk menjayakan program latihan anda.";
+                renderTrainer();
+            } else if (tabName === 'talent') {
+                heroTitle.textContent = "Bakat & Influencer Tempatan";
+                heroSubtitle.textContent = "Hubungi pengacara, content creator dan pelbagai bakat tempatan untuk kolaborasi.";
+                renderTalent();
+            } else if (tabName === 'privacy') {
+                heroTitle.textContent = "Dasar Privasi & Polisi";
+                heroSubtitle.textContent = "Sila baca dan fahami polisi penggunaan platform BayuOne.";
+            } else if (tabName === 'admin') {
+                renderAdminTable(); renderFeedbackTable(); renderSubscriberTable();
+                renderBannerTable(); renderPartnerTable();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+        function setRegisterType(type) {
+            const regTypeInput = document.getElementById('reg-type');
+            if (regTypeInput) regTypeInput.value = type;
+
+            ['penganjur', 'trainer', 'talent'].forEach(t => {
+                const btn = document.getElementById(`btn-reg-${t}`);
+                const fieldGroup = document.getElementById(`fields-${t}`);
+                if (!btn || !fieldGroup) return;
+                if (t === type) {
+                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs";
+                    fieldGroup.classList.remove('hidden');
+                } else {
+                    btn.className = "py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand";
+                    fieldGroup.classList.add('hidden');
+                }
+            });
+
+            const allIds = [
+                'reg-penganjur-title','reg-penganjur-org','reg-penganjur-date','reg-penganjur-state',
+                'reg-penganjur-sabah-loc','reg-penganjur-category','reg-penganjur-privacy','reg-penganjur-mode',
+                'reg-trainer-name','reg-trainer-email','reg-trainer-phone','reg-trainer-state',
+                'reg-trainer-sabah-loc','reg-trainer-summary','reg-trainer-privacy',
+                'reg-talent-name','reg-talent-email','reg-talent-phone','reg-talent-state',
+                'reg-talent-sabah-loc','reg-talent-niche','reg-talent-summary','reg-talent-privacy'
+            ];
+            allIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.required = false;
+            });
+
+            const pState = document.getElementById('reg-penganjur-state');
+            const trState = document.getElementById('reg-trainer-state');
+            const tlState = document.getElementById('reg-talent-state');
+
+            if (type === 'penganjur') {
+                const pTitle = document.getElementById('reg-penganjur-title');
+                const pOrg = document.getElementById('reg-penganjur-org');
+                const pDate = document.getElementById('reg-penganjur-date');
+                const pSabah = document.getElementById('reg-penganjur-sabah-loc');
+                const pCat = document.getElementById('reg-penganjur-category');
+                const pPrivacy = document.getElementById('reg-penganjur-privacy');
+                const pMode = document.getElementById('reg-penganjur-mode');
+                if (pTitle) pTitle.required = true;
+                if (pOrg) pOrg.required = true;
+                if (pDate) pDate.required = true;
+                if (pState) pState.required = true;
+                if (pSabah && pState && pState.value === "Sabah") pSabah.required = true;
+                if (pCat) pCat.required = true;
+                if (pPrivacy) pPrivacy.required = true;
+                if (pMode) pMode.required = true;
+            } else if (type === 'trainer') {
+                const trName = document.getElementById('reg-trainer-name');
+                const trEmail = document.getElementById('reg-trainer-email');
+                const trPhone = document.getElementById('reg-trainer-phone');
+                const trSabah = document.getElementById('reg-trainer-sabah-loc');
+                const trSum = document.getElementById('reg-trainer-summary');
+                const trPrivacy = document.getElementById('reg-trainer-privacy');
+                if (trName) trName.required = true;
+                if (trEmail) trEmail.required = true;
+                if (trPhone) trPhone.required = true;
+                if (trState) trState.required = true;
+                if (trSabah && trState && trState.value === "Sabah") trSabah.required = true;
+                if (trSum) trSum.required = true;
+                if (trPrivacy) trPrivacy.required = true;
+            } else if (type === 'talent') {
+                const tlName = document.getElementById('reg-talent-name');
+                const tlEmail = document.getElementById('reg-talent-email');
+                const tlPhone = document.getElementById('reg-talent-phone');
+                const tlSabah = document.getElementById('reg-talent-sabah-loc');
+                const tlNiche = document.getElementById('reg-talent-niche');
+                const tlSum = document.getElementById('reg-talent-summary');
+                const tlPrivacy = document.getElementById('reg-talent-privacy');
+                if (tlName) tlName.required = true;
+                if (tlEmail) tlEmail.required = true;
+                if (tlPhone) tlPhone.required = true;
+                if (tlState) tlState.required = true;
+                if (tlSabah && tlState && tlState.value === "Sabah") tlSabah.required = true;
+                if (tlNiche) tlNiche.required = true;
+                if (tlSum) tlSum.required = true;
+                if (tlPrivacy) tlPrivacy.required = true;
+            }
+        }
+        function togglePenganjurFee() {
+            const feeType = document.getElementById('reg-penganjur-fee-type')?.value;
+            const amountWrapper = document.getElementById('reg-penganjur-fee-amount-wrapper');
+            if (!amountWrapper) return;
+            if (feeType === 'Berbayar') {
+                amountWrapper.classList.remove('hidden');
+            } else {
+                amountWrapper.classList.add('hidden');
+                const min = document.getElementById('reg-penganjur-fee-min');
+                const max = document.getElementById('reg-penganjur-fee-max');
+                if (min) min.value = '';
+                if (max) max.value = '';
+            }
+        }
+        function toggleTrainerCertCustom() {
+            const cb = document.getElementById('trainer_cert_lain');
+            const wrapper = document.getElementById('reg-trainer-cert-custom-wrapper');
+            const input = document.getElementById('reg-trainer-cert-custom');
+            if (!cb || !wrapper || !input) return;
+            if (cb.checked) {
+                wrapper.classList.remove('hidden');
+                input.required = true;
+                updateTrainerCertCustomCounter();
+            } else {
+                wrapper.classList.add('hidden');
+                input.required = false;
+                input.value = '';
+                updateTrainerCertCustomCounter();
+            }
+        }
+        function updateTrainerCertCustomCounter() {
+            const input = document.getElementById('reg-trainer-cert-custom');
+            const counter = document.getElementById('reg-trainer-cert-custom-counter');
+            if (!input || !counter) return;
+            counter.textContent = `${input.value.length} / 150 aksara`;
+        }
+
+        async function handleRegisterSubmit(event) {
+            if (event) event.preventDefault();
+            const regType = document.getElementById('reg-type').value;
+
+            ['penganjur', 'trainer', 'talent'].forEach(prefix => {
+                const sabahSel = document.getElementById(`reg-${prefix}-sabah-loc`);
+                const sabahWrapper = document.getElementById(`reg-${prefix}-sabah-wrapper`);
+                if (sabahSel && sabahWrapper && sabahWrapper.classList.contains('hidden')) {
+                    sabahSel.required = false;
+                }
+            });
+
+            if (!['penganjur', 'trainer', 'talent'].includes(regType)) {
+                alert('Ralat: Jenis permohonan tidak dikenali.'); return;
+            }
+            const val = (id) => {
+                const el = document.getElementById(id);
+                return el ? (el.value || '').trim() : '';
+            };
+
+            if (regType === 'trainer') {
+                const summary = val('reg-trainer-summary');
+                if (countWords(summary) > 120) {
+                    alert('Ringkasan Profil Trainer tidak boleh melebihi 120 patah perkataan.');
+                    return;
+                }
+            }
+            if (regType === 'talent') {
+                const summary = val('reg-talent-summary');
+                if (countWords(summary) > 120) {
+                    alert('Ringkasan Profil Talent tidak boleh melebihi 120 patah perkataan.');
+                    return;
+                }
+            }
+
+            const newId = "APP-" + Date.now();
+            let newApp = null;
+
+            if (regType === 'penganjur') {
+                const title = val('reg-penganjur-title');
+                const org = val('reg-penganjur-org');
+                const email = val('reg-penganjur-email');
+                const date = val('reg-penganjur-date');
+                const dateEnd = val('reg-penganjur-date-end');
+                const oneDay = document.getElementById('reg-penganjur-oneday')?.checked || false;
+                const state = val('reg-penganjur-state');
+                const sabahLoc = val('reg-penganjur-sabah-loc');
+                const category = val('reg-penganjur-category');
+                const picName = val('reg-penganjur-pic-name');
+                const picTel = val('reg-penganjur-pic-tel');
+                const mode = val('reg-penganjur-mode') || 'Fizikal';
+                const url = val('reg-penganjur-url');
+                const feeType = val('reg-penganjur-fee-type') || 'Percuma';
+                const feeMin = val('reg-penganjur-fee-min');
+                const feeMax = val('reg-penganjur-fee-max');
+
+                if (!org) { alert('Sila masukkan nama Penganjur.'); return; }
+                if (!mode) { alert('Sila pilih Mod.'); return; }
+
+                let hargaMin = null, hargaMax = null, hargaYuran = 'Percuma';
+                if (feeType === 'Berbayar') {
+                    if (!feeMin) { alert('Sila masukkan Harga Minimum.'); return; }
+                    hargaMin = parseFloat(feeMin);
+                    if (feeMax) {
+                        hargaMax = parseFloat(feeMax);
+                        if (hargaMax < hargaMin) {
+                            alert('Harga Maksimum tidak boleh lebih rendah daripada Harga Minimum.');
+                            return;
+                        }
+                    }
+                    if (hargaMax && hargaMax > hargaMin) hargaYuran = `RM${hargaMin} - RM${hargaMax}`;
+                    else hargaYuran = `RM${hargaMin}`;
+                }
+                const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
+                newApp = {
+                    id: newId, type: "Agenda", title: title, name: picName || org, org: org,
+                    penganjur: org,
+                    email: email, phone: picTel,
+                    location: location, mode: mode, category: category,
+                    date: date, dateEnd: oneDay ? date : dateEnd, isOneDay: oneDay,
+                    url: url || TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Pending", validity: "", tarikhDari: "", tarikhSehingga: "",
+                    label: "", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
+                    photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80",
+                    hargaYuran: hargaYuran, feeType: feeType,
+                    hargaMin: hargaMin, hargaMax: hargaMax,
+                    expertise: [], certs: [], certCustom: "", niche: "", summary: ""
+                };
+            } else if (regType === 'trainer') {
+                const name = val('reg-trainer-name');
+                const email = val('reg-trainer-email');
+                const phone = val('reg-trainer-phone');
+                const state = val('reg-trainer-state');
+                const sabahLoc = val('reg-trainer-sabah-loc');
+                const summary = val('reg-trainer-summary');
+                const url = val('reg-trainer-url');
+                const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
+                if (!phone) { alert('Sila masukkan No. Telefon.'); return; }
+                const expBoxes = document.querySelectorAll('input[name="trainer_exp"]:checked');
+                const expertise = Array.from(expBoxes).map(cb => cb.value);
+                const certBoxes = document.querySelectorAll('input[name="trainer_cert"]:checked');
+                const certs = Array.from(certBoxes).map(cb => cb.value);
+                const certCustom = val('reg-trainer-cert-custom');
+                newApp = {
+                    id: newId, type: "Trainer", title: "Trainer Profesional",
+                    name: name, org: '', email: email, phone: phone,
+                    location: location, mode: '', category: '',
+                    date: getTodayStr(), dateEnd: null, isOneDay: false,
+                    url: url || TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Pending", validity: "", tarikhDari: "", tarikhSehingga: "",
+                    label: "", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
+                    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80",
+                    hargaYuran: "", feeType: "", hargaMin: null, hargaMax: null,
+                    expertise: expertise.length > 0 ? expertise : ["Pengurusan & Kepimpinan"],
+                    certs: certs, certCustom: certCustom, niche: "", summary: summary
+                };
+            } else if (regType === 'talent') {
+                const name = val('reg-talent-name');
+                const email = val('reg-talent-email');
+                const phone = val('reg-talent-phone');
+                const state = val('reg-talent-state');
+                const sabahLoc = val('reg-talent-sabah-loc');
+                const niche = val('reg-talent-niche');
+                const summary = val('reg-talent-summary');
+                const url = val('reg-talent-url');
+                const location = (state === "Sabah" && sabahLoc) ? sabahLoc : state;
+                if (!phone) { alert('Sila masukkan No. Telefon.'); return; }
+                newApp = {
+                    id: newId, type: "Talent", title: "Talent Tempatan",
+                    name: name, org: '', email: email, phone: phone,
+                    location: location, mode: '', category: '',
+                    date: getTodayStr(), dateEnd: null, isOneDay: false,
+                    url: url || TIKTOK_BAYUONE_URL, urlButton: "",
+                    approval: "Pending", validity: "", tarikhDari: "", tarikhSehingga: "",
+                    label: "", remark: "", statusPenangguhan: "", statusPenangguhanSub: "",
+                    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80",
+                    hargaYuran: "", feeType: "", hargaMin: null, hargaMax: null,
+                    expertise: [], certs: [], certCustom: "", niche: niche, summary: summary
+                };
+            }
+            if (!newApp) return;
+            const { error } = await db.from('applications').insert([rowFromApp(newApp)]);
+            if (error) {
+                console.error('Insert failed:', error);
+                alert('Ralat semasa menghantar permohonan: ' + error.message);
+                return;
+            }
+            document.getElementById('form-register').reset();
+            setRegisterType('penganjur');
+            document.getElementById('reg-penganjur-fee-amount-wrapper')?.classList.add('hidden');
+            document.getElementById('reg-trainer-cert-custom-wrapper')?.classList.add('hidden');
+            updateTrainerCertCustomCounter();
+            document.getElementById('reg-penganjur-enddate-wrapper')?.classList.remove('hidden');
+            updateWordCounter('reg-trainer-summary', 'reg-trainer-summary-counter');
+            updateWordCounter('reg-talent-summary', 'reg-talent-summary-counter');
+            document.getElementById('modal-register').classList.add('hidden');
+            document.getElementById('modal-submission-success').classList.remove('hidden');
+            await loadAllData();
+            refreshAllViews();
+        }
+
+        function openRegisterModal() {
+            document.getElementById('modal-register').classList.remove('hidden');
+            setRegisterType('penganjur');
+        }
+        function closeRegisterModal() { document.getElementById('modal-register').classList.add('hidden'); }
+        function closeSubmissionSuccessModal() { document.getElementById('modal-submission-success').classList.add('hidden'); }
+        function openFeedbackModal() { document.getElementById('modal-feedback').classList.remove('hidden'); }
+        function closeFeedbackModal() { document.getElementById('modal-feedback').classList.add('hidden'); }
+        function closeFeedbackSuccessModal() { document.getElementById('modal-feedback-success').classList.add('hidden'); }
+        function openAdminLoginModal() { document.getElementById('modal-admin-login').classList.remove('hidden'); }
+        function closeAdminLoginModal() { document.getElementById('modal-admin-login').classList.add('hidden'); }
+        function closeFeedbackPreviewModal() { document.getElementById('modal-feedback-preview').classList.add('hidden'); }
+        function closeAdminReviewModal() { document.getElementById('modal-admin-review').classList.add('hidden'); }
+        function closeBannerModal() { document.getElementById('modal-banner').classList.add('hidden'); }
+        function closePartnerModal() { document.getElementById('modal-partner').classList.add('hidden'); }
+        function closeEditSubscriberModal() { document.getElementById('modal-edit-subscriber').classList.add('hidden'); }
+        function closeDeleteModal() {
+            window.__applicationToDelete = null;
+            document.getElementById('modal-confirm-delete').classList.add('hidden');
+        }
+
+        async function handleFeedbackSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('fb-name').value.trim();
+            const email = document.getElementById('fb-email').value.trim();
+            const message = document.getElementById('fb-message').value.trim();
+            if (!name || !email || !message) return;
+            const now = new Date();
+            const dateStr = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0].substring(0,5);
+            const { error } = await db.from('feedbacks').insert([{
+                id: "FB-" + Date.now(), name, email, message, date: dateStr, status: "In Review"
+            }]);
+            if (error) { alert('Ralat menghantar maklum balas: ' + error.message); return; }
+            closeFeedbackModal();
+            document.getElementById('form-feedback').reset();
+            document.getElementById('modal-feedback-success').classList.remove('hidden');
+            await loadAllData();
+            renderFeedbackTable();
+        }
+
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('admin-login-email').value;
+            const password = document.getElementById('admin-login-pass').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Log Masuk...'; }
+            const { data, error } = await db.auth.signInWithPassword({ email, password });
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Log Masuk'; }
+            if (error) { alert('Log masuk gagal: ' + error.message); return; }
+            currentUser = data.user;
+            closeAdminLoginModal();
+            await loadAllData();
+            switchTab('admin');
+        }
+        async function logoutAdmin() {
+            try { await db.auth.signOut(); } catch (err) { console.warn(err); }
+            currentUser = null;
+            switchTab('agenda');
+        }
+
+        function openBannerModal(id) {
+            const modal = document.getElementById('modal-banner');
+            const title = document.getElementById('banner-modal-title');
+            const form = document.getElementById('form-banner');
+            if (id) {
+                const banner = bayuData.banners.find(b => b.id === id);
+                if (!banner) return;
+                title.textContent = 'Edit Banner';
+                document.getElementById('banner-edit-id').value = banner.id;
+                document.getElementById('banner-photo').value = banner.photo;
+                document.getElementById('banner-name').value = banner.name;
+                document.getElementById('banner-company').value = banner.company;
+                document.getElementById('banner-validity').value = banner.validity;
+                document.getElementById('banner-start-date').value = banner.startDate;
+                document.getElementById('banner-end-date').value = banner.endDate;
+                document.getElementById('banner-photo-preview').classList.remove('hidden');
+                document.getElementById('banner-photo-preview').querySelector('img').src = banner.photo;
+            } else {
+                title.textContent = 'Tambah Banner';
+                document.getElementById('banner-edit-id').value = '';
+                form.reset();
+                document.getElementById('banner-end-date').value = '';
+                document.getElementById('banner-photo-preview').classList.add('hidden');
+            }
+            modal.classList.remove('hidden');
+        }
+        function calculateBannerEndDate() {
+            const startDate = document.getElementById('banner-start-date').value;
+            const validity = document.getElementById('banner-validity').value;
+            const endDateInput = document.getElementById('banner-end-date');
+            if (startDate && validity) endDateInput.value = calculateTarikhTamat(startDate, validity);
+            else endDateInput.value = '';
+        }
+        async function handleSaveBanner(e) {
+            e.preventDefault();
+            const editId = document.getElementById('banner-edit-id').value;
+            const photo = document.getElementById('banner-photo').value.trim();
+            const name = document.getElementById('banner-name').value.trim();
+            const company = document.getElementById('banner-company').value.trim();
+            const validity = document.getElementById('banner-validity').value;
+            const startDate = document.getElementById('banner-start-date').value;
+            const endDate = document.getElementById('banner-end-date').value;
+            if (!photo || !name || !company || !validity || !startDate || !endDate) {
+                alert('Sila isi semua maklumat banner.'); return;
+            }
+            const payload = { photo, name, company, validity, start_date: startDate, end_date: endDate };
+            if (editId) {
+                const { error } = await db.from('banners').update(payload).eq('id', editId);
+                if (error) { alert('Ralat: ' + error.message); return; }
+            } else {
+                const { error } = await db.from('banners').insert([{ id: "BAN-" + Date.now(), ...payload }]);
+                if (error) { alert('Ralat: ' + error.message); return; }
+            }
+            closeBannerModal();
+            await loadAllData();
+            renderBannerTable(); renderBanner();
+        }
+        async function confirmDeleteBanner(id) {
+            if (!confirm('Adakah anda pasti mahu memadam banner ini?')) return;
+            const { error } = await db.from('banners').delete().eq('id', id);
+            if (error) { alert('Ralat: ' + error.message); return; }
+            await loadAllData();
+            renderBannerTable(); renderBanner();
+        }
+
+        function openPartnerModal(id) {
+            const modal = document.getElementById('modal-partner');
+            const title = document.getElementById('partner-modal-title');
+            const form = document.getElementById('form-partner');
+            if (id) {
+                const p = bayuData.partnerships.find(x => x.id === id);
+                if (!p) return;
+                title.textContent = 'Edit Partner';
+                document.getElementById('partner-edit-id').value = p.id;
+                document.getElementById('partner-name').value = p.name;
+                document.getElementById('partner-image').value = p.image;
+                document.getElementById('partner-position').value = p.position;
+                document.getElementById('partner-image-preview').classList.remove('hidden');
+                document.getElementById('partner-image-preview').querySelector('img').src = p.image;
+            } else {
+                title.textContent = 'Tambah Partner';
+                document.getElementById('partner-edit-id').value = '';
+                form.reset();
+                const used = bayuData.partnerships.map(p => p.position);
+                let next = 1;
+                while (used.includes(next) && next <= 10) next++;
+                document.getElementById('partner-position').value = next <= 10 ? next : 10;
+                document.getElementById('partner-image-preview').classList.add('hidden');
+            }
+            modal.classList.remove('hidden');
+        }
+        async function handleSavePartner(e) {
+            e.preventDefault();
+            const editId = document.getElementById('partner-edit-id').value;
+            const name = document.getElementById('partner-name').value.trim();
+            const image = document.getElementById('partner-image').value.trim();
+            const position = parseInt(document.getElementById('partner-position').value, 10);
+            if (!name || !image || !position || position < 1 || position > 10) {
+                alert('Sila isi semua maklumat dengan posisi 1 - 10.'); return;
+            }
+            const conflicting = bayuData.partnerships.find(p => p.position === position && p.id !== editId);
+            if (conflicting) await db.from('partnerships').delete().eq('id', conflicting.id);
+            const payload = { name, image, position };
+            if (editId) {
+                const { error } = await db.from('partnerships').update(payload).eq('id', editId);
+                if (error) { alert('Ralat: ' + error.message); return; }
+            } else {
+                const { error } = await db.from('partnerships').insert([{ id: "PTN-" + Date.now(), ...payload }]);
+                if (error) { alert('Ralat: ' + error.message); return; }
+            }
+            closePartnerModal();
+            await loadAllData();
+            renderPartnerTable(); renderBrandsSupport();
+        }
+        async function confirmDeletePartner(id) {
+            if (!confirm('Adakah anda pasti mahu memadam partner ini?')) return;
+            const { error } = await db.from('partnerships').delete().eq('id', id);
+            if (error) { alert('Ralat: ' + error.message); return; }
+            await loadAllData();
+            renderPartnerTable(); renderBrandsSupport();
+        }
+
+        function getAgendaFiltered() {
+            const loc = (document.getElementById('filter-agenda-location')?.value || '').trim();
+            const mode = (document.getElementById('filter-agenda-mode')?.value || '').trim();
+            const cat = (document.getElementById('filter-agenda-category')?.value || '').trim();
+            const day = (document.getElementById('filter-agenda-day')?.value || '').trim();
+            const month = (document.getElementById('filter-agenda-month')?.value || '').trim();
+            const year = (document.getElementById('filter-agenda-year')?.value || '').trim();
+            const q = (document.getElementById('global-search')?.value || '').toLowerCase().trim();
+
+            return bayuData.applications.filter(item => {
+                if (item.type !== 'Agenda') return false;
+                if (item.approval !== 'Approved') return false;
+                if (loc && (item.location || '') !== loc) return false;
+                if (mode && (item.mode || '') !== mode) return false;
+                if (cat && (item.category || '') !== cat) return false;
+                const { start, end } = getAgendaDateRange(item);
+                if (year || month || day) {
+                    let matches = false;
+                    if (year && !month && !day) {
+                        const ys = start.slice(0, 4);
+                        const ye = (end || start).slice(0, 4);
+                        matches = (ys <= year && ye >= year);
+                    } else if (year && month && !day) {
+                        const startD = new Date(start);
+                        const endD = new Date(end || start);
+                        const monthStart = new Date(`${year}-${month}-01`);
+                        const monthEnd = new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 0);
+                        matches = (startD <= monthEnd && endD >= monthStart);
+                    } else if (year && month && day) {
+                        const target = `${year}-${month}-${day}`;
+                        matches = isAgendaActiveOn(item, target);
+                    } else if (month && !year && !day) {
+                        const sm = start.slice(5, 7);
+                        const em = (end || start).slice(5, 7);
+                        matches = (sm === month || em === month || (sm <= month && em >= month));
+                    } else if (day && !month && !year) {
+                        const sd = start.slice(8, 10);
+                        const ed = (end || start).slice(8, 10);
+                        matches = (sd === day || ed === day || (sd <= day && ed >= day));
+                    } else if (day && month && !year) {
+                        const sd = start.slice(5, 10);
+                        const ed = (end || start).slice(5, 10);
+                        const target = `${month}-${day}`;
+                        matches = (sd <= target && ed >= target) || sd === target || ed === target;
+                    }
+                    if (!matches) return false;
+                }
+                if (activeQuickFilter) {
+                    const today = new Date();
+                    const startD = new Date(start);
+                    const endD = new Date(end || start);
+                    if (activeQuickFilter === 'week') {
+                        const dayOfWeek = today.getDay();
+                        const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+                        const weekStart = new Date(today.setDate(diff));
+                        weekStart.setHours(0,0,0,0);
+                        const weekEnd = new Date(weekStart);
+                        weekEnd.setDate(weekStart.getDate() + 6);
+                        weekEnd.setHours(23,59,59,999);
+                        if (!(startD <= weekEnd && endD >= weekStart)) return false;
+                    } else if (activeQuickFilter === 'month') {
+                        const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+                        const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+                        monthEnd.setHours(23,59,59,999);
+                        if (!(startD <= monthEnd && endD >= monthStart)) return false;
+                    } else if (activeQuickFilter === 'year') {
+                        const yearStart = new Date(today.getFullYear(), 0, 1);
+                        const yearEnd = new Date(today.getFullYear(), 11, 31);
+                        yearEnd.setHours(23,59,59,999);
+                        if (!(startD <= yearEnd && endD >= yearStart)) return false;
+                    } else if (activeQuickFilter === 'course') {
+                        const courseCategories = ['Kursus & Latihan', 'Bengkel', 'Seminar & Forum'];
+                        if (!courseCategories.includes(item.category)) return false;
+                    }
+                }
+                if (q) {
+                    const hay = ((item.title || '') + ' ' + (item.name || '') + ' ' + (item.org || '') + ' ' +
+                        (item.penganjur || '') + ' ' + (item.location || '') + ' ' + (item.category || '') + ' ' + (item.summary || '')).toLowerCase();
+                    if (!hay.includes(q)) return false;
+                }
+                return true;
+            });
+        }
+
+        function renderAgenda() {
+            const upcomingContainer = document.getElementById('grid-agenda-upcoming');
+            const endedContainer = document.getElementById('grid-agenda-ended');
+            const paginationEl = document.getElementById('agenda-pagination');
+            if (!upcomingContainer || !endedContainer) return;
+            upcomingContainer.innerHTML = '';
+            endedContainer.innerHTML = '';
+            if (paginationEl) paginationEl.innerHTML = '';
+
+            const filtered = getAgendaFiltered();
+            const promoted = filtered.filter(x => isPromotionActive(x));
+            const normal = filtered.filter(x => !isPromotionActive(x));
+            const sortedPromoted = sortByPromotion(promoted);
+            normal.sort((a, b) => {
+                const da = a.date || '9999-12-31';
+                const db = b.date || '9999-12-31';
+                return da.localeCompare(db);
+            });
+            const sortedAgenda = [...sortedPromoted, ...normal];
+
+            const upcoming = [];
+            const ended = [];
+            sortedAgenda.forEach(item => {
+                const s = getAgendaStatusInfo(item);
+                if (s.code === 'TAMAT' || s.code === 'DIBATALKAN') ended.push(item);
+                else upcoming.push(item);
+            });
+
+            const totalPages = Math.max(1, Math.ceil(upcoming.length / AGENDA_PER_PAGE));
+            if (currentAgendaPage > totalPages) currentAgendaPage = totalPages;
+            const startIdx = (currentAgendaPage - 1) * AGENDA_PER_PAGE;
+            const pageItems = upcoming.slice(startIdx, startIdx + AGENDA_PER_PAGE);
+
+            const buildCard = (item) => {
+                const badgeHtml = getPromotionalBadgeHtml(item);
+                const displayTitle = item.title || item.name;
+                const priceDisplay = getPriceDisplay(item);
+                const { start, end } = getAgendaDateRange(item);
+                const dateDisplay = item.isOneDay
+                    ? formatDateDisplay(start)
+                    : `${formatDateDisplay(start)} - ${formatDateDisplay(end)}`;
+                const penganjurDisplay = item.org || item.penganjur || item.name || 'Penganjur';
+                return `
+                    <div class="bg-white rounded-2xl border border-brand-border overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="relative h-48 bg-gray-100 overflow-hidden">
+                                <img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'}" alt="${displayTitle}" class="w-full h-full object-cover">
+                                <div class="absolute top-3 left-3 flex flex-wrap gap-1">${badgeHtml}</div>
+                                <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-2.5 py-1 rounded-lg font-semibold">${item.mode || 'Fizikal'}</div>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <div class="text-xs font-bold text-brand uppercase tracking-wider">${item.category || 'Program'}</div>
+                                <h3 class="text-lg font-bold text-brand-dark leading-snug hover:text-brand transition-colors">${displayTitle}</h3>
+                                <div class="text-xs text-brand-muted space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-calendar text-brand"></i> ${dateDisplay || 'Akan Datang'}</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand"></i> ${item.location || 'Sabah'}</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-user text-brand"></i> Penganjur: <span class="font-semibold text-brand-dark">${penganjurDisplay}</span></div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-tag text-brand"></i> Harga Yuran: <span class="font-bold text-brand-dark">${priceDisplay}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="w-full bg-brand-bg hover:bg-brand text-brand hover:text-white border border-brand-border font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                                <span>Maklumat Lanjut</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>`;
+            };
+
+            pageItems.forEach(item => { upcomingContainer.innerHTML += buildCard(item); });
+            ended.forEach(item => { endedContainer.innerHTML += buildCard(item); });
+
+            document.getElementById('count-upcoming').textContent = `${upcoming.length} Program`;
+            document.getElementById('count-ended').textContent = `${ended.length} Program`;
+
+            if (paginationEl && totalPages > 1) {
+                const makeBtn = (label, page, disabled, active) => {
+                    const b = document.createElement('button');
+                    b.textContent = label;
+                    b.className = `px-3.5 py-2 rounded-lg text-xs font-bold border transition-colors ${
+                        active ? 'bg-brand text-white border-brand' :
+                        disabled ? 'bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed' :
+                        'bg-white text-brand-dark border-brand-border hover:border-brand hover:text-brand'
+                    }`;
+                    if (!disabled && !active) b.onclick = () => { currentAgendaPage = page; renderAgenda(); window.scrollTo({ top: 200, behavior: 'smooth' }); };
+                    return b;
+                };
+                paginationEl.appendChild(makeBtn('«', Math.max(1, currentAgendaPage - 1), currentAgendaPage === 1, false));
+                for (let p = 1; p <= totalPages; p++) {
+                    paginationEl.appendChild(makeBtn(String(p), p, false, p === currentAgendaPage));
+                }
+                paginationEl.appendChild(makeBtn('»', Math.min(totalPages, currentAgendaPage + 1), currentAgendaPage === totalPages, false));
+            }
+        }
+
+        function filterAgenda() { currentAgendaPage = 1; renderAgenda(); }
+        function resetAgendaFilters() {
+            document.getElementById('filter-agenda-location').value = "";
+            document.getElementById('filter-agenda-mode').value = "";
+            document.getElementById('filter-agenda-category').value = "";
+            document.getElementById('filter-agenda-day').value = "";
+            document.getElementById('filter-agenda-month').value = "";
+            document.getElementById('filter-agenda-year').value = "";
+            const gs = document.getElementById('global-search');
+            if (gs) gs.value = '';
+            activeQuickFilter = '';
+            document.querySelectorAll('.quick-filter-btn').forEach(b => b.classList.remove('active'));
+            currentAgendaPage = 1;
+            renderAgenda();
+        }
+
+        function getTrainerFiltered() {
+            const name = (document.getElementById('filter-trainer-name')?.value || '').toLowerCase().trim();
+            const exp = (document.getElementById('filter-trainer-expertise')?.value || '').trim();
+            const loc = (document.getElementById('filter-trainer-location')?.value || '').trim();
+            const cert = (document.getElementById('filter-trainer-cert')?.value || '').trim();
+            const q = (document.getElementById('global-search')?.value || '').toLowerCase().trim();
+            return bayuData.applications.filter(item => {
+                if (item.type !== 'Trainer') return false;
+                if (item.approval !== 'Approved') return false;
+                if (name && !(item.name || '').toLowerCase().includes(name)) return false;
+                if (exp && !(item.expertise || []).includes(exp)) return false;
+                if (loc && (item.location || '') !== loc) return false;
+                if (cert) {
+                    const rawCerts = item.certs || [];
+                    const custom = (item.certCustom || '').trim();
+                    if (cert === 'Lain-Lain') {
+                        if (!(rawCerts.includes('Lain-Lain') && custom !== '')) return false;
+                    } else {
+                        if (!rawCerts.includes(cert)) return false;
+                    }
+                }
+                if (q) {
+                    const certList = getTrainerCertDisplayList(item);
+                    const hay = ((item.name || '') + ' ' + (item.title || '') + ' ' + (item.location || '') + ' ' + (item.summary || '') + ' ' + (item.expertise || []).join(' ') + ' ' + certList.join(' ')).toLowerCase();
+                    if (!hay.includes(q)) return false;
+                }
+                return true;
+            });
+        }
+        function renderTrainer() {
+            const container = document.getElementById('grid-trainer');
+            if (!container) return;
+            container.innerHTML = '';
+            const sortedTrainers = sortByPromotion(getTrainerFiltered());
+            sortedTrainers.forEach(item => {
+                const displayName = item.name || item.title;
+                const expTags = (item.expertise || []).map(exp => `<span class="bg-brand-bg text-brand text-[10px] font-semibold px-2 py-0.5 rounded-md border border-brand-border">${exp}</span>`).join(' ');
+                const certList = getTrainerCertDisplayList(item);
+                const certTags = certList.map(cert => `<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">${cert}</span>`).join(' ');
+                const certDisplay = certList.length > 0 ? `<div class="flex flex-wrap gap-1">${certTags}</div>` : '';
+                const badgeHtml = getPromotionalBadgeHtml(item);
+                const promoBadgeBlock = badgeHtml ? `<div class="flex flex-wrap gap-1">${badgeHtml}</div>` : '';
+                container.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            ${promoBadgeBlock}
+                            <div class="flex items-center gap-4">
+                                <img src="${item.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400'}" alt="${displayName}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shrink-0">
+                                <div>
+                                    <h3 class="text-base font-bold text-brand-dark">${displayName}</h3>
+                                    <p class="text-xs text-brand-muted font-medium">${item.title || 'Trainer Profesional'}</p>
+                                    <p class="text-[11px] text-brand font-semibold mt-1"><i class="fa-solid fa-location-dot mr-1"></i>${item.location || 'Sabah'}</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1">${expTags}</div>
+                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
+                        </div>
+                        <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between">
+                            ${certDisplay}
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">Lihat Profil</a>
+                        </div>
+                    </div>`;
+            });
+        }
+        function filterTrainer() { renderTrainer(); }
+        function resetTrainerFilters() {
+            document.getElementById('filter-trainer-name').value = "";
+            document.getElementById('filter-trainer-expertise').value = "";
+            document.getElementById('filter-trainer-location').value = "";
+            document.getElementById('filter-trainer-cert').value = "";
+            const gs = document.getElementById('global-search');
+            if (gs) gs.value = '';
+            renderTrainer();
+        }
+
+        function getTalentFiltered() {
+            const name = (document.getElementById('filter-talent-name')?.value || '').toLowerCase().trim();
+            const niche = (document.getElementById('filter-talent-niche')?.value || '').trim();
+            const loc = (document.getElementById('filter-talent-location')?.value || '').trim();
+            const q = (document.getElementById('global-search')?.value || '').toLowerCase().trim();
+            return bayuData.applications.filter(item => {
+                if (item.type !== 'Talent') return false;
+                if (item.approval !== 'Approved') return false;
+                if (name && !(item.name || '').toLowerCase().includes(name)) return false;
+                if (niche && (item.niche || '') !== niche) return false;
+                if (loc && (item.location || '') !== loc) return false;
+                if (q) {
+                    const hay = ((item.name || '') + ' ' + (item.title || '') + ' ' + (item.niche || '') + ' ' + (item.location || '') + ' ' + (item.summary || '')).toLowerCase();
+                    if (!hay.includes(q)) return false;
+                }
+                return true;
+            });
+        }
+        function renderTalent() {
+            const container = document.getElementById('grid-talent');
+            if (!container) return;
+            container.innerHTML = '';
+            const sortedTalents = sortByPromotion(getTalentFiltered());
+            sortedTalents.forEach(item => {
+                const displayName = item.name || item.title;
+                const badgeHtml = getPromotionalBadgeHtml(item);
+                const promoBadgeBlock = badgeHtml ? `<div class="flex flex-wrap gap-1">${badgeHtml}</div>` : '';
+                container.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            ${promoBadgeBlock}
+                            <div class="flex items-center gap-4">
+                                <img src="${item.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400'}" alt="${displayName}" class="w-16 h-16 rounded-2xl object-cover border border-brand-border shrink-0">
+                                <div>
+                                    <h3 class="text-base font-bold text-brand-dark">${displayName}</h3>
+                                    <p class="text-xs text-brand font-semibold">${item.niche || 'Bakat Tempatan'}</p>
+                                    <p class="text-[11px] text-brand-muted mt-0.5"><i class="fa-solid fa-location-dot mr-1"></i>${item.location || 'Sabah'}</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
+                        </div>
+                        <div class="pt-4 mt-4 border-t border-brand-border">
+                            <a href="${item.url || TIKTOK_BAYUONE_URL}" target="_blank" class="w-full bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors block text-center">Lihat Profil</a>
+                        </div>
+                    </div>`;
+            });
+        }
+        function filterTalent() { renderTalent(); }
+        function resetTalentFilters() {
+            document.getElementById('filter-talent-name').value = "";
+            document.getElementById('filter-talent-niche').value = "";
+            document.getElementById('filter-talent-location').value = "";
+            const gs = document.getElementById('global-search');
+            if (gs) gs.value = '';
+            renderTalent();
+        }
+        function handleGlobalSearch() { currentAgendaPage = 1; renderAgenda(); renderTrainer(); renderTalent(); }
+        function triggerSearch() { handleGlobalSearch(); }
+
+        function getBannerStatus(banner) {
+            const todayStr = getTodayStr();
+            if (todayStr < banner.startDate) return { code: 'AKAN_DATANG', label: 'Akan Datang', class: 'bg-amber-100 text-amber-800 border-amber-200' };
+            if (todayStr >= banner.startDate && todayStr < banner.endDate) return { code: 'SEDANG_AKTIF', label: 'Sedang Aktif', class: 'bg-emerald-100 text-emerald-800 border-emerald-200' };
+            return { code: 'TELAH_TAMAT', label: 'Telah Tamat', class: 'bg-gray-100 text-gray-600 border-gray-200' };
+        }
+        function getActiveBanner() {
+            const todayStr = getTodayStr();
+            return bayuData.banners.find(b => todayStr >= b.startDate && todayStr < b.endDate);
+        }
+        function renderBanner() {
+            const container = document.getElementById('banner-ad-container');
+            if (!container) return;
+            const activeBanner = getActiveBanner();
+            if (!activeBanner || !activeBanner.photo) {
+                container.innerHTML = '';
+                container.style.display = 'none';
+                return;
+            }
+            container.style.display = 'flex';
+            container.innerHTML = `<img src="${activeBanner.photo}" alt="${activeBanner.name}" onerror="this.style.display='none'">`;
+        }
+
+        function renderBrandsSupport() {
+            const section = document.getElementById('brands-support-section');
+            const grid = document.getElementById('brands-support-grid');
+            if (!section || !grid) return;
+            const valid = bayuData.partnerships.filter(p => p && p.image && p.image.trim() !== '').sort((a, b) => a.position - b.position);
+            if (valid.length === 0) {
+                section.classList.add('hidden');
+                grid.innerHTML = '';
+                return;
+            }
+            section.classList.remove('hidden');
+            grid.innerHTML = '';
+            valid.forEach(p => {
+                const tile = document.createElement('div');
+                tile.className = "flex flex-col items-center";
+                tile.innerHTML = `
+                    <div class="brand-logo-tile w-full">
+                        <img src="${p.image}" alt="${p.name || 'Partner'}" onerror="this.closest('.brand-logo-tile').style.display='none'">
+                    </div>
+                    ${p.name ? `<p class="mt-2 text-[11px] sm:text-xs font-semibold text-brand-dark text-center truncate w-full">${p.name}</p>` : ''}
+                `;
+                grid.appendChild(tile);
+            });
+        }
+
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            const searchVal = (document.getElementById('admin-search')?.value || '').toLowerCase().trim();
+            const filterType = document.getElementById('admin-filter-type')?.value || '';
+            const filterApproval = document.getElementById('admin-filter-approval')?.value || '';
+            let total = 0, pending = 0, approved = 0, cancelled = 0;
+            bayuData.applications.forEach(item => {
+                total++;
+                if (item.approval === 'Pending') pending++;
+                if (item.approval === 'Approved') approved++;
+                if (item.statusPenangguhan === 'Dibatalkan') cancelled++;
+                if (filterType && item.type !== filterType) return;
+                if (filterApproval && item.approval !== filterApproval) return;
+                const nameText = (item.name || '').toLowerCase();
+                const titleText = (item.title || '').toLowerCase();
+                const emailText = (item.email || '').toLowerCase();
+                const orgText = (item.org || '').toLowerCase();
+                if (searchVal && !nameText.includes(searchVal) && !titleText.includes(searchVal) && !emailText.includes(searchVal) && !orgText.includes(searchVal)) return;
+                const displayTitle = (item.type === 'Agenda') ? (item.title || item.name) : (item.name || item.title);
+                const displayDate = formatDateDisplay(item.date) || '-';
+                const hasLabel = item.label && item.label.trim() !== '';
+                const labelDisplay = hasLabel ? item.label : '-';
+                const validityDisplay = hasLabel ? (item.validity || '-') : '-';
+                const dariDisplay = hasLabel ? (formatDateDisplay(item.tarikhDari) || '-') : '-';
+                const hinggaDisplay = hasLabel ? (formatDateDisplay(item.tarikhSehingga) || '-') : '-';
+                let labelBadgeClass = 'bg-gray-100 text-gray-600';
+                if (item.label === 'Top') labelBadgeClass = 'bg-emerald-100 text-emerald-800';
+                else if (item.label === 'Featured') labelBadgeClass = 'bg-amber-100 text-amber-800';
+                else if (item.label === 'Promoted') labelBadgeClass = 'bg-indigo-100 text-indigo-800';
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5"><img src="${item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=100'}" class="w-10 h-10 rounded-xl object-cover border border-brand-border"></td>
+                    <td class="p-3.5 font-bold text-brand-dark">
+                        <div>${displayTitle}</div>
+                        <div class="text-[10px] text-brand font-semibold uppercase tracking-wider">${item.type} • ${item.id}</div>
+                    </td>
+                    <td class="p-3.5 text-brand-muted">
+                        <div>${item.name || item.org || '-'}</div>
+                        <div class="text-[11px] text-gray-500">${item.email || '-'}</div>
+                    </td>
+                    <td class="p-3.5 font-semibold text-brand-dark">${displayDate}</td>
+                    <td class="p-3.5">
+                        <span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${item.approval === 'Approved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                            ${item.approval === 'Approved' ? 'Diluluskan' : 'Menunggu Semakan'}
+                        </span>
+                    </td>
+                    <td class="p-3.5"><span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${labelBadgeClass}">${labelDisplay}</span></td>
+                    <td class="p-3.5 font-semibold ${hasLabel ? 'text-brand-dark' : 'text-gray-300'}">${validityDisplay}</td>
+                    <td class="p-3.5 ${hasLabel ? 'text-gray-600' : 'text-gray-300'}">${dariDisplay}</td>
+                    <td class="p-3.5 ${hasLabel ? 'text-gray-600' : 'text-gray-300'}">${hinggaDisplay}</td>
+                    <td class="p-3.5 text-right space-x-2">
+                        <button onclick="openAdminReviewModal('${item.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
+                        </button>
+                        <button onclick="confirmDeleteApplication('${item.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>`;
+                tbody.appendChild(tr);
+            });
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-pending').textContent = pending;
+            document.getElementById('stat-approved').textContent = approved;
+            document.getElementById('stat-active').textContent = approved;
+            document.getElementById('stat-expiring').textContent = 0;
+            document.getElementById('stat-expired').textContent = 0;
+            document.getElementById('stat-cancelled').textContent = cancelled;
+            document.getElementById('stat-feedback').textContent = bayuData.feedbacks.length;
+        }
+
+        function renderBannerTable() {
+            const tbody = document.getElementById('banner-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            bayuData.banners.forEach(banner => {
+                const statusInfo = getBannerStatus(banner);
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5"><img src="${banner.photo}" class="w-16 h-8 rounded object-cover border border-brand-border" onerror="this.style.display='none'"></td>
+                    <td class="p-3.5 font-bold text-brand-dark">${banner.name}</td>
+                    <td class="p-3.5 text-brand-muted">${banner.company}</td>
+                    <td class="p-3.5">${banner.validity}</td>
+                    <td class="p-3.5 font-semibold text-brand-dark">${formatDateDisplay(banner.startDate)}</td>
+                    <td class="p-3.5 font-semibold text-brand-dark">${formatDateDisplay(banner.endDate)}</td>
+                    <td class="p-3.5"><span class="px-2.5 py-1 rounded-full font-bold text-[10px] ${statusInfo.class}">${statusInfo.label}</span></td>
+                    <td class="p-3.5 text-right space-x-2">
+                        <button onclick="openBannerModal('${banner.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
+                        </button>
+                        <button onclick="confirmDeleteBanner('${banner.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderPartnerTable() {
+            const tbody = document.getElementById('partner-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            const sorted = [...bayuData.partnerships].sort((a, b) => a.position - b.position);
+            sorted.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5 font-bold text-brand-dark">${p.position}</td>
+                    <td class="p-3.5"><img src="${p.image}" class="w-10 h-10 rounded-lg object-contain border border-brand-border bg-white p-1" onerror="this.style.display='none'"></td>
+                    <td class="p-3.5 font-bold text-brand-dark">${p.name}</td>
+                    <td class="p-3.5 text-brand-muted text-[11px] break-all max-w-xs">${p.image}</td>
+                    <td class="p-3.5"><span class="px-2.5 py-1 rounded-full font-bold text-[10px] bg-emerald-100 text-emerald-800">Aktif</span></td>
+                    <td class="p-3.5 text-right space-x-2">
+                        <button onclick="openPartnerModal('${p.id}')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold text-[11px] hover:bg-brand-dark transition-colors">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
+                        </button>
+                        <button onclick="confirmDeletePartner('${p.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-lg font-bold text-[11px] transition-colors">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderFeedbackTable() {
+            const tbody = document.getElementById('feedback-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            bayuData.feedbacks.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5 text-gray-500">${item.date}</td>
+                    <td class="p-3.5 font-bold text-brand-dark">${item.name}</td>
+                    <td class="p-3.5 text-brand-muted">${item.email}</td>
+                    <td class="p-3.5 text-brand-text max-w-xs truncate">${item.message}</td>
+                    <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${item.status}</span></td>
+                    <td class="p-3.5 text-right space-x-1">
+                        <button onclick="openFeedbackPreview('${item.id}')" class="text-brand hover:underline text-[11px] font-bold mr-2">Lihat Penuh</button>
+                        <button onclick="toggleFeedbackStatus('${item.id}')" class="text-brand hover:underline text-[11px] font-bold">Tukar Status</button>
+                    </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+        function openFeedbackPreview(id) {
+            const fb = bayuData.feedbacks.find(f => f.id === id);
+            if (!fb) return;
+            const container = document.getElementById('feedback-preview-body');
+            container.innerHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-0.5">Tarikh</span><span class="text-brand-muted">${fb.date}</span></div>
+                    <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-0.5">Status</span><span class="px-2 py-0.5 rounded text-[10px] font-bold ${fb.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${fb.status}</span></div>
+                </div>
+                <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-0.5">Nama</span><span class="text-brand-text">${fb.name}</span></div>
+                <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-0.5">Emel</span><span class="text-brand-text">${fb.email}</span></div>
+                <div class="bg-brand-bg p-3 rounded-lg"><span class="font-bold text-brand-dark block mb-1">Maklum Balas Penuh</span><div class="feedback-preview-text text-brand-text text-xs leading-relaxed">${fb.message}</div></div>`;
+            document.getElementById('modal-feedback-preview').classList.remove('hidden');
+        }
+        async function toggleFeedbackStatus(id) {
+            const fb = bayuData.feedbacks.find(f => f.id === id);
+            if (!fb) return;
+            const newStatus = (fb.status === 'Resolved') ? 'In Review' : 'Resolved';
+            const { error } = await db.from('feedbacks').update({ status: newStatus }).eq('id', id);
+            if (error) { alert('Ralat: ' + error.message); return; }
+            await loadAllData();
+            renderFeedbackTable();
+        }
+
+        function renderSubscriberTable() {
+            const tbody = document.getElementById('subscriber-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            let total = 0, newSub = 0, existingSub = 0;
+            bayuData.subscribers.forEach(sub => {
+                total++;
+                if (sub.status === 'NEW') newSub++; else existingSub++;
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-brand-bg/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5 font-bold text-brand-dark">${sub.name}</td>
+                    <td class="p-3.5 text-brand-muted">${sub.email}</td>
+                    <td class="p-3.5 text-xs text-gray-600">${sub.minat}</td>
+                    <td class="p-3.5 text-right space-x-1">
+                        <button onclick="openEditSubscriberModal('${sub.id}')" class="text-brand hover:underline text-[11px] font-bold">Edit</button>
+                    </td>`;
+                tbody.appendChild(tr);
+            });
+            document.getElementById('stat-sub-total').textContent = total;
+            document.getElementById('stat-sub-new').textContent = newSub;
+            document.getElementById('stat-sub-existing').textContent = existingSub;
+        }
+        async function handleSubscribeSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('sub-name').value.trim();
+            const email = document.getElementById('sub-email').value.trim();
+            const checkedBoxes = document.querySelectorAll('input[name="sub_interest"]:checked');
+            const errorEl = document.getElementById('sub-error');
+            if (checkedBoxes.length === 0) { errorEl.classList.remove('hidden'); return; }
+            else errorEl.classList.add('hidden');
+            const minatList = Array.from(checkedBoxes).map(cb => cb.value).join(', ');
+            const { error } = await db.from('subscribers').insert([{
+                id: "SUB-" + Date.now(), name, email, minat: minatList,
+                date: getTodayStr(), status: "NEW"
+            }]);
+            if (error) { alert('Ralat: ' + error.message); return; }
+            document.getElementById('subscribe-form').reset();
+            document.getElementById('sub-success-message').classList.remove('hidden');
+            setTimeout(() => document.getElementById('sub-success-message').classList.add('hidden'), 5000);
+            await loadAllData();
+            renderSubscriberTable();
+        }
+        function openEditSubscriberModal(id) {
+            const sub = bayuData.subscribers.find(s => s.id === id);
+            if (!sub) return;
+            document.getElementById('edit-sub-id').value = sub.id;
+            document.getElementById('edit-sub-name').value = sub.name;
+            document.getElementById('edit-sub-email').value = sub.email;
+            document.getElementById('edit-sub-minat').value = sub.minat;
+            document.getElementById('modal-edit-subscriber').classList.remove('hidden');
+        }
+        async function handleSaveSubscriber(e) {
+            e.preventDefault();
+            const id = document.getElementById('edit-sub-id').value;
+            const payload = {
+                name: document.getElementById('edit-sub-name').value.trim(),
+                email: document.getElementById('edit-sub-email').value.trim(),
+                minat: document.getElementById('edit-sub-minat').value.trim()
+            };
+            const { error } = await db.from('subscribers').update(payload).eq('id', id);
+            if (error) { alert('Ralat: ' + error.message); return; }
+            closeEditSubscriberModal();
+            await loadAllData();
+            renderSubscriberTable();
+        }
+
+        function openAdminReviewModal(id) {
+            const item = bayuData.applications.find(a => a.id === id);
+            if (!item) return;
+            const modalBody = document.getElementById('admin-review-body');
+            if (!modalBody) return;
+            let typeSpecificFields = '';
+            if (item.type === 'Agenda') {
+                const feeType = item.feeType || 'Percuma';
+                const feeMin = item.hargaMin || '';
+                const feeMax = item.hargaMax || '';
+                typeSpecificFields = `
+                    <div class="bg-brand-bg p-3 rounded-xl border border-brand-border">
+                        <div class="text-[11px] font-bold text-brand uppercase tracking-wider mb-3">Maklumat Agenda</div>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tajuk Program</label>
+                                <input type="text" id="admin-edit-title" value="${item.title || ''}" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Penganjur</label>
+                                    <input type="text" id="admin-edit-org" value="${item.org || item.penganjur || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama PIC</label>
+                                    <input type="text" id="admin-edit-name" value="${item.name || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel</label>
+                                    <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon</label>
+                                    <input type="tel" id="admin-edit-phone" value="${item.phone || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Mula</label>
+                                    <input type="date" id="admin-edit-date" value="${item.date || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Akhir</label>
+                                    <input type="date" id="admin-edit-date-end" value="${item.dateEnd || item.date || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Mod</label>
+                                    <select id="admin-edit-mode" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                        ${['Fizikal','Online','Hybrid'].map(o => `<option ${item.mode === o ? 'selected' : ''}>${o}</option>`).join('')}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Kategori</label>
+                                    <select id="admin-edit-category" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                        ${['Kursus & Latihan','Seminar & Forum','Bengkel','Persidangan & Konvensyen','Networking & Professional','Komuniti & Sosial','Sukan & Rekreasi','Festival & Hiburan','Keusahawanan & Perniagaan','Pendidikan','Pelancongan','Sukan & Kesihatan','Rekreasi & Hobi','Agama & Kerohanian','Lain-lain'].map(c => `<option ${item.category === c ? 'selected' : ''}>${c}</option>`).join('')}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
+                                    <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jenis Yuran</label>
+                                    <select id="admin-edit-feetype" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                        <option value="Percuma" ${feeType === 'Percuma' ? 'selected' : ''}>Percuma</option>
+                                        <option value="Berbayar" ${feeType === 'Berbayar' ? 'selected' : ''}>Berbayar</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Min (RM)</label>
+                                    <input type="number" id="admin-edit-feemin" value="${feeMin}" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Maks (RM)</label>
+                                    <input type="number" id="admin-edit-feemax" value="${feeMax}" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL / Link Pendaftaran</label>
+                                <input type="url" id="admin-edit-url" value="${item.url || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar / Poster</label>
+                                <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                        </div>
+                    </div>`;
+            } else if (item.type === 'Trainer') {
+                const expOptions = ['Pengurusan & Kepimpinan','Sumber Manusia & Organisasi','Pentadbiran & Profesional','Perniagaan & Keusahawanan','Pemasaran & Jualan','Teknologi, AI & Digital','Kreatif, Media & Komunikasi','Kewangan, Akaun & Percukaian','Pendidikan & Akademik','Kesihatan, Keselamatan & Kesejahteraan','Industri & Teknikal','Kerajaan & Perkhidmatan Awam','Bahasa & Kemahiran Komunikasi','Pelancongan, Hospitaliti & F&B','Kualiti, Risiko & Pematuhan','Kemahiran Insaniah & Pembangunan Diri','Alam Sekitar & Kelestarian','Kecantikan & Gaya','Makanan & Masakan','Pelancongan & Hospitaliti','Kesihatan','Kemahiran Teknikal & Vokasional','Pertanian & Agro','Bahasa','Kemahiran Khusus / Lain-lain'];
+                const certOptions = ['HRD Corp TTT','HRD Corp Accredited Trainer','Sijil NCS-TTT','SKM3, DKM, atau DLKM','Lain-Lain'];
+                typeSpecificFields = `
+                    <div class="bg-brand-bg p-3 rounded-xl border border-brand-border">
+                        <div class="text-[11px] font-bold text-brand uppercase tracking-wider mb-3">Maklumat Trainer</div>
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Trainer</label>
+                                    <input type="text" id="admin-edit-name" value="${item.name || ''}" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel</label>
+                                    <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon</label>
+                                    <input type="tel" id="admin-edit-phone" value="${item.phone || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
+                                    <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Bidang Kepakaran</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto p-2 border border-brand-border rounded-xl bg-white">
+                                    ${expOptions.map(o => `<label class="flex items-center gap-2 text-xs"><input type="checkbox" name="admin_trainer_exp" value="${o}" ${(item.expertise||[]).includes(o) ? 'checked' : ''}><span>${o}</span></label>`).join('')}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Pentauliahan / Sijil</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 p-2 border border-brand-border rounded-xl bg-white">
+                                    ${certOptions.map(o => `<label class="flex items-center gap-2 text-xs"><input type="checkbox" name="admin_trainer_cert" value="${o}" ${(item.certs||[]).includes(o) ? 'checked' : ''}><span>${o}</span></label>`).join('')}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Pentauliahan Lain-lain (Custom)</label>
+                                <input type="text" id="admin-edit-cert-custom" maxlength="150" value="${item.certCustom || ''}" placeholder="Asingkan dengan koma (,)" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil</label>
+                                <textarea id="admin-edit-summary" rows="3" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none">${item.summary || ''}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
+                                <input type="url" id="admin-edit-url" value="${item.url || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar Profil</label>
+                                <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                        </div>
+                    </div>`;
+            } else if (item.type === 'Talent') {
+                const nicheOptions = ['Makanan, Minuman & Gaya Hidup','Pelancongan, Percutian & Hospitaliti','Kecantikan, Fesyen & Penjagaan Diri Kesihatan','Kecergasan & Kesejahteraan','Perniagaan, Kewangan & Keusahawanan','Pendidikan, Kerjaya & Pembangunan Diri','Teknologi, Digital & Media Sosial','Automotif, Hartanah & Pelaburan','Keluarga, Komuniti, Budaya & Gaya Hidup','Pengacaraan & Emcee','Hiburan & Seni','Fotografi & Videografi','Content Creator'];
+                typeSpecificFields = `
+                    <div class="bg-brand-bg p-3 rounded-xl border border-brand-border">
+                        <div class="text-[11px] font-bold text-brand uppercase tracking-wider mb-3">Maklumat Talent</div>
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Talent</label>
+                                    <input type="text" id="admin-edit-name" value="${item.name || ''}" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel</label>
+                                    <input type="email" id="admin-edit-email" value="${item.email || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon</label>
+                                    <input type="tel" id="admin-edit-phone" value="${item.phone || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi</label>
+                                    <input type="text" id="admin-edit-location" value="${item.location || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Bidang / Niche</label>
+                                <select id="admin-edit-niche" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                    ${nicheOptions.map(o => `<option ${item.niche === o ? 'selected' : ''}>${o}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil</label>
+                                <textarea id="admin-edit-summary" rows="3" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none">${item.summary || ''}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
+                                <input type="url" id="admin-edit-url" value="${item.url || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar Profil</label>
+                                <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                        </div>
+                    </div>`;
+            }
+            const hasLabel = item.label && item.label.trim() !== '';
+            const labelOptionsHtml = ['','Top','Featured','Promoted'].map(opt => {
+                const val = opt;
+                const label = opt === '' ? 'Tiada Label' : opt;
+                return `<option value="${val}" ${item.label === val ? 'selected' : ''}>${label}</option>`;
+            }).join('');
+            modalBody.innerHTML = `
+                <form onsubmit="handleSaveAdminEdit(event, '${item.id}')" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Jenis</label>
+                            <input type="text" value="${item.type}" disabled class="w-full bg-gray-100 border border-brand-border rounded-xl px-3.5 py-2 text-xs font-bold text-brand">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">ID</label>
+                            <input type="text" value="${item.id}" disabled class="w-full bg-gray-100 border border-brand-border rounded-xl px-3.5 py-2 text-xs font-bold text-brand-muted">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Status Kelulusan</label>
+                            <select id="admin-edit-approval" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                <option value="Pending" ${item.approval === 'Pending' ? 'selected' : ''}>Menunggu Semakan</option>
+                                <option value="Approved" ${item.approval === 'Approved' ? 'selected' : ''}>Diluluskan</option>
+                            </select>
+                        </div>
+                    </div>
+                    ${typeSpecificFields}
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                        <div class="text-[11px] font-bold text-amber-800 uppercase tracking-wider mb-3">
+                            <i class="fa-solid fa-star mr-1"></i> Label Promosi & Tempoh Sah
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Label Promosi</label>
+                                <select id="admin-edit-label" onchange="toggleAdminLabelFields()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                    ${labelOptionsHtml}
+                                </select>
+                            </div>
+                            <div id="admin-label-fields-wrapper" class="${hasLabel ? '' : 'hidden'} space-y-3">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tempoh Sah</label>
+                                        <select id="admin-edit-validity" onchange="onAdminValidityChange()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                            ${['','1 Bulan','3 Bulan','6 Bulan','1 Tahun'].map(o => `<option value="${o}" ${item.validity === o ? 'selected' : ''}>${o || 'Tiada'}</option>`).join('')}
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Dari</label>
+                                        <input type="date" id="admin-edit-dari" value="${item.tarikhDari || ''}" onchange="onAdminDariChange()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Hingga</label>
+                                        <input type="date" id="admin-edit-hingga" value="${item.tarikhSehingga || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                    </div>
+                                </div>
+                                <button type="button" onclick="resetAdminLabelDates()" class="bg-white border border-amber-300 text-amber-800 hover:bg-amber-100 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-colors">
+                                    <i class="fa-solid fa-rotate-left mr-1"></i> Reset Tarikh
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-brand-border flex gap-3">
+                        <button type="button" onclick="closeAdminReviewModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl text-xs transition-colors">Batal</button>
+                        <button type="submit" class="w-1/2 bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl text-xs transition-colors">Simpan Perubahan</button>
+                    </div>
+                </form>`;
+            document.getElementById('modal-admin-review').classList.remove('hidden');
+        }
+        function toggleAdminLabelFields() {
+            const labelVal = document.getElementById('admin-edit-label').value;
+            const wrapper = document.getElementById('admin-label-fields-wrapper');
+            if (!wrapper) return;
+            if (labelVal && labelVal.trim() !== '') wrapper.classList.remove('hidden');
+            else wrapper.classList.add('hidden');
+        }
+        function onAdminValidityChange() {
+            const dari = document.getElementById('admin-edit-dari').value;
+            const validity = document.getElementById('admin-edit-validity').value;
+            const hinggaEl = document.getElementById('admin-edit-hingga');
+            if (!hinggaEl) return;
+            if (dari && validity) {
+                const calc = calculateTarikhTamat(dari, validity);
+                if (calc) hinggaEl.value = calc;
+            }
+        }
+        function onAdminDariChange() { onAdminValidityChange(); }
+        function resetAdminLabelDates() {
+            const dariEl = document.getElementById('admin-edit-dari');
+            const hinggaEl = document.getElementById('admin-edit-hingga');
+            const validityEl = document.getElementById('admin-edit-validity');
+            if (dariEl) dariEl.value = '';
+            if (hinggaEl) hinggaEl.value = '';
+            if (validityEl) validityEl.value = '';
+        }
+        async function handleSaveAdminEdit(e, id) {
+            e.preventDefault();
+            const item = bayuData.applications.find(a => a.id === id);
+            if (!item) return;
+            const approvalVal = document.getElementById('admin-edit-approval').value;
+            const labelVal = document.getElementById('admin-edit-label').value;
+            const validityVal = document.getElementById('admin-edit-validity')?.value || '';
+            let dariVal = document.getElementById('admin-edit-dari')?.value || '';
+            let hinggaVal = document.getElementById('admin-edit-hingga')?.value || '';
+            const updated = { ...item };
+            updated.approval = approvalVal;
+            updated.label = labelVal;
+            if (labelVal && labelVal.trim() !== '') {
+                updated.validity = validityVal;
+                updated.tarikhDari = dariVal;
+                if (dariVal && validityVal && !hinggaVal) hinggaVal = calculateTarikhTamat(dariVal, validityVal);
+                updated.tarikhSehingga = hinggaVal;
+            } else {
+                updated.validity = '';
+                updated.tarikhDari = '';
+                updated.tarikhSehingga = '';
+            }
+            if (item.type === 'Agenda') {
+                updated.title = document.getElementById('admin-edit-title').value.trim();
+                updated.org = document.getElementById('admin-edit-org').value.trim();
+                updated.penganjur = updated.org;
+                updated.name = document.getElementById('admin-edit-name').value.trim() || updated.org;
+                updated.email = document.getElementById('admin-edit-email').value.trim();
+                updated.phone = document.getElementById('admin-edit-phone').value.trim();
+                updated.date = document.getElementById('admin-edit-date').value;
+                updated.dateEnd = document.getElementById('admin-edit-date-end').value;
+                updated.mode = document.getElementById('admin-edit-mode').value;
+                updated.category = document.getElementById('admin-edit-category').value;
+                updated.location = document.getElementById('admin-edit-location').value.trim();
+                updated.url = document.getElementById('admin-edit-url').value.trim();
+                updated.photo = document.getElementById('admin-edit-photo').value.trim();
+                updated.feeType = document.getElementById('admin-edit-feetype').value;
+                const feeMin = document.getElementById('admin-edit-feemin')?.value;
+                const feeMax = document.getElementById('admin-edit-feemax')?.value;
+                updated.hargaMin = feeMin ? parseFloat(feeMin) : null;
+                updated.hargaMax = feeMax ? parseFloat(feeMax) : null;
+                if (updated.feeType === 'Berbayar' && updated.hargaMin) {
+                    updated.hargaYuran = (updated.hargaMax && updated.hargaMax > updated.hargaMin) ? `RM${updated.hargaMin} - RM${updated.hargaMax}` : `RM${updated.hargaMin}`;
+                } else {
+                    updated.hargaYuran = 'Percuma';
+                }
+            } else if (item.type === 'Trainer') {
+                updated.name = document.getElementById('admin-edit-name').value.trim();
+                updated.email = document.getElementById('admin-edit-email').value.trim();
+                updated.phone = document.getElementById('admin-edit-phone').value.trim();
+                updated.location = document.getElementById('admin-edit-location').value.trim();
+                updated.summary = document.getElementById('admin-edit-summary').value.trim();
+                if (countWords(updated.summary) > 120) { alert('Ringkasan Profil Trainer tidak boleh melebihi 120 patah perkataan.'); return; }
+                updated.url = document.getElementById('admin-edit-url').value.trim();
+                updated.photo = document.getElementById('admin-edit-photo').value.trim();
+                const expBoxes = document.querySelectorAll('input[name="admin_trainer_exp"]:checked');
+                updated.expertise = Array.from(expBoxes).map(cb => cb.value);
+                if (updated.expertise.length === 0) updated.expertise = ["Pengurusan & Kepimpinan"];
+                const certBoxes = document.querySelectorAll('input[name="admin_trainer_cert"]:checked');
+                updated.certs = Array.from(certBoxes).map(cb => cb.value);
+                const customCertInput = document.getElementById('admin-edit-cert-custom');
+                updated.certCustom = (customCertInput && customCertInput.value) ? customCertInput.value.trim().slice(0, 150) : '';
+            } else if (item.type === 'Talent') {
+                updated.name = document.getElementById('admin-edit-name').value.trim();
+                updated.email = document.getElementById('admin-edit-email').value.trim();
+                updated.phone = document.getElementById('admin-edit-phone').value.trim();
+                updated.location = document.getElementById('admin-edit-location').value.trim();
+                updated.niche = document.getElementById('admin-edit-niche').value;
+                updated.summary = document.getElementById('admin-edit-summary').value.trim();
+                if (countWords(updated.summary) > 120) { alert('Ringkasan Profil Talent tidak boleh melebihi 120 patah perkataan.'); return; }
+                updated.url = document.getElementById('admin-edit-url').value.trim();
+                updated.photo = document.getElementById('admin-edit-photo').value.trim();
+            }
+            const { error } = await db.from('applications').update(rowFromApp(updated)).eq('id', id);
+            if (error) { alert('Ralat menyimpan: ' + error.message); return; }
+            closeAdminReviewModal();
+            await loadAllData();
+            refreshAllViews();
+        }
+
+        function confirmDeleteApplication(id) {
+            window.__applicationToDelete = id;
+            document.getElementById('modal-confirm-delete').classList.remove('hidden');
+            document.getElementById('btn-confirm-delete').onclick = executeDeleteApplication;
+        }
+        async function executeDeleteApplication() {
+            const id = window.__applicationToDelete;
+            if (!id) return;
+            const { error } = await db.from('applications').delete().eq('id', id);
+            if (error) { alert('Ralat memadam: ' + error.message); return; }
+            closeDeleteModal();
+            await loadAllData();
+            refreshAllViews();
+        }
+
+        document.getElementById('banner-photo')?.addEventListener('input', function() {
+            const url = this.value.trim();
+            const preview = document.getElementById('banner-photo-preview');
+            if (url) { preview.classList.remove('hidden'); preview.querySelector('img').src = url; }
+            else preview.classList.add('hidden');
+        });
+        document.getElementById('partner-image')?.addEventListener('input', function() {
+            const url = this.value.trim();
+            const preview = document.getElementById('partner-image-preview');
+            if (url) { preview.classList.remove('hidden'); preview.querySelector('img').src = url; }
+            else preview.classList.add('hidden');
+        });
+        document.getElementById('reg-trainer-cert-custom')?.addEventListener('input', updateTrainerCertCustomCounter);
+
+        (async function init() {
+            initLocationDropdowns();
+            populateYearDaySelects();
+            try {
+                const { data: { session } } = await db.auth.getSession();
+                currentUser = session?.user || null;
+            } catch (err) { console.warn('Session check skipped:', err.message); }
+            await loadAllData();
+            refreshAllViews();
+            const regForm = document.getElementById('form-register');
+            if (regForm) regForm.addEventListener('submit', handleRegisterSubmit);
+            document.getElementById('reg-penganjur-fee-type')?.addEventListener('change', togglePenganjurFee);
+            const overlay = document.getElementById('app-loading');
+            if (overlay) overlay.style.display = 'none';
+        })();
+    </script>
 
     <!-- DISABLE RIGHT CLICK -->
     <script>
