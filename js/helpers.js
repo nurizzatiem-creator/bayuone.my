@@ -5,7 +5,7 @@
 // behaviour: price display, promotion logic, badge HTML, etc.
 // ============================================================
 
-import { getTodayStr, formatDateDisplay } from './utils.js';
+import { getTodayStr, formatDateDisplay } from './utils.js?v=6b';
 
 // ---------- Agenda date range ----------
 export function getAgendaDateRange(item) {
