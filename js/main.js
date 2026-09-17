@@ -33,7 +33,6 @@ import { renderBanner, renderBrandsSupport } from './banner.js';
 import {
     renderAdminTable,
     renderBannerTable,
-    renderPartnerTable,
     openAdminReviewModal,
     openBannerModal,
     calculateBannerEndDate,
@@ -66,7 +65,8 @@ import {
 import {
     openPartnerModal,
     handleSavePartner,
-    confirmDeletePartner
+    confirmDeletePartner,
+    renderPartnerTable
 } from './partner.js';
 
 // Modals
