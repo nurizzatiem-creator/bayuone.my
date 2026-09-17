@@ -9,7 +9,7 @@
 // NEVER put the service_role key here.
 // ============================================================
 
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const SUPABASE_URL = 'https://voxnrgoitktdiyvsvfac.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_vjUIAoqsAJRadmN3DM-04w_jh1oNkl9';
