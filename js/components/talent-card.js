@@ -2,7 +2,7 @@
 // BayuOne — Talent card component
 // ============================================================
 
-import { getPromotionalBadgeHtml } from '../helpers.js';
+import { getPromotionalBadgeHtml } from '../helpers.js?v=6b';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400';
 const TIKTOK_URL = 'https://www.tiktok.com/@bayuone.my';
