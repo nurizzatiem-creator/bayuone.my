@@ -12,6 +12,7 @@
 export function appFromRow(r) {
     return {
         id: r.id,
+        slug: r.slug,
         type: r.type,
         title: r.title,
         name: r.name,
@@ -51,6 +52,7 @@ export function appFromRow(r) {
 export function rowFromApp(a) {
     return {
         id: a.id,
+        slug: a.slug,
         type: a.type,
         title: a.title,
         name: a.name,
