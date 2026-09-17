@@ -10,8 +10,8 @@ import {
     getAgendaDateRange,
     getPriceDisplay,
     getPromotionalBadgeHtml
-} from '../helpers.js';
-import { formatDateDisplay } from '../utils.js';
+} from '../helpers.js?v=6b';
+import { formatDateDisplay } from '../utils.js?v=6b';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800';
 const TIKTOK_URL = 'https://www.tiktok.com/@bayuone.my';
