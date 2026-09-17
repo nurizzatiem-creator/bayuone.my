@@ -10,7 +10,7 @@
 // significant deploy (6c, 6d, etc.).
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b';
+import { db } from './supabase-client.js';
 import { loadAllData, bayuData } from './data-loader.js?v=6b';
 import { getTodayStr, countWords } from './utils.js?v=6b';
 
