@@ -4,14 +4,14 @@
 // Phase 5B: card markup extracted to components/agenda-card.js
 // ============================================================
 
-import { bayuData } from './data-loader.js';
+import { bayuData } from './data-loader.js?v=6b';
 import {
     getAgendaDateRange,
     isPromotionActive,
     sortByPromotion,
     getAgendaStatusInfo
-} from './helpers.js';
-import { renderAgendaCard } from './components/agenda-card.js';
+} from './helpers.js?v=6b';
+import { renderAgendaCard } from './components/agenda-card.js?v=6b';
 
 // The module-local UI state
 let activeQuickFilter = '';
