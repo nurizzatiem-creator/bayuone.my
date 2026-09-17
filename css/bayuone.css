@@ -1,1 +1,190 @@
+/* ============================================================
+   BayuOne — Custom Styles
+   Extracted from index.html <style> block (Phase 2)
+   Do not add page-specific styles here.
+   ============================================================ */
 
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #FFFFFF;
+    color: #17231E;
+    overflow-x: hidden;
+}
+
+.sticky-nav {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.92);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #F4F8F5; }
+::-webkit-scrollbar-thumb { background: #C2D4C9; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #126B4C; }
+
+/* Tab buttons */
+.tab-btn.active {
+    color: #126B4C;
+    border-bottom: 2px solid #126B4C;
+    font-weight: 700;
+}
+
+/* Badge pills */
+.badge-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.badge-featured { background-color: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+.badge-promoted { background-color: #E0E7FF; color: #3730A3; border: 1px solid #C7D2FE; }
+.badge-top { background-color: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
+
+/* Modals */
+.modal-backdrop {
+    background-color: rgba(11, 25, 19, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+/* Brand typography helper */
+.brand-text-b { font-weight: 700; }
+.brand-text-o { font-weight: 400; }
+
+/* Banner ad */
+.banner-container {
+    width: 100%;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.banner-container img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.75rem;
+}
+@media (min-width: 1280px) {
+    .banner-container { height: 150px; }
+    .banner-container img { width: 1600px; height: 150px; object-fit: cover; }
+}
+
+/* Feedback preview text */
+.feedback-preview-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Admin review modal scroll area */
+#admin-review-body {
+    max-height: 65vh;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Partner / brand logo tiles */
+.brand-logo-tile {
+    aspect-ratio: 1 / 1;
+    background-color: #FFFFFF;
+    border: 1px solid #DCE6DF;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0.75rem;
+    transition: box-shadow 0.2s ease;
+}
+.brand-logo-tile:hover { box-shadow: 0 4px 12px rgba(18, 107, 76, 0.08); }
+.brand-logo-tile img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Interest checkboxes (subscribe form) */
+.interest-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.55rem;
+    font-size: 0.72rem;
+    line-height: 1.1;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    color: #ffffff;
+    font-weight: 500;
+}
+.interest-checkbox-label:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.22);
+}
+.interest-checkbox-label input[type="checkbox"] {
+    width: 0.85rem;
+    height: 0.85rem;
+    margin: 0;
+    accent-color: #1CB07E;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Footer social buttons */
+.social-icon-btn {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #D1FAE5;
+    font-size: 15px;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    text-decoration: none;
+}
+.social-icon-btn:hover {
+    background-color: #126B4C;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+}
+
+/* App loading overlay */
+#app-loading {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+#app-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #DCE6DF;
+    border-top-color: #126B4C;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Quick filter active state */
+.quick-filter-btn.active {
+    background-color: #126B4C !important;
+    color: #FFFFFF !important;
+    border-color: #126B4C !important;
+}
