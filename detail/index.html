@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BayuOne — Profil</title>
+    <link rel="icon" type="image/svg+xml" href="../Bayuone.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#126B4C',
+                            dark: '#0B5139',
+                            text: '#17231E',
+                            muted: '#637069',
+                            border: '#DCE6DF',
+                            bg: '#F4F8F5',
+                            accent: '#1CB07E'
+                        }
+                    },
+                    fontFamily: { sans: ['DM Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../css/bayuone.css">
+</head>
+<body class="min-h-screen flex flex-col bg-white text-brand-text">
+
+    <!-- LOADING OVERLAY -->
+    <div id="detail-loading" class="fixed inset-0 z-50 bg-white flex items-center justify-center flex-col gap-4">
+        <div class="spinner"></div>
+        <p class="text-sm font-semibold text-brand-dark">Memuatkan profil...</p>
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 border-b border-brand-border sticky-nav bg-white">
+        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-2 cursor-pointer">
+                <div class="w-9 h-9 bg-white border border-brand-border rounded-lg flex items-center justify-center overflow-hidden p-0.5">
+                    <img src="https://lh3.googleusercontent.com/d/1gXBWckPatTAQwgfXpmLn5gu3DY7YkWQO" onerror="this.style.display='none'" alt="BayuOne" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-base text-brand-dark leading-none">
+                        <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>
+                    </span>
+                    <span class="text-[10px] font-medium text-brand-muted leading-none mt-0.5">Connect • Create • Grow</span>
+                </div>
+            </a>
+            <a href="../" class="text-xs font-bold text-brand hover:text-brand-dark flex items-center gap-2">
+                <i class="fa-solid fa-arrow-left"></i><span>Kembali ke Laman Utama</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT — filled by detail-page.js -->
+    <main id="detail-content" class="flex-grow w-full max-w-[1000px] mx-auto px-4 sm:px-6 py-8">
+        <!-- Placeholder shown while loading -->
+        <div class="text-center py-20">
+            <div class="spinner mx-auto"></div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-white mt-auto">
+        <div class="max-w-[1200px] mx-auto px-4 py-8 text-center">
+            <p class="text-sm font-bold">
+                <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>
+                — Komuniti Kemahiran, Bakat & Peluang
+            </p>
+            <p class="text-xs text-emerald-200/60 mt-2">Powered by NMZ Kreatif Enterprise (199736-T) · © 2026</p>
+            <div class="pt-4 flex justify-center gap-3">
+                <a href="../" class="text-xs text-emerald-300 hover:text-white underline underline-offset-2">Laman Utama</a>
+                <span class="text-emerald-800">·</span>
+                <a href="../dasar-privasi.html" class="text-xs text-emerald-300 hover:text-white underline underline-offset-2">Dasar Privasi</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Detail page loader -->
+    <script type="module" src="../js/detail-page.js?v=6d"></script>
+</body>
+</html>
