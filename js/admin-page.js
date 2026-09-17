@@ -5,7 +5,7 @@
 //   - Checking the admin's Supabase Auth session
 //   - Showing the login gate if not authenticated
 //   - Rendering the admin dashboard if authenticated
-//   - Logout
+//   - Logout (with confirmation + redirect to public site)
 // ============================================================
 
 import { db } from './supabase-client.js';
@@ -489,6 +489,17 @@ function renderAdminDashboard() {
         resetAdminLabelDates
     });
 
+    // Show admin email in header (Improvement 1)
+    (async () => {
+        try {
+            const { data: { user } } = await db.auth.getUser();
+            const el = document.getElementById('admin-email-display');
+            if (el && user?.email) el.textContent = '· ' + user.email;
+        } catch (err) {
+            console.warn('Could not load admin email:', err);
+        }
+    })();
+
     // Render all tables
     renderAdminTable();
     renderBannerTable();
@@ -531,9 +542,11 @@ async function handleLogin(event) {
     await showAdminUI();
 }
 
+// Improvement 2 + 3: Confirm logout + redirect to public site
 async function handleLogout() {
+    if (!confirm('Adakah anda pasti mahu log keluar dari panel admin?')) return;
     try { await db.auth.signOut(); } catch (err) { console.warn(err); }
-    showLoginGate();
+    window.location.href = '../';
 }
 
 async function checkSession() {
