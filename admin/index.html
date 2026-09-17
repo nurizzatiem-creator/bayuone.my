@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BayuOne Admin — Panel Pengurusan</title>
+    <link rel="icon" type="image/svg+xml" href="../Bayuone.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#126B4C',
+                            dark: '#0B5139',
+                            text: '#17231E',
+                            muted: '#637069',
+                            border: '#DCE6DF',
+                            bg: '#F4F8F5',
+                            accent: '#1CB07E'
+                        }
+                    },
+                    fontFamily: { sans: ['DM Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../css/bayuone.css">
+</head>
+<body class="min-h-screen flex flex-col bg-brand-bg text-brand-text">
+
+    <!-- LOGIN GATE — shown if not logged in -->
+    <div id="admin-login-gate" class="hidden min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-brand-border">
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 bg-brand-bg rounded-xl mx-auto flex items-center justify-center text-brand text-xl font-bold mb-2">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="text-lg font-bold text-brand-dark"><span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> Admin Access</h3>
+                <p class="text-xs text-brand-muted">Log masuk panel kawalan BayuOne</p>
+            </div>
+            <form id="admin-login-form" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-brand-dark mb-1">Emel Admin</label>
+                    <input type="email" id="admin-login-email" placeholder="emel@anda.com" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-brand-dark mb-1">Katalaluan</label>
+                    <input type="password" id="admin-login-pass" placeholder="Katalaluan" required class="w-full border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                </div>
+                <button type="submit" class="w-full bg-brand text-white font-bold py-2.5 rounded-xl text-xs hover:bg-brand-dark transition-colors">
+                    Log Masuk
+                </button>
+                <p id="admin-login-error" class="hidden text-xs text-red-600 text-center font-semibold"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN CONTENT — shown when logged in -->
+    <div id="admin-content" class="hidden flex-grow">
+        <header class="sticky top-0 z-40 border-b border-brand-border sticky-nav bg-white">
+            <div class="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 bg-white border border-brand-border rounded-lg flex items-center justify-center overflow-hidden p-0.5">
+                        <img src="https://lh3.googleusercontent.com/d/1gXBWckPatTAQwgfXpmLn5gu3DY7YkWQO" onerror="this.style.display='none'" alt="BayuOne" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <span class="text-base text-brand-dark leading-none">
+                            <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>
+                            <span class="text-[10px] ml-1 text-brand font-bold uppercase tracking-wider">Admin</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="../" class="bg-white border border-brand-border text-brand-dark hover:bg-brand-bg px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Ke Laman Awam
+                    </a>
+                    <button id="btn-logout" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        Log Keluar
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-[1400px] mx-auto px-4 sm:px-6 py-8 space-y-8">
+            <!-- Admin dashboard content injected here by admin-page.js -->
+            <div id="admin-page-content"></div>
+        </main>
+    </div>
+
+    <!-- LOADING SPINNER -->
+    <div id="admin-loading" class="fixed inset-0 z-50 bg-white flex items-center justify-center flex-col gap-4">
+        <div class="spinner"></div>
+        <p class="text-sm font-semibold text-brand-dark">Memuatkan panel admin...</p>
+    </div>
+
+    <script type="module" src="../js/admin-page.js"></script>
+</body>
+</html>
