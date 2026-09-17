@@ -7,7 +7,7 @@
 
 import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js';
 import { rowFromApp } from './converters.js';
-import { getTodayStr, countWords } from './utils.js';
+import { getTodayStr, countWords, slugify } from './utils.js';
 import { bayuData, loadAllData } from './data-loader.js';
 
 // ------------------------------------------------------------
