@@ -3,6 +3,7 @@
 // ============================================================
 // Handles the "Sertai BayuOne" modal submit for all three
 // application types: Penganjur (Agenda), Trainer and Talent.
+// Phase 6B: slug is auto-generated for every new record.
 // ============================================================
 
 import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js';
@@ -305,7 +306,8 @@ export async function handleRegisterSubmit(event) {
         const location = (state === 'Sabah' && sabahLoc) ? sabahLoc : state;
 
         newApp = {
-            id: newId, type: 'Agenda', title, name: picName || org, org,
+            id: newId, type: 'Agenda', slug: slugify(title),
+            title, name: picName || org, org,
             penganjur: org,
             email, phone: picTel,
             location, mode, category,
@@ -337,7 +339,8 @@ export async function handleRegisterSubmit(event) {
         const certCustom = val('reg-trainer-cert-custom');
 
         newApp = {
-            id: newId, type: 'Trainer', title: 'Trainer Profesional',
+            id: newId, type: 'Trainer', slug: slugify(name),
+            title: 'Trainer Profesional',
             name, org: '', email, phone,
             location, mode: '', category: '',
             date: getTodayStr(), dateEnd: null, isOneDay: false,
@@ -363,7 +366,8 @@ export async function handleRegisterSubmit(event) {
         if (!phone) { alert('Sila masukkan No. Telefon.'); return; }
 
         newApp = {
-            id: newId, type: 'Talent', title: 'Talent Tempatan',
+            id: newId, type: 'Talent', slug: slugify(name),
+            title: 'Talent Tempatan',
             name, org: '', email, phone,
             location, mode: '', category: '',
             date: getTodayStr(), dateEnd: null, isOneDay: false,
