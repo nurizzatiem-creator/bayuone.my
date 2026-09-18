@@ -5,7 +5,7 @@
 // It imports every module, wires up event listeners, and
 // exposes global functions used by inline onclick="..." attributes.
 //
-// Amendment 4: Cache-bust versions bumped to ?v=6b3.
+// Batch 4A: Wired in openSharePopup / closeSharePopup from share-popup.js
 // ============================================================
 
 import { db } from './supabase-client.js?v=6b3';
@@ -122,6 +122,12 @@ import {
     triggerSearch
 } from './tabs.js?v=7c3';
 
+// Share popup (Batch 4A)
+import {
+    openSharePopup,
+    closeSharePopup
+} from './share-popup.js?v=6b3';
+
 // ------------------------------------------------------------
 // Utility: word counter for trainer/talent summary fields
 // ------------------------------------------------------------
@@ -228,6 +234,10 @@ Object.assign(window, {
     toggleMobileMenu,
     handleGlobalSearch,
     triggerSearch,
+
+    // Share popup (Batch 4A)
+    openSharePopup,
+    closeSharePopup,
 
     // Modals
     openRegisterModal,
