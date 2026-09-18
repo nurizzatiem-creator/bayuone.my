@@ -254,7 +254,18 @@
                         <span id="count-ended" class="text-xs font-bold bg-gray-100 text-gray-500 px-3 py-1 rounded-full">0 Program</span>
                     </div>
 
-                    <div id="grid-agenda-ended" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-75"></div>
+                    <!-- Amendment 5: Telah Tamat slider content (rendered by JS) -->
+                    <div id="grid-agenda-ended" class="opacity-75"></div>
+
+                    <!-- Amendment 5: Telah Tamat slider navigation -->
+                    <div id="ended-slider-nav" class="hidden justify-center gap-3 mt-6">
+                        <button type="button" onclick="endedSliderPrev()" data-ended-prev class="w-10 h-10 rounded-full border border-brand-border bg-white text-brand-dark hover:bg-brand hover:text-white hover:border-brand transition-colors flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button type="button" onclick="endedSliderNext()" data-ended-next class="w-10 h-10 rounded-full border border-brand-border bg-white text-brand-dark hover:bg-brand hover:text-white hover:border-brand transition-colors flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -887,7 +898,7 @@
     </div>
 
     <!-- APPLICATION JAVASCRIPT LOGIC -->
-    <script type="module" src="js/main.js?v=7c"></script>
+    <script type="module" src="js/main.js?v=7c2"></script>
 
     <!-- DISABLE RIGHT CLICK -->
     <script>
