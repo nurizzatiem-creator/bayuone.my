@@ -5,8 +5,8 @@
 import {
     getPromotionalBadgeHtml,
     getTrainerCertDisplayList
-} from '../helpers.js?v=6b';
-import { buildDetailUrl } from '../slug.js?v=6b';
+} from '../helpers.js?v=6b3';
+import { buildDetailUrl } from '../slug.js?v=6b3';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400';
 const TIKTOK_URL = 'https://www.tiktok.com/@bayuone.my';
