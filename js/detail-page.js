@@ -6,6 +6,9 @@
 //   2. /trainer/ahmad-rahman-123456 (via 404 fallback)
 //
 // Renders a full profile page for Agenda / Trainer / Talent.
+//
+// Amendment 2: Agenda date range uses Malay format via
+// formatAgendaDateRange() from utils.js.
 // ============================================================
 
 import { loadAllData, bayuData } from './data-loader.js?v=6b';
@@ -22,7 +25,6 @@ function getRoute() {
     const qType = (params.get('type') || '').trim();
     const qSlug = (params.get('slug') || '').trim();
     if (qType && qSlug) {
-        // Normalize type — accept "trainer", "Trainer", etc.
         const typeMap = { agenda: 'Agenda', trainer: 'Trainer', talent: 'Talent' };
         const normalized = typeMap[qType.toLowerCase()];
         if (normalized) return { type: normalized, slug: qSlug };
@@ -48,10 +50,8 @@ function escapeHtml(str) {
         .replace(/'/g, '&#39;');
 }
 
-import { formatAgendaDateRange } from './utils.js?v=6b';
-
+// Single date — used for non-range cases only.
 function formatDate(iso) {
-    // Kept for non-range uses (banners, etc.) — returns DD/MM/YYYY
     if (!iso) return '';
     const s = String(iso).split('T')[0];
     const parts = s.split('-');
@@ -100,7 +100,14 @@ function shareButtonsHtml(item, pageUrl, shareText) {
 function renderAgenda(item, pageUrl) {
     const title = item.title || item.name || 'Program';
     const shareText = `Saya Jumpa ${title} di BayuOne. Jom kita join.`;
-    const dateRange = formatAgendaDateRange(item.date, item.dateEnd || item.date, item.isOneDay);
+
+    // Amendment 2: Malay date range format
+    const dateRange = formatAgendaDateRange(
+        item.date,
+        item.dateEnd || item.date,
+        item.isOneDay
+    );
+
     const organiser = item.org || item.penganjur || item.name || 'Penganjur';
 
     document.title = `${title} | BayuOne`;
@@ -320,7 +327,6 @@ function updateMetaTags(title, description, image, url) {
     setMeta('name', 'twitter:description', description);
     setMeta('name', 'twitter:image', image);
 
-    // Add canonical
     let link = document.querySelector('link[rel="canonical"]');
     if (!link) {
         link = document.createElement('link');
@@ -346,14 +352,11 @@ async function init() {
         return;
     }
 
-    // Load all data from Supabase
     await loadAllData();
 
-    // Find the record
     const record = findRecordBySlug(route.type, route.slug);
 
     if (!record) {
-        // Either the slug does not exist, or the record is not approved
         const existsButNotApproved = (bayuData.applications || []).some(
             a => a.type === route.type && (a.slug || '').toLowerCase() === route.slug.toLowerCase()
         );
@@ -365,10 +368,8 @@ async function init() {
         return;
     }
 
-    // Build the canonical page URL
     const pageUrl = window.location.href;
 
-    // Render based on type
     let html = '';
     if (record.type === 'Agenda') html = renderAgenda(record, pageUrl);
     else if (record.type === 'Trainer') html = renderTrainer(record, pageUrl);
@@ -376,13 +377,11 @@ async function init() {
 
     if (container) container.innerHTML = html;
 
-    // Update meta tags for sharing
     const shareTitle = record.title || record.name || 'BayuOne';
     const shareDesc = record.summary || record.description || 'Lihat profil penuh di BayuOne.';
     const shareImg = record.photo || '';
     updateMetaTags(shareTitle, shareDesc, shareImg, pageUrl);
 
-    // Wire copy-link buttons
     document.querySelectorAll('.copy-url-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const url = btn.dataset.copyUrl || window.location.href;
@@ -398,13 +397,8 @@ async function init() {
         });
     });
 
-    // Hide loading overlay
     if (loading) loading.classList.add('hidden');
 }
-
-// ------------------------------------------------------------
-// Boot
-// ------------------------------------------------------------
 
 init().catch(err => {
     console.error('Detail page error:', err);
