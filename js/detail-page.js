@@ -1,26 +1,15 @@
 // ============================================================
 // BayuOne — Detail page renderer
 // ============================================================
-// Handles both URL styles:
-//   1. detail/?type=trainer&slug=ahmad-rahman-123456
-//   2. /trainer/ahmad-rahman-123456 (via 404 fallback)
-//
-// Renders a full profile page for Agenda / Trainer / Talent.
-//
-// Amendment 2: Agenda date range uses Malay format via
-// formatAgendaDateRange() from utils.js.
+// Amendment 2: Malay date range via formatAgendaDateRange.
+// Amendment 4: imports bumped to ?v=6b3.
 // ============================================================
 
-import { loadAllData, bayuData } from './data-loader.js?v=6b';
-import { getSlugRoute, findRecordBySlug } from './slug.js?v=6b';
-import { formatAgendaDateRange } from './utils.js?v=6b';
-
-// ------------------------------------------------------------
-// URL parsing
-// ------------------------------------------------------------
+import { loadAllData, bayuData } from './data-loader.js?v=6b3';
+import { getSlugRoute, findRecordBySlug } from './slug.js?v=6b3';
+import { formatAgendaDateRange } from './utils.js?v=6b3';
 
 function getRoute() {
-    // 1. Try query string first (works everywhere)
     const params = new URLSearchParams(window.location.search);
     const qType = (params.get('type') || '').trim();
     const qSlug = (params.get('slug') || '').trim();
@@ -29,17 +18,10 @@ function getRoute() {
         const normalized = typeMap[qType.toLowerCase()];
         if (normalized) return { type: normalized, slug: qSlug };
     }
-
-    // 2. Fall back to path-based routing (via 404 fallback)
     const pathRoute = getSlugRoute();
     if (pathRoute) return pathRoute;
-
     return null;
 }
-
-// ------------------------------------------------------------
-// Small HTML helpers
-// ------------------------------------------------------------
 
 function escapeHtml(str) {
     return String(str == null ? '' : str)
@@ -50,7 +32,6 @@ function escapeHtml(str) {
         .replace(/'/g, '&#39;');
 }
 
-// Single date — used for non-range cases only.
 function formatDate(iso) {
     if (!iso) return '';
     const s = String(iso).split('T')[0];
@@ -93,21 +74,10 @@ function shareButtonsHtml(item, pageUrl, shareText) {
         </div>`;
 }
 
-// ------------------------------------------------------------
-// Page renderers by type
-// ------------------------------------------------------------
-
 function renderAgenda(item, pageUrl) {
     const title = item.title || item.name || 'Program';
     const shareText = `Saya Jumpa ${title} di BayuOne. Jom kita join.`;
-
-    // Amendment 2: Malay date range format
-    const dateRange = formatAgendaDateRange(
-        item.date,
-        item.dateEnd || item.date,
-        item.isOneDay
-    );
-
+    const dateRange = formatAgendaDateRange(item.date, item.dateEnd || item.date, item.isOneDay);
     const organiser = item.org || item.penganjur || item.name || 'Penganjur';
 
     document.title = `${title} | BayuOne`;
@@ -116,16 +86,13 @@ function renderAgenda(item, pageUrl) {
             <div class="relative h-64 sm:h-80 bg-gray-100 overflow-hidden">
                 <img src="${escapeHtml(item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200')}" alt="${escapeHtml(title)}" class="w-full h-full object-cover">
             </div>
-
             <div class="p-6 sm:p-8 space-y-6">
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="badge-pill bg-brand-bg text-brand border border-brand-border">${escapeHtml(item.category || 'Program')}</span>
                     <span class="badge-pill bg-brand-bg text-brand border border-brand-border">${escapeHtml(item.mode || 'Fizikal')}</span>
                     ${item.label ? `<span class="badge-pill badge-featured">${escapeHtml(item.label)}</span>` : ''}
                 </div>
-
                 <h1 class="text-3xl sm:text-4xl font-extrabold text-brand-dark leading-tight">${escapeHtml(title)}</h1>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-brand-text">
                     <div class="flex items-start gap-3">
                         <i class="fa-regular fa-calendar text-brand text-lg mt-0.5"></i>
@@ -156,12 +123,10 @@ function renderAgenda(item, pageUrl) {
                         </div>
                     </div>
                 </div>
-
                 <div class="pt-4 border-t border-brand-border">
                     <h2 class="text-lg font-bold text-brand-dark mb-2">Keterangan Program</h2>
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.description || item.summary || 'Tiada keterangan penuh disediakan.')}</p>
                 </div>
-
                 <div class="pt-4 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Hubungi & Daftar</h2>
                     <div class="flex flex-wrap gap-2">
@@ -170,7 +135,6 @@ function renderAgenda(item, pageUrl) {
                         ${item.email ? `<a href="mailto:${escapeHtml(item.email)}" class="flex items-center gap-2 bg-white border border-brand-border text-brand-dark hover:border-brand font-bold px-5 py-2.5 rounded-xl text-xs transition-colors"><i class="fa-solid fa-envelope"></i> Emel</a>` : ''}
                     </div>
                 </div>
-
                 <div class="pt-4 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Kongsi</h2>
                     <p class="text-xs text-brand-muted italic">"${escapeHtml(shareText)}"</p>
@@ -202,22 +166,17 @@ function renderTrainer(item, pageUrl) {
                         <p class="text-sm text-brand font-semibold mt-2"><i class="fa-solid fa-location-dot mr-1"></i>${escapeHtml(item.location || 'Sabah')}</p>
                     </div>
                 </div>
-
                 ${expertise ? `<div class="pt-4 border-t border-brand-border"><h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider mb-3">Bidang Kepakaran</h2><div class="flex flex-wrap gap-2">${expertise}</div></div>` : ''}
-
                 ${certs ? `<div class="pt-4 border-t border-brand-border"><h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider mb-3">Pentauliahan / Sijil</h2><div class="flex flex-wrap gap-2">${certs}</div></div>` : ''}
-
                 <div class="pt-4 border-t border-brand-border">
                     <h2 class="text-lg font-bold text-brand-dark mb-2">Ringkasan Profil</h2>
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.summary || 'Tiada ringkasan disediakan.')}</p>
                 </div>
-
                 ${item.description ? `
                 <div class="pt-4 border-t border-brand-border">
                     <h2 class="text-lg font-bold text-brand-dark mb-2">Keterangan Penuh</h2>
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.description)}</p>
                 </div>` : ''}
-
                 <div class="pt-4 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Hubungi Trainer</h2>
                     <div class="flex flex-wrap gap-2">
@@ -226,7 +185,6 @@ function renderTrainer(item, pageUrl) {
                         ${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener" class="flex items-center gap-2 bg-white border border-brand-border text-brand-dark hover:border-brand font-bold px-5 py-2.5 rounded-xl text-xs transition-colors"><i class="fa-solid fa-arrow-up-right-from-square"></i> Social Media / Website</a>` : ''}
                     </div>
                 </div>
-
                 <div class="pt-4 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Kongsi</h2>
                     <p class="text-xs text-brand-muted italic">"${escapeHtml(shareText)}"</p>
@@ -252,18 +210,15 @@ function renderTalent(item, pageUrl) {
                         <p class="text-sm text-brand-muted mt-2"><i class="fa-solid fa-location-dot mr-1"></i>${escapeHtml(item.location || 'Sabah')}</p>
                     </div>
                 </div>
-
                 <div class="pt-4 border-t border-brand-border">
                     <h2 class="text-lg font-bold text-brand-dark mb-2">Ringkasan Profil</h2>
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.summary || 'Tiada ringkasan disediakan.')}</p>
                 </div>
-
                 ${item.description ? `
                 <div class="pt-4 border-t border-brand-border">
                     <h2 class="text-lg font-bold text-brand-dark mb-2">Keterangan Penuh</h2>
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.description)}</p>
                 </div>` : ''}
-
                 <div class="pt-4 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Hubungi Bakat</h2>
                     <div class="flex flex-wrap gap-2">
@@ -272,7 +227,6 @@ function renderTalent(item, pageUrl) {
                         ${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener" class="flex items-center gap-2 bg-white border border-brand-border text-brand-dark hover:border-brand font-bold px-5 py-2.5 rounded-xl text-xs transition-colors"><i class="fa-solid fa-arrow-up-right-from-square"></i> Social Media / Website</a>` : ''}
                     </div>
                 </div>
-
                 <div class="pt-4 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Kongsi</h2>
                     <p class="text-xs text-brand-muted italic">"${escapeHtml(shareText)}"</p>
@@ -281,10 +235,6 @@ function renderTalent(item, pageUrl) {
             </div>
         </div>`;
 }
-
-// ------------------------------------------------------------
-// Error states
-// ------------------------------------------------------------
 
 function renderNotFound(reason) {
     document.title = 'Profil Tidak Ditemui | BayuOne';
@@ -301,10 +251,6 @@ function renderNotFound(reason) {
         </div>`;
 }
 
-// ------------------------------------------------------------
-// Update meta tags for sharing
-// ------------------------------------------------------------
-
 function updateMetaTags(title, description, image, url) {
     const setMeta = (attr, key, content) => {
         if (!content) return;
@@ -316,7 +262,6 @@ function updateMetaTags(title, description, image, url) {
         }
         el.setAttribute('content', content);
     };
-
     setMeta('property', 'og:title', title);
     setMeta('property', 'og:description', description);
     setMeta('property', 'og:image', image);
@@ -326,7 +271,6 @@ function updateMetaTags(title, description, image, url) {
     setMeta('name', 'twitter:title', title);
     setMeta('name', 'twitter:description', description);
     setMeta('name', 'twitter:image', image);
-
     let link = document.querySelector('link[rel="canonical"]');
     if (!link) {
         link = document.createElement('link');
@@ -335,10 +279,6 @@ function updateMetaTags(title, description, image, url) {
     }
     link.href = url;
 }
-
-// ------------------------------------------------------------
-// Main render
-// ------------------------------------------------------------
 
 async function init() {
     const container = document.getElementById('detail-content');
