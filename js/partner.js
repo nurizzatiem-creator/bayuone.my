@@ -1,10 +1,12 @@
 // ============================================================
 // BayuOne — Partner (admin table + public brands support section)
 // ============================================================
+// Amendment 4: all imports bumped to ?v=6b3.
+// ============================================================
 
-import { db } from './supabase-client.js?v=6b';
-import { bayuData, loadAllData } from './data-loader.js?v=6b';
-import { renderBrandsSupport } from './banner.js?v=6b';
+import { db } from './supabase-client.js?v=6b3';
+import { bayuData, loadAllData } from './data-loader.js?v=6b3';
+import { renderBrandsSupport } from './banner.js?v=6b3';
 
 export function openPartnerModal(id) {
     const modal = document.getElementById('modal-partner');
