@@ -1,17 +1,17 @@
 // ============================================================
 // BayuOne — Agenda card component
 // ============================================================
-// Amendment 2: Malay date range via formatAgendaDateRange.
-// Amendment 4: all imports bumped to ?v=6b3.
+// Amendment 13: card image now uses object-top so poster titles
+//               near the top are always visible.
 // ============================================================
 
 import {
     getAgendaDateRange,
     getPriceDisplay,
     getPromotionalBadgeHtml
-} from '../helpers.js?v=6b3';
-import { formatAgendaDateRange } from '../utils.js?v=6b3';
-import { buildDetailUrl } from '../slug.js?v=6b3';
+} from '../helpers.js?v=6b5';
+import { formatAgendaDateRange } from '../utils.js?v=6b5';
+import { buildDetailUrl } from '../slug.js?v=6b5';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800';
 
@@ -27,7 +27,7 @@ export function renderAgendaCard(item) {
         <div class="bg-white rounded-2xl border border-brand-border overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
             <div>
                 <div class="relative h-48 bg-gray-100 overflow-hidden">
-                    <img src="${item.photo || FALLBACK_PHOTO}" alt="${displayTitle}" class="w-full h-full object-cover">
+                    <img src="${item.photo || FALLBACK_PHOTO}" alt="${displayTitle}" class="w-full h-full object-cover object-top">
                     <div class="absolute top-3 left-3 flex flex-wrap gap-1">${badgeHtml}</div>
                     <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-2.5 py-1 rounded-lg font-semibold">${item.mode || 'Fizikal'}</div>
                 </div>
