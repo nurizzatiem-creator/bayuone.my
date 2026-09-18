@@ -48,7 +48,7 @@ export function renderAgendaCard(item) {
             </div>
             <div class="p-5 pt-0">
                 <a href="${buildDetailUrl('Agenda', item.slug)}" class="w-full bg-brand-bg hover:bg-brand text-brand hover:text-white border border-brand-border font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
-                    <span>Lihat Detail</span>
+                    <span>Maklumat Lanjut</span>
                     <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
             </div>
