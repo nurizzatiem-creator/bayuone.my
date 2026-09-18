@@ -1,32 +1,25 @@
 // ============================================================
 // BayuOne — Agenda (events) rendering + filtering
 // ============================================================
-// Phase 5B: card markup extracted to components/agenda-card.js
-// Amendment 5: "Telah Tamat" section is now a manual 3-up slider
-//              (latest-ended-first, no autoplay).
+// Amendment 4: all imports bumped to ?v=6b3.
+// Amendment 5: "Telah Tamat" is a manual 3-up slider.
 // ============================================================
 
-import { bayuData } from './data-loader.js?v=6b';
+import { bayuData } from './data-loader.js?v=6b3';
 import {
     getAgendaDateRange,
     isPromotionActive,
     sortByPromotion,
     getAgendaStatusInfo
-} from './helpers.js?v=6b';
-import { renderAgendaCard } from './components/agenda-card.js?v=6b2';
+} from './helpers.js?v=6b3';
+import { renderAgendaCard } from './components/agenda-card.js?v=6b3';
 
-// The module-local UI state
 let activeQuickFilter = '';
 let currentAgendaPage = 1;
 const AGENDA_PER_PAGE = 12;
 
-// Amendment 5: Telah Tamat slider state
 let endedSliderOffset = 0;
 const ENDED_SLIDER_PAGE_SIZE = 3;
-
-// ------------------------------------------------------------
-// Quick filter
-// ------------------------------------------------------------
 
 export function setQuickFilter(type) {
     activeQuickFilter = (activeQuickFilter === type) ? '' : type;
@@ -39,10 +32,6 @@ export function setQuickFilter(type) {
     endedSliderOffset = 0;
     renderAgenda();
 }
-
-// ------------------------------------------------------------
-// Filtering
-// ------------------------------------------------------------
 
 export function isAgendaActiveOn(item, isoDate) {
     const { start, end } = getAgendaDateRange(item);
@@ -139,10 +128,6 @@ function getAgendaFiltered() {
     });
 }
 
-// ------------------------------------------------------------
-// Rendering
-// ------------------------------------------------------------
-
 export function renderAgenda() {
     const upcomingContainer = document.getElementById('grid-agenda-upcoming');
     const endedContainer = document.getElementById('grid-agenda-ended');
@@ -172,7 +157,6 @@ export function renderAgenda() {
         else upcoming.push(item);
     });
 
-    // Amendment 5: sort ended events by END date, latest first
     ended.sort((a, b) => {
         const endA = a.dateEnd || a.date || '';
         const endB = b.dateEnd || b.date || '';
@@ -186,7 +170,6 @@ export function renderAgenda() {
 
     pageItems.forEach(item => { upcomingContainer.innerHTML += renderAgendaCard(item); });
 
-    // Amendment 5: render "Telah Tamat" as a manual slider
     renderEndedSlider(endedContainer, ended);
 
     document.getElementById('count-upcoming').textContent = `${upcoming.length} Program`;
@@ -218,11 +201,6 @@ export function renderAgenda() {
     }
 }
 
-// ------------------------------------------------------------
-// Amendment 5: "Telah Tamat" slider
-// ------------------------------------------------------------
-// Shows 3 cards at a time. Manual ← → navigation. No autoplay.
-
 function renderEndedSlider(container, endedItems) {
     if (!container) return;
     container.innerHTML = '';
@@ -235,12 +213,10 @@ function renderEndedSlider(container, endedItems) {
         return;
     }
 
-    // Clamp offset to valid range
     const maxOffset = Math.max(0, endedItems.length - ENDED_SLIDER_PAGE_SIZE);
     if (endedSliderOffset > maxOffset) endedSliderOffset = maxOffset;
     if (endedSliderOffset < 0) endedSliderOffset = 0;
 
-    // Render 3-card row
     const track = document.createElement('div');
     track.className = 'grid grid-cols-1 md:grid-cols-3 gap-6';
     const pageItems = endedItems.slice(
@@ -252,7 +228,6 @@ function renderEndedSlider(container, endedItems) {
     });
     container.appendChild(track);
 
-    // Show or hide the nav based on whether there are more than 3 items
     if (nav) {
         if (endedItems.length > ENDED_SLIDER_PAGE_SIZE) {
             nav.style.display = 'flex';
@@ -277,10 +252,6 @@ export function endedSliderNext() {
     endedSliderOffset += ENDED_SLIDER_PAGE_SIZE;
     renderAgenda();
 }
-
-// ------------------------------------------------------------
-// Public filter API
-// ------------------------------------------------------------
 
 export function filterAgenda() {
     currentAgendaPage = 1;
