@@ -2,11 +2,61 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <title>BayuOne — Page Not Found</title>
-    <meta http-equiv="refresh" content="0; url=/">
-    <script>window.location.replace('/');</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BayuOne — Mengalihkan...</title>
+    <link rel="icon" type="image/svg+xml" href="/Bayuone.svg">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #F4F8F5; color: #17231E; }
+        .box { text-align: center; padding: 2rem; }
+        .spinner { width: 40px; height: 40px; border: 3px solid #DCE6DF; border-top-color: #126B4C; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        a { color: #126B4C; font-weight: 600; text-decoration: none; }
+    </style>
 </head>
 <body>
-    <p>Halaman tidak ditemui. <a href="/">Kembali ke BayuOne</a></p>
+    <div class="box">
+        <div class="spinner"></div>
+        <p>Mengalihkan ke halaman yang anda cari...</p>
+        <p style="font-size: 0.8rem; color: #637069;">Jika tidak dialihkan secara automatik, <a href="/">klik di sini</a>.</p>
+    </div>
+
+    <script>
+        (function () {
+            // Read the current path, e.g. "/trainer/ahmad-rahman-123456"
+            // or "/bayuone-repo/trainer/ahmad-rahman-123456" on GitHub Pages
+            var path = window.location.pathname || '/';
+            var parts = path.split('/').filter(Boolean);
+
+            // Known type prefixes
+            var prefixToType = {
+                'agenda': 'agenda',
+                'trainer': 'trainer',
+                'talent': 'talent'
+            };
+
+            // Walk the parts to find { prefix, slug }
+            for (var i = 0; i < parts.length - 1; i++) {
+                var prefix = parts[i].toLowerCase();
+                if (prefixToType[prefix]) {
+                    var slug = decodeURIComponent(parts[i + 1] || '').trim();
+                    if (slug) {
+                        // Detect GitHub Pages sub-path (e.g. /bayuone-repo/)
+                        var base = '/' + parts.slice(0, i).join('/');
+                        if (base === '/') base = '';
+
+                        // Redirect to the detail page with query string
+                        window.location.replace(
+                            base + '/detail/?type=' + encodeURIComponent(prefixToType[prefix]) +
+                            '&slug=' + encodeURIComponent(slug)
+                        );
+                        return;
+                    }
+                }
+            }
+
+            // Not a detail URL — fall back to home
+            window.location.replace('/');
+        })();
+    </script>
 </body>
 </html>
