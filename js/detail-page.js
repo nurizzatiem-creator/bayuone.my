@@ -1,13 +1,16 @@
 // ============================================================
 // BayuOne — Detail page renderer
 // ============================================================
-// Amendment 2: Malay date range via formatAgendaDateRange.
-// Amendment 4: imports bumped to ?v=6b3.
+// Amendment 2:  Malay date range via formatAgendaDateRange
+// Amendment 4:  Trainer/Talent description display
+// Amendment 9:  Dynamic Trainer share message
+// Amendment 10: Dynamic Talent share message
+// Amendment 14: Agenda detail 2-column layout (image left, details right)
 // ============================================================
 
-import { loadAllData, bayuData } from './data-loader.js?v=6b3';
-import { getSlugRoute, findRecordBySlug } from './slug.js?v=6b3';
-import { formatAgendaDateRange } from './utils.js?v=6b3';
+import { loadAllData, bayuData } from './data-loader.js?v=6b5';
+import { getSlugRoute, findRecordBySlug } from './slug.js?v=6b5';
+import { formatAgendaDateRange } from './utils.js?v=6b5';
 
 function getRoute() {
     const params = new URLSearchParams(window.location.search);
@@ -30,14 +33,6 @@ function escapeHtml(str) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
-}
-
-function formatDate(iso) {
-    if (!iso) return '';
-    const s = String(iso).split('T')[0];
-    const parts = s.split('-');
-    if (parts.length !== 3) return iso;
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
 }
 
 function priceDisplay(item) {
@@ -74,6 +69,10 @@ function shareButtonsHtml(item, pageUrl, shareText) {
         </div>`;
 }
 
+// ------------------------------------------------------------
+// Amendment 14: Agenda detail — 2-column layout
+// ------------------------------------------------------------
+
 function renderAgenda(item, pageUrl) {
     const title = item.title || item.name || 'Program';
     const shareText = `Saya Jumpa ${title} di BayuOne. Jom kita join.`;
@@ -83,59 +82,80 @@ function renderAgenda(item, pageUrl) {
     document.title = `${title} | BayuOne`;
     return `
         <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
-            <div class="relative h-64 sm:h-80 bg-gray-100 overflow-hidden">
-                <img src="${escapeHtml(item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200')}" alt="${escapeHtml(title)}" class="w-full h-full object-cover">
-            </div>
-            <div class="p-6 sm:p-8 space-y-6">
-                <div class="flex flex-wrap items-center gap-2">
+            <div class="p-5 sm:p-6">
+                <div class="flex flex-wrap items-center gap-2 mb-5">
                     <span class="badge-pill bg-brand-bg text-brand border border-brand-border">${escapeHtml(item.category || 'Program')}</span>
                     <span class="badge-pill bg-brand-bg text-brand border border-brand-border">${escapeHtml(item.mode || 'Fizikal')}</span>
                     ${item.label ? `<span class="badge-pill badge-featured">${escapeHtml(item.label)}</span>` : ''}
                 </div>
-                <h1 class="text-3xl sm:text-4xl font-extrabold text-brand-dark leading-tight">${escapeHtml(title)}</h1>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-brand-text">
-                    <div class="flex items-start gap-3">
-                        <i class="fa-regular fa-calendar text-brand text-lg mt-0.5"></i>
-                        <div>
-                            <div class="font-bold text-brand-dark">Tarikh Program</div>
-                            <div class="text-brand-muted">${escapeHtml(dateRange)}</div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+                    <!-- Left: Full portrait image -->
+                    <div class="flex justify-center">
+                        <div class="w-full bg-brand-bg border border-brand-border rounded-2xl overflow-hidden" style="max-width: 480px;">
+                            <img
+                                src="${escapeHtml(item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200')}"
+                                alt="${escapeHtml(title)}"
+                                class="w-full h-auto object-contain"
+                            >
                         </div>
                     </div>
-                    <div class="flex items-start gap-3">
-                        <i class="fa-solid fa-location-dot text-brand text-lg mt-0.5"></i>
-                        <div>
-                            <div class="font-bold text-brand-dark">Lokasi</div>
-                            <div class="text-brand-muted">${escapeHtml(item.location || 'Sabah')}</div>
+
+                    <!-- Right: Details -->
+                    <div class="flex flex-col gap-5">
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-dark leading-tight">${escapeHtml(title)}</h1>
+
+                        <div class="grid grid-cols-1 gap-3 text-sm text-brand-text">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-regular fa-calendar text-brand text-lg mt-0.5 w-5"></i>
+                                <div>
+                                    <div class="font-bold text-brand-dark text-xs uppercase tracking-wider">Tarikh Program</div>
+                                    <div class="text-brand-muted mt-0.5">${escapeHtml(dateRange)}</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-location-dot text-brand text-lg mt-0.5 w-5"></i>
+                                <div>
+                                    <div class="font-bold text-brand-dark text-xs uppercase tracking-wider">Lokasi</div>
+                                    <div class="text-brand-muted mt-0.5">${escapeHtml(item.location || 'Sabah')}</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-user text-brand text-lg mt-0.5 w-5"></i>
+                                <div>
+                                    <div class="font-bold text-brand-dark text-xs uppercase tracking-wider">Penganjur</div>
+                                    <div class="text-brand-muted mt-0.5">${escapeHtml(organiser)}</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-tag text-brand text-lg mt-0.5 w-5"></i>
+                                <div>
+                                    <div class="font-bold text-brand-dark text-xs uppercase tracking-wider">Harga Yuran</div>
+                                    <div class="text-brand-muted mt-0.5">${escapeHtml(priceDisplay(item))}</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <i class="fa-solid fa-user text-brand text-lg mt-0.5"></i>
-                        <div>
-                            <div class="font-bold text-brand-dark">Penganjur</div>
-                            <div class="text-brand-muted">${escapeHtml(organiser)}</div>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <i class="fa-solid fa-tag text-brand text-lg mt-0.5"></i>
-                        <div>
-                            <div class="font-bold text-brand-dark">Harga Yuran</div>
-                            <div class="text-brand-muted">${escapeHtml(priceDisplay(item))}</div>
+
+                        <div class="pt-4 border-t border-brand-border space-y-2">
+                            <h2 class="text-xs font-bold text-brand-dark uppercase tracking-wider">Hubungi & Daftar</h2>
+                            <div class="flex flex-wrap gap-2">
+                                ${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener" class="flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2.5 rounded-xl text-xs transition-colors"><i class="fa-solid fa-arrow-up-right-from-square"></i> Daftar / Maklumat Lanjut</a>` : ''}
+                                ${item.phone ? `<a href="tel:${escapeHtml(item.phone)}" class="flex items-center gap-2 bg-white border border-brand-border text-brand-dark hover:border-brand font-bold px-4 py-2.5 rounded-xl text-xs transition-colors"><i class="fa-solid fa-phone"></i> Telefon</a>` : ''}
+                                ${item.email ? `<a href="mailto:${escapeHtml(item.email)}" class="flex items-center gap-2 bg-white border border-brand-border text-brand-dark hover:border-brand font-bold px-4 py-2.5 rounded-xl text-xs transition-colors"><i class="fa-solid fa-envelope"></i> Emel</a>` : ''}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="pt-4 border-t border-brand-border">
-                    <h2 class="text-lg font-bold text-brand-dark mb-2">Keterangan Program</h2>
+
+                <!-- Full-width: Keterangan Program -->
+                <div class="mt-8 pt-6 border-t border-brand-border">
+                    <h2 class="text-lg font-bold text-brand-dark mb-3">Keterangan Program</h2>
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.description || item.summary || 'Tiada keterangan penuh disediakan.')}</p>
                 </div>
-                <div class="pt-4 border-t border-brand-border space-y-3">
-                    <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Hubungi & Daftar</h2>
-                    <div class="flex flex-wrap gap-2">
-                        ${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener" class="flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-colors"><i class="fa-solid fa-arrow-up-right-from-square"></i> Daftar / Maklumat Lanjut</a>` : ''}
-                        ${item.phone ? `<a href="tel:${escapeHtml(item.phone)}" class="flex items-center gap-2 bg-white border border-brand-border text-brand-dark hover:border-brand font-bold px-5 py-2.5 rounded-xl text-xs transition-colors"><i class="fa-solid fa-phone"></i> Telefon</a>` : ''}
-                        ${item.email ? `<a href="mailto:${escapeHtml(item.email)}" class="flex items-center gap-2 bg-white border border-brand-border text-brand-dark hover:border-brand font-bold px-5 py-2.5 rounded-xl text-xs transition-colors"><i class="fa-solid fa-envelope"></i> Emel</a>` : ''}
-                    </div>
-                </div>
-                <div class="pt-4 border-t border-brand-border space-y-3">
+
+                <!-- Full-width: Share -->
+                <div class="mt-8 pt-6 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Kongsi</h2>
                     <p class="text-xs text-brand-muted italic">"${escapeHtml(shareText)}"</p>
                     ${shareButtonsHtml(item, pageUrl, shareText)}
@@ -143,6 +163,10 @@ function renderAgenda(item, pageUrl) {
             </div>
         </div>`;
 }
+
+// ------------------------------------------------------------
+// Trainer detail (unchanged from previous version)
+// ------------------------------------------------------------
 
 function renderTrainer(item, pageUrl) {
     const name = item.name || 'Trainer';
@@ -197,6 +221,10 @@ function renderTrainer(item, pageUrl) {
             </div>
         </div>`;
 }
+
+// ------------------------------------------------------------
+// Talent detail (unchanged from previous version)
+// ------------------------------------------------------------
 
 function renderTalent(item, pageUrl) {
     const name = item.name || 'Talent';
