@@ -2,8 +2,8 @@
 // BayuOne — Feedback (public submit + admin table)
 // ============================================================
 
-import { db } from './supabase-client.js';
-import { bayuData, loadAllData } from './data-loader.js';
+import { db } from './supabase-client.js?v=6b';
+import { bayuData, loadAllData } from './data-loader.js?v=6b';
 
 export async function handleFeedbackSubmit(e) {
     e.preventDefault();
