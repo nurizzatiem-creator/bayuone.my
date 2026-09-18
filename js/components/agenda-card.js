@@ -11,7 +11,7 @@ import {
     getPriceDisplay,
     getPromotionalBadgeHtml
 } from '../helpers.js?v=6b';
-import { formatDateDisplay } from '../utils.js?v=6b';
+import { formatAgendaDateRange } from '../utils.js?v=6b';
 import { buildDetailUrl } from '../slug.js?v=6b';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800';
@@ -22,9 +22,7 @@ export function renderAgendaCard(item) {
     const displayTitle = item.title || item.name;
     const priceDisplay = getPriceDisplay(item);
     const { start, end } = getAgendaDateRange(item);
-    const dateDisplay = item.isOneDay
-        ? formatDateDisplay(start)
-        : `${formatDateDisplay(start)} - ${formatDateDisplay(end)}`;
+    const dateDisplay = formatAgendaDateRange(start, end, item.isOneDay);
     const penganjurDisplay = item.org || item.penganjur || item.name || 'Penganjur';
 
     return `
