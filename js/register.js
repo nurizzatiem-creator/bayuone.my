@@ -4,6 +4,8 @@
 // Handles the "Sertai BayuOne" modal submit for all three
 // application types: Penganjur (Agenda), Trainer and Talent.
 // Phase 6B: slug is auto-generated for every new record.
+// Amendment: Trainer & Talent no longer offer "Atas Talian/Webinar"
+// in the location dropdown. Penganjur still does.
 // ============================================================
 
 import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js?v=6b';
@@ -15,10 +17,20 @@ import { bayuData, loadAllData } from './data-loader.js?v=6b';
 // Location helpers
 // ------------------------------------------------------------
 
+// Full list — used by Penganjur (Agenda) form.
+// Includes "Atas Talian/Webinar" because events can be online.
 export const MALAYSIAN_STATES = [
     'Johor', 'Kedah', 'Kelantan', 'Melaka', 'Negeri Sembilan', 'Pahang', 'Perak', 'Perlis',
     'Pulau Pinang', 'Sabah', 'Sarawak', 'Selangor', 'Terengganu', 'Wilayah Persekutuan Kuala Lumpur',
     'Wilayah Persekutuan Labuan', 'Wilayah Persekutuan Putrajaya', 'Atas Talian/Webinar'
+];
+
+// Reduced list — used by Trainer & Talent forms.
+// Excludes "Atas Talian/Webinar".
+export const MALAYSIAN_STATES_NO_ONLINE = [
+    'Johor', 'Kedah', 'Kelantan', 'Melaka', 'Negeri Sembilan', 'Pahang', 'Perak', 'Perlis',
+    'Pulau Pinang', 'Sabah', 'Sarawak', 'Selangor', 'Terengganu', 'Wilayah Persekutuan Kuala Lumpur',
+    'Wilayah Persekutuan Labuan', 'Wilayah Persekutuan Putrajaya'
 ];
 
 export const SABAH_DIVISIONS = {
@@ -34,7 +46,14 @@ export function initLocationDropdowns() {
         const stateSelect = document.getElementById(`reg-${prefix}-state`);
         if (!stateSelect) return;
         stateSelect.innerHTML = `<option value="">Sila Pilih Negeri / Wilayah</option>`;
-        MALAYSIAN_STATES.forEach(st => {
+
+        // Penganjur uses full list (with Atas Talian/Webinar)
+        // Trainer & Talent use reduced list (without it)
+        const states = (prefix === 'penganjur')
+            ? MALAYSIAN_STATES
+            : MALAYSIAN_STATES_NO_ONLINE;
+
+        states.forEach(st => {
             stateSelect.innerHTML += `<option value="${st}">${st}</option>`;
         });
     });
