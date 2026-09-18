@@ -6,10 +6,10 @@
 // Phase 6B: slug is auto-generated for every new record.
 // ============================================================
 
-import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js';
-import { rowFromApp } from './converters.js';
-import { getTodayStr, countWords, slugify } from './utils.js';
-import { bayuData, loadAllData } from './data-loader.js';
+import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js?v=6b';
+import { rowFromApp } from './converters.js?v=6b';
+import { getTodayStr, countWords, slugify } from './utils.js?v=6b';
+import { bayuData, loadAllData } from './data-loader.js?v=6b';
 
 // ------------------------------------------------------------
 // Location helpers
