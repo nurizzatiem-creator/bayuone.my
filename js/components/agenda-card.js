@@ -12,6 +12,7 @@ import {
     getPromotionalBadgeHtml
 } from '../helpers.js?v=6b';
 import { formatDateDisplay } from '../utils.js?v=6b';
+import { buildDetailUrl } from '../slug.js?v=6b';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800';
 const TIKTOK_URL = 'https://www.tiktok.com/@bayuone.my';
@@ -46,8 +47,8 @@ export function renderAgendaCard(item) {
                 </div>
             </div>
             <div class="p-5 pt-0">
-                <a href="${item.url || TIKTOK_URL}" target="_blank" class="w-full bg-brand-bg hover:bg-brand text-brand hover:text-white border border-brand-border font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
-                    <span>Maklumat Lanjut</span>
+                <a href="${buildDetailUrl('Agenda', item.slug)}" class="w-full bg-brand-bg hover:bg-brand text-brand hover:text-white border border-brand-border font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                    <span>Lihat Detail</span>
                     <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
             </div>
