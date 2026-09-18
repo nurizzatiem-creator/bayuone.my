@@ -4,12 +4,12 @@
 // Phase 5B: card markup extracted to components/trainer-card.js
 // ============================================================
 
-import { bayuData } from './data-loader.js';
+import { bayuData } from './data-loader.js?v=6b';
 import {
     sortByPromotion,
     getTrainerCertDisplayList
-} from './helpers.js';
-import { renderTrainerCard } from './components/trainer-card.js';
+} from './helpers.js?v=6b';
+import { renderTrainerCard } from './components/trainer-card.js?v=6b';
 
 // ------------------------------------------------------------
 // Filtering
