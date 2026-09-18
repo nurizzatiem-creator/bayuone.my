@@ -4,9 +4,9 @@
 // Phase 5B: card markup extracted to components/talent-card.js
 // ============================================================
 
-import { bayuData } from './data-loader.js';
-import { sortByPromotion } from './helpers.js';
-import { renderTalentCard } from './components/talent-card.js';
+import { bayuData } from './data-loader.js?v=6b';
+import { sortByPromotion } from './helpers.js?v=6b';
+import { renderTalentCard } from './components/talent-card.js?v=6b';
 
 // ------------------------------------------------------------
 // Filtering
