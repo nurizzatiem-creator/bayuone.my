@@ -2,18 +2,12 @@
 // BayuOne — Data loader
 // ============================================================
 // Loads all rows from Supabase into one shared in-memory cache.
-// Every render module reads from this cache. After an insert,
-// update or delete, call loadAllData() to refresh it.
-//
-// IMPORTANT: supabase-client.js and converters.js are imported
-// WITHOUT a version suffix. This ensures a single Supabase
-// instance across the entire app.
+// Amendment 4: all imports bumped to ?v=6b3.
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b';
-import { appFromRow } from './converters.js?v=6b';
+import { db } from './supabase-client.js?v=6b3';
+import { appFromRow } from './converters.js?v=6b3';
 
-// The single source of truth used by the whole frontend.
 export const bayuData = {
     applications: [],
     subscribers: [],
