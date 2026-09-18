@@ -33,8 +33,10 @@ import {
     resetAgendaFilters,
     setQuickFilter,
     resetCurrentAgendaPage,
-    isAgendaActiveOn
-} from './agenda.js?v=6b';
+    isAgendaActiveOn,
+    endedSliderPrev,
+    endedSliderNext
+} from './agenda.js?v=6b2';
 
 import {
     renderTrainer,
@@ -258,6 +260,8 @@ Object.assign(window, {
     resetAgendaFilters,
     setQuickFilter,
     renderAgenda,
+    endedSliderPrev,
+    endedSliderNext,
     filterTrainer,
     resetTrainerFilters,
     renderTrainer,
