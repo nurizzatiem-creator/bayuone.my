@@ -4,7 +4,7 @@
 // Amendment 4: data-loader import bumped to ?v=6b3.
 // ============================================================
 
-import { bayuData } from './data-loader.js?v=6b3';
+import { bayuData } from './data-loader.js?v=6b5';
 
 const PREFIX_TO_TYPE = {
     agenda: 'Agenda',
