@@ -1,11 +1,9 @@
 // ============================================================
-// BayuOne — Detail page renderer
+// BayuOne — Detail page renderer (DEBUG VERSION)
 // ============================================================
-// Amendment 2:  Malay date range via formatAgendaDateRange
-// Amendment 4:  Trainer/Talent description display
-// Amendment 9:  Dynamic Trainer share message
-// Amendment 10: Dynamic Talent share message
-// Amendment 14: Agenda detail 2-column layout (image left, details right)
+// This version adds on-page diagnostics when ?debug=1 is
+// present in the URL. Look at the "Profil Tidak Ditemui"
+// screen to see what is happening without opening the console.
 // ============================================================
 
 import { loadAllData, bayuData } from './data-loader.js?v=6b5';
@@ -69,10 +67,6 @@ function shareButtonsHtml(item, pageUrl, shareText) {
         </div>`;
 }
 
-// ------------------------------------------------------------
-// Amendment 14: Agenda detail — 2-column layout
-// ------------------------------------------------------------
-
 function renderAgenda(item, pageUrl) {
     const title = item.title || item.name || 'Program';
     const shareText = `Saya Jumpa ${title} di BayuOne. Jom kita join.`;
@@ -90,19 +84,12 @@ function renderAgenda(item, pageUrl) {
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-
-                    <!-- Left: Full portrait image -->
                     <div class="flex justify-center">
                         <div class="w-full bg-brand-bg border border-brand-border rounded-2xl overflow-hidden" style="max-width: 480px;">
-                            <img
-                                src="${escapeHtml(item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200')}"
-                                alt="${escapeHtml(title)}"
-                                class="w-full h-auto object-contain"
-                            >
+                            <img src="${escapeHtml(item.photo || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200')}" alt="${escapeHtml(title)}" class="w-full h-auto object-contain">
                         </div>
                     </div>
 
-                    <!-- Right: Details -->
                     <div class="flex flex-col gap-5">
                         <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-dark leading-tight">${escapeHtml(title)}</h1>
 
@@ -148,13 +135,11 @@ function renderAgenda(item, pageUrl) {
                     </div>
                 </div>
 
-                <!-- Full-width: Keterangan Program -->
                 <div class="mt-8 pt-6 border-t border-brand-border">
                     <h2 class="text-lg font-bold text-brand-dark mb-3">Keterangan Program</h2>
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.description || item.summary || 'Tiada keterangan penuh disediakan.')}</p>
                 </div>
 
-                <!-- Full-width: Share -->
                 <div class="mt-8 pt-6 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Kongsi</h2>
                     <p class="text-xs text-brand-muted italic">"${escapeHtml(shareText)}"</p>
@@ -163,10 +148,6 @@ function renderAgenda(item, pageUrl) {
             </div>
         </div>`;
 }
-
-// ------------------------------------------------------------
-// Trainer detail (unchanged from previous version)
-// ------------------------------------------------------------
 
 function renderTrainer(item, pageUrl) {
     const name = item.name || 'Trainer';
@@ -222,15 +203,9 @@ function renderTrainer(item, pageUrl) {
         </div>`;
 }
 
-// ------------------------------------------------------------
-// Talent detail (unchanged from previous version)
-// ------------------------------------------------------------
-
 function renderTalent(item, pageUrl) {
     const name = item.name || 'Talent';
-    const nicheText = (item.niche && String(item.niche).trim() !== '')
-        ? item.niche
-        : 'tempatan';
+    const nicheText = (item.niche && String(item.niche).trim() !== '') ? item.niche : 'tempatan';
     const locationText = item.location || 'Sabah';
     const shareText = `Hai! Saya jumpa ${name}, talent untuk niche ${nicheText} dari ${locationText}.\n\nSenang cari talent untuk event atau projek di BayuOne!`;
 
@@ -272,9 +247,32 @@ function renderTalent(item, pageUrl) {
         </div>`;
 }
 
-function renderNotFound(reason) {
+// ------------------------------------------------------------
+// DEBUG: Diagnostic panel
+// ------------------------------------------------------------
+
+function renderDebugPanel(route, debugInfo) {
+    const rows = Object.entries(debugInfo).map(([k, v]) => `
+        <tr>
+            <td class="p-2 font-bold text-brand-dark align-top">${escapeHtml(k)}</td>
+            <td class="p-2 text-brand-text break-all">${escapeHtml(String(v))}</td>
+        </tr>`).join('');
+
+    return `
+        <div class="bg-amber-50 border border-amber-300 rounded-2xl p-4 mb-4">
+            <div class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
+                <i class="fa-solid fa-bug mr-1"></i> DEBUG INFO
+            </div>
+            <table class="w-full text-xs">
+                <tbody>${rows}</tbody>
+            </table>
+        </div>`;
+}
+
+function renderNotFound(reason, debugHtml = '') {
     document.title = 'Profil Tidak Ditemui | BayuOne';
     return `
+        ${debugHtml}
         <div class="bg-white rounded-2xl border border-brand-border shadow-sm p-10 text-center">
             <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto text-2xl mb-4">
                 <i class="fa-solid fa-circle-info"></i>
@@ -320,6 +318,7 @@ async function init() {
     const container = document.getElementById('detail-content');
     const loading = document.getElementById('detail-loading');
 
+    const isDebug = new URLSearchParams(window.location.search).get('debug') === '1';
     const route = getRoute();
 
     if (!route) {
@@ -330,16 +329,42 @@ async function init() {
 
     await loadAllData();
 
+    const totalApps = (bayuData.applications || []).length;
+    const approvedApps = (bayuData.applications || []).filter(a => a.approval === 'Approved');
+    const sameTypeApproved = approvedApps.filter(a => a.type === route.type);
+
     const record = findRecordBySlug(route.type, route.slug);
 
     if (!record) {
-        const existsButNotApproved = (bayuData.applications || []).some(
-            a => a.type === route.type && (a.slug || '').toLowerCase() === route.slug.toLowerCase()
+        // Look for a matching record ignoring the approval check, for debug
+        const matchingByTypeAndSlug = (bayuData.applications || []).filter(a =>
+            a.type === route.type &&
+            String(a.slug || '').toLowerCase() === String(route.slug).toLowerCase()
         );
-        const reason = existsButNotApproved
+
+        const debugInfo = {
+            'URL type param': route.type,
+            'URL slug param': route.slug,
+            'URL slug length': route.slug.length,
+            'Total applications loaded': totalApps,
+            'Approved applications': approvedApps.length,
+            'Approved of this type': sameTypeApproved.length,
+            'Records matching type+slug (any approval)': matchingByTypeAndSlug.length,
+            'Sample loaded slugs (first 5)': approvedApps.slice(0, 5).map(a => a.slug).join(' | '),
+            'Sample matching records': matchingByTypeAndSlug.map(a => `${a.slug} [${a.approval}]`).join(' | '),
+            'First record type (debug)': totalApps > 0 ? bayuData.applications[0].type : '(empty)',
+            'First record approval (debug)': totalApps > 0 ? bayuData.applications[0].approval : '(empty)',
+            'First record slug (debug)': totalApps > 0 ? bayuData.applications[0].slug : '(empty)',
+            'First record keys (debug)': totalApps > 0 ? Object.keys(bayuData.applications[0]).slice(0, 10).join(', ') : '(empty)'
+        };
+
+        const debugHtml = isDebug ? renderDebugPanel(route, debugInfo) : '';
+
+        const reason = matchingByTypeAndSlug.length > 0
             ? 'Maklumat ini belum diterbitkan secara awam.'
             : `${route.type} tidak ditemui.`;
-        if (container) container.innerHTML = renderNotFound(reason);
+
+        if (container) container.innerHTML = renderNotFound(reason, debugHtml);
         if (loading) loading.classList.add('hidden');
         return;
     }
