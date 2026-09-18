@@ -7,10 +7,11 @@
 //   - Rendering the admin dashboard if authenticated
 //   - Logout (with confirmation + redirect to public site)
 //   - Showing logged-in admin email in the header
+// Amendment 4: all imports bumped to ?v=6b3.
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b';
-import { loadAllData } from './data-loader.js?v=6b';
+import { db } from './supabase-client.js?v=6b3';
+import { loadAllData } from './data-loader.js?v=6b3';
 
 // Admin dashboard renderers
 import {
@@ -27,26 +28,26 @@ import {
     onAdminDariChange,
     resetAdminLabelDates,
     handleSaveAdminEdit
-} from './admin.js?v=6b';
+} from './admin.js?v=6b3';
 
 import {
     renderFeedbackTable,
     openFeedbackPreview,
     toggleFeedbackStatus
-} from './feedback.js?v=6b';
+} from './feedback.js?v=6b3';
 
 import {
     renderSubscriberTable,
     openEditSubscriberModal,
     handleSaveSubscriber
-} from './subscriber.js?v=6b';
+} from './subscriber.js?v=6b3';
 
 import {
     openPartnerModal,
     handleSavePartner,
     confirmDeletePartner,
     renderPartnerTable
-} from './partner.js?v=6b';
+} from './partner.js?v=6b3';
 
 // ------------------------------------------------------------
 // The full admin dashboard HTML
@@ -411,17 +412,12 @@ const ADMIN_DASHBOARD_HTML = `
     </div>
 `;
 
-// ------------------------------------------------------------
-// Render the dashboard once authenticated
-// ------------------------------------------------------------
-
 function renderAdminDashboard() {
     const container = document.getElementById('admin-page-content');
     if (!container) return;
 
     container.innerHTML = ADMIN_DASHBOARD_HTML;
 
-    // Wire up all handlers
     document.getElementById('btn-logout')?.addEventListener('click', handleLogout);
     document.getElementById('btn-add-banner')?.addEventListener('click', () => openBannerModal());
     document.getElementById('btn-add-partner')?.addEventListener('click', () => openPartnerModal());
@@ -435,28 +431,19 @@ function renderAdminDashboard() {
     document.getElementById('close-edit-subscriber')?.addEventListener('click', () => closeModalById('modal-edit-subscriber'));
     document.getElementById('cancel-edit-subscriber')?.addEventListener('click', () => closeModalById('modal-edit-subscriber'));
     document.getElementById('cancel-delete')?.addEventListener('click', () => closeModalById('modal-confirm-delete'));
-    document.getElementById('btn-confirm-delete')?.addEventListener('click', () => {
-        if (window.__applicationToDelete) {
-            // Handled by admin.js logic via confirmDeleteApplication
-        }
-    });
 
-    // Search & filter listeners
     document.getElementById('admin-search')?.addEventListener('keyup', renderAdminTable);
     document.getElementById('admin-filter-type')?.addEventListener('change', renderAdminTable);
     document.getElementById('admin-filter-approval')?.addEventListener('change', renderAdminTable);
     document.getElementById('admin-filter-status')?.addEventListener('change', renderAdminTable);
 
-    // Form submissions
     document.getElementById('form-banner')?.addEventListener('submit', handleSaveBanner);
     document.getElementById('form-partner')?.addEventListener('submit', handleSavePartner);
     document.getElementById('form-edit-subscriber')?.addEventListener('submit', handleSaveSubscriber);
 
-    // Auto-calc banner end date
     document.getElementById('banner-validity')?.addEventListener('change', calculateBannerEndDate);
     document.getElementById('banner-start-date')?.addEventListener('change', calculateBannerEndDate);
 
-    // Image previews
     document.getElementById('banner-photo')?.addEventListener('input', function () {
         const url = this.value.trim();
         const preview = document.getElementById('banner-photo-preview');
@@ -472,7 +459,6 @@ function renderAdminDashboard() {
         else preview.classList.add('hidden');
     });
 
-    // Expose functions that admin.js expects on window
     Object.assign(window, {
         openAdminReviewModal,
         openBannerModal,
@@ -490,16 +476,12 @@ function renderAdminDashboard() {
         resetAdminLabelDates
     });
 
-    // Show admin email — try sessionStorage first, then fall back to getUser
+    // Show admin email
     (async () => {
         const el = document.getElementById('admin-email-display');
         if (!el) return;
-
         let email = '';
-        try {
-            email = sessionStorage.getItem('bayuone_admin_email') || '';
-        } catch (e) { /* ignore */ }
-
+        try { email = sessionStorage.getItem('bayuone_admin_email') || ''; } catch (e) {}
         if (!email) {
             try {
                 const { data: { user } } = await db.auth.getUser();
@@ -507,15 +489,11 @@ function renderAdminDashboard() {
                     email = user.email;
                     try { sessionStorage.setItem('bayuone_admin_email', email); } catch (e) {}
                 }
-            } catch (err) {
-                console.warn('Could not load admin email:', err);
-            }
+            } catch (err) { console.warn('Could not load admin email:', err); }
         }
-
         if (email) el.textContent = '· ' + email;
     })();
 
-    // Render all tables
     renderAdminTable();
     renderBannerTable();
     renderFeedbackTable();
@@ -529,10 +507,6 @@ function closeModalById(id) {
     const el = document.getElementById(id);
     if (el) el.classList.add('hidden');
 }
-
-// ------------------------------------------------------------
-// Auth: login, logout, session check
-// ------------------------------------------------------------
 
 async function handleLogin(event) {
     event.preventDefault();
@@ -554,11 +528,8 @@ async function handleLogin(event) {
         return;
     }
 
-    // Save the email immediately after successful login
     const userEmail = data?.user?.email || email;
-    try {
-        sessionStorage.setItem('bayuone_admin_email', userEmail);
-    } catch (e) { /* ignore */ }
+    try { sessionStorage.setItem('bayuone_admin_email', userEmail); } catch (e) {}
 
     await showAdminUI();
 }
@@ -598,25 +569,13 @@ async function showAdminUI() {
     showAdminGate();
 }
 
-// ------------------------------------------------------------
-// Boot
-// ------------------------------------------------------------
-
 (async function init() {
-    // Wire up login form
     document.getElementById('admin-login-form')?.addEventListener('submit', handleLogin);
-
-    // Check existing session
     const user = await checkSession();
-
     if (user) {
-        // Already logged in — pre-store the email for the header
-        try {
-            if (user.email) sessionStorage.setItem('bayuone_admin_email', user.email);
-        } catch (e) { /* ignore */ }
+        try { if (user.email) sessionStorage.setItem('bayuone_admin_email', user.email); } catch (e) {}
         await showAdminUI();
     } else {
-        // Not logged in — show login gate
         showLoginGate();
     }
 })();
