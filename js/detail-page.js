@@ -8,8 +8,8 @@
 // Renders a full profile page for Agenda / Trainer / Talent.
 // ============================================================
 
-import { loadAllData, bayuData } from './data-loader.js?v=6d';
-import { getSlugRoute, findRecordBySlug } from './slug.js?v=6d';
+import { loadAllData, bayuData } from './data-loader.js?v=6b';
+import { getSlugRoute, findRecordBySlug } from './slug.js?v=6b';
 
 // ------------------------------------------------------------
 // URL parsing
