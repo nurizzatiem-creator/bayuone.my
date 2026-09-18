@@ -1,20 +1,17 @@
 // ============================================================
 // BayuOne — Business helper functions
 // ============================================================
-// Functions that combine simple utils into BayuOne-specific
-// behaviour: price display, promotion logic, badge HTML, etc.
+// Amendment 4: utils.js import bumped to ?v=6b3.
 // ============================================================
 
-import { getTodayStr, formatDateDisplay } from './utils.js?v=6b';
+import { getTodayStr, formatDateDisplay } from './utils.js?v=6b3';
 
-// ---------- Agenda date range ----------
 export function getAgendaDateRange(item) {
     const start = item.date || '';
     const end = item.isOneDay ? start : (item.dateEnd || start);
     return { start, end };
 }
 
-// ---------- Price display ----------
 export function getPriceDisplay(item) {
     const feeType = item.feeType || 'Percuma';
     if (feeType !== 'Berbayar') return 'Percuma';
@@ -27,7 +24,6 @@ export function getPriceDisplay(item) {
     return 'Percuma';
 }
 
-// ---------- Promotion / label logic ----------
 export function isPromotionActive(item) {
     if (!item || !item.label || item.label.trim() === '') return false;
     if (!item.tarikhDari || !item.tarikhSehingga) return false;
@@ -44,8 +40,6 @@ export function getPromoPriority(item) {
     return 4;
 }
 
-// Sort an array so that active promotions come first,
-// then original order is preserved within each priority group.
 export function sortByPromotion(items) {
     return items
         .map((item, idx) => ({ item, idx }))
@@ -67,7 +61,6 @@ export function getPromotionalBadgeHtml(item) {
     return '';
 }
 
-// ---------- Agenda status ----------
 export function getAgendaStatusInfo(item) {
     if (item.statusPenangguhan === 'Dibatalkan') {
         return { code: 'DIBATALKAN', label: 'Dibatalkan' };
@@ -82,7 +75,6 @@ export function getAgendaStatusInfo(item) {
     return { code: 'AKAN_DATANG', label: 'Akan Datang' };
 }
 
-// ---------- Trainer certificates ----------
 export function getTrainerCertDisplayList(item) {
     const rawCerts = item.certs || [];
     const custom = (item.certCustom || '').trim();
@@ -97,7 +89,6 @@ export function getTrainerCertDisplayList(item) {
     return result;
 }
 
-// ---------- Banner status ----------
 export function getBannerStatus(banner) {
     const todayStr = getTodayStr();
     if (todayStr < banner.startDate) {
@@ -109,5 +100,4 @@ export function getBannerStatus(banner) {
     return { code: 'TELAH_TAMAT', label: 'Telah Tamat', class: 'bg-gray-100 text-gray-600 border-gray-200' };
 }
 
-// ---------- Re-export for convenience ----------
 export { formatDateDisplay };
