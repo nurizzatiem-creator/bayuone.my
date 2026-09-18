@@ -146,7 +146,11 @@ function renderAgenda(item, pageUrl) {
 
 function renderTrainer(item, pageUrl) {
     const name = item.name || 'Trainer';
-    const shareText = `Saya Jumpa ${name} di BayuOne.`;
+    const expertiseList = (item.expertise && item.expertise.length > 0)
+        ? item.expertise.join(', ')
+        : 'profesional';
+    const locationText = item.location || 'Sabah';
+    const shareText = `Hai! Saya jumpa ${name}, jurulatih ${expertiseList} dari ${locationText}.\n\nSenang cari trainer untuk program di BayuOne!`;
     const expertise = (item.expertise || []).map(e =>
         `<span class="bg-brand-bg text-brand text-xs font-semibold px-3 py-1 rounded-lg border border-brand-border">${escapeHtml(e)}</span>`
     ).join(' ');
@@ -196,7 +200,11 @@ function renderTrainer(item, pageUrl) {
 
 function renderTalent(item, pageUrl) {
     const name = item.name || 'Talent';
-    const shareText = `Saya Jumpa ${name} di BayuOne.`;
+    const nicheText = (item.niche && String(item.niche).trim() !== '')
+        ? item.niche
+        : 'tempatan';
+    const locationText = item.location || 'Sabah';
+    const shareText = `Hai! Saya jumpa ${name}, talent untuk niche ${nicheText} dari ${locationText}.\n\nSenang cari talent untuk event atau projek di BayuOne!`;
 
     document.title = `${name} | BayuOne`;
     return `
