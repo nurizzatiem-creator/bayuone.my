@@ -3,13 +3,16 @@
 // ============================================================
 // Handles: admin login/logout, applications table, review modal,
 // banner table, delete confirmation. Data comes from data-loader.
+//
+// Amendment 4: Admin review modal includes "Keterangan Program"
+//              textarea for Agenda records (stored in `description`).
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b';
-import { bayuData, loadAllData } from './data-loader.js?v=6b';
-import { rowFromApp } from './converters.js?v=6b';
-import { formatDateDisplay, countWords, calculateTarikhTamat, getTodayStr } from './utils.js?v=6b';
-import { getBannerStatus } from './helpers.js?v=6b';
+import { db } from './supabase-client.js?v=6b3';
+import { bayuData, loadAllData } from './data-loader.js?v=6b3';
+import { rowFromApp } from './converters.js?v=6b3';
+import { formatDateDisplay, countWords, calculateTarikhTamat, getTodayStr } from './utils.js?v=6b3';
+import { getBannerStatus } from './helpers.js?v=6b3';
 
 // ------------------------------------------------------------
 // Admin login / logout
@@ -383,6 +386,10 @@ export function openAdminReviewModal(id) {
                         <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Gambar / Poster</label>
                         <input type="url" id="admin-edit-photo" value="${item.photo || ''}" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
                     </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Keterangan Program</label>
+                        <textarea id="admin-edit-description" rows="4" placeholder="Keterangan penuh program (dipaparkan pada halaman detail awam)..." class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none">${item.description || ''}</textarea>
+                    </div>
                 </div>
             </div>`;
     } else if (item.type === 'Trainer') {
@@ -623,6 +630,7 @@ export async function handleSaveAdminEdit(e, id) {
         updated.title = document.getElementById('admin-edit-title').value.trim();
         updated.org = document.getElementById('admin-edit-org').value.trim();
         updated.penganjur = updated.org;
+        updated.description = document.getElementById('admin-edit-description').value.trim();
         updated.name = document.getElementById('admin-edit-name').value.trim() || updated.org;
         updated.email = document.getElementById('admin-edit-email').value.trim();
         updated.phone = document.getElementById('admin-edit-phone').value.trim();
