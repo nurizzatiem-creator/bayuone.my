@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami | BayuOne</title>
+    <meta name="description" content="BayuOne ialah platform yang menghubungkan penganjur, trainer dan talent untuk berkongsi program, kemahiran dan peluang di Sabah dan Malaysia.">
+
+    <link rel="icon" type="image/svg+xml" href="./Bayuone.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#126B4C',
+                            dark: '#0B5139',
+                            text: '#17231E',
+                            muted: '#637069',
+                            border: '#DCE6DF',
+                            bg: '#F4F8F5',
+                            accent: '#1CB07E'
+                        }
+                    },
+                    fontFamily: { sans: ['DM Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/bayuone.css">
+</head>
+<body class="min-h-screen flex flex-col bg-white text-brand-text">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 border-b border-brand-border sticky-nav transition-all duration-200">
+        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <a href="./" class="flex items-center space-x-3">
+                <div class="w-11 h-11 bg-white border border-brand-border rounded-xl shadow-sm flex items-center justify-center overflow-hidden p-1">
+                    <img src="https://lh3.googleusercontent.com/d/1gXBWckPatTAQwgfXpmLn5gu3DY7YkWQO" onerror="this.style.display='none'" alt="BayuOne Logo" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl tracking-tight text-brand-dark flex items-center gap-1.5">
+                        <span><span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></span>
+                        <span class="text-[10px] bg-brand-bg text-brand border border-brand-border px-1.5 py-0.5 rounded font-semibold uppercase tracking-wider">Sabah</span>
+                    </span>
+                    <span class="text-[11px] font-medium text-brand-muted leading-none">Connect • Create • Grow</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <a href="./" class="text-brand-dark hover:text-brand transition-colors">Laman Utama</a>
+                <a href="./tentang-kami.html" class="text-brand font-bold">Tentang Kami</a>
+                <a href="./dasar-privasi.html" class="text-brand-dark hover:text-brand transition-colors">Dasar Privasi</a>
+            </nav>
+
+            <a href="./" class="bg-brand hover:bg-brand-dark text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-arrow-left text-xs"></i>
+                <span>Kembali</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="bg-brand-bg border-b border-brand-border py-12 md:py-16">
+        <div class="max-w-[900px] mx-auto px-4 sm:px-6 text-center">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-brand-border text-brand-dark text-xs font-bold uppercase tracking-widest shadow-2xs mb-4">
+                <span class="w-2 h-2 rounded-full bg-brand"></span>
+                <span>TENTANG KAMI</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tight leading-tight">
+                Menghubungkan Komuniti, Kemahiran & Peluang
+            </h1>
+            <p class="mt-4 text-base sm:text-lg text-brand-muted max-w-2xl mx-auto">
+                BayuOne ialah platform yang menghubungkan <strong>Penganjur</strong>, <strong>Trainer</strong> dan <strong>Talent</strong> untuk perkongsian program, kemahiran, peluang dan jaringan profesional.
+            </p>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-[900px] mx-auto px-4 sm:px-6 py-12">
+
+        <!-- What we do -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-extrabold text-brand-dark mb-4">Apa Yang Kami Lakukan</h2>
+            <p class="text-sm sm:text-base text-brand-text leading-relaxed mb-4">
+                <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span> membolehkan penganjur program, jurulatih profesional, dan bakat tempatan memaparkan penawaran mereka kepada komuniti yang lebih luas. Kami percaya bahawa peluang terbaik berlaku apabila orang yang tepat berjumpa pada masa yang tepat.
+            </p>
+            <p class="text-sm sm:text-base text-brand-text leading-relaxed">
+                Melalui BayuOne, pengguna boleh mencari program latihan, seminar, bengkel, jurulatih bertauliah, dan pelbagai bakat profesional dalam satu platform yang mudah dan dipercayai.
+            </p>
+        </section>
+
+        <!-- 3 pillars -->
+        <section class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-sm">
+                <div class="w-12 h-12 rounded-xl bg-brand-bg border border-brand-border flex items-center justify-center text-brand text-xl mb-4">
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <h3 class="text-lg font-bold text-brand-dark mb-2">Agenda & Program</h3>
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Penganjur boleh memaparkan program, seminar, kursus dan acara komuniti untuk dilihat oleh penyertaan yang lebih luas.
+                </p>
+            </div>
+            <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-sm">
+                <div class="w-12 h-12 rounded-xl bg-brand-bg border border-brand-border flex items-center justify-center text-brand text-xl mb-4">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+                <h3 class="text-lg font-bold text-brand-dark mb-2">Trainer Profesional</h3>
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Jurulatih, penceramah dan pakar bidang boleh membina profil profesional dan ditemui oleh organisasi yang memerlukan kepakaran mereka.
+                </p>
+            </div>
+            <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-sm">
+                <div class="w-12 h-12 rounded-xl bg-brand-bg border border-brand-border flex items-center justify-center text-brand text-xl mb-4">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <h3 class="text-lg font-bold text-brand-dark mb-2">Bakat Tempatan</h3>
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Bakat dalam pelbagai bidang — pengacaraan, F&B, kecantikan, fotografi dan banyak lagi — boleh memaparkan perkhidmatan mereka kepada komuniti.
+                </p>
+            </div>
+        </section>
+
+        <!-- Mission -->
+        <section class="mb-12 bg-brand-bg rounded-2xl border border-brand-border p-6 sm:p-8">
+            <h2 class="text-2xl font-extrabold text-brand-dark mb-4">Misi Kami</h2>
+            <p class="text-sm sm:text-base text-brand-text leading-relaxed mb-4">
+                Menjadi titik rujukan utama untuk program, latihan dan bakat tempatan di Sabah dan Malaysia — memudahkan kolaborasi, memupuk kemahiran, dan membuka lebih banyak peluang untuk semua.
+            </p>
+            <ul class="space-y-3 text-sm sm:text-base text-brand-text">
+                <li class="flex items-start gap-3">
+                    <i class="fa-solid fa-check-circle text-brand mt-1"></i>
+                    <span><strong>Connect</strong> — menghubungkan individu dan organisasi yang berkongsi minat.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fa-solid fa-check-circle text-brand mt-1"></i>
+                    <span><strong>Create</strong> — menyokong penciptaan program, kandungan dan perkhidmatan bermutu.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fa-solid fa-check-circle text-brand mt-1"></i>
+                    <span><strong>Grow</strong> — membina komuniti yang mampan, profesional dan saling menyokong.</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Contact -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-extrabold text-brand-dark mb-4">Hubungi Kami</h2>
+            <p class="text-sm sm:text-base text-brand-text leading-relaxed mb-4">
+                Untuk sebarang pertanyaan, kerjasama atau maklum balas, boleh hubungi kami melalui:
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="https://www.facebook.com/KomunitiBayuOne" target="_blank" rel="noopener" class="flex items-center gap-3 bg-white rounded-xl border border-brand-border p-4 hover:border-brand transition-colors">
+                    <div class="w-10 h-10 rounded-lg bg-brand-bg flex items-center justify-center text-brand">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-brand-dark uppercase tracking-wider">Facebook</div>
+                        <div class="text-sm text-brand-muted">KomunitiBayuOne</div>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/bayuone.my" target="_blank" rel="noopener" class="flex items-center gap-3 bg-white rounded-xl border border-brand-border p-4 hover:border-brand transition-colors">
+                    <div class="w-10 h-10 rounded-lg bg-brand-bg flex items-center justify-center text-brand">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-brand-dark uppercase tracking-wider">Instagram</div>
+                        <div class="text-sm text-brand-muted">@bayuone.my</div>
+                    </div>
+                </a>
+                <a href="https://www.tiktok.com/@bayuone.my" target="_blank" rel="noopener" class="flex items-center gap-3 bg-white rounded-xl border border-brand-border p-4 hover:border-brand transition-colors">
+                    <div class="w-10 h-10 rounded-lg bg-brand-bg flex items-center justify-center text-brand">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-brand-dark uppercase tracking-wider">TikTok</div>
+                        <div class="text-sm text-brand-muted">@bayuone.my</div>
+                    </div>
+                </a>
+                <a href="https://www.threads.net/@bayuone.my" target="_blank" rel="noopener" class="flex items-center gap-3 bg-white rounded-xl border border-brand-border p-4 hover:border-brand transition-colors">
+                    <div class="w-10 h-10 rounded-lg bg-brand-bg flex items-center justify-center text-brand">
+                        <i class="fa-brands fa-threads"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-brand-dark uppercase tracking-wider">Threads</div>
+                        <div class="text-sm text-brand-muted">@bayuone.my</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="text-center py-8">
+            <a href="./" class="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-bold px-6 py-3 rounded-xl text-sm transition-colors">
+                <i class="fa-solid fa-arrow-left"></i>
+                Kembali ke Laman Utama
+            </a>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-white border-t border-brand-dark py-10">
+        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
+            <p class="text-sm font-bold">
+                <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>
+                — Komuniti Kemahiran, Bakat & Peluang
+            </p>
+            <p class="text-xs text-emerald-200/60 mt-2">Powered by NMZ Kreatif Enterprise (199736-T) · © 2026</p>
+            <div class="pt-4 flex justify-center flex-wrap gap-x-4 gap-y-2 text-xs">
+                <a href="./" class="text-emerald-300 hover:text-white underline underline-offset-2">Laman Utama</a>
+                <span class="text-emerald-800">·</span>
+                <a href="./tentang-kami.html" class="text-emerald-300 hover:text-white underline underline-offset-2">Tentang Kami</a>
+                <span class="text-emerald-800">·</span>
+                <a href="./dasar-privasi.html" class="text-emerald-300 hover:text-white underline underline-offset-2">Dasar Privasi</a>
+                <span class="text-emerald-800">·</span>
+                <a href="./admin/" class="text-emerald-300 hover:text-white underline underline-offset-2">Login Admin</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
