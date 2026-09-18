@@ -9,9 +9,9 @@
 // ============================================================
 
 import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js?v=6b3';
-import { rowFromApp } from './converters.js?v=6b';
-import { getTodayStr, countWords, slugify } from './utils.js?v=6b';
-import { bayuData, loadAllData } from './data-loader.js?v=6b';
+import { rowFromApp } from './converters.js?v=6b3';
+import { getTodayStr, countWords, slugify } from './utils.js?v=6b3';
+import { bayuData, loadAllData } from './data-loader.js?v=6b3';
 
 // ------------------------------------------------------------
 // Location helpers
