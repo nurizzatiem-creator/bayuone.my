@@ -10,6 +10,7 @@
 
 import { loadAllData, bayuData } from './data-loader.js?v=6b';
 import { getSlugRoute, findRecordBySlug } from './slug.js?v=6b';
+import { formatAgendaDateRange } from './utils.js?v=6b';
 
 // ------------------------------------------------------------
 // URL parsing
@@ -47,7 +48,10 @@ function escapeHtml(str) {
         .replace(/'/g, '&#39;');
 }
 
+import { formatAgendaDateRange } from './utils.js?v=6b';
+
 function formatDate(iso) {
+    // Kept for non-range uses (banners, etc.) — returns DD/MM/YYYY
     if (!iso) return '';
     const s = String(iso).split('T')[0];
     const parts = s.split('-');
@@ -96,9 +100,7 @@ function shareButtonsHtml(item, pageUrl, shareText) {
 function renderAgenda(item, pageUrl) {
     const title = item.title || item.name || 'Program';
     const shareText = `Saya Jumpa ${title} di BayuOne. Jom kita join.`;
-    const dateRange = item.isOneDay
-        ? formatDate(item.date)
-        : `${formatDate(item.date)} - ${formatDate(item.dateEnd || item.date)}`;
+    const dateRange = formatAgendaDateRange(item.date, item.dateEnd || item.date, item.isOneDay);
     const organiser = item.org || item.penganjur || item.name || 'Penganjur';
 
     document.title = `${title} | BayuOne`;
