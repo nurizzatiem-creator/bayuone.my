@@ -113,7 +113,7 @@ function getAgendaFiltered() {
                 yearEnd.setHours(23, 59, 59, 999);
                 if (!(startD <= yearEnd && endD >= yearStart)) return false;
             } else if (activeQuickFilter === 'course') {
-                const courseCategories = ['Kursus & Latihan', 'Bengkel', 'Seminar & Forum'];
+                const courseCategories = ['Kursus & Latihan', 'Bengkel', 'Seminar & Forum','Persidangan & Konvensyen'];
                 if (!courseCategories.includes(item.category)) return false;
             }
         }
