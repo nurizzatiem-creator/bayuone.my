@@ -2,9 +2,9 @@
 // BayuOne — Banner + Partner (public rendering)
 // ============================================================
 
-import { bayuData } from './data-loader.js';
-import { getTodayStr } from './utils.js';
-import { getBannerStatus } from './helpers.js';
+import { bayuData } from './data-loader.js?v=6b';
+import { getTodayStr } from './utils.js?v=6b';
+import { getBannerStatus } from './helpers.js?v=6b';
 
 // ------------------------------------------------------------
 // Active banner
