@@ -5,13 +5,12 @@
 // It imports every module, wires up event listeners, and
 // exposes global functions used by inline onclick="..." attributes.
 //
-// Phase 7C: openPrivacyPage removed (privacy is now at /dasar-privasi.html)
-// Cache-bust version bumped to 7c.
+// Amendment 4: Cache-bust versions bumped to ?v=6b3.
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b';
-import { loadAllData, bayuData } from './data-loader.js?v=6b';
-import { getTodayStr, countWords } from './utils.js?v=6b';
+import { db } from './supabase-client.js?v=6b3';
+import { loadAllData, bayuData } from './data-loader.js?v=6b3';
+import { getTodayStr, countWords } from './utils.js?v=6b3';
 
 // Registration + form helpers
 import {
@@ -24,7 +23,7 @@ import {
     togglePenganjurFee,
     toggleTrainerCertCustom,
     updateTrainerCertCustomCounter
-} from './register.js?v=6b';
+} from './register.js?v=6b3';
 
 // Public renderers
 import {
@@ -36,24 +35,24 @@ import {
     isAgendaActiveOn,
     endedSliderPrev,
     endedSliderNext
-} from './agenda.js?v=6b2';
+} from './agenda.js?v=6b3';
 
 import {
     renderTrainer,
     filterTrainer,
     resetTrainerFilters
-} from './trainer.js?v=6b';
+} from './trainer.js?v=6b3';
 
 import {
     renderTalent,
     filterTalent,
     resetTalentFilters
-} from './talent.js?v=6b';
+} from './talent.js?v=6b3';
 
 import {
     renderBanner,
     renderBrandsSupport
-} from './banner.js?v=6b';
+} from './banner.js?v=6b3';
 
 // Admin renderers
 import {
@@ -73,7 +72,7 @@ import {
     onAdminDariChange,
     resetAdminLabelDates,
     handleSaveAdminEdit
-} from './admin.js?v=6b';
+} from './admin.js?v=6b3';
 
 // Feedback / subscribers / partners
 import {
@@ -81,21 +80,21 @@ import {
     handleFeedbackSubmit,
     openFeedbackPreview,
     toggleFeedbackStatus
-} from './feedback.js?v=6b';
+} from './feedback.js?v=6b3';
 
 import {
     renderSubscriberTable,
     handleSubscribeSubmit,
     openEditSubscriberModal,
     handleSaveSubscriber
-} from './subscriber.js?v=6b';
+} from './subscriber.js?v=6b3';
 
 import {
     openPartnerModal,
     handleSavePartner,
     confirmDeletePartner,
     renderPartnerTable
-} from './partner.js?v=6b';
+} from './partner.js?v=6b3';
 
 // Modals
 import {
@@ -113,15 +112,15 @@ import {
     closePartnerModal,
     closeEditSubscriberModal,
     closeDeleteModal
-} from './modals.js?v=6b';
+} from './modals.js?v=6b3';
 
-// Tabs / search (Phase 7C: openPrivacyPage removed)
+// Tabs / search
 import {
     switchTab,
     toggleMobileMenu,
     handleGlobalSearch,
     triggerSearch
-} from './tabs.js?v=7c';
+} from './tabs.js?v=7c3';
 
 // ------------------------------------------------------------
 // Utility: word counter for trainer/talent summary fields
@@ -224,7 +223,7 @@ function refreshAllViews() {
 // ------------------------------------------------------------
 
 Object.assign(window, {
-    // Tabs / navigation (Phase 7C: openPrivacyPage removed)
+    // Tabs / navigation
     switchTab,
     toggleMobileMenu,
     handleGlobalSearch,
