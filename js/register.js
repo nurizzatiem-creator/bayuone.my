@@ -8,7 +8,7 @@
 // in the location dropdown. Penganjur still does.
 // ============================================================
 
-import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js?v=6b';
+import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js?v=6b3';
 import { rowFromApp } from './converters.js?v=6b';
 import { getTodayStr, countWords, slugify } from './utils.js?v=6b';
 import { bayuData, loadAllData } from './data-loader.js?v=6b';
@@ -290,6 +290,7 @@ export async function handleRegisterSubmit(event) {
         const title = val('reg-penganjur-title');
         const org = val('reg-penganjur-org');
         const email = val('reg-penganjur-email');
+        const description = val('reg-penganjur-description');
         const date = val('reg-penganjur-date');
         const dateEnd = val('reg-penganjur-date-end');
         const oneDay = document.getElementById('reg-penganjur-oneday')?.checked || false;
@@ -328,6 +329,7 @@ export async function handleRegisterSubmit(event) {
             id: newId, type: 'Agenda', slug: slugify(title),
             title, name: picName || org, org,
             penganjur: org,
+            description,
             email, phone: picTel,
             location, mode, category,
             date, dateEnd: oneDay ? date : dateEnd, isOneDay: oneDay,
