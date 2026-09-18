@@ -2,6 +2,8 @@
 // BayuOne — Agenda (events) rendering + filtering
 // ============================================================
 // Phase 5B: card markup extracted to components/agenda-card.js
+// Amendment 5: "Telah Tamat" section is now a manual 3-up slider
+//              (latest-ended-first, no autoplay).
 // ============================================================
 
 import { bayuData } from './data-loader.js?v=6b';
@@ -11,12 +13,16 @@ import {
     sortByPromotion,
     getAgendaStatusInfo
 } from './helpers.js?v=6b';
-import { renderAgendaCard } from './components/agenda-card.js?v=6b';
+import { renderAgendaCard } from './components/agenda-card.js?v=6b2';
 
 // The module-local UI state
 let activeQuickFilter = '';
 let currentAgendaPage = 1;
 const AGENDA_PER_PAGE = 12;
+
+// Amendment 5: Telah Tamat slider state
+let endedSliderOffset = 0;
+const ENDED_SLIDER_PAGE_SIZE = 3;
 
 // ------------------------------------------------------------
 // Quick filter
@@ -30,6 +36,7 @@ export function setQuickFilter(type) {
         if (btn) btn.classList.add('active');
     }
     currentAgendaPage = 1;
+    endedSliderOffset = 0;
     renderAgenda();
 }
 
@@ -165,13 +172,22 @@ export function renderAgenda() {
         else upcoming.push(item);
     });
 
+    // Amendment 5: sort ended events by END date, latest first
+    ended.sort((a, b) => {
+        const endA = a.dateEnd || a.date || '';
+        const endB = b.dateEnd || b.date || '';
+        return endB.localeCompare(endA);
+    });
+
     const totalPages = Math.max(1, Math.ceil(upcoming.length / AGENDA_PER_PAGE));
     if (currentAgendaPage > totalPages) currentAgendaPage = totalPages;
     const startIdx = (currentAgendaPage - 1) * AGENDA_PER_PAGE;
     const pageItems = upcoming.slice(startIdx, startIdx + AGENDA_PER_PAGE);
 
     pageItems.forEach(item => { upcomingContainer.innerHTML += renderAgendaCard(item); });
-    ended.forEach(item => { endedContainer.innerHTML += renderAgendaCard(item); });
+
+    // Amendment 5: render "Telah Tamat" as a manual slider
+    renderEndedSlider(endedContainer, ended);
 
     document.getElementById('count-upcoming').textContent = `${upcoming.length} Program`;
     document.getElementById('count-ended').textContent = `${ended.length} Program`;
@@ -202,8 +218,73 @@ export function renderAgenda() {
     }
 }
 
+// ------------------------------------------------------------
+// Amendment 5: "Telah Tamat" slider
+// ------------------------------------------------------------
+// Shows 3 cards at a time. Manual ← → navigation. No autoplay.
+
+function renderEndedSlider(container, endedItems) {
+    if (!container) return;
+    container.innerHTML = '';
+
+    const nav = document.getElementById('ended-slider-nav');
+
+    if (!endedItems || endedItems.length === 0) {
+        container.innerHTML = '<div class="text-center text-brand-muted text-sm py-8">Tiada program tamat buat masa ini.</div>';
+        if (nav) nav.style.display = 'none';
+        return;
+    }
+
+    // Clamp offset to valid range
+    const maxOffset = Math.max(0, endedItems.length - ENDED_SLIDER_PAGE_SIZE);
+    if (endedSliderOffset > maxOffset) endedSliderOffset = maxOffset;
+    if (endedSliderOffset < 0) endedSliderOffset = 0;
+
+    // Render 3-card row
+    const track = document.createElement('div');
+    track.className = 'grid grid-cols-1 md:grid-cols-3 gap-6';
+    const pageItems = endedItems.slice(
+        endedSliderOffset,
+        endedSliderOffset + ENDED_SLIDER_PAGE_SIZE
+    );
+    pageItems.forEach(item => {
+        track.innerHTML += renderAgendaCard(item);
+    });
+    container.appendChild(track);
+
+    // Show or hide the nav based on whether there are more than 3 items
+    if (nav) {
+        if (endedItems.length > ENDED_SLIDER_PAGE_SIZE) {
+            nav.style.display = 'flex';
+            const prevBtn = nav.querySelector('[data-ended-prev]');
+            const nextBtn = nav.querySelector('[data-ended-next]');
+            if (prevBtn) prevBtn.disabled = (endedSliderOffset === 0);
+            if (nextBtn) nextBtn.disabled = (endedSliderOffset >= maxOffset);
+        } else {
+            nav.style.display = 'none';
+        }
+    }
+}
+
+export function endedSliderPrev() {
+    if (endedSliderOffset > 0) {
+        endedSliderOffset = Math.max(0, endedSliderOffset - ENDED_SLIDER_PAGE_SIZE);
+        renderAgenda();
+    }
+}
+
+export function endedSliderNext() {
+    endedSliderOffset += ENDED_SLIDER_PAGE_SIZE;
+    renderAgenda();
+}
+
+// ------------------------------------------------------------
+// Public filter API
+// ------------------------------------------------------------
+
 export function filterAgenda() {
     currentAgendaPage = 1;
+    endedSliderOffset = 0;
     renderAgenda();
 }
 
@@ -217,6 +298,7 @@ export function resetAgendaFilters() {
     const gs = document.getElementById('global-search');
     if (gs) gs.value = '';
     activeQuickFilter = '';
+    endedSliderOffset = 0;
     document.querySelectorAll('.quick-filter-btn').forEach(b => b.classList.remove('active'));
     currentAgendaPage = 1;
     renderAgenda();
