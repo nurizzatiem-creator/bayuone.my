@@ -76,6 +76,10 @@
                     <i class="fa-solid fa-plus text-xs"></i>
                     <span>Sertai <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></span>
                 </button>
+                <button onclick="openSharePopup()" class="bg-white hover:bg-brand-bg text-brand-dark border border-brand-border text-sm font-bold px-5 py-2.5 rounded-xl shadow-sm hover:shadow transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-share-nodes text-xs"></i>
+                    <span>Kongsi</span>
+                </button>
             </div>
 
             <button onclick="toggleMobileMenu()" class="md:hidden text-brand-dark text-xl p-2 rounded-lg hover:bg-brand-bg focus:outline-none">
@@ -93,9 +97,12 @@
             <button onclick="switchTab('talent'); toggleMobileMenu()" class="w-full text-left py-2.5 px-3 rounded-lg text-sm font-semibold text-brand-text hover:bg-brand-bg flex items-center gap-3">
                 <i class="fa-solid fa-star text-brand"></i> Bakat Tempatan
             </button>
-            <div class="pt-2">
+            <div class="pt-2 space-y-2">
                 <button onclick="openRegisterModal(); toggleMobileMenu()" class="w-full bg-brand text-white font-bold text-center py-3 rounded-xl shadow">
                     + Sertai <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span>
+                </button>
+                <button onclick="openSharePopup(); toggleMobileMenu()" class="w-full bg-white text-brand-dark border border-brand-border font-bold text-center py-3 rounded-xl shadow-sm">
+                    <i class="fa-solid fa-share-nodes mr-2"></i> Kongsi BayuOne
                 </button>
             </div>
         </div>
@@ -943,7 +950,7 @@
     </div>
 
     <!-- APPLICATION JAVASCRIPT LOGIC -->
-    <script type="module" src="js/main.js?v=7c3"></script>
+    <script type="module" src="js/main.js?v=7c4"></script>
 
     <!-- DISABLE RIGHT CLICK -->
     <script>
