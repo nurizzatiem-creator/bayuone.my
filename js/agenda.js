@@ -12,7 +12,7 @@ import {
     sortByPromotion,
     getAgendaStatusInfo
 } from './helpers.js?v=6b3';
-import { renderAgendaCard } from './components/agenda-card.js?v=6b3';
+import { renderAgendaCard } from './components/agenda-card.js?v=6b5';
 
 let activeQuickFilter = '';
 let currentAgendaPage = 1;
