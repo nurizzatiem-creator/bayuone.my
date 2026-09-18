@@ -1,19 +1,15 @@
 // ============================================================
 // BayuOne — Trainer rendering + filtering
 // ============================================================
-// Phase 5B: card markup extracted to components/trainer-card.js
+// Amendment 4: all imports bumped to ?v=6b3.
 // ============================================================
 
-import { bayuData } from './data-loader.js?v=6b';
+import { bayuData } from './data-loader.js?v=6b3';
 import {
     sortByPromotion,
     getTrainerCertDisplayList
-} from './helpers.js?v=6b';
-import { renderTrainerCard } from './components/trainer-card.js?v=6b';
-
-// ------------------------------------------------------------
-// Filtering
-// ------------------------------------------------------------
+} from './helpers.js?v=6b3';
+import { renderTrainerCard } from './components/trainer-card.js?v=6b3';
 
 function getTrainerFiltered() {
     const name = (document.getElementById('filter-trainer-name')?.value || '').toLowerCase().trim();
@@ -47,10 +43,6 @@ function getTrainerFiltered() {
         return true;
     });
 }
-
-// ------------------------------------------------------------
-// Public API
-// ------------------------------------------------------------
 
 export function renderTrainer() {
     const container = document.getElementById('grid-trainer');
