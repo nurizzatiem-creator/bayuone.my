@@ -1,12 +1,8 @@
 // ============================================================
 // BayuOne — Database row ↔ application object converters
 // ============================================================
-// The Supabase tables use snake_case column names.
-// The rest of the app uses camelCase field names.
-// These two functions convert cleanly between them.
-//
-//  appFromRow(row) : converts a Supabase row → app object
-//  rowFromApp(app) : converts an app object → Supabase row
+// Amendment 4: added `description` field.
+// No imports — pure functions.
 // ============================================================
 
 export function appFromRow(r) {
@@ -14,7 +10,6 @@ export function appFromRow(r) {
         id: r.id,
         slug: r.slug,
         type: r.type,
-        description: r.description,
         title: r.title,
         name: r.name,
         org: r.org,
@@ -42,6 +37,7 @@ export function appFromRow(r) {
         certCustom: r.cert_custom,
         niche: r.niche,
         summary: r.summary,
+        description: r.description,
         dateEnd: r.date_end,
         isOneDay: r.is_one_day || false,
         hargaMin: r.harga_min,
@@ -55,7 +51,6 @@ export function rowFromApp(a) {
         id: a.id,
         slug: a.slug,
         type: a.type,
-        description: a.description,
         title: a.title,
         name: a.name,
         org: a.org,
@@ -83,6 +78,7 @@ export function rowFromApp(a) {
         cert_custom: a.certCustom,
         niche: a.niche,
         summary: a.summary,
+        description: a.description,
         date_end: a.dateEnd,
         is_one_day: a.isOneDay || false,
         harga_min: a.hargaMin,
