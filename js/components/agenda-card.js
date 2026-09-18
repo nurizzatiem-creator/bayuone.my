@@ -1,21 +1,19 @@
 // ============================================================
 // BayuOne — Agenda card component
 // ============================================================
-// Shared renderer for Agenda event cards. Used by:
-//   - js/agenda.js (list view)
-//   - Future: detail/slug pages
+// Amendment 2: Malay date range via formatAgendaDateRange.
+// Amendment 4: all imports bumped to ?v=6b3.
 // ============================================================
 
 import {
     getAgendaDateRange,
     getPriceDisplay,
     getPromotionalBadgeHtml
-} from '../helpers.js?v=6b';
-import { formatAgendaDateRange } from '../utils.js?v=6b';
-import { buildDetailUrl } from '../slug.js?v=6b';
+} from '../helpers.js?v=6b3';
+import { formatAgendaDateRange } from '../utils.js?v=6b3';
+import { buildDetailUrl } from '../slug.js?v=6b3';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800';
-const TIKTOK_URL = 'https://www.tiktok.com/@bayuone.my';
 
 export function renderAgendaCard(item) {
     const badgeHtml = getPromotionalBadgeHtml(item);
