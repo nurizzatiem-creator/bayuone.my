@@ -6,6 +6,7 @@ import {
     getPromotionalBadgeHtml,
     getTrainerCertDisplayList
 } from '../helpers.js?v=6b';
+import { buildDetailUrl } from '../slug.js?v=6b';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400';
 const TIKTOK_URL = 'https://www.tiktok.com/@bayuone.my';
@@ -40,7 +41,7 @@ export function renderTrainerCard(item) {
             </div>
             <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between">
                 ${certDisplay}
-                <a href="${item.url || TIKTOK_URL}" target="_blank" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">Lihat Profil</a>
+                <a href="${buildDetailUrl('Trainer', item.slug)}" class="bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors">Lihat Profil</a>
             </div>
         </div>`;
 }
