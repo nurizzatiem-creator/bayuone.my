@@ -5,9 +5,8 @@
 // It imports every module, wires up event listeners, and
 // exposes global functions used by inline onclick="..." attributes.
 //
-// IMPORTANT: supabase-client.js is imported WITHOUT a version
-// suffix. This ensures a single Supabase instance across the
-// entire app (avoids "Multiple GoTrueClient instances" warning).
+// Phase 7C: openPrivacyPage removed (privacy is now at /dasar-privasi.html)
+// Cache-bust version bumped to 7c.
 // ============================================================
 
 import { db } from './supabase-client.js?v=6b';
@@ -114,14 +113,13 @@ import {
     closeDeleteModal
 } from './modals.js?v=6b';
 
-// Tabs / search
+// Tabs / search (Phase 7C: openPrivacyPage removed)
 import {
     switchTab,
     toggleMobileMenu,
-    openPrivacyPage,
     handleGlobalSearch,
     triggerSearch
-} from './tabs.js?v=6b';
+} from './tabs.js?v=7c';
 
 // ------------------------------------------------------------
 // Utility: word counter for trainer/talent summary fields
@@ -224,10 +222,9 @@ function refreshAllViews() {
 // ------------------------------------------------------------
 
 Object.assign(window, {
-    // Tabs / navigation
+    // Tabs / navigation (Phase 7C: openPrivacyPage removed)
     switchTab,
     toggleMobileMenu,
-    openPrivacyPage,
     handleGlobalSearch,
     triggerSearch,
 
