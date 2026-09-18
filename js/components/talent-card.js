@@ -1,11 +1,13 @@
 // ============================================================
 // BayuOne — Talent card component
 // ============================================================
+// Amendment 4: all imports bumped to ?v=6b3.
+// ============================================================
 
-import { getPromotionalBadgeHtml } from '../helpers.js?v=6b';
+import { getPromotionalBadgeHtml } from '../helpers.js?v=6b3';
+import { buildDetailUrl } from '../slug.js?v=6b3';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400';
-const TIKTOK_URL = 'https://www.tiktok.com/@bayuone.my';
 
 export function renderTalentCard(item) {
     const displayName = item.name || item.title;
@@ -27,7 +29,7 @@ export function renderTalentCard(item) {
                 <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">${item.summary || 'Tiada maklumat ringkasan profil.'}</p>
             </div>
             <div class="pt-4 mt-4 border-t border-brand-border">
-                <a href="${item.url || TIKTOK_URL}" target="_blank" class="w-full bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors block text-center">Lihat Profil</a>
+                <a href="${buildDetailUrl('Talent', item.slug)}" class="w-full bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors block text-center">Lihat Profil</a>
             </div>
         </div>`;
 }
