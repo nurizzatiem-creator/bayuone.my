@@ -82,3 +82,57 @@ export function slugify(str) {
     const suffix = Date.now().toString().slice(-6);
     return base ? `${base}-${suffix}` : `record-${suffix}`;
 }
+// Format an agenda date range in Malay style.
+// Examples:
+//   Single day:           24 September 2026
+//   Same month:           24-26 September 2026
+//   Same year, cross-month: 24 September - 2 October 2026
+//   Cross-year:           30 December 2026 - 2 January 2027
+export function formatAgendaDateRange(startIso, endIso, isOneDay) {
+    if (!startIso) return '';
+    const months = [
+        'Januari', 'Februari', 'Mac', 'April', 'Mei', 'Jun',
+        'Julai', 'Ogos', 'September', 'Oktober', 'November', 'Disember'
+    ];
+
+    const parseIso = (iso) => {
+        if (!iso) return null;
+        const s = String(iso).split('T')[0];
+        const parts = s.split('-');
+        if (parts.length !== 3) return null;
+        const y = parseInt(parts[0], 10);
+        const m = parseInt(parts[1], 10) - 1;
+        const d = parseInt(parts[2], 10);
+        if (isNaN(y) || isNaN(m) || isNaN(d)) return null;
+        return { y, m, d };
+    };
+
+    const start = parseIso(startIso);
+    if (!start) return startIso;
+
+    // Single day
+    if (isOneDay || !endIso || endIso === startIso) {
+        return `${start.d} ${months[start.m]} ${start.y}`;
+    }
+
+    const end = parseIso(endIso);
+    if (!end) return `${start.d} ${months[start.m]} ${start.y}`;
+
+    // Same day
+    if (start.y === end.y && start.m === end.m && start.d === end.d) {
+        return `${start.d} ${months[start.m]} ${start.y}`;
+    }
+
+    // Same year and same month
+    if (start.y === end.y && start.m === end.m) {
+        return `${start.d}-${end.d} ${months[start.m]} ${start.y}`;
+    }
+
+    // Same year, different month
+    if (start.y === end.y) {
+        return `${start.d} ${months[start.m]} - ${end.d} ${months[end.m]} ${end.y}`;
+    }
+
+    // Different years
+    return `${start.d} ${months[start.m]} ${start.y} - ${end.d} ${months[end.m]} ${end.y}`;
+}
