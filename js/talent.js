@@ -1,16 +1,12 @@
 // ============================================================
 // BayuOne — Talent rendering + filtering
 // ============================================================
-// Phase 5B: card markup extracted to components/talent-card.js
+// Amendment 4: all imports bumped to ?v=6b3.
 // ============================================================
 
-import { bayuData } from './data-loader.js?v=6b';
-import { sortByPromotion } from './helpers.js?v=6b';
-import { renderTalentCard } from './components/talent-card.js?v=6b';
-
-// ------------------------------------------------------------
-// Filtering
-// ------------------------------------------------------------
+import { bayuData } from './data-loader.js?v=6b3';
+import { sortByPromotion } from './helpers.js?v=6b3';
+import { renderTalentCard } from './components/talent-card.js?v=6b3';
 
 function getTalentFiltered() {
     const name = (document.getElementById('filter-talent-name')?.value || '').toLowerCase().trim();
@@ -32,10 +28,6 @@ function getTalentFiltered() {
         return true;
     });
 }
-
-// ------------------------------------------------------------
-// Public API
-// ------------------------------------------------------------
 
 export function renderTalent() {
     const container = document.getElementById('grid-talent');
