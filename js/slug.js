@@ -85,21 +85,7 @@ export function buildDetailUrl(type, slug) {
     const prefix = prefixMap[type];
     if (!prefix || !slug) return '/';
 
-    // Detect GitHub Pages sub-path (e.g. /bayuone-repo/) if any
-    const path = window.location.pathname || '/';
-    const parts = path.split('/').filter(Boolean);
-    const knownPrefixes = ['agenda', 'trainer', 'talent', 'admin'];
-
-    // Find the base — everything up to but not including the
-    // first known prefix. If none, base is "/".
-    let base = '/';
-    for (let i = 0; i < parts.length; i++) {
-        if (knownPrefixes.includes(parts[i].toLowerCase())) {
-            base = '/' + parts.slice(0, i).join('/');
-            if (base === '/') base = '';
-            break;
-        }
-    }
-
-    return `${base}/${prefix}/${encodeURIComponent(slug)}`;
+    // Build a root-relative URL that always starts with "/".
+    // The browser will resolve it against the current domain.
+    return `/${prefix}/${encodeURIComponent(slug)}`;
 }
