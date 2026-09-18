@@ -188,3 +188,21 @@ body {
     color: #FFFFFF !important;
     border-color: #126B4C !important;
 }
+/* Batch 4B: Featured quick filter (Kursus, Latihan & Bengkel) */
+.quick-filter-featured {
+    /* Solid brand colour by default */
+    background-color: #126B4C !important;
+    color: #FFFFFF !important;
+    border-color: #126B4C !important;
+}
+.quick-filter-featured:hover {
+    background-color: #0B5139 !important;
+    border-color: #0B5139 !important;
+    color: #FFFFFF !important;
+}
+.quick-filter-featured.active {
+    background-color: #0B5139 !important;
+    border-color: #0B5139 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 0 0 3px rgba(18, 107, 76, 0.20);
+}
