@@ -1,14 +1,12 @@
 // ============================================================
 // BayuOne — Banner + Partner (public rendering)
 // ============================================================
+// Amendment 4: all imports bumped to ?v=6b3.
+// ============================================================
 
-import { bayuData } from './data-loader.js?v=6b';
-import { getTodayStr } from './utils.js?v=6b';
-import { getBannerStatus } from './helpers.js?v=6b';
-
-// ------------------------------------------------------------
-// Active banner
-// ------------------------------------------------------------
+import { bayuData } from './data-loader.js?v=6b3';
+import { getTodayStr } from './utils.js?v=6b3';
+import { getBannerStatus } from './helpers.js?v=6b3';
 
 export function getActiveBanner() {
     const todayStr = getTodayStr();
@@ -27,10 +25,6 @@ export function renderBanner() {
     container.style.display = 'flex';
     container.innerHTML = `<img src="${active.photo}" alt="${active.name}" onerror="this.style.display='none'">`;
 }
-
-// ------------------------------------------------------------
-// Partners section
-// ------------------------------------------------------------
 
 export function renderBrandsSupport() {
     const section = document.getElementById('brands-support-section');
@@ -62,5 +56,4 @@ export function renderBrandsSupport() {
     });
 }
 
-// Re-export for convenience
 export { getBannerStatus };
