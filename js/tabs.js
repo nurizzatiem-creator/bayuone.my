@@ -1,6 +1,10 @@
 // ============================================================
 // BayuOne — Tab switching + mobile menu + global search
 // ============================================================
+// Phase 7C: Removed openPrivacyPage and the 'privacy' tab case
+// because the privacy page is now a standalone HTML file at
+// /dasar-privasi.html
+// ============================================================
 
 export function switchTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -27,9 +31,6 @@ export function switchTab(tabName) {
         heroTitle.textContent = 'Bakat & Influencer Tempatan';
         heroSubtitle.textContent = 'Hubungi pengacara, content creator dan pelbagai bakat tempatan untuk kolaborasi.';
         window.renderTalent?.();
-    } else if (tabName === 'privacy') {
-        heroTitle.textContent = 'Dasar Privasi & Polisi';
-        heroSubtitle.textContent = 'Sila baca dan fahami polisi penggunaan platform BayuOne.';
     } else if (tabName === 'admin') {
         window.renderAdminTable?.();
         window.renderFeedbackTable?.();
@@ -42,11 +43,6 @@ export function switchTab(tabName) {
 
 export function toggleMobileMenu() {
     document.getElementById('mobile-menu')?.classList.toggle('hidden');
-}
-
-export function openPrivacyPage(e) {
-    if (e) e.preventDefault();
-    switchTab('privacy');
 }
 
 export function handleGlobalSearch() {
