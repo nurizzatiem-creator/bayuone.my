@@ -10,7 +10,7 @@
 // entire app (avoids "Multiple GoTrueClient instances" warning).
 // ============================================================
 
-import { db } from './supabase-client.js';
+import { db } from './supabase-client.js?v=6b';
 import { loadAllData, bayuData } from './data-loader.js?v=6b';
 import { getTodayStr, countWords } from './utils.js?v=6b';
 
