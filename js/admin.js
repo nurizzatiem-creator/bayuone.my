@@ -5,11 +5,11 @@
 // banner table, delete confirmation. Data comes from data-loader.
 // ============================================================
 
-import { db } from './supabase-client.js';
-import { bayuData, loadAllData } from './data-loader.js';
-import { rowFromApp } from './converters.js';
-import { formatDateDisplay, countWords, calculateTarikhTamat, getTodayStr } from './utils.js';
-import { getBannerStatus } from './helpers.js';
+import { db } from './supabase-client.js?v=6b';
+import { bayuData, loadAllData } from './data-loader.js?v=6b';
+import { rowFromApp } from './converters.js?v=6b';
+import { formatDateDisplay, countWords, calculateTarikhTamat, getTodayStr } from './utils.js?v=6b';
+import { getBannerStatus } from './helpers.js?v=6b';
 
 // ------------------------------------------------------------
 // Admin login / logout
