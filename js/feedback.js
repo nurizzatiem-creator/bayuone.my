@@ -1,9 +1,11 @@
 // ============================================================
 // BayuOne — Feedback (public submit + admin table)
 // ============================================================
+// Amendment 4: all imports bumped to ?v=6b3.
+// ============================================================
 
-import { db } from './supabase-client.js?v=6b';
-import { bayuData, loadAllData } from './data-loader.js?v=6b';
+import { db } from './supabase-client.js?v=6b3';
+import { bayuData, loadAllData } from './data-loader.js?v=6b3';
 
 export async function handleFeedbackSubmit(e) {
     e.preventDefault();
