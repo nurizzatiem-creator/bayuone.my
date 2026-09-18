@@ -9,8 +9,8 @@
 //   - Showing logged-in admin email in the header
 // ============================================================
 
-import { db } from './supabase-client.js';
-import { loadAllData } from './data-loader.js';
+import { db } from './supabase-client.js?v=6b';
+import { loadAllData } from './data-loader.js?v=6b';
 
 // Admin dashboard renderers
 import {
@@ -27,26 +27,26 @@ import {
     onAdminDariChange,
     resetAdminLabelDates,
     handleSaveAdminEdit
-} from './admin.js';
+} from './admin.js?v=6b';
 
 import {
     renderFeedbackTable,
     openFeedbackPreview,
     toggleFeedbackStatus
-} from './feedback.js';
+} from './feedback.js?v=6b';
 
 import {
     renderSubscriberTable,
     openEditSubscriberModal,
     handleSaveSubscriber
-} from './subscriber.js';
+} from './subscriber.js?v=6b';
 
 import {
     openPartnerModal,
     handleSavePartner,
     confirmDeletePartner,
     renderPartnerTable
-} from './partner.js';
+} from './partner.js?v=6b';
 
 // ------------------------------------------------------------
 // The full admin dashboard HTML
@@ -610,8 +610,7 @@ async function showAdminUI() {
     const user = await checkSession();
 
     if (user) {
-        // Already logged in — show dashboard
-        // Also pre-store the email from session for the header
+        // Already logged in — pre-store the email for the header
         try {
             if (user.email) sessionStorage.setItem('bayuone_admin_email', user.email);
         } catch (e) { /* ignore */ }
