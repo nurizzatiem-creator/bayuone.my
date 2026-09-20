@@ -529,355 +529,330 @@
     <!-- ============ PUBLIC MODALS ================================== -->
     <!-- ============================================================= -->
 
-    <!-- REGISTRATION MODAL — Batch 3A compact layout -->
-    <div id="modal-register" class="fixed inset-0 z-50 hidden overflow-y-auto modal-backdrop flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-brand-border">
-            <button onclick="closeRegisterModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+    <!-- REGISTRATION MODAL — Batch 4D mobile-friendly structure -->
+    <div id="modal-register" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full shadow-2xl relative border border-brand-border flex flex-col" style="max-height: 92vh;">
 
-            <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-xl bg-brand-bg border border-brand-border flex items-center justify-center text-brand font-bold text-lg">
-                    <i class="fa-solid fa-user-plus"></i>
+            <!-- Fixed header -->
+            <div class="p-5 sm:p-6 pb-4 border-b border-brand-border shrink-0">
+                <button onclick="closeRegisterModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 p-2 z-10"><i class="fa-solid fa-xmark text-lg"></i></button>
+
+                <div class="flex items-center gap-3 mb-5 pr-10">
+                    <div class="w-10 h-10 rounded-xl bg-brand-bg border border-brand-border flex items-center justify-center text-brand font-bold text-lg shrink-0">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-brand-dark">Sertai <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></h3>
+                        <p class="text-[11px] sm:text-xs text-brand-muted">Hantar permohonan penganjuran program, trainer atau talent anda.</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-xl font-bold text-brand-dark">Sertai <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></h3>
-                    <p class="text-xs text-brand-muted">Hantar permohonan penganjuran program, trainer atau talent anda.</p>
+
+                <div class="grid grid-cols-3 gap-2 bg-brand-bg p-1.5 rounded-xl border border-brand-border">
+                    <button type="button" onclick="setRegisterType('penganjur')" id="btn-reg-penganjur" class="py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs">1. Penganjur</button>
+                    <button type="button" onclick="setRegisterType('trainer')" id="btn-reg-trainer" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">2. Trainer</button>
+                    <button type="button" onclick="setRegisterType('talent')" id="btn-reg-talent" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">3. Talent</button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-2 bg-brand-bg p-1.5 rounded-xl border border-brand-border mb-6">
-                <button type="button" onclick="setRegisterType('penganjur')" id="btn-reg-penganjur" class="py-2 text-xs font-bold rounded-lg transition-all bg-white text-brand shadow-xs">1. Penganjur</button>
-                <button type="button" onclick="setRegisterType('trainer')" id="btn-reg-trainer" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">2. Trainer</button>
-                <button type="button" onclick="setRegisterType('talent')" id="btn-reg-talent" class="py-2 text-xs font-bold rounded-lg transition-all text-brand-muted hover:text-brand">3. Talent</button>
-            </div>
+            <!-- Scrollable body -->
+            <div class="overflow-y-auto flex-1 p-5 sm:p-6">
 
-            <form id="form-register" onsubmit="handleRegisterSubmit(event)" novalidate>
-                <input type="hidden" id="reg-type" value="penganjur">
+                <form id="form-register" onsubmit="handleRegisterSubmit(event)" novalidate>
+                    <input type="hidden" id="reg-type" value="penganjur">
 
-                <!-- ============ PENGANJUR FIELDS (compact layout) ============ -->
-                <div id="fields-penganjur" class="space-y-4">
-                    <!-- Row 1: Tajuk Program (full width) -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tajuk Program <span class="text-red-500">*</span></label>
-                        <input type="text" id="reg-penganjur-title" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                    </div>
-
-                    <!-- Row 2: Penganjur + Emel side-by-side -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- ============ PENGANJUR FIELDS ============ -->
+                    <div id="fields-penganjur" class="space-y-3">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Penganjur <span class="text-red-500">*</span></label>
-                            <input type="text" id="reg-penganjur-org" required placeholder="Contoh: Jabatan Pelancongan Sabah" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tajuk Program <span class="text-red-500">*</span></label>
+                            <input type="text" id="reg-penganjur-title" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Penganjur <span class="text-red-500">*</span></label>
+                                <input type="text" id="reg-penganjur-org" required placeholder="Contoh: Jabatan Pelancongan Sabah" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Penganjur <span class="text-gray-400 font-normal">(Optional)</span></label>
+                                <input type="email" id="reg-penganjur-email" placeholder="alamat@emel.com" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Program <span class="text-red-500">*</span></label>
+                                <input type="date" id="reg-penganjur-date" required onchange="syncPenganjurEndDate()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                <label class="mt-2 flex items-center gap-2 cursor-pointer text-xs font-semibold text-brand-dark">
+                                    <input type="checkbox" id="reg-penganjur-oneday" onchange="togglePenganjurOneDay()" class="accent-brand rounded">
+                                    <span>Tick jika ini program 1 hari</span>
+                                </label>
+                            </div>
+                            <div id="reg-penganjur-enddate-wrapper">
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Akhir Program <span class="text-red-500">*</span></label>
+                                <input type="date" id="reg-penganjur-date-end" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
+                                <select id="reg-penganjur-state" onchange="handleStateChange('penganjur')" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                    <option value="">Sila Pilih Negeri / Wilayah</option>
+                                </select>
+                            </div>
+                            <div id="reg-penganjur-sabah-wrapper" class="hidden">
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Daerah Sabah <span class="text-red-500">*</span></label>
+                                <select id="reg-penganjur-sabah-loc" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                    <option value="">Sila Pilih Daerah Sabah</option>
+                                </select>
+                            </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Penganjur <span class="text-gray-400 font-normal">(Optional)</span></label>
-                            <input type="email" id="reg-penganjur-email" placeholder="alamat@emel.com" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        </div>
-                    </div>
-
-                    <!-- Row 3: Tarikh Mula + Tarikh Akhir side-by-side -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Program <span class="text-red-500">*</span></label>
-                            <input type="date" id="reg-penganjur-date" required onchange="syncPenganjurEndDate()" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                            <label class="mt-2 flex items-center gap-2 cursor-pointer text-xs font-semibold text-brand-dark">
-                                <input type="checkbox" id="reg-penganjur-oneday" onchange="togglePenganjurOneDay()" class="accent-brand rounded">
-                                <span>Tick jika ini program 1 hari</span>
-                            </label>
-                        </div>
-                        <div id="reg-penganjur-enddate-wrapper">
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Tarikh Akhir Program <span class="text-red-500">*</span></label>
-                            <input type="date" id="reg-penganjur-date-end" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        </div>
-                    </div>
-
-                    <!-- Row 4: Negeri + Sabah district side-by-side -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
-                            <select id="reg-penganjur-state" onchange="handleStateChange('penganjur')" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                                <option value="">Sila Pilih Negeri / Wilayah</option>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Kategori <span class="text-red-500">*</span></label>
+                            <select id="reg-penganjur-category" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                <option value="Kursus & Latihan">Kursus & Latihan</option>
+                                <option value="Seminar & Forum">Seminar & Forum</option>
+                                <option value="Bengkel">Bengkel</option>
+                                <option value="Persidangan & Konvensyen">Persidangan & Konvensyen</option>
+                                <option value="Networking & Professional">Networking & Professional</option>
+                                <option value="Komuniti & Sosial">Komuniti & Sosial</option>
+                                <option value="Sukan & Rekreasi">Sukan & Rekreasi</option>
+                                <option value="Festival & Hiburan">Festival & Hiburan</option>
+                                <option value="Keusahawanan & Perniagaan">Keusahawanan & Perniagaan</option>
+                                <option value="Pendidikan">Pendidikan</option>
+                                <option value="Pelancongan">Pelancongan</option>
+                                <option value="Sukan & Kesihatan">Sukan & Kesihatan</option>
+                                <option value="Rekreasi & Hobi">Rekreasi & Hobi</option>
+                                <option value="Agama & Kerohanian">Agama & Kerohanian</option>
+                                <option value="Lain-lain">Lain-lain</option>
                             </select>
                         </div>
-                        <div id="reg-penganjur-sabah-wrapper" class="hidden">
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Daerah Sabah <span class="text-red-500">*</span></label>
-                            <select id="reg-penganjur-sabah-loc" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                                <option value="">Sila Pilih Daerah Sabah</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Row 5: Kategori (full width) -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Kategori <span class="text-red-500">*</span></label>
-                        <select id="reg-penganjur-category" required class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                            <option value="Kursus & Latihan">Kursus & Latihan</option>
-                            <option value="Seminar & Forum">Seminar & Forum</option>
-                            <option value="Bengkel">Bengkel</option>
-                            <option value="Persidangan & Konvensyen">Persidangan & Konvensyen</option>
-                            <option value="Networking & Professional">Networking & Professional</option>
-                            <option value="Komuniti & Sosial">Komuniti & Sosial</option>
-                            <option value="Sukan & Rekreasi">Sukan & Rekreasi</option>
-                            <option value="Festival & Hiburan">Festival & Hiburan</option>
-                            <option value="Keusahawanan & Perniagaan">Keusahawanan & Perniagaan</option>
-                            <option value="Pendidikan">Pendidikan</option>
-                            <option value="Pelancongan">Pelancongan</option>
-                            <option value="Sukan & Kesihatan">Sukan & Kesihatan</option>
-                            <option value="Rekreasi & Hobi">Rekreasi & Hobi</option>
-                            <option value="Agama & Kerohanian">Agama & Kerohanian</option>
-                            <option value="Lain-lain">Lain-lain</option>
-                        </select>
-                    </div>
-
-                    <!-- Row 6: Harga + Min + Max side-by-side -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Yuran</label>
-                            <select id="reg-penganjur-fee-type" onchange="togglePenganjurFee()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                                <option value="Percuma">Percuma</option>
-                                <option value="Berbayar">Berbayar</option>
-                            </select>
-                        </div>
-                        <div id="reg-penganjur-fee-amount-wrapper" class="sm:col-span-2 hidden">
-                            <div class="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Min (RM) <span class="text-red-500">*</span></label>
-                                    <input type="number" id="reg-penganjur-fee-min" placeholder="50" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Maks (RM)</label>
-                                    <input type="number" id="reg-penganjur-fee-max" placeholder="150" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Yuran</label>
+                                <select id="reg-penganjur-fee-type" onchange="togglePenganjurFee()" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                    <option value="Percuma">Percuma</option>
+                                    <option value="Berbayar">Berbayar</option>
+                                </select>
+                            </div>
+                            <div id="reg-penganjur-fee-amount-wrapper" class="sm:col-span-2 hidden">
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Min (RM) <span class="text-red-500">*</span></label>
+                                        <input type="number" id="reg-penganjur-fee-min" placeholder="50" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Harga Maks (RM)</label>
+                                        <input type="number" id="reg-penganjur-fee-max" placeholder="150" min="0" step="0.01" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-sm focus:border-brand focus:outline-none">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama PIC</label>
+                                <input type="text" id="reg-penganjur-pic-name" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Tel PIC</label>
+                                <input type="tel" id="reg-penganjur-pic-tel" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Mod <span class="text-red-500">*</span></label>
+                                <select id="reg-penganjur-mode" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                                    <option value="">Pilih Mod</option>
+                                    <option value="Fizikal">Fizikal</option>
+                                    <option value="Online">Online</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Hebahan / Pendaftaran</label>
+                            <input type="url" id="reg-penganjur-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Keterangan Program <span class="text-gray-400 font-normal">(Optional)</span></label>
+                            <textarea id="reg-penganjur-description" rows="3" placeholder="Terangkan secara ringkas kandungan, objektif dan manfaat program ini untuk peserta..." class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
+                        </div>
+                        <div>
+                            <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
+                                <input type="checkbox" id="reg-penganjur-privacy" required class="mt-0.5 accent-brand rounded">
+                                <span>
+                                    Saya faham dan setuju dengan
+                                    <a href="./dasar-privasi.html" target="_blank" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
+                                </span>
+                            </label>
+                        </div>
                     </div>
 
-                    <!-- Row 7: PIC Name + PIC Tel + Mod side-by-side -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama PIC</label>
-                            <input type="text" id="reg-penganjur-pic-name" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                    <!-- ============ TRAINER FIELDS ============ -->
+                    <div id="fields-trainer" class="space-y-3 hidden">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Trainer <span class="text-red-500">*</span></label>
+                                <input type="text" id="reg-trainer-name" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Trainer <span class="text-red-500">*</span></label>
+                                <input type="email" id="reg-trainer-email" placeholder="alamat@emel.com" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Tel PIC</label>
-                            <input type="tel" id="reg-penganjur-pic-tel" class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon <span class="text-red-500">*</span></label>
+                                <input type="tel" id="reg-trainer-phone" required placeholder="0123456789" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
+                                <select id="reg-trainer-state" onchange="handleStateChange('trainer')" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                    <option value="">Sila Pilih Negeri / Wilayah</option>
+                                </select>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Mod <span class="text-red-500">*</span></label>
-                            <select id="reg-penganjur-mode" required class="w-full bg-white border border-brand-border rounded-xl px-3 py-2 text-xs focus:border-brand focus:outline-none">
-                                <option value="">Pilih Mod</option>
-                                <option value="Fizikal">Fizikal</option>
-                                <option value="Online">Online</option>
-                                <option value="Hybrid">Hybrid</option>
+                        <div id="reg-trainer-sabah-wrapper" class="hidden">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Daerah Sabah <span class="text-red-500">*</span></label>
+                            <select id="reg-trainer-sabah-loc" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                <option value="">Sila Pilih Daerah Sabah</option>
                             </select>
                         </div>
-                    </div>
-
-                    <!-- Row 8: URL (full width) -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Hebahan / Pendaftaran</label>
-                        <input type="url" id="reg-penganjur-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                    </div>
-
-                    <!-- Row 9: Privacy -->
-                    <div>
-                        <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
-                            <input type="checkbox" id="reg-penganjur-privacy" required class="mt-0.5 accent-brand rounded">
-                            <span>
-                                Saya faham dan setuju dengan
-                                <a href="./dasar-privasi.html" target="_blank" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
-                            </span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- ============ TRAINER FIELDS (compact layout) ============ -->
-                <div id="fields-trainer" class="space-y-4 hidden">
-                    <!-- Row 1: Nama + Emel side-by-side -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Trainer <span class="text-red-500">*</span></label>
-                            <input type="text" id="reg-trainer-name" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Bidang Kepakaran (Boleh pilih lebih satu)</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto p-2 border border-brand-border rounded-xl text-xs bg-gray-50">
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pengurusan & Kepimpinan"> Pengurusan & Kepimpinan</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Sumber Manusia & Organisasi"> Sumber Manusia & Organisasi</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pentadbiran & Profesional"> Pentadbiran & Profesional</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Perniagaan & Keusahawanan"> Perniagaan & Keusahawanan</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pemasaran & Jualan"> Pemasaran & Jualan</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Teknologi, AI & Digital"> Teknologi, AI & Digital</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kreatif, Media & Komunikasi"> Kreatif, Media & Komunikasi</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kewangan, Akaun & Percukaian"> Kewangan, Akaun & Percukaian</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pendidikan & Akademik"> Pendidikan & Akademik</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kesihatan, Keselamatan & Kesejahteraan"> Kesihatan & Keselamatan</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kecantikan & Gaya"> Kecantikan & Gaya</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Makanan & Masakan"> Makanan & Masakan</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pelancongan & Hospitaliti"> Pelancongan & Hospitaliti</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kesihatan"> Kesihatan</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kemahiran Teknikal & Vokasional"> Kemahiran Teknikal & Vokasional</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pertanian & Agro"> Pertanian & Agro</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Bahasa"> Bahasa</label>
+                            </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Trainer <span class="text-red-500">*</span></label>
-                            <input type="email" id="reg-trainer-email" placeholder="alamat@emel.com" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil <span class="text-red-500">*</span></label>
+                            <textarea id="reg-trainer-summary" rows="3" placeholder="Penerangan ringkas pengalaman & kepakaran anda..." oninput="updateWordCounter('reg-trainer-summary','reg-trainer-summary-counter')" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
+                            <p id="reg-trainer-summary-counter" class="text-[10px] text-brand-muted mt-1 text-right">0 / 120 patah perkataan</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Pentauliahan / Sijil</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="HRD Corp TTT"> HRD Corp TTT</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="HRD Corp Accredited Trainer"> HRD Corp Accredited Trainer</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="Sijil NCS-TTT"> Sijil NCS-TTT</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="SKM3, DKM, atau DLKM"> SKM3, DKM, atau DLKM</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="trainer_cert_lain" name="trainer_cert" value="Lain-Lain" onchange="toggleTrainerCertCustom()"> Lain-Lain</label>
+                            </div>
+                        </div>
+                        <div id="reg-trainer-cert-custom-wrapper" class="hidden">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Sila Nyatakan Pentauliahan Lain-lain <span class="text-red-500">*</span></label>
+                            <input type="text" id="reg-trainer-cert-custom" maxlength="150" placeholder="Contoh: Certified HR Trainer, Digital Marketing Specialist" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            <p class="text-[10px] text-brand-muted mt-1">Asingkan setiap pentauliahan dengan koma (,)</p>
+                            <p id="reg-trainer-cert-custom-counter" class="text-[10px] text-brand-muted mt-0.5 text-right">0 / 150 aksara</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
+                            <input type="url" id="reg-trainer-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
+                                <input type="checkbox" id="reg-trainer-privacy" required class="mt-0.5 accent-brand rounded">
+                                <span>
+                                    Saya faham dan setuju dengan
+                                    <a href="./dasar-privasi.html" target="_blank" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
+                                </span>
+                            </label>
                         </div>
                     </div>
 
-                    <!-- Row 2: Telefon + Lokasi Negeri side-by-side -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon <span class="text-red-500">*</span></label>
-                            <input type="tel" id="reg-trainer-phone" required placeholder="0123456789" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                    <!-- ============ TALENT FIELDS ============ -->
+                    <div id="fields-talent" class="space-y-3 hidden">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Talent <span class="text-red-500">*</span></label>
+                                <input type="text" id="reg-talent-name" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Talent <span class="text-red-500">*</span></label>
+                                <input type="email" id="reg-talent-email" placeholder="alamat@emel.com" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
-                            <select id="reg-trainer-state" onchange="handleStateChange('trainer')" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                                <option value="">Sila Pilih Negeri / Wilayah</option>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon <span class="text-red-500">*</span></label>
+                                <input type="tel" id="reg-talent-phone" required placeholder="0123456789" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
+                                <select id="reg-talent-state" onchange="handleStateChange('talent')" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                    <option value="">Sila Pilih Negeri / Wilayah</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="reg-talent-sabah-wrapper" class="hidden">
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Daerah Sabah <span class="text-red-500">*</span></label>
+                            <select id="reg-talent-sabah-loc" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                <option value="">Sila Pilih Daerah Sabah</option>
                             </select>
                         </div>
-                    </div>
-
-                    <!-- Row 3: Sabah district (only shown when Sabah) -->
-                    <div id="reg-trainer-sabah-wrapper" class="hidden">
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Daerah Sabah <span class="text-red-500">*</span></label>
-                        <select id="reg-trainer-sabah-loc" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                            <option value="">Sila Pilih Daerah Sabah</option>
-                        </select>
-                    </div>
-
-                    <!-- Row 4: Expertise -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Bidang Kepakaran (Boleh pilih lebih satu)</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto p-2 border border-brand-border rounded-xl text-xs bg-gray-50">
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pengurusan & Kepimpinan"> Pengurusan & Kepimpinan</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Sumber Manusia & Organisasi"> Sumber Manusia & Organisasi</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pentadbiran & Profesional"> Pentadbiran & Profesional</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Perniagaan & Keusahawanan"> Perniagaan & Keusahawanan</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pemasaran & Jualan"> Pemasaran & Jualan</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Teknologi, AI & Digital"> Teknologi, AI & Digital</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kreatif, Media & Komunikasi"> Kreatif, Media & Komunikasi</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kewangan, Akaun & Percukaian"> Kewangan, Akaun & Percukaian</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pendidikan & Akademik"> Pendidikan & Akademik</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kesihatan, Keselamatan & Kesejahteraan"> Kesihatan & Keselamatan</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kecantikan & Gaya"> Kecantikan & Gaya</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Makanan & Masakan"> Makanan & Masakan</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pelancongan & Hospitaliti"> Pelancongan & Hospitaliti</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kesihatan"> Kesihatan</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Kemahiran Teknikal & Vokasional"> Kemahiran Teknikal & Vokasional</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Pertanian & Agro"> Pertanian & Agro</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_exp" value="Bahasa"> Bahasa</label>
-                        </div>
-                    </div>
-
-                    <!-- Row 5: Summary (full width) -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil <span class="text-red-500">*</span></label>
-                        <textarea id="reg-trainer-summary" rows="3" placeholder="Penerangan ringkas pengalaman & kepakaran anda..." oninput="updateWordCounter('reg-trainer-summary','reg-trainer-summary-counter')" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
-                        <p id="reg-trainer-summary-counter" class="text-[10px] text-brand-muted mt-1 text-right">0 / 120 patah perkataan</p>
-                    </div>
-
-                    <!-- Row 6: Certificates (full width, but compact grid) -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1.5">Pentauliahan / Sijil</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="HRD Corp TTT"> HRD Corp TTT</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="HRD Corp Accredited Trainer"> HRD Corp Accredited Trainer</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="Sijil NCS-TTT"> Sijil NCS-TTT</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" name="trainer_cert" value="SKM3, DKM, atau DLKM"> SKM3, DKM, atau DLKM</label>
-                            <label class="flex items-center gap-2"><input type="checkbox" id="trainer_cert_lain" name="trainer_cert" value="Lain-Lain" onchange="toggleTrainerCertCustom()"> Lain-Lain</label>
-                        </div>
-                    </div>
-
-                    <!-- Row 7: Custom cert (full width when shown) -->
-                    <div id="reg-trainer-cert-custom-wrapper" class="hidden">
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Sila Nyatakan Pentauliahan Lain-lain <span class="text-red-500">*</span></label>
-                        <input type="text" id="reg-trainer-cert-custom" maxlength="150" placeholder="Contoh: Certified HR Trainer, Digital Marketing Specialist" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        <p class="text-[10px] text-brand-muted mt-1">Asingkan setiap pentauliahan dengan koma (,)</p>
-                        <p id="reg-trainer-cert-custom-counter" class="text-[10px] text-brand-muted mt-0.5 text-right">0 / 150 aksara</p>
-                    </div>
-
-                    <!-- Row 8: URL -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
-                        <input type="url" id="reg-trainer-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                    </div>
-
-                    <!-- Amendment 4: Keterangan Program -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Keterangan Program <span class="text-gray-400 font-normal">(Optional)</span></label>
-                        <textarea id="reg-penganjur-description" rows="4" placeholder="Terangkan secara ringkas kandungan, objektif dan manfaat program ini untuk peserta..." class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
-                    </div>
-
-                    <!-- Row 9: Privacy -->
-                    <div>
-                        <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
-                            <input type="checkbox" id="reg-trainer-privacy" required class="mt-0.5 accent-brand rounded">
-                            <span>
-                                Saya faham dan setuju dengan
-                                <a href="./dasar-privasi.html" target="_blank" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
-                            </span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- ============ TALENT FIELDS ============ -->
-                <div id="fields-talent" class="space-y-4 hidden">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Nama Talent <span class="text-red-500">*</span></label>
-                            <input type="text" id="reg-talent-name" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Emel Talent <span class="text-red-500">*</span></label>
-                            <input type="email" id="reg-talent-email" placeholder="alamat@emel.com" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">No. Telefon <span class="text-red-500">*</span></label>
-                            <input type="tel" id="reg-talent-phone" required placeholder="0123456789" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi (Negeri) <span class="text-red-500">*</span></label>
-                            <select id="reg-talent-state" onchange="handleStateChange('talent')" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                                <option value="">Sila Pilih Negeri / Wilayah</option>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Bidang / Niche <span class="text-red-500">*</span></label>
+                            <select id="reg-talent-niche" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                                <option value="Makanan, Minuman & Gaya Hidup">Makanan, Minuman & Gaya Hidup</option>
+                                <option value="Pelancongan, Percutian & Hospitaliti">Pelancongan, Percutian & Hospitaliti</option>
+                                <option value="Kecantikan, Fesyen & Penjagaan Diri Kesihatan">Kecantikan, Fesyen & Penjagaan Diri</option>
+                                <option value="Kecergasan & Kesejahteraan">Kecergasan & Kesejahteraan</option>
+                                <option value="Perniagaan, Kewangan & Keusahawanan">Perniagaan, Kewangan & Keusahawanan</option>
+                                <option value="Pendidikan, Kerjaya & Pembangunan Diri">Pendidikan, Kerjaya & Pembangunan Diri</option>
+                                <option value="Teknologi, Digital & Media Sosial">Teknologi, Digital & Media Sosial</option>
+                                <option value="Automotif, Hartanah & Pelaburan">Automotif, Hartanah & Pelaburan</option>
+                                <option value="Keluarga, Komuniti, Budaya & Gaya Hidup">Keluarga, Komuniti, Budaya & Gaya Hidup</option>
+                                <option value="Pengacaraan & Emcee">Pengacaraan & Emcee</option>
+                                <option value="Hiburan & Seni">Hiburan & Seni</option>
+                                <option value="Fotografi & Videografi">Fotografi & Videografi</option>
+                                <option value="Content Creator">Content Creator</option>
                             </select>
                         </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil <span class="text-red-500">*</span></label>
+                            <textarea id="reg-talent-summary" rows="3" placeholder="Penerangan pencapaian & aktiviti anda..." oninput="updateWordCounter('reg-talent-summary','reg-talent-summary-counter')" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
+                            <p id="reg-talent-summary-counter" class="text-[10px] text-brand-muted mt-1 text-right">0 / 120 patah perkataan</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
+                            <input type="url" id="reg-talent-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
+                                <input type="checkbox" id="reg-talent-privacy" required class="mt-0.5 accent-brand rounded">
+                                <span>
+                                    Saya faham dan setuju dengan
+                                    <a href="./dasar-privasi.html" target="_blank" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
+                                </span>
+                            </label>
+                        </div>
                     </div>
-                    <div id="reg-talent-sabah-wrapper" class="hidden">
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Lokasi Sabah (Bahagian / Daerah) <span class="text-red-500">*</span></label>
-                        <select id="reg-talent-sabah-loc" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                            <option value="">Sila Pilih Daerah Sabah</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Bidang / Niche <span class="text-red-500">*</span></label>
-                        <select id="reg-talent-niche" class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                            <option value="Makanan, Minuman & Gaya Hidup">Makanan, Minuman & Gaya Hidup</option>
-                            <option value="Pelancongan, Percutian & Hospitaliti">Pelancongan, Percutian & Hospitaliti</option>
-                            <option value="Kecantikan, Fesyen & Penjagaan Diri Kesihatan">Kecantikan, Fesyen & Penjagaan Diri</option>
-                            <option value="Kecergasan & Kesejahteraan">Kecergasan & Kesejahteraan</option>
-                            <option value="Perniagaan, Kewangan & Keusahawanan">Perniagaan, Kewangan & Keusahawanan</option>
-                            <option value="Pendidikan, Kerjaya & Pembangunan Diri">Pendidikan, Kerjaya & Pembangunan Diri</option>
-                            <option value="Teknologi, Digital & Media Sosial">Teknologi, Digital & Media Sosial</option>
-                            <option value="Automotif, Hartanah & Pelaburan">Automotif, Hartanah & Pelaburan</option>
-                            <option value="Keluarga, Komuniti, Budaya & Gaya Hidup">Keluarga, Komuniti, Budaya & Gaya Hidup</option>
-                            <option value="Pengacaraan & Emcee">Pengacaraan & Emcee</option>
-                            <option value="Hiburan & Seni">Hiburan & Seni</option>
-                            <option value="Fotografi & Videografi">Fotografi & Videografi</option>
-                            <option value="Content Creator">Content Creator</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">Ringkasan Profil <span class="text-red-500">*</span></label>
-                        <textarea id="reg-talent-summary" rows="3" placeholder="Penerangan pencapaian & aktiviti anda..." oninput="updateWordCounter('reg-talent-summary','reg-talent-summary-counter')" class="w-full bg-white border border-brand-border rounded-xl p-3 text-xs focus:border-brand focus:outline-none"></textarea>
-                        <p id="reg-talent-summary-counter" class="text-[10px] text-brand-muted mt-1 text-right">0 / 120 patah perkataan</p>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-brand-dark mb-1">URL Social Media / Website</label>
-                        <input type="url" id="reg-talent-url" placeholder="https://..." class="w-full bg-white border border-brand-border rounded-xl px-3.5 py-2 text-sm focus:border-brand focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="flex items-start gap-2 cursor-pointer text-xs text-brand-text leading-snug">
-                            <input type="checkbox" id="reg-talent-privacy" required class="mt-0.5 accent-brand rounded">
-                            <span>
-                                Saya faham dan setuju dengan
-                                <a href="./dasar-privasi.html" target="_blank" class="text-brand hover:text-brand-dark underline underline-offset-2 font-bold">Dasar Privasi & Polisi <span class="brand-text-b">Bayu</span><span class="brand-text-o">One</span></a>.
-                            </span>
-                        </label>
-                    </div>
-                </div>
+                </form>
+            </div>
 
-                <div class="mt-6 space-y-2">
-                    <button type="submit" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl shadow transition-colors text-sm">
-                        Hantar Permohonan
-                    </button>
-                    <button type="button" onclick="closeRegisterModal()" class="w-full md:hidden bg-white text-black border border-brand-border hover:bg-gray-50 font-bold py-3 rounded-xl shadow-sm transition-colors text-sm">
+            <!-- Fixed footer -->
+            <div class="p-4 sm:p-5 border-t border-brand-border bg-brand-bg rounded-b-2xl shrink-0">
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <button type="button" onclick="closeRegisterModal()" class="w-full sm:w-1/3 bg-white text-brand-dark border border-brand-border hover:bg-gray-50 font-bold py-3 rounded-xl text-sm transition-colors">
                         Tutup
                     </button>
-                    <p class="text-[11px] text-brand-muted text-center mt-2">Permohonan akan disemak oleh pasukan Admin sebelum diterbitkan secara awam.</p>
+                    <button type="submit" form="form-register" class="w-full sm:w-2/3 bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl shadow transition-colors text-sm">
+                        Hantar Permohonan
+                    </button>
                 </div>
-            </form>
+                <p class="text-[11px] text-brand-muted text-center mt-2">Permohonan akan disemak oleh pasukan Admin sebelum diterbitkan secara awam.</p>
+            </div>
         </div>
     </div>
 
