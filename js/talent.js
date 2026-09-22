@@ -1,12 +1,12 @@
 // ============================================================
 // BayuOne — Talent rendering + filtering
 // ============================================================
-// Amendment 4: all imports bumped to ?v=6b3.
+// Amendment 4: all imports bumped to ?v=6b5.
 // ============================================================
 
-import { bayuData } from './data-loader.js?v=6b3';
-import { sortByPromotion } from './helpers.js?v=6b3';
-import { renderTalentCard } from './components/talent-card.js?v=6b3';
+import { bayuData } from './data-loader.js?v=6b5';
+import { sortByPromotion } from './helpers.js?v=6b5';
+import { renderTalentCard } from './components/talent-card.js?v=6b5';
 
 function getTalentFiltered() {
     const name = (document.getElementById('filter-talent-name')?.value || '').toLowerCase().trim();
