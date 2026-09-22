@@ -2,7 +2,7 @@
 // BayuOne — Database row ↔ application object converters
 // ============================================================
 // Amendment 4: added `description` field.
-// No imports — pure functions.
+// Phase 3A: added photo_1..photo_6 and youtube_1..youtube_6.
 // ============================================================
 
 export function appFromRow(r) {
@@ -42,7 +42,20 @@ export function appFromRow(r) {
         isOneDay: r.is_one_day || false,
         hargaMin: r.harga_min,
         hargaMax: r.harga_max,
-        penganjur: r.penganjur
+        penganjur: r.penganjur,
+        // Phase 3A: Portfolio
+        photo_1: r.photo_1,
+        photo_2: r.photo_2,
+        photo_3: r.photo_3,
+        photo_4: r.photo_4,
+        photo_5: r.photo_5,
+        photo_6: r.photo_6,
+        youtube_1: r.youtube_1,
+        youtube_2: r.youtube_2,
+        youtube_3: r.youtube_3,
+        youtube_4: r.youtube_4,
+        youtube_5: r.youtube_5,
+        youtube_6: r.youtube_6
     };
 }
 
@@ -83,6 +96,19 @@ export function rowFromApp(a) {
         is_one_day: a.isOneDay || false,
         harga_min: a.hargaMin,
         harga_max: a.hargaMax,
-        penganjur: a.penganjur
+        penganjur: a.penganjur,
+        // Phase 3A: Portfolio
+        photo_1: a.photo_1,
+        photo_2: a.photo_2,
+        photo_3: a.photo_3,
+        photo_4: a.photo_4,
+        photo_5: a.photo_5,
+        photo_6: a.photo_6,
+        youtube_1: a.youtube_1,
+        youtube_2: a.youtube_2,
+        youtube_3: a.youtube_3,
+        youtube_4: a.youtube_4,
+        youtube_5: a.youtube_5,
+        youtube_6: a.youtube_6
     };
 }
