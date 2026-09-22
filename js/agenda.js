@@ -1,17 +1,17 @@
 // ============================================================
 // BayuOne — Agenda (events) rendering + filtering
 // ============================================================
-// Amendment 4: all imports bumped to ?v=6b3.
+// Amendment 4: all imports bumped to ?v=6b5.
 // Amendment 5: "Telah Tamat" is a manual 3-up slider.
 // ============================================================
 
-import { bayuData } from './data-loader.js?v=6b3';
+import { bayuData } from './data-loader.js?v=6b5';
 import {
     getAgendaDateRange,
     isPromotionActive,
     sortByPromotion,
     getAgendaStatusInfo
-} from './helpers.js?v=6b3';
+} from './helpers.js?v=6b5';
 import { renderAgendaCard } from './components/agenda-card.js?v=6b5';
 
 let activeQuickFilter = '';
