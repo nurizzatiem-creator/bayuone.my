@@ -1,15 +1,15 @@
 // ============================================================
 // BayuOne — Trainer rendering + filtering
 // ============================================================
-// Amendment 4: all imports bumped to ?v=6b3.
+// Amendment 4: all imports bumped to ?v=6b5.
 // ============================================================
 
-import { bayuData } from './data-loader.js?v=6b3';
+import { bayuData } from './data-loader.js?v=6b5';
 import {
     sortByPromotion,
     getTrainerCertDisplayList
-} from './helpers.js?v=6b3';
-import { renderTrainerCard } from './components/trainer-card.js?v=6b3';
+} from './helpers.js?v=6b5';
+import { renderTrainerCard } from './components/trainer-card.js?v=6b5';
 
 function getTrainerFiltered() {
     const name = (document.getElementById('filter-trainer-name')?.value || '').toLowerCase().trim();
