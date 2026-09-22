@@ -1,9 +1,12 @@
 // ============================================================
-// BayuOne — Detail page renderer (DEBUG VERSION)
+// BayuOne — Detail page renderer
 // ============================================================
-// This version adds on-page diagnostics when ?debug=1 is
-// present in the URL. Look at the "Profil Tidak Ditemui"
-// screen to see what is happening without opening the console.
+// Amendment 2:  Malay date range
+// Amendment 4:  Trainer/Talent description
+// Amendment 9:  Dynamic Trainer share message
+// Amendment 10: Dynamic Talent share message
+// Amendment 14: Agenda detail 2-column layout
+// Phase 3B:     Portfolio (photos + YouTube videos) for Top/Featured/Promoted
 // ============================================================
 
 import { loadAllData, bayuData } from './data-loader.js?v=6b5';
@@ -45,6 +48,194 @@ function priceDisplay(item) {
     return 'Percuma';
 }
 
+// ------------------------------------------------------------
+// Phase 3B: Portfolio helpers
+// ------------------------------------------------------------
+
+function getPortfolioLimits(label) {
+    const l = (label || '').trim();
+    if (l === 'Top') return { photos: 6, videos: 6 };
+    if (l === 'Featured') return { photos: 2, videos: 1 };
+    if (l === 'Promoted') return { photos: 1, videos: 0 };
+    return { photos: 0, videos: 0 };
+}
+
+function getPortfolioPhotos(item) {
+    const limits = getPortfolioLimits(item.label);
+    if (limits.photos === 0) return [];
+    const arr = [];
+    for (let i = 1; i <= 6; i++) {
+        const url = (item['photo_' + i] || '').trim();
+        if (url) arr.push(url);
+        if (arr.length >= limits.photos) break;
+    }
+    return arr;
+}
+
+function getPortfolioVideos(item) {
+    const limits = getPortfolioLimits(item.label);
+    if (limits.videos === 0) return [];
+    const arr = [];
+    for (let i = 1; i <= 6; i++) {
+        const url = (item['youtube_' + i] || '').trim();
+        if (url) arr.push(url);
+        if (arr.length >= limits.videos) break;
+    }
+    return arr;
+}
+
+// Extract YouTube video ID from various URL formats:
+//   youtube.com/watch?v=ID
+//   youtu.be/ID
+//   youtube.com/embed/ID
+//   youtube.com/shorts/ID
+function getYouTubeId(url) {
+    if (!url) return null;
+    const patterns = [
+        /(?:youtube\.com\/watch\?v=)([A-Za-z0-9_-]{11})/,
+        /(?:youtu\.be\/)([A-Za-z0-9_-]{11})/,
+        /(?:youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/,
+        /(?:youtube\.com\/shorts\/)([A-Za-z0-9_-]{11})/
+    ];
+    for (const p of patterns) {
+        const m = url.match(p);
+        if (m) return m[1];
+    }
+    return null;
+}
+
+function youtubeThumbnail(url) {
+    const id = getYouTubeId(url);
+    if (id) return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    return '';
+}
+
+// Slider renderer — 3 per row on desktop, 1 per row on mobile
+// Uses simple CSS grid + JS pagination. No autoplay.
+function renderPortfolioSlider(sectionId, items, renderItemFn) {
+    const DESKTOP_PER_PAGE = 3;
+    const MOBILE_PER_PAGE = 1;
+
+    const wrapper = document.getElementById(sectionId);
+    if (!wrapper) return;
+
+    if (!items || items.length === 0) {
+        wrapper.innerHTML = '';
+        wrapper.style.display = 'none';
+        return;
+    }
+    wrapper.style.display = 'block';
+
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const PER_PAGE = isMobile ? MOBILE_PER_PAGE : DESKTOP_PER_PAGE;
+    const totalPages = Math.ceil(items.length / PER_PAGE);
+
+    let currentPage = 0;
+
+    function renderPage() {
+        const start = currentPage * PER_PAGE;
+        const pageItems = items.slice(start, start + PER_PAGE);
+
+        const track = document.createElement('div');
+        track.className = 'grid grid-cols-1 md:grid-cols-3 gap-4';
+
+        pageItems.forEach(item => {
+            track.innerHTML += renderItemFn(item);
+        });
+
+        const showNav = items.length > PER_PAGE;
+
+        wrapper.innerHTML = `
+            ${track.outerHTML}
+            ${showNav ? `
+                <div class="flex justify-center gap-3 mt-4">
+                    <button type="button" data-prev class="w-10 h-10 rounded-full border border-brand-border bg-white text-brand-dark hover:bg-brand hover:text-white hover:border-brand transition-colors flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed" ${currentPage === 0 ? 'disabled' : ''}>
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <button type="button" data-next class="w-10 h-10 rounded-full border border-brand-border bg-white text-brand-dark hover:bg-brand hover:text-white hover:border-brand transition-colors flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed" ${currentPage >= totalPages - 1 ? 'disabled' : ''}>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            ` : ''}
+        `;
+
+        const prevBtn = wrapper.querySelector('[data-prev]');
+        const nextBtn = wrapper.querySelector('[data-next]');
+        if (prevBtn) prevBtn.onclick = () => { if (currentPage > 0) { currentPage--; renderPage(); } };
+        if (nextBtn) nextBtn.onclick = () => { if (currentPage < totalPages - 1) { currentPage++; renderPage(); } };
+    }
+
+    renderPage();
+}
+
+function portfolioPhotoItemHtml(url) {
+    return `
+        <div class="bg-brand-bg border border-brand-border rounded-xl overflow-hidden" style="aspect-ratio: 4/3;">
+            <img src="${escapeHtml(url)}" alt="Portfolio" class="w-full h-full object-cover" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>`;
+}
+
+function portfolioVideoItemHtml(url) {
+    const thumb = youtubeThumbnail(url);
+    return `
+        <a href="${escapeHtml(url)}" target="_blank" rel="noopener" class="group bg-brand-bg border border-brand-border rounded-xl overflow-hidden relative block" style="aspect-ratio: 4/3;">
+            ${thumb ? `<img src="${escapeHtml(thumb)}" alt="YouTube video" class="w-full h-full object-cover" loading="lazy">` : ''}
+            <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-play text-lg ml-1"></i>
+                </div>
+            </div>
+        </a>`;
+}
+
+// Builds the full Portfolio section HTML (photos + videos)
+function buildPortfolioSection(item) {
+    const photos = getPortfolioPhotos(item);
+    const videos = getPortfolioVideos(item);
+
+    if (photos.length === 0 && videos.length === 0) return '';
+
+    return `
+        <div class="pt-6 mt-6 border-t border-brand-border">
+            <h2 class="text-lg font-bold text-brand-dark mb-4">Portfolio</h2>
+
+            ${photos.length > 0 ? `
+                <div class="mb-6">
+                    <h3 class="text-sm font-bold text-brand-dark uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-images text-brand mr-1"></i> Photos
+                    </h3>
+                    <div id="portfolio-photos-slider"></div>
+                </div>
+            ` : ''}
+
+            ${videos.length > 0 ? `
+                <div>
+                    <h3 class="text-sm font-bold text-brand-dark uppercase tracking-wider mb-3">
+                        <i class="fa-brands fa-youtube text-red-600 mr-1"></i> Videos
+                    </h3>
+                    <div id="portfolio-videos-slider"></div>
+                </div>
+            ` : ''}
+        </div>`;
+}
+
+// Called after the detail HTML is inserted to init the sliders
+function initPortfolioSliders(item) {
+    const photos = getPortfolioPhotos(item);
+    const videos = getPortfolioVideos(item);
+
+    if (photos.length > 0) {
+        renderPortfolioSlider('portfolio-photos-slider', photos, portfolioPhotoItemHtml);
+    }
+    if (videos.length > 0) {
+        renderPortfolioSlider('portfolio-videos-slider', videos, portfolioVideoItemHtml);
+    }
+}
+
+// ------------------------------------------------------------
+// Share buttons
+// ------------------------------------------------------------
+
 function shareButtonsHtml(item, pageUrl, shareText) {
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + pageUrl)}`;
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
@@ -67,11 +258,16 @@ function shareButtonsHtml(item, pageUrl, shareText) {
         </div>`;
 }
 
+// ------------------------------------------------------------
+// Agenda detail — 2-column layout
+// ------------------------------------------------------------
+
 function renderAgenda(item, pageUrl) {
     const title = item.title || item.name || 'Program';
     const shareText = `Saya Jumpa ${title} di BayuOne. Jom kita join.`;
     const dateRange = formatAgendaDateRange(item.date, item.dateEnd || item.date, item.isOneDay);
     const organiser = item.org || item.penganjur || item.name || 'Penganjur';
+    const portfolioHtml = buildPortfolioSection(item);
 
     document.title = `${title} | BayuOne`;
     return `
@@ -140,6 +336,8 @@ function renderAgenda(item, pageUrl) {
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.description || item.summary || 'Tiada keterangan penuh disediakan.')}</p>
                 </div>
 
+                ${portfolioHtml}
+
                 <div class="mt-8 pt-6 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Kongsi</h2>
                     <p class="text-xs text-brand-muted italic">"${escapeHtml(shareText)}"</p>
@@ -148,6 +346,10 @@ function renderAgenda(item, pageUrl) {
             </div>
         </div>`;
 }
+
+// ------------------------------------------------------------
+// Trainer detail
+// ------------------------------------------------------------
 
 function renderTrainer(item, pageUrl) {
     const name = item.name || 'Trainer';
@@ -162,6 +364,7 @@ function renderTrainer(item, pageUrl) {
     const certs = (item.certs || []).map(c =>
         `<span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200">${escapeHtml(c)}</span>`
     ).join(' ');
+    const portfolioHtml = buildPortfolioSection(item);
 
     document.title = `${name} | BayuOne`;
     return `
@@ -186,6 +389,7 @@ function renderTrainer(item, pageUrl) {
                     <h2 class="text-lg font-bold text-brand-dark mb-2">Keterangan Penuh</h2>
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.description)}</p>
                 </div>` : ''}
+                ${portfolioHtml}
                 <div class="pt-4 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Hubungi Trainer</h2>
                     <div class="flex flex-wrap gap-2">
@@ -203,11 +407,16 @@ function renderTrainer(item, pageUrl) {
         </div>`;
 }
 
+// ------------------------------------------------------------
+// Talent detail
+// ------------------------------------------------------------
+
 function renderTalent(item, pageUrl) {
     const name = item.name || 'Talent';
     const nicheText = (item.niche && String(item.niche).trim() !== '') ? item.niche : 'tempatan';
     const locationText = item.location || 'Sabah';
     const shareText = `Hai! Saya jumpa ${name}, talent untuk niche ${nicheText} dari ${locationText}.\n\nSenang cari talent untuk event atau projek di BayuOne!`;
+    const portfolioHtml = buildPortfolioSection(item);
 
     document.title = `${name} | BayuOne`;
     return `
@@ -230,6 +439,7 @@ function renderTalent(item, pageUrl) {
                     <h2 class="text-lg font-bold text-brand-dark mb-2">Keterangan Penuh</h2>
                     <p class="text-sm text-brand-text leading-relaxed whitespace-pre-wrap">${escapeHtml(item.description)}</p>
                 </div>` : ''}
+                ${portfolioHtml}
                 <div class="pt-4 border-t border-brand-border space-y-3">
                     <h2 class="text-sm font-bold text-brand-dark uppercase tracking-wider">Hubungi Bakat</h2>
                     <div class="flex flex-wrap gap-2">
@@ -248,31 +458,12 @@ function renderTalent(item, pageUrl) {
 }
 
 // ------------------------------------------------------------
-// DEBUG: Diagnostic panel
+// Not found + meta tags
 // ------------------------------------------------------------
 
-function renderDebugPanel(route, debugInfo) {
-    const rows = Object.entries(debugInfo).map(([k, v]) => `
-        <tr>
-            <td class="p-2 font-bold text-brand-dark align-top">${escapeHtml(k)}</td>
-            <td class="p-2 text-brand-text break-all">${escapeHtml(String(v))}</td>
-        </tr>`).join('');
-
-    return `
-        <div class="bg-amber-50 border border-amber-300 rounded-2xl p-4 mb-4">
-            <div class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
-                <i class="fa-solid fa-bug mr-1"></i> DEBUG INFO
-            </div>
-            <table class="w-full text-xs">
-                <tbody>${rows}</tbody>
-            </table>
-        </div>`;
-}
-
-function renderNotFound(reason, debugHtml = '') {
+function renderNotFound(reason) {
     document.title = 'Profil Tidak Ditemui | BayuOne';
     return `
-        ${debugHtml}
         <div class="bg-white rounded-2xl border border-brand-border shadow-sm p-10 text-center">
             <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto text-2xl mb-4">
                 <i class="fa-solid fa-circle-info"></i>
@@ -314,11 +505,14 @@ function updateMetaTags(title, description, image, url) {
     link.href = url;
 }
 
+// ------------------------------------------------------------
+// Main render
+// ------------------------------------------------------------
+
 async function init() {
     const container = document.getElementById('detail-content');
     const loading = document.getElementById('detail-loading');
 
-    const isDebug = new URLSearchParams(window.location.search).get('debug') === '1';
     const route = getRoute();
 
     if (!route) {
@@ -329,42 +523,16 @@ async function init() {
 
     await loadAllData();
 
-    const totalApps = (bayuData.applications || []).length;
-    const approvedApps = (bayuData.applications || []).filter(a => a.approval === 'Approved');
-    const sameTypeApproved = approvedApps.filter(a => a.type === route.type);
-
     const record = findRecordBySlug(route.type, route.slug);
 
     if (!record) {
-        // Look for a matching record ignoring the approval check, for debug
-        const matchingByTypeAndSlug = (bayuData.applications || []).filter(a =>
-            a.type === route.type &&
-            String(a.slug || '').toLowerCase() === String(route.slug).toLowerCase()
+        const existsButNotApproved = (bayuData.applications || []).some(
+            a => a.type === route.type && (a.slug || '').toLowerCase() === route.slug.toLowerCase()
         );
-
-        const debugInfo = {
-            'URL type param': route.type,
-            'URL slug param': route.slug,
-            'URL slug length': route.slug.length,
-            'Total applications loaded': totalApps,
-            'Approved applications': approvedApps.length,
-            'Approved of this type': sameTypeApproved.length,
-            'Records matching type+slug (any approval)': matchingByTypeAndSlug.length,
-            'Sample loaded slugs (first 5)': approvedApps.slice(0, 5).map(a => a.slug).join(' | '),
-            'Sample matching records': matchingByTypeAndSlug.map(a => `${a.slug} [${a.approval}]`).join(' | '),
-            'First record type (debug)': totalApps > 0 ? bayuData.applications[0].type : '(empty)',
-            'First record approval (debug)': totalApps > 0 ? bayuData.applications[0].approval : '(empty)',
-            'First record slug (debug)': totalApps > 0 ? bayuData.applications[0].slug : '(empty)',
-            'First record keys (debug)': totalApps > 0 ? Object.keys(bayuData.applications[0]).slice(0, 10).join(', ') : '(empty)'
-        };
-
-        const debugHtml = isDebug ? renderDebugPanel(route, debugInfo) : '';
-
-        const reason = matchingByTypeAndSlug.length > 0
+        const reason = existsButNotApproved
             ? 'Maklumat ini belum diterbitkan secara awam.'
             : `${route.type} tidak ditemui.`;
-
-        if (container) container.innerHTML = renderNotFound(reason, debugHtml);
+        if (container) container.innerHTML = renderNotFound(reason);
         if (loading) loading.classList.add('hidden');
         return;
     }
@@ -377,6 +545,9 @@ async function init() {
     else if (record.type === 'Talent') html = renderTalent(record, pageUrl);
 
     if (container) container.innerHTML = html;
+
+    // Phase 3B: initialise portfolio sliders after HTML is in the DOM
+    initPortfolioSliders(record);
 
     const shareTitle = record.title || record.name || 'BayuOne';
     const shareDesc = record.summary || record.description || 'Lihat profil penuh di BayuOne.';
