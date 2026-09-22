@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BayuOne Admin — Panel Pengurusan</title>
+
     <link rel="icon" type="image/svg+xml" href="../Bayuone.svg">
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/icon-180.png">
     <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#126B4C">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
@@ -38,7 +40,7 @@
 </head>
 <body class="min-h-screen flex flex-col bg-brand-bg text-brand-text">
 
-    <!-- LOGIN GATE — shown if not logged in -->
+    <!-- LOGIN GATE -->
     <div id="admin-login-gate" class="hidden min-h-screen flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-brand-border">
             <div class="text-center mb-5">
@@ -65,7 +67,7 @@
         </div>
     </div>
 
-    <!-- ADMIN CONTENT — shown when logged in -->
+    <!-- ADMIN CONTENT -->
     <div id="admin-content" class="hidden flex-grow">
         <header class="sticky top-0 z-40 border-b border-brand-border sticky-nav bg-white">
             <div class="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
@@ -93,15 +95,46 @@
         </header>
 
         <main class="max-w-[1400px] mx-auto px-4 sm:px-6 py-8 space-y-8">
-            <!-- Admin dashboard content injected here by admin-page.js -->
             <div id="admin-page-content"></div>
         </main>
     </div>
 
-    <!-- LOADING SPINNER -->
+    <!-- LOADING -->
     <div id="admin-loading" class="fixed inset-0 z-50 bg-white flex items-center justify-center flex-col gap-4">
         <div class="spinner"></div>
         <p class="text-sm font-semibold text-brand-dark">Memuatkan panel admin...</p>
+    </div>
+
+    <!-- ================================================ -->
+    <!-- ADMIN REVIEW MODAL — SCROLLABLE FIX -->
+    <!-- ================================================ -->
+    <div id="modal-admin-review" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white rounded-2xl max-w-3xl w-full shadow-2xl relative border border-brand-border flex flex-col" style="max-height: 92vh;">
+            <!-- Fixed header -->
+            <div class="p-5 border-b border-brand-border shrink-0 relative">
+                <button onclick="closeAdminReviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 p-1 z-10"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <h3 class="text-lg font-bold text-brand-dark">Semakan & Edit Permohonan</h3>
+                <p class="text-xs text-brand-muted">Kemaskini semua maklumat permohonan, kelulusan, tempoh sah, portfolio dan label promosi.</p>
+            </div>
+            <!-- Scrollable body -->
+            <div id="admin-review-body" class="overflow-y-auto flex-1 p-5 space-y-4"></div>
+        </div>
+    </div>
+
+    <!-- SUBMISSION SUCCESS MODAL -->
+    <div id="modal-submission-success" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl text-center border border-brand-border space-y-4">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="text-lg font-bold text-brand-dark">Permohonan Berjaya Dihantar</h3>
+            <p class="text-xs text-brand-muted leading-relaxed">
+                Terima kasih! Permohonan akan disemak oleh pasukan Admin sebelum diterbitkan secara awam dalam platform BayuOne.
+            </p>
+            <button onclick="closeSubmissionSuccessModal()" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-2.5 rounded-xl text-sm transition-colors">
+                Faham / Tutup
+            </button>
+        </div>
     </div>
 
     <script type="module" src="../js/admin-page.js?v=6b5"></script>
