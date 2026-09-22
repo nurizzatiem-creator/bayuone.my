@@ -1,12 +1,12 @@
 // ============================================================
 // BayuOne — Banner + Partner (public rendering)
 // ============================================================
-// Amendment 4: all imports bumped to ?v=6b3.
+// Amendment 4: all imports bumped to ?v=6b5.
 // ============================================================
 
-import { bayuData } from './data-loader.js?v=6b3';
-import { getTodayStr } from './utils.js?v=6b3';
-import { getBannerStatus } from './helpers.js?v=6b3';
+import { bayuData } from './data-loader.js?v=6b5';
+import { getTodayStr } from './utils.js?v=6b5';
+import { getBannerStatus } from './helpers.js?v=6b5';
 
 export function getActiveBanner() {
     const todayStr = getTodayStr();
