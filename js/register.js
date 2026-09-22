@@ -8,10 +8,10 @@
 // in the location dropdown. Penganjur still does.
 // ============================================================
 
-import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js?v=6b3';
-import { rowFromApp } from './converters.js?v=6b3';
-import { getTodayStr, countWords, slugify } from './utils.js?v=6b3';
-import { bayuData, loadAllData } from './data-loader.js?v=6b3';
+import { db, TIKTOK_BAYUONE_URL } from './supabase-client.js?v=6b5';
+import { rowFromApp } from './converters.js?v=6b5';
+import { getTodayStr, countWords, slugify } from './utils.js?v=6b5';
+import { bayuData, loadAllData } from './data-loader.js?v=6b5';
 
 // ------------------------------------------------------------
 // Location helpers
