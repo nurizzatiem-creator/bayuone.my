@@ -1,10 +1,10 @@
 // ============================================================
 // BayuOne — Business helper functions
 // ============================================================
-// Amendment 4: utils.js import bumped to ?v=6b3.
+// Amendment 4: utils.js import bumped to ?v=6b5.
 // ============================================================
 
-import { getTodayStr, formatDateDisplay } from './utils.js?v=6b3';
+import { getTodayStr, formatDateDisplay } from './utils.js?v=6b5';
 
 export function getAgendaDateRange(item) {
     const start = item.date || '';
