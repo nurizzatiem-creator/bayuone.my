@@ -2,11 +2,11 @@
 // BayuOne — Data loader
 // ============================================================
 // Loads all rows from Supabase into one shared in-memory cache.
-// Amendment 4: all imports bumped to ?v=6b3.
+// Amendment 4: all imports bumped to ?v=6b5.
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b3';
-import { appFromRow } from './converters.js?v=6b3';
+import { db } from './supabase-client.js?v=6b5';
+import { appFromRow } from './converters.js?v=6b5';
 
 export const bayuData = {
     applications: [],
