@@ -7,11 +7,11 @@
 //   - Rendering the admin dashboard if authenticated
 //   - Logout (with confirmation + redirect to public site)
 //   - Showing logged-in admin email in the header
-// Amendment 4: all imports bumped to ?v=6b3.
+// Amendment 5: all imports bumped to ?v=6b5.
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b3';
-import { loadAllData } from './data-loader.js?v=6b3';
+import { db } from './supabase-client.js?v=6b5';
+import { loadAllData } from './data-loader.js?v=6b5';
 
 // Admin dashboard renderers
 import {
@@ -28,26 +28,26 @@ import {
     onAdminDariChange,
     resetAdminLabelDates,
     handleSaveAdminEdit
-} from './admin.js?v=6b3';
+} from './admin.js?v=6b5';
 
 import {
     renderFeedbackTable,
     openFeedbackPreview,
     toggleFeedbackStatus
-} from './feedback.js?v=6b3';
+} from './feedback.js?v=6b5';
 
 import {
     renderSubscriberTable,
     openEditSubscriberModal,
     handleSaveSubscriber
-} from './subscriber.js?v=6b3';
+} from './subscriber.js?v=6b5';
 
 import {
     openPartnerModal,
     handleSavePartner,
     confirmDeletePartner,
     renderPartnerTable
-} from './partner.js?v=6b3';
+} from './partner.js?v=6b5';
 
 // ------------------------------------------------------------
 // The full admin dashboard HTML
