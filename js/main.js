@@ -8,9 +8,9 @@
 // Batch 4A: Wired in openSharePopup / closeSharePopup from share-popup.js
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b3';
-import { loadAllData, bayuData } from './data-loader.js?v=6b3';
-import { getTodayStr, countWords } from './utils.js?v=6b3';
+import { db } from './supabase-client.js?v=6b5';
+import { loadAllData, bayuData } from './data-loader.js?v=6b5';
+import { getTodayStr, countWords } from './utils.js?v=6b5';
 
 // Registration + form helpers
 import {
@@ -23,7 +23,7 @@ import {
     togglePenganjurFee,
     toggleTrainerCertCustom,
     updateTrainerCertCustomCounter
-} from './register.js?v=6b3';
+} from './register.js?v=6b5';
 
 // Public renderers
 import {
@@ -35,19 +35,19 @@ import {
     isAgendaActiveOn,
     endedSliderPrev,
     endedSliderNext
-} from './agenda.js?v=6b3';
+} from './agenda.js?v=6b5';
 
 import {
     renderTrainer,
     filterTrainer,
     resetTrainerFilters
-} from './trainer.js?v=6b3';
+} from './trainer.js?v=6b5';
 
 import {
     renderTalent,
     filterTalent,
     resetTalentFilters
-} from './talent.js?v=6b3';
+} from './talent.js?v=6b5';
 
 import {
     renderBanner,
@@ -72,7 +72,7 @@ import {
     onAdminDariChange,
     resetAdminLabelDates,
     handleSaveAdminEdit
-} from './admin.js?v=6b3';
+} from './admin.js?v=6b5';
 
 // Feedback / subscribers / partners
 import {
@@ -80,21 +80,21 @@ import {
     handleFeedbackSubmit,
     openFeedbackPreview,
     toggleFeedbackStatus
-} from './feedback.js?v=6b3';
+} from './feedback.js?v=6b5';
 
 import {
     renderSubscriberTable,
     handleSubscribeSubmit,
     openEditSubscriberModal,
     handleSaveSubscriber
-} from './subscriber.js?v=6b3';
+} from './subscriber.js?v=6b5';
 
 import {
     openPartnerModal,
     handleSavePartner,
     confirmDeletePartner,
     renderPartnerTable
-} from './partner.js?v=6b3';
+} from './partner.js?v=6b5';
 
 // Modals
 import {
@@ -112,7 +112,7 @@ import {
     closePartnerModal,
     closeEditSubscriberModal,
     closeDeleteModal
-} from './modals.js?v=6b3';
+} from './modals.js?v=6b5';
 
 // Tabs / search
 import {
@@ -126,7 +126,7 @@ import {
 import {
     openSharePopup,
     closeSharePopup
-} from './share-popup.js?v=6b3';
+} from './share-popup.js?v=6b5';
 
 // ------------------------------------------------------------
 // Utility: word counter for trainer/talent summary fields
