@@ -4,15 +4,15 @@
 // Handles: admin login/logout, applications table, review modal,
 // banner table, delete confirmation. Data comes from data-loader.
 //
-// Amendment 4: Admin review modal includes "Keterangan Program"
-//              textarea for Agenda records (stored in `description`).
+// Amendment 4: Admin review modal includes "Keterangan Program".
+// Phase 3A: Admin review modal includes Portfolio (6 photos + 6 videos).
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b3';
-import { bayuData, loadAllData } from './data-loader.js?v=6b3';
-import { rowFromApp } from './converters.js?v=6b3';
-import { formatDateDisplay, countWords, calculateTarikhTamat, getTodayStr } from './utils.js?v=6b3';
-import { getBannerStatus } from './helpers.js?v=6b3';
+import { db } from './supabase-client.js?v=6b5';
+import { bayuData, loadAllData } from './data-loader.js?v=6b5';
+import { rowFromApp } from './converters.js?v=6b5';
+import { formatDateDisplay, countWords, calculateTarikhTamat, getTodayStr } from './utils.js?v=6b5';
+import { getBannerStatus } from './helpers.js?v=6b5';
 
 // ------------------------------------------------------------
 // Admin login / logout
@@ -293,6 +293,42 @@ function buildSelectOptions(options, selectedValue) {
     }).join('');
 }
 
+// Phase 3A: Build the Portfolio section HTML
+function buildPortfolioSection(item) {
+    return `
+        <!-- Portfolio Photos -->
+        <div class="pt-3 border-t border-amber-300 mt-3">
+            <div class="text-[11px] font-bold text-amber-800 uppercase tracking-wider mb-2">
+                <i class="fa-solid fa-images mr-1"></i> Portfolio Photos (URL)
+            </div>
+            <p class="text-[10px] text-amber-700 mb-2">Top: up to 6 · Featured: up to 2 · Promoted: up to 1</p>
+            <div class="space-y-2">
+                <input type="url" id="admin-edit-photo-1" value="${item.photo_1 || ''}" placeholder="Photo 1 URL" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-photo-2" value="${item.photo_2 || ''}" placeholder="Photo 2 URL" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-photo-3" value="${item.photo_3 || ''}" placeholder="Photo 3 URL (Top only)" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-photo-4" value="${item.photo_4 || ''}" placeholder="Photo 4 URL (Top only)" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-photo-5" value="${item.photo_5 || ''}" placeholder="Photo 5 URL (Top only)" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-photo-6" value="${item.photo_6 || ''}" placeholder="Photo 6 URL (Top only)" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+            </div>
+        </div>
+
+        <!-- Portfolio YouTube Videos -->
+        <div class="pt-3 border-t border-amber-300 mt-3">
+            <div class="text-[11px] font-bold text-amber-800 uppercase tracking-wider mb-2">
+                <i class="fa-brands fa-youtube mr-1"></i> Portfolio YouTube Videos (URL)
+            </div>
+            <p class="text-[10px] text-amber-700 mb-2">Top: up to 6 · Featured: up to 1 · Promoted: none</p>
+            <div class="space-y-2">
+                <input type="url" id="admin-edit-youtube-1" value="${item.youtube_1 || ''}" placeholder="YouTube video 1 URL" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-youtube-2" value="${item.youtube_2 || ''}" placeholder="YouTube video 2 URL (Top only)" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-youtube-3" value="${item.youtube_3 || ''}" placeholder="YouTube video 3 URL (Top only)" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-youtube-4" value="${item.youtube_4 || ''}" placeholder="YouTube video 4 URL (Top only)" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-youtube-5" value="${item.youtube_5 || ''}" placeholder="YouTube video 5 URL (Top only)" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+                <input type="url" id="admin-edit-youtube-6" value="${item.youtube_6 || ''}" placeholder="YouTube video 6 URL (Top only)" class="w-full bg-white border border-brand-border rounded-lg px-2.5 py-1.5 text-xs focus:border-brand focus:outline-none">
+            </div>
+        </div>`;
+}
+
 export function openAdminReviewModal(id) {
     const item = bayuData.applications.find(a => a.id === id);
     if (!item) return;
@@ -525,7 +561,7 @@ export function openAdminReviewModal(id) {
 
             <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
                 <div class="text-[11px] font-bold text-amber-800 uppercase tracking-wider mb-3">
-                    <i class="fa-solid fa-star mr-1"></i> Label Promosi & Tempoh Sah
+                    <i class="fa-solid fa-star mr-1"></i> Label Promosi, Tempoh Sah & Portfolio
                 </div>
                 <div class="space-y-3">
                     <div>
@@ -555,6 +591,8 @@ export function openAdminReviewModal(id) {
                         <button type="button" onclick="resetAdminLabelDates()" class="bg-white border border-amber-300 text-amber-800 hover:bg-amber-100 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-colors">
                             <i class="fa-solid fa-rotate-left mr-1"></i> Reset Tarikh
                         </button>
+
+                        ${buildPortfolioSection(item)}
                     </div>
                 </div>
             </div>
@@ -620,10 +658,29 @@ export async function handleSaveAdminEdit(e, id) {
         updated.tarikhDari = dariVal;
         if (dariVal && validityVal && !hinggaVal) hinggaVal = calculateTarikhTamat(dariVal, validityVal);
         updated.tarikhSehingga = hinggaVal;
+
+        // Phase 3A: Save Portfolio fields
+        updated.photo_1 = document.getElementById('admin-edit-photo-1')?.value.trim() || '';
+        updated.photo_2 = document.getElementById('admin-edit-photo-2')?.value.trim() || '';
+        updated.photo_3 = document.getElementById('admin-edit-photo-3')?.value.trim() || '';
+        updated.photo_4 = document.getElementById('admin-edit-photo-4')?.value.trim() || '';
+        updated.photo_5 = document.getElementById('admin-edit-photo-5')?.value.trim() || '';
+        updated.photo_6 = document.getElementById('admin-edit-photo-6')?.value.trim() || '';
+        updated.youtube_1 = document.getElementById('admin-edit-youtube-1')?.value.trim() || '';
+        updated.youtube_2 = document.getElementById('admin-edit-youtube-2')?.value.trim() || '';
+        updated.youtube_3 = document.getElementById('admin-edit-youtube-3')?.value.trim() || '';
+        updated.youtube_4 = document.getElementById('admin-edit-youtube-4')?.value.trim() || '';
+        updated.youtube_5 = document.getElementById('admin-edit-youtube-5')?.value.trim() || '';
+        updated.youtube_6 = document.getElementById('admin-edit-youtube-6')?.value.trim() || '';
     } else {
         updated.validity = '';
         updated.tarikhDari = '';
         updated.tarikhSehingga = '';
+        // Clear Portfolio when label is removed
+        updated.photo_1 = ''; updated.photo_2 = ''; updated.photo_3 = '';
+        updated.photo_4 = ''; updated.photo_5 = ''; updated.photo_6 = '';
+        updated.youtube_1 = ''; updated.youtube_2 = ''; updated.youtube_3 = '';
+        updated.youtube_4 = ''; updated.youtube_5 = ''; updated.youtube_6 = '';
     }
 
     if (item.type === 'Agenda') {
