@@ -1,11 +1,11 @@
 // ============================================================
 // BayuOne — Talent card component
 // ============================================================
-// Amendment 4: all imports bumped to ?v=6b3.
+// Amendment 4: all imports bumped to ?v=6b5.
 // ============================================================
 
-import { getPromotionalBadgeHtml } from '../helpers.js?v=6b3';
-import { buildDetailUrl } from '../slug.js?v=6b3';
+import { getPromotionalBadgeHtml } from '../helpers.js?v=6b5';
+import { buildDetailUrl } from '../slug.js?v=6b5';
 
 const FALLBACK_PHOTO = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400';
 
