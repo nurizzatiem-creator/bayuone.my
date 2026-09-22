@@ -2,9 +2,9 @@
 // BayuOne — Subscribers (public subscribe form + admin table)
 // ============================================================
 
-import { db } from './supabase-client.js?v=6b3';
-import { bayuData, loadAllData } from './data-loader.js?v=6b3';
-import { getTodayStr } from './utils.js?v=6b3';
+import { db } from './supabase-client.js?v=6b5';
+import { bayuData, loadAllData } from './data-loader.js?v=6b5';
+import { getTodayStr } from './utils.js?v=6b5';
 
 export async function handleSubscribeSubmit(e) {
     e.preventDefault();
