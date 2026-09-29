@@ -6,8 +6,10 @@
 // exposes global functions used by inline onclick="..." attributes.
 //
 // Batch 4A: Wired in openSharePopup / closeSharePopup from share-popup.js
-// Fix: removed duplicate submit listener for form-register (was in both
-//      index.html onsubmit= and here) that caused double inserts.
+// Fix: removed duplicate submit listeners for form-register,
+//      form-feedback, and subscribe-form (all three had both an
+//      inline onsubmit="..." in HTML AND an addEventListener here,
+//      causing every submission to fire twice).
 // ============================================================
 
 import { db } from './supabase-client.js?v=6b5';
@@ -321,13 +323,17 @@ Object.assign(window, {
 // ------------------------------------------------------------
 // Wire up event listeners that cannot live in HTML (form submits)
 // ------------------------------------------------------------
-// NOTE: form-register is handled by onsubmit="handleRegisterSubmit(event)"
-//       in index.html. Do NOT add a listener for it here — that would
-//       cause each submission to fire twice and duplicate the row.
+// NOTE: The following forms are already handled by onsubmit="..."
+// attributes inside index.html. Do NOT add listeners for them here
+// or every submission will fire twice and duplicate the row:
+//
+//   - form-register      → onsubmit="handleRegisterSubmit(event)"
+//   - form-feedback      → onsubmit="handleFeedbackSubmit(event)"
+//   - subscribe-form     → onsubmit="handleSubscribeSubmit(event)"
+//
+// Only wire up the forms below which do NOT have inline onsubmit.
 
 function wireFormSubmits() {
-    document.getElementById('form-feedback')?.addEventListener('submit', handleFeedbackSubmit);
-    document.getElementById('subscribe-form')?.addEventListener('submit', handleSubscribeSubmit);
     document.getElementById('form-banner')?.addEventListener('submit', handleSaveBanner);
     document.getElementById('form-partner')?.addEventListener('submit', handleSavePartner);
     document.getElementById('form-edit-subscriber')?.addEventListener('submit', handleSaveSubscriber);
