@@ -5,11 +5,10 @@
 // It imports every module, wires up event listeners, and
 // exposes global functions used by inline onclick="..." attributes.
 //
-// Batch 4A: Wired in openSharePopup / closeSharePopup from share-popup.js
 // Fix: removed duplicate submit listeners for form-register,
-//      form-feedback, and subscribe-form (all three had both an
-//      inline onsubmit="..." in HTML AND an addEventListener here,
-//      causing every submission to fire twice).
+//      form-feedback and subscribe-form. All three have inline
+//      onsubmit="..." attributes in index.html, so adding another
+//      addEventListener here caused every submission to fire twice.
 // ============================================================
 
 import { db } from './supabase-client.js?v=6b5';
@@ -239,7 +238,7 @@ Object.assign(window, {
     handleGlobalSearch,
     triggerSearch,
 
-    // Share popup (Batch 4A)
+    // Share popup
     openSharePopup,
     closeSharePopup,
 
@@ -323,15 +322,15 @@ Object.assign(window, {
 // ------------------------------------------------------------
 // Wire up event listeners that cannot live in HTML (form submits)
 // ------------------------------------------------------------
-// NOTE: The following forms are already handled by onsubmit="..."
-// attributes inside index.html. Do NOT add listeners for them here
-// or every submission will fire twice and duplicate the row:
+// IMPORTANT: The following three forms are already handled by
+// onsubmit="..." attributes inside index.html. Do NOT add listeners
+// for them here — that would cause each submission to fire twice.
 //
-//   - form-register      → onsubmit="handleRegisterSubmit(event)"
-//   - form-feedback      → onsubmit="handleFeedbackSubmit(event)"
-//   - subscribe-form     → onsubmit="handleSubscribeSubmit(event)"
+//   - form-register   → onsubmit="handleRegisterSubmit(event)"
+//   - form-feedback   → onsubmit="handleFeedbackSubmit(event)"
+//   - subscribe-form  → onsubmit="handleSubscribeSubmit(event)"
 //
-// Only wire up the forms below which do NOT have inline onsubmit.
+// Only the forms below (which have NO inline onsubmit) are wired here.
 
 function wireFormSubmits() {
     document.getElementById('form-banner')?.addEventListener('submit', handleSaveBanner);
