@@ -6,6 +6,8 @@
 // exposes global functions used by inline onclick="..." attributes.
 //
 // Batch 4A: Wired in openSharePopup / closeSharePopup from share-popup.js
+// Fix: removed duplicate submit listener for form-register (was in both
+//      index.html onsubmit= and here) that caused double inserts.
 // ============================================================
 
 import { db } from './supabase-client.js?v=6b5';
@@ -319,9 +321,11 @@ Object.assign(window, {
 // ------------------------------------------------------------
 // Wire up event listeners that cannot live in HTML (form submits)
 // ------------------------------------------------------------
+// NOTE: form-register is handled by onsubmit="handleRegisterSubmit(event)"
+//       in index.html. Do NOT add a listener for it here — that would
+//       cause each submission to fire twice and duplicate the row.
 
 function wireFormSubmits() {
-    document.getElementById('form-register')?.addEventListener('submit', handleRegisterSubmit);
     document.getElementById('form-feedback')?.addEventListener('submit', handleFeedbackSubmit);
     document.getElementById('subscribe-form')?.addEventListener('submit', handleSubscribeSubmit);
     document.getElementById('form-banner')?.addEventListener('submit', handleSaveBanner);
